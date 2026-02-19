@@ -3,50 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>DIGIY DRIVER — Chauffeur (Realtime + GEO)</title>
+  <title>Galerie Chauffeurs — DIGIY DRIVER</title>
   <meta name="theme-color" content="#22c55e" />
-  <meta name="description" content="DIGIY DRIVER Chauffeur — tableau de bord, courses en direct, filtrage zone & distance, 0% commission." />
-
+  <meta name="description" content="Galerie publique des chauffeurs DIGIY DRIVER — zones, disponibilité, contact direct WhatsApp. 0% commission." />
   <style>
     :root{
       --green:#22c55e;
       --green2:#16a34a;
       --sky:#0ea5e9;
-      --ok:#22c55e;
-
       --bg:#f0fdf4;
-      --bg2:#ffffff;
       --card:#ffffff;
-
       --text:#0f172a;
       --muted:#64748b;
-
       --shadow:0 12px 28px rgba(2,6,23,.08);
       --radius:18px;
-
       --warn:#f59e0b;
       --warnBg:rgba(245,158,11,.12);
       --warnBd:rgba(245,158,11,.35);
       --warnTx:#7c2d12;
+      --bd:rgba(15,23,42,.10);
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, #dcfce7 0%, var(--bg) 55%, var(--bg2) 100%);
+      background: linear-gradient(180deg, #dcfce7 0%, var(--bg) 55%, #fff 100%);
       color:var(--text);
     }
     header{
-      position:sticky; top:0; z-index:5;
+      position:sticky; top:0; z-index:10;
       padding:16px 14px;
       background: linear-gradient(90deg, var(--green), #4ade80);
       color:#fff;
       box-shadow: 0 10px 22px rgba(34,197,94,.32);
     }
+    .wrap{max-width:980px; margin:0 auto; padding:14px;}
     .topRow{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
       max-width:980px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
     }
     .brand{
       font-weight:1000;
@@ -64,8 +59,6 @@
       font-weight:900;
       white-space:nowrap;
     }
-    main{max-width:980px; margin:0 auto; padding:14px;}
-
     .card{
       background:#ffffffcc;
       backdrop-filter: blur(7px);
@@ -100,17 +93,16 @@
       font-size:14px;
       background:#fff;
     }
-
     .status{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
     }
     .status .left{display:flex; flex-direction:column; gap:2px}
     .status .title{font-weight:1000}
-    .status .sub{font-size:12px; color:var(--muted); font-weight:800}
+    .status .sub{font-size:12px; color:var(--muted); font-weight:800; line-height:1.35}
     .badge{
       font-size:12px;
       font-weight:1000;
@@ -126,31 +118,12 @@
       border:1px solid var(--warnBd);
       color:var(--warnTx);
     }
-
-    .actionsTop{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center;
-    }
-    button{
-      padding:11px 12px;
-      border:none;
-      border-radius:14px;
-      font-weight:1000;
-      font-size:14px;
-      cursor:pointer;
-    }
-    button:disabled{opacity:.55; cursor:not-allowed}
-    .btn-light{
-      background:#fff;
-      border:1px solid rgba(15,23,42,.14);
-      color:var(--text);
-    }
-
     .grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap:12px;
     }
-    .trip{
+    .driver{
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -159,15 +132,15 @@
       overflow:hidden;
       position:relative;
     }
-    .trip .head{
+    .head{
       display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
     }
-    .trip .route{
+    .name{
       font-weight:1000;
       font-size:15px;
       line-height:1.2;
     }
-    .trip .meta{
+    .meta{
       margin-top:8px;
       display:flex; flex-wrap:wrap; gap:8px;
       font-size:12px;
@@ -177,25 +150,46 @@
     .tag{
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(15,23,42,.10);
+      border:1px solid var(--bd);
       background:#fff;
     }
-    .price{
-      margin-top:10px;
-      font-size:16px;
-      font-weight:1100;
-      color:var(--green2);
+    .actions{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+    button, a.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:11px 12px;
+      border:none;
+      border-radius:14px;
+      font-weight:1000;
+      font-size:14px;
+      cursor:pointer;
+      text-decoration:none;
+      user-select:none;
     }
-    .actions{display:flex; gap:10px; margin-top:12px;}
-    .btn-accept{background:var(--green2); color:#fff}
-    .btn-start{background:var(--sky); color:#fff}
-    .btn-done{background:var(--ok); color:#fff}
+    button:disabled{opacity:.55; cursor:not-allowed}
+    .btn-main{background:var(--green2); color:#fff}
+    .btn-sky{background:var(--sky); color:#fff}
     .btn-ghost{
       background:#fff;
       border:1px solid rgba(15,23,42,.12);
       color:var(--text);
     }
-
+    .footCta{
+      text-align:center;
+    }
+    .footCta .big{
+      font-weight:1100;
+      font-size:16px;
+    }
+    .footCta .small{
+      margin-top:6px;
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+      line-height:1.35;
+    }
     .toast{
       position: fixed;
       left: 50%;
@@ -220,17 +214,25 @@
 <body>
 <header>
   <div class="topRow">
-    <div class="brand">🚕 DIGIY DRIVER <span class="pill">Personnes • Realtime</span></div>
-    <div class="pill" id="who">…</div>
+    <div class="brand">🚕 DIGIY DRIVER <span class="pill">Galerie Chauffeurs</span></div>
+    <div class="pill" id="countPill">…</div>
   </div>
 </header>
 
-<main>
+<main class="wrap">
+
+  <div class="card status">
+    <div class="left">
+      <div class="title">🔎 Trouve un chauffeur près de toi</div>
+      <div class="sub">Filtre par zone / recherche. Contact direct WhatsApp. Paiement direct (0% commission).</div>
+    </div>
+    <div class="badge" id="liveBadge">Public</div>
+  </div>
 
   <div class="card">
     <div class="bar">
       <div class="field">
-        <label>📍 Zone (pickup_zone)</label>
+        <label>📍 Zone</label>
         <select id="zoneFilter">
           <option value="">Toutes</option>
           <option value="Plateau">Plateau</option>
@@ -241,56 +243,33 @@
       </div>
 
       <div class="field">
-        <label>📏 Rayon</label>
-        <select id="radiusFilter">
-          <option value="2">2 km</option>
-          <option value="3">3 km</option>
-          <option value="5" selected>5 km</option>
-          <option value="8">8 km</option>
-          <option value="10">10 km</option>
-        </select>
+        <label>🔎 Recherche</label>
+        <input id="qFilter" placeholder="Nom, ville, véhicule…" />
       </div>
 
       <div class="field">
-        <label>🎛️ Vue</label>
-        <select id="viewFilter">
-          <option value="open" selected>Demandes ouvertes (requested)</option>
-          <option value="mine">Mes courses (accepted/ongoing)</option>
-          <option value="all">Tout (requested/accepted/ongoing)</option>
+        <label>🟢 Dispo</label>
+        <select id="availFilter">
+          <option value="all" selected>Tous</option>
+          <option value="online">En ligne</option>
+          <option value="offline">Hors-ligne</option>
         </select>
       </div>
     </div>
   </div>
 
-  <!-- Bandeau soft (on ne vire pas) -->
-  <div class="card status" id="softCard" style="display:none">
-    <div class="left">
-      <div class="title" id="softTitle">⚠️ Profil à compléter</div>
-      <div class="sub" id="softSub">On te laisse entrer. Mets tes infos chauffeur quand tu peux.</div>
-    </div>
-    <div class="badge warn">Soft-guard</div>
-  </div>
+  <div class="grid" id="drivers"></div>
 
-  <div class="card status">
-    <div class="left">
-      <div class="title" id="statusTitle">Connexion…</div>
-      <div class="sub" id="statusSub">Chargement Supabase / GPS</div>
-    </div>
-    <div class="badge" id="gpsBadge">GPS: …</div>
-  </div>
-
-  <div class="card status">
-    <div class="left">
-      <div class="title">👤 Dashboard Chauffeur</div>
-      <div class="sub" id="meLine">Chargement profil…</div>
-    </div>
-    <div class="actionsTop">
-      <button class="btn-light" id="btnReload">🔄 Recharger</button>
-      <button class="btn-light" id="btnLogout">🚪 Déconnexion</button>
+  <div class="card footCta">
+    <div class="big">Vous êtes chauffeur ?</div>
+    <div class="small">Crée ta fiche et reçois des clients en direct.</div>
+    <div class="actions" style="justify-content:center; margin-top:12px;">
+      <a class="btn btn-main" href="https://driver.digiylyfe.com/" rel="noopener">Devenir chauffeur</a>
+      <a class="btn btn-ghost" href="https://wa.me/221771342889" rel="noopener">WhatsApp</a>
+      <a class="btn btn-sky" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
     </div>
   </div>
 
-  <div class="grid" id="trips"></div>
 </main>
 
 <div class="toast" id="toast"></div>
@@ -298,37 +277,37 @@
 <script type="module">
   import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-  /* PORTE HUB */
-  const DIGIY_GATE = "https://beauville.github.io/digiy-hub/";
-  function STOP(){
-    location.replace(DIGIY_GATE);
-    throw new Error("DIGIY_GATE");
-  }
-
-  /* SUPABASE */
+  /* === SUPABASE (public) === */
   const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
   const SUPABASE_ANON_KEY =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA";
 
-  globalThis.__sb ||= createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  const sb = globalThis.__sb;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  /* === CONFIG ===
+     👉 Crée côté Supabase une VIEW/TABLE publique: public_driver_cards
+     Colonnes recommandées:
+       id (uuid/text)
+       name (text)
+       city (text)
+       zone (text)
+       car (text)
+       whatsapp (text)  // ex: 22177xxxxxxx
+       is_online (bool) // optionnel
+       rating (numeric) // optionnel
+  */
+  const PUBLIC_SOURCE = "public_driver_cards";
 
   /* UI */
-  const tripsEl = document.getElementById("trips");
+  const driversEl = document.getElementById("drivers");
   const zoneFilter = document.getElementById("zoneFilter");
-  const radiusFilter = document.getElementById("radiusFilter");
-  const viewFilter = document.getElementById("viewFilter");
-  const whoEl = document.getElementById("who");
-  const statusTitle = document.getElementById("statusTitle");
-  const statusSub = document.getElementById("statusSub");
-  const gpsBadge = document.getElementById("gpsBadge");
-  const meLine = document.getElementById("meLine");
+  const qFilter = document.getElementById("qFilter");
+  const availFilter = document.getElementById("availFilter");
+  const countPill = document.getElementById("countPill");
+  const liveBadge = document.getElementById("liveBadge");
   const toastEl = document.getElementById("toast");
-  const btnReload = document.getElementById("btnReload");
-  const btnLogout = document.getElementById("btnLogout");
-  const softCard = document.getElementById("softCard");
-  const softTitle = document.getElementById("softTitle");
-  const softSub = document.getElementById("softSub");
+
+  let ALL = [];
 
   function toast(msg){
     toastEl.textContent = msg;
@@ -337,302 +316,144 @@
     globalThis.__t = setTimeout(()=> toastEl.style.display="none", 2400);
   }
 
-  function showSoft(title, sub){
-    softTitle.textContent = title;
-    softSub.textContent = sub;
-    softCard.style.display = "flex";
+  function esc(s){
+    return String(s ?? "").replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
   }
 
-  async function main(){
-    // Session obligatoire (seule vraie raison de virer)
-    const { data: sess } = await sb.auth.getSession();
-    const session = sess?.session;
+  function normPhone(p){
+    const digits = String(p ?? "").replace(/\D/g,"");
+    if (!digits) return "";
+    // si l'utilisateur met déjà 221..., ok
+    return digits;
+  }
 
-    if (!session){
-      statusTitle.textContent = "❌ Non connecté";
-      statusSub.textContent = "Retour HUB…";
-      whoEl.textContent = "Offline";
-      STOP();
+  function passes(d){
+    const z = (zoneFilter.value || "").trim();
+    const q = (qFilter.value || "").trim().toLowerCase();
+    const a = availFilter.value || "all";
+
+    if (z && String(d.zone || "") !== z) return false;
+
+    if (a === "online" && d.is_online !== true) return false;
+    if (a === "offline" && d.is_online === true) return false;
+
+    if (q){
+      const hay = `${d.name||""} ${d.city||""} ${d.zone||""} ${d.car||""}`.toLowerCase();
+      if (!hay.includes(q)) return false;
     }
+    return true;
+  }
 
-    const uid = session.user.id;
-    whoEl.textContent = (session.user.phone || session.user.email || "Chauffeur");
-    statusTitle.textContent = "🟢 En ligne";
-    statusSub.textContent = "Chargement profil & courses…";
+  function render(){
+    const items = ALL.filter(passes);
+    countPill.textContent = `${items.length} chauffeur(s)`;
 
-    // Profil : on tente, mais on NE VIRE PAS si ça échoue
-    let profile = null;
-    let profError = null;
-
-    try{
-      const res = await sb
-        .from("profiles")
-        .select("role_auto, pro_type, active_modules")
-        .eq("id", uid)
-        .maybeSingle();
-
-      profile = res.data || null;
-      profError = res.error || null;
-    }catch(e){
-      profError = e;
-      profile = null;
-    }
-
-    // Cas clair : si profil dit FRET => dehors (seule interdiction dure)
-    if (profile){
-      const proType = (profile.pro_type || "").toLowerCase();
-      const mods = Array.isArray(profile.active_modules) ? profile.active_modules : [];
-      if (proType === "fret" || mods.includes("fret")){
-        STOP();
-      }
-      meLine.textContent = `ID: ${uid.slice(0,6)}… • ROLE: ${profile.role_auto || "?"} • TYPE: ${profile.pro_type || "?"}`;
-    } else {
-      // Profil absent / RLS / erreur -> SOFT ONLY
-      showSoft("⚠️ Profil pas prêt", "Ton accès est OK. On n’a pas encore pu lire ton profil (RLS/profil). Tu complèteras après.");
-      meLine.textContent = `ID: ${uid.slice(0,6)}… • Mode: DRIVER (soft)`;
-      if (profError) console.warn("profiles read error (soft):", profError);
-    }
-
-    // Logout
-    btnLogout?.addEventListener("click", async ()=>{
-      await sb.auth.signOut();
-      STOP();
-    });
-
-    // GPS
-    let driverLat = null, driverLng = null;
-
-    function setGPSBadge(){
-      gpsBadge.textContent = (driverLat && driverLng) ? "GPS: OK" : "GPS: OFF";
-    }
-    setGPSBadge();
-
-    function distanceKm(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2-lat1) * Math.PI/180;
-      const dLon = (lon2-lon1) * Math.PI/180;
-      const a =
-        Math.sin(dLat/2)**2 +
-        Math.cos(lat1*Math.PI/180) *
-        Math.cos(lat2*Math.PI/180) *
-        Math.sin(dLon/2)**2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    }
-
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        (pos)=>{
-          driverLat = pos.coords.latitude;
-          driverLng = pos.coords.longitude;
-          setGPSBadge();
-        },
-        ()=>{
-          setGPSBadge();
-          statusSub.textContent = "GPS refusé • filtrage distance désactivé";
-        },
-        { enableHighAccuracy:true, maximumAge: 8000, timeout: 12000 }
-      );
-    } else {
-      statusSub.textContent = "GPS indisponible • filtrage distance désactivé";
-    }
-
-    // Store
-    const store = new Map();
-
-    function passesFilters(trip){
-      const z = zoneFilter.value;
-      const r = parseFloat(radiusFilter.value || "5");
-      const v = viewFilter.value;
-
-      if (v === "open" && trip.status !== "requested") return false;
-      if (v === "mine" && !(trip.status === "accepted" || trip.status === "ongoing")) return false;
-      if (v === "all" && !["requested","accepted","ongoing"].includes(trip.status)) return false;
-
-      if (z && (trip.pickup_zone || "") !== z) return false;
-
-      if (driverLat && driverLng && trip.pickup_lat && trip.pickup_lng) {
-        const d = distanceKm(driverLat, driverLng, trip.pickup_lat, trip.pickup_lng);
-        if (d > r) return false;
-      }
-      return true;
-    }
-
-    function formatTripMeta(trip){
-      const z = trip.pickup_zone ? `📍 ${trip.pickup_zone}` : "📍 Zone ?";
-      const c = trip.pickup_city ? `🏙️ ${trip.pickup_city}` : "🏙️ Ville ?";
-
-      let distStr = null;
-      if (driverLat && driverLng && trip.pickup_lat && trip.pickup_lng) {
-        const d = distanceKm(driverLat, driverLng, trip.pickup_lat, trip.pickup_lng);
-        distStr = `📏 ${d.toFixed(1)} km`;
-      }
-
-      const km = trip.distance_km ? `🛣️ ${trip.distance_km} km` : null;
-      const min = trip.duration_min ? `⏱️ ${trip.duration_min} min` : null;
-
-      return [c, z, distStr, km, min].filter(Boolean);
-    }
-
-    function renderAll(){
-      tripsEl.innerHTML = "";
-      const items = Array.from(store.values())
-        .filter(passesFilters)
-        .sort((a,b)=> (new Date(b.created_at) - new Date(a.created_at)));
-
-      if (!items.length){
-        tripsEl.innerHTML = `
-          <div class="trip" style="grid-column:1/-1">
-            <div class="route">Aucune course dans tes filtres</div>
-            <div class="meta">
-              <span class="tag">Zone=Toutes</span>
-              <span class="tag">Rayon=10km</span>
-              <span class="tag">Vue=Demandes ouvertes</span>
-            </div>
+    if (!items.length){
+      driversEl.innerHTML = `
+        <div class="driver" style="grid-column:1/-1">
+          <div class="name">Aucun chauffeur trouvé</div>
+          <div class="meta">
+            <span class="tag">Change les filtres</span>
+            <span class="tag">Ou contacte WhatsApp</span>
           </div>
-        `;
-        return;
-      }
+          <div class="actions">
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">WhatsApp support</a>
+            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
+          </div>
+        </div>
+      `;
+      return;
+    }
 
-      for (const trip of items) {
-        const card = document.createElement("div");
-        card.className = "trip";
+    driversEl.innerHTML = items.map(d => {
+      const name = esc(d.name || "Chauffeur");
+      const city = esc(d.city || "");
+      const zone = esc(d.zone || "");
+      const car  = esc(d.car || "");
+      const online = (d.is_online === true);
+      const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
+      const wa = normPhone(d.whatsapp);
 
-        const route = `📍 ${trip.pickup_city || "?"} → ${trip.dropoff_city || "?"}`;
-        const metaTags = formatTripMeta(trip).map(x=>`<span class="tag">${x}</span>`).join("");
+      const badge = online ? `<span class="tag" style="border-color:rgba(34,197,94,.25)">🟢 En ligne</span>` : `<span class="tag">⚪ Hors-ligne</span>`;
+      const rateTag = (rating && !Number.isNaN(rating)) ? `<span class="tag">⭐ ${rating.toFixed(1)}</span>` : ``;
 
-        let actionsHtml = "";
-        if (trip.status === "requested") {
-          actionsHtml = `
-            <div class="actions">
-              <button class="btn-accept" data-id="${trip.id}" data-act="accept">Accepter</button>
-            </div>
-          `;
-        } else if (trip.status === "accepted") {
-          actionsHtml = `
-            <div class="actions">
-              <button class="btn-start" data-id="${trip.id}" data-act="start">Démarrer</button>
-              <button class="btn-ghost" data-id="${trip.id}" data-act="refresh">Rafraîchir</button>
-            </div>
-          `;
-        } else if (trip.status === "ongoing") {
-          actionsHtml = `
-            <div class="actions">
-              <button class="btn-done" data-id="${trip.id}" data-act="complete">Terminer</button>
-              <button class="btn-ghost" data-id="${trip.id}" data-act="refresh">Rafraîchir</button>
-            </div>
-          `;
-        }
-
-        card.innerHTML = `
+      return `
+        <div class="driver">
           <div class="head">
             <div>
-              <div class="route">${route}</div>
-              <div class="meta">${metaTags}</div>
-              <div class="price">💰 ${(trip.amount ?? 0)} F CFA</div>
+              <div class="name">🚕 ${name}</div>
+              <div class="meta">
+                ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
+                ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+                ${car  ? `<span class="tag">🚗 ${car}</span>` : ``}
+                ${badge}
+                ${rateTag}
+              </div>
             </div>
             <div class="pill" style="color:#0f172a;background:#fff;border-color:rgba(15,23,42,.15)">
-              ${trip.status}
+              Public
             </div>
           </div>
-          ${actionsHtml}
-        `;
 
-        tripsEl.appendChild(card);
-      }
-    }
-
-    async function rpcAction(action, tripId){
-      try{
-        if (!tripId) return;
-
-        toast(`⏳ ${action.toUpperCase()}…`);
-        let res;
-
-        if (action === "accept") res = await sb.rpc("accept_trip", { p_trip_id: tripId });
-        else if (action === "start") res = await sb.rpc("start_trip", { p_trip_id: tripId });
-        else if (action === "complete") res = await sb.rpc("complete_trip", { p_trip_id: tripId });
-        else if (action === "refresh") { await loadInitial(); toast("✅ Rafraîchi"); return; }
-        else return;
-
-        if (res?.error){
-          console.error(res.error);
-          toast("❌ " + res.error.message);
-          return;
-        }
-
-        toast("✅ OK");
-      }catch(e){
-        console.error(e);
-        toast("❌ Erreur action");
-      }
-    }
-
-    document.addEventListener("click", (e)=>{
-      const btn = e.target?.closest("button[data-act]");
-      if (!btn) return;
-      rpcAction(btn.getAttribute("data-act"), btn.getAttribute("data-id"));
-    });
-
-    async function loadInitial(){
-      const { data, error } = await sb
-        .from("driver_trips")
-        .select("*")
-        .in("status", ["requested","accepted","ongoing"])
-        .order("created_at", { ascending:false })
-        .limit(200);
-
-      if (error){
-        console.error(error);
-        statusSub.textContent = "Erreur chargement (driver_trips)";
-        tripsEl.innerHTML = `
-          <div class="trip" style="grid-column:1/-1">
-            <div class="route">⚠️ driver_trips inaccessible</div>
-            <div class="meta">
-              <span class="tag">Table/view manquante ?</span>
-              <span class="tag">RLS bloque ?</span>
-            </div>
+          <div class="actions">
+            ${wa ? `<a class="btn btn-main" href="https://wa.me/${wa}" rel="noopener">WhatsApp</a>`
+                 : `<button class="btn btn-main" disabled>WhatsApp</button>`}
+            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
           </div>
-        `;
-        return;
-      }
-
-      store.clear();
-      (data || []).forEach(t => t?.id && store.set(t.id, t));
-      renderAll();
-      statusSub.textContent = "Realtime actif • attente de courses";
-    }
-
-    btnReload?.addEventListener("click", async ()=>{
-      await loadInitial();
-      toast("✅ Rechargé");
-    });
-
-    zoneFilter.addEventListener("change", renderAll);
-    radiusFilter.addEventListener("change", renderAll);
-    viewFilter.addEventListener("change", renderAll);
-    setInterval(()=>{ renderAll(); }, 7000);
-
-    await loadInitial();
-
-    sb.channel("driver-trips-live")
-      .on("postgres_changes", { event:"INSERT", schema:"public", table:"driver_trips" }, (p)=>{
-        const t = p.new;
-        if (!t?.id) return;
-        store.set(t.id, t);
-        renderAll();
-        if (t.status === "requested") toast("🚕 Nouvelle demande !");
-      })
-      .on("postgres_changes", { event:"UPDATE", schema:"public", table:"driver_trips" }, (p)=>{
-        const t = p.new;
-        if (!t?.id) return;
-        if (["requested","accepted","ongoing"].includes(t.status)) store.set(t.id, t);
-        else store.delete(t.id);
-        renderAll();
-      })
-      .subscribe();
+        </div>
+      `;
+    }).join("");
   }
 
-  main();
+  async function load(){
+    liveBadge.textContent = "Chargement…";
+    try{
+      const { data, error } = await sb
+        .from(PUBLIC_SOURCE)
+        .select("*")
+        .limit(250);
+
+      if (error) throw error;
+
+      ALL = Array.isArray(data) ? data : [];
+      liveBadge.textContent = "Public";
+      render();
+    }catch(e){
+      console.warn("Public gallery error:", e);
+      liveBadge.textContent = "⚠️ Public (fallback)";
+
+      // Fallback propre si la vue n'existe pas / RLS bloque
+      ALL = [];
+      countPill.textContent = "…";
+
+      driversEl.innerHTML = `
+        <div class="driver" style="grid-column:1/-1">
+          <div class="name">⚠️ Galerie pas encore branchée</div>
+          <div class="meta">
+            <span class="tag">La source Supabase "public_driver_cards" n’est pas accessible</span>
+            <span class="tag">RLS / vue publique à créer</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">WhatsApp</a>
+            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
+          </div>
+        </div>
+      `;
+
+      toast("Galerie en mode fallback (public)");
+    }
+  }
+
+  zoneFilter.addEventListener("change", render);
+  availFilter.addEventListener("change", render);
+  qFilter.addEventListener("input", () => {
+    clearTimeout(globalThis.__q);
+    globalThis.__q = setTimeout(render, 120);
+  });
+
+  load();
 </script>
 </body>
 </html>
