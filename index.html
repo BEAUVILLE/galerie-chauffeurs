@@ -58,6 +58,10 @@
       font-size:12px;
       font-weight:900;
       white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
     }
     .card{
       background:#ffffffcc;
@@ -208,14 +212,48 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    /* Lang switch (header) */
+    .lang-switch{
+      display:flex;
+      gap:6px;
+      padding:4px;
+      border-radius:999px;
+      background: rgba(255,255,255,.22);
+      border:1px solid rgba(255,255,255,.35);
+    }
+    .lang-switch button{
+      border:none;
+      padding:7px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:1000;
+      font-size:12px;
+      background:transparent;
+      color:#fff;
+    }
+    .lang-switch button.active{
+      background:#0f172a;
+      color:#fff;
+    }
   </style>
 </head>
 
 <body>
 <header>
   <div class="topRow">
-    <div class="brand">🚕 DIGIY DRIVER <span class="pill">Galerie Chauffeurs</span></div>
-    <div class="pill" id="countPill">…</div>
+    <div class="brand">
+      🚕 DIGIY DRIVER
+      <span class="pill" data-i18n="gallery_title">Galerie Chauffeurs</span>
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+      <div class="lang-switch" aria-label="Language switch">
+        <button id="lang-fr" class="active" type="button">FR</button>
+        <button id="lang-wo" type="button">WO</button>
+      </div>
+      <div class="pill" id="countPill">…</div>
+    </div>
   </div>
 </header>
 
@@ -223,18 +261,18 @@
 
   <div class="card status">
     <div class="left">
-      <div class="title">🔎 Trouve un chauffeur près de toi</div>
-      <div class="sub">Filtre par zone / recherche. Contact direct WhatsApp. Paiement direct (0% commission).</div>
+      <div class="title" data-i18n="hero_title">🔎 Trouve un chauffeur près de toi</div>
+      <div class="sub" data-i18n="hero_sub">Filtre par zone / recherche. Contact direct WhatsApp. Paiement direct (0% commission).</div>
     </div>
-    <div class="badge" id="liveBadge">Public</div>
+    <div class="badge" id="liveBadge" data-i18n="badge_public">Public</div>
   </div>
 
   <div class="card">
     <div class="bar">
       <div class="field">
-        <label>📍 Zone</label>
+        <label data-i18n="label_zone">📍 Zone</label>
         <select id="zoneFilter">
-          <option value="">Toutes</option>
+          <option value="" data-i18n="zone_all">Toutes</option>
           <option value="Plateau">Plateau</option>
           <option value="Almadies">Almadies</option>
           <option value="Yoff">Yoff</option>
@@ -243,16 +281,16 @@
       </div>
 
       <div class="field">
-        <label>🔎 Recherche</label>
+        <label data-i18n="label_search">🔎 Recherche</label>
         <input id="qFilter" placeholder="Nom, ville, véhicule…" />
       </div>
 
       <div class="field">
-        <label>🟢 Dispo</label>
+        <label data-i18n="label_avail">🟢 Dispo</label>
         <select id="availFilter">
-          <option value="all" selected>Tous</option>
-          <option value="online">En ligne</option>
-          <option value="offline">Hors-ligne</option>
+          <option value="all" selected data-i18n="avail_all">Tous</option>
+          <option value="online" data-i18n="avail_online">En ligne</option>
+          <option value="offline" data-i18n="avail_offline">Hors-ligne</option>
         </select>
       </div>
     </div>
@@ -261,12 +299,12 @@
   <div class="grid" id="drivers"></div>
 
   <div class="card footCta">
-    <div class="big">Vous êtes chauffeur ?</div>
-    <div class="small">Crée ta fiche et reçois des clients en direct.</div>
+    <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ?</div>
+    <div class="small" data-i18n="cta_driver_sub">Crée ta fiche et reçois des clients en direct.</div>
     <div class="actions" style="justify-content:center; margin-top:12px;">
-      <a class="btn btn-main" href="https://driver.digiylyfe.com/" rel="noopener">Devenir chauffeur</a>
-      <a class="btn btn-ghost" href="https://wa.me/221771342889" rel="noopener">WhatsApp</a>
-      <a class="btn btn-sky" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
+      <a class="btn btn-main" href="https://driver.digiylyfe.com/" rel="noopener" data-i18n="cta_become_driver">Devenir chauffeur</a>
+      <a class="btn btn-ghost" href="https://wa.me/221771342889" rel="noopener" data-i18n="cta_whatsapp">WhatsApp</a>
+      <a class="btn btn-sky" href="https://driver.digiylyfe.com/" rel="noopener" data-i18n="cta_order_ride">Commander une course</a>
     </div>
   </div>
 
@@ -276,6 +314,138 @@
 
 <script type="module">
   import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  /* =========================
+     i18n — FR / WO (Wolof)
+     ========================= */
+  const DIGIY_LANG = {
+    fr: {
+      gallery_title: "Galerie Chauffeurs",
+      hero_title: "🔎 Trouve un chauffeur près de toi",
+      hero_sub: "Filtre par zone / recherche. Contact direct WhatsApp. Paiement direct (0% commission).",
+      badge_public: "Public",
+      badge_loading: "Chargement…",
+      badge_fallback: "⚠️ Public (fallback)",
+
+      label_zone: "📍 Zone",
+      zone_all: "Toutes",
+
+      label_search: "🔎 Recherche",
+      search_ph: "Nom, ville, véhicule…",
+
+      label_avail: "🟢 Dispo",
+      avail_all: "Tous",
+      avail_online: "En ligne",
+      avail_offline: "Hors-ligne",
+
+      count_drivers: (n) => `${n} chauffeur(s)`,
+
+      empty_title: "Aucun chauffeur trouvé",
+      empty_tag_1: "Change les filtres",
+      empty_tag_2: "Ou contacte WhatsApp",
+      btn_support_whatsapp: "WhatsApp support",
+      btn_order_ride: "Commander une course",
+
+      driver_default_name: "Chauffeur",
+      tag_online: "🟢 En ligne",
+      tag_offline: "⚪ Hors-ligne",
+      pill_public: "Public",
+      btn_whatsapp: "WhatsApp",
+
+      cta_driver_title: "Vous êtes chauffeur ?",
+      cta_driver_sub: "Crée ta fiche et reçois des clients en direct.",
+      cta_become_driver: "Devenir chauffeur",
+      cta_whatsapp: "WhatsApp",
+      cta_order_ride: "Commander une course",
+
+      fallback_title: "⚠️ Galerie pas encore branchée",
+      fallback_tag_1: "La source Supabase \"public_driver_cards\" n’est pas accessible",
+      fallback_tag_2: "RLS / vue publique à créer",
+
+      toast_fallback: "Galerie en mode fallback (public)"
+    },
+
+    wo: {
+      gallery_title: "Galerie Chauffeur yi",
+      hero_title: "🔎 Seetal chauffeur bi ci sa wet",
+      hero_sub: "Tànn zone / seet. WhatsApp ci diggante. Fey bu jublu (0% commission).",
+      badge_public: "Public",
+      badge_loading: "Di yük…",
+      badge_fallback: "⚠️ Public (fallback)",
+
+      label_zone: "📍 Zone",
+      zone_all: "Yépp",
+
+      label_search: "🔎 Seet",
+      search_ph: "Tur, dëkk, voiture…",
+
+      label_avail: "🟢 Dispo",
+      avail_all: "Yépp",
+      avail_online: "Ci ligne",
+      avail_offline: "Hors-ligne",
+
+      count_drivers: (n) => `${n} chauffeur`,
+
+      empty_title: "Amul chauffeur bu ñu gis",
+      empty_tag_1: "Soppi filtre yi",
+      empty_tag_2: "Walla bataaxal WhatsApp",
+      btn_support_whatsapp: "WhatsApp support",
+      btn_order_ride: "Jox ma course",
+
+      driver_default_name: "Chauffeur",
+      tag_online: "🟢 Ci ligne",
+      tag_offline: "⚪ Hors-ligne",
+      pill_public: "Public",
+      btn_whatsapp: "WhatsApp",
+
+      cta_driver_title: "Yow, yaa di chauffeur ?",
+      cta_driver_sub: "Def sa fiche te jot client yi ci direct.",
+      cta_become_driver: "Nekkal chauffeur",
+      cta_whatsapp: "WhatsApp",
+      cta_order_ride: "Jox ma course",
+
+      fallback_title: "⚠️ Galerie bi du connecté",
+      fallback_tag_1: "Source Supabase \"public_driver_cards\" duñu ko jàpp",
+      fallback_tag_2: "RLS / vue publique war nañu ko def",
+
+      toast_fallback: "Galerie bi ci mode fallback (public)"
+    }
+  };
+
+  let CURRENT_LANG = localStorage.getItem("digiy_lang") || "fr";
+
+  function t(key, ...args){
+    const pack = DIGIY_LANG[CURRENT_LANG] || DIGIY_LANG.fr;
+    const val = pack[key];
+    if (typeof val === "function") return val(...args);
+    return (val != null) ? String(val) : String((DIGIY_LANG.fr[key] ?? key));
+  }
+
+  function applyLanguage(lang){
+    CURRENT_LANG = (lang === "wo") ? "wo" : "fr";
+    localStorage.setItem("digiy_lang", CURRENT_LANG);
+
+    // html lang
+    document.documentElement.setAttribute("lang", CURRENT_LANG === "wo" ? "wo" : "fr");
+
+    // static texts
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key = el.dataset.i18n;
+      const val = t(key);
+      if (val) el.textContent = val;
+    });
+
+    // placeholder
+    const q = document.getElementById("qFilter");
+    if (q) q.setAttribute("placeholder", t("search_ph"));
+
+    // buttons state
+    document.getElementById("lang-fr")?.classList.toggle("active", CURRENT_LANG==="fr");
+    document.getElementById("lang-wo")?.classList.toggle("active", CURRENT_LANG==="wo");
+  }
+
+  document.getElementById("lang-fr").addEventListener("click", ()=>{ applyLanguage("fr"); render(); });
+  document.getElementById("lang-wo").addEventListener("click", ()=>{ applyLanguage("wo"); render(); });
 
   /* === SUPABASE (public) === */
   const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
@@ -325,7 +495,6 @@
   function normPhone(p){
     const digits = String(p ?? "").replace(/\D/g,"");
     if (!digits) return "";
-    // si l'utilisateur met déjà 221..., ok
     return digits;
   }
 
@@ -348,19 +517,19 @@
 
   function render(){
     const items = ALL.filter(passes);
-    countPill.textContent = `${items.length} chauffeur(s)`;
+    countPill.textContent = t("count_drivers", items.length);
 
     if (!items.length){
       driversEl.innerHTML = `
         <div class="driver" style="grid-column:1/-1">
-          <div class="name">Aucun chauffeur trouvé</div>
+          <div class="name">${esc(t("empty_title"))}</div>
           <div class="meta">
-            <span class="tag">Change les filtres</span>
-            <span class="tag">Ou contacte WhatsApp</span>
+            <span class="tag">${esc(t("empty_tag_1"))}</span>
+            <span class="tag">${esc(t("empty_tag_2"))}</span>
           </div>
           <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">WhatsApp support</a>
-            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
+            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">${esc(t("btn_order_ride"))}</a>
           </div>
         </div>
       `;
@@ -368,7 +537,7 @@
     }
 
     driversEl.innerHTML = items.map(d => {
-      const name = esc(d.name || "Chauffeur");
+      const name = esc(d.name || t("driver_default_name"));
       const city = esc(d.city || "");
       const zone = esc(d.zone || "");
       const car  = esc(d.car || "");
@@ -376,7 +545,10 @@
       const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
       const wa = normPhone(d.whatsapp);
 
-      const badge = online ? `<span class="tag" style="border-color:rgba(34,197,94,.25)">🟢 En ligne</span>` : `<span class="tag">⚪ Hors-ligne</span>`;
+      const badge = online
+        ? `<span class="tag" style="border-color:rgba(34,197,94,.25)">${esc(t("tag_online"))}</span>`
+        : `<span class="tag">${esc(t("tag_offline"))}</span>`;
+
       const rateTag = (rating && !Number.isNaN(rating)) ? `<span class="tag">⭐ ${rating.toFixed(1)}</span>` : ``;
 
       return `
@@ -393,14 +565,14 @@
               </div>
             </div>
             <div class="pill" style="color:#0f172a;background:#fff;border-color:rgba(15,23,42,.15)">
-              Public
+              ${esc(t("pill_public"))}
             </div>
           </div>
 
           <div class="actions">
-            ${wa ? `<a class="btn btn-main" href="https://wa.me/${wa}" rel="noopener">WhatsApp</a>`
-                 : `<button class="btn btn-main" disabled>WhatsApp</button>`}
-            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
+            ${wa ? `<a class="btn btn-main" href="https://wa.me/${wa}" rel="noopener">${esc(t("btn_whatsapp"))}</a>`
+                 : `<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`}
+            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">${esc(t("btn_order_ride"))}</a>
           </div>
         </div>
       `;
@@ -408,7 +580,7 @@
   }
 
   async function load(){
-    liveBadge.textContent = "Chargement…";
+    liveBadge.textContent = t("badge_loading");
     try{
       const { data, error } = await sb
         .from(PUBLIC_SOURCE)
@@ -418,31 +590,30 @@
       if (error) throw error;
 
       ALL = Array.isArray(data) ? data : [];
-      liveBadge.textContent = "Public";
+      liveBadge.textContent = t("badge_public");
       render();
     }catch(e){
       console.warn("Public gallery error:", e);
-      liveBadge.textContent = "⚠️ Public (fallback)";
+      liveBadge.textContent = t("badge_fallback");
 
-      // Fallback propre si la vue n'existe pas / RLS bloque
       ALL = [];
       countPill.textContent = "…";
 
       driversEl.innerHTML = `
         <div class="driver" style="grid-column:1/-1">
-          <div class="name">⚠️ Galerie pas encore branchée</div>
+          <div class="name">${esc(t("fallback_title"))}</div>
           <div class="meta">
-            <span class="tag">La source Supabase "public_driver_cards" n’est pas accessible</span>
-            <span class="tag">RLS / vue publique à créer</span>
+            <span class="tag">${esc(t("fallback_tag_1"))}</span>
+            <span class="tag">${esc(t("fallback_tag_2"))}</span>
           </div>
           <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">WhatsApp</a>
-            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">Commander une course</a>
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a>
+            <a class="btn btn-ghost" href="https://driver.digiylyfe.com/" rel="noopener">${esc(t("btn_order_ride"))}</a>
           </div>
         </div>
       `;
 
-      toast("Galerie en mode fallback (public)");
+      toast(t("toast_fallback"));
     }
   }
 
@@ -453,6 +624,8 @@
     globalThis.__q = setTimeout(render, 120);
   });
 
+  // init language then load
+  applyLanguage(CURRENT_LANG);
   load();
 </script>
 </body>
