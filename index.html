@@ -1,438 +1,638 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>DIGIY DRIVER — Chauffeurs Privés Sénégal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="DIGIY DRIVER — Chauffeurs privés au Sénégal • 0% commission • Contact direct • Transferts AIBD, circuits, disponibilité 24/7.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>DIGIY DRIVER — Chauffeur (Realtime + GEO)</title>
+  <meta name="theme-color" content="#22c55e" />
+  <meta name="description" content="DIGIY DRIVER Chauffeur — tableau de bord, courses en direct, filtrage zone & distance, 0% commission." />
 
   <style>
     :root{
-      --bg:#020617;
-      --card:#030712;
-      --accent:#facc15;
-      --accent2:#0ea5e9;
-      --ink:#f9fafb;
-      --muted:#cbd5e1;
+      --green:#22c55e;
+      --green2:#16a34a;
+      --sky:#0ea5e9;
+      --ok:#22c55e;
+
+      --bg:#f0fdf4;
+      --bg2:#ffffff;
+      --card:#ffffff;
+
+      --text:#0f172a;
+      --muted:#64748b;
+
+      --shadow:0 12px 28px rgba(2,6,23,.08);
+      --radius:18px;
+
+      --warn:#f59e0b;
+      --warnBg:rgba(245,158,11,.12);
+      --warnBd:rgba(245,158,11,.35);
+      --warnTx:#7c2d12;
     }
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
-    }
+    *{box-sizing:border-box}
     body{
-      background:#020617;
-      color:var(--ink);
-      padding:12px;
-      display:flex;
-      justify-content:center;
-    }
-    .app{
-      width:100%;
-      max-width:1100px;
-      min-height:100vh;
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #dcfce7 0%, var(--bg) 55%, var(--bg2) 100%);
+      color:var(--text);
     }
     header{
+      position:sticky; top:0; z-index:5;
+      padding:16px 14px;
+      background: linear-gradient(90deg, var(--green), #4ade80);
+      color:#fff;
+      box-shadow: 0 10px 22px rgba(34,197,94,.32);
+    }
+    .topRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      max-width:980px; margin:0 auto;
+    }
+    .brand{
+      font-weight:1000;
+      letter-spacing:.3px;
+      display:flex; align-items:center; gap:10px;
+      font-size:17px;
+      white-space:nowrap;
+    }
+    .pill{
+      background: rgba(255,255,255,.22);
+      border:1px solid rgba(255,255,255,.35);
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    main{max-width:980px; margin:0 auto; padding:14px;}
+
+    .card{
+      background:#ffffffcc;
+      backdrop-filter: blur(7px);
+      border:1px solid rgba(15,23,42,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .bar{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:10px;
+    }
+    @media(max-width:860px){
+      .bar{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+    .field label{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:900;
+      display:block;
+      margin-bottom:6px;
+    }
+    select, input{
+      width:100%;
+      padding:11px 12px;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.12);
+      outline:none;
+      font-size:14px;
+      background:#fff;
+    }
+
+    .status{
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      margin-bottom:18px;
+      justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
     }
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .brand-logo{
-      width:50px;
-      height:50px;
-      border-radius:16px;
-      background:radial-gradient(circle at 30% 0%,#0ea5e9,#0284c7);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      box-shadow:0 10px 24px rgba(14,165,233,0.55);
-    }
-    .brand-title{
-      font-size:24px;
-      font-weight:900;
-      color:var(--accent2);
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-    }
-    .brand-sub{
-      font-size:15px;
-      color:var(--muted);
-      font-weight:600;
-    }
-    .back-link{
-      font-size:13px;
-      color:var(--muted);
-      text-decoration:none;
-      padding:8px 14px;
+    .status .left{display:flex; flex-direction:column; gap:2px}
+    .status .title{font-weight:1000}
+    .status .sub{font-size:12px; color:var(--muted); font-weight:800}
+    .badge{
+      font-size:12px;
+      font-weight:1000;
+      padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(148,163,184,0.5);
-      background:rgba(15,23,42,0.9);
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
+      background:#dcfce7;
+      border:1px solid rgba(34,197,94,.22);
+      color:#14532d;
+      white-space:nowrap;
+    }
+    .badge.warn{
+      background:var(--warnBg);
+      border:1px solid var(--warnBd);
+      color:var(--warnTx);
     }
 
-    .hero{
-      background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(3,7,18,0.96));
-      border:1px solid rgba(14,165,233,0.3);
-      border-radius:20px;
-      padding:20px;
-      margin-bottom:20px;
-      text-align:center;
+    .actionsTop{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center;
     }
-    .hero h2{
-      font-size:28px;
-      font-weight:900;
-      color:var(--accent);
-      margin-bottom:8px;
-    }
-    .hero h2 span{
-      color:var(--accent2);
-    }
-    .hero p{
-      font-size:16px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-    .hero .stats{
-      display:flex;
-      gap:20px;
-      justify-content:center;
-      margin-top:16px;
-      flex-wrap:wrap;
-    }
-    .stat-item{
+    button{
+      padding:11px 12px;
+      border:none;
+      border-radius:14px;
+      font-weight:1000;
       font-size:14px;
-      font-weight:800;
-      color:var(--accent2);
+      cursor:pointer;
+    }
+    button:disabled{opacity:.55; cursor:not-allowed}
+    .btn-light{
+      background:#fff;
+      border:1px solid rgba(15,23,42,.14);
+      color:var(--text);
     }
 
     .grid{
-      margin-top:10px;
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
     }
-    @media(max-width:900px){
-      .grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-    }
-    @media(max-width:640px){
-      .grid{
-        grid-template-columns:1fr;
-      }
-      .hero h2{
-        font-size:22px;
-      }
-      .hero p{
-        font-size:14px;
-      }
-    }
-
-    .card{
-      background:var(--card);
-      border-radius:22px;
-      border:1px solid rgba(148,163,184,0.35);
+    .trip{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border:1px solid rgba(15,23,42,.08);
       padding:14px;
-      box-shadow:0 14px 32px rgba(0,0,0,0.55);
-      display:flex;
-      flex-direction:column;
-      gap:10px;
       overflow:hidden;
-      transition:all 0.3s ease;
-    }
-    .card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 40px rgba(14,165,233,0.3);
-    }
-    .photo{
-      width:100%;
-      height:220px;
-      border-radius:16px;
-      overflow:hidden;
-      border:2px solid var(--accent2);
       position:relative;
     }
-    .photo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+    .trip .head{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
     }
-    .hub-badge{
-      position:absolute;
-      top:10px;
-      right:10px;
-      background:var(--accent);
-      color:#111;
-      padding:6px 12px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:900;
-      box-shadow:0 4px 12px rgba(250,204,21,0.6);
-    }
-    .name{
-      font-size:22px;
-      font-weight:900;
-      color:var(--accent2);
-    }
-    .type{
+    .trip .route{
+      font-weight:1000;
       font-size:15px;
-      font-weight:700;
-      color:var(--accent);
+      line-height:1.2;
     }
-    .desc{
-      font-size:16px;
-      line-height:1.5;
-      color:var(--ink);
-    }
-    .city{
-      font-size:14px;
-      color:var(--muted);
-      font-weight:600;
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-    .price{
-      font-size:15px;
-      font-weight:800;
-      color:var(--accent);
-      padding:8px 12px;
-      background:rgba(250,204,21,0.15);
-      border-radius:10px;
-      text-align:center;
-    }
-    .actions{
-      display:flex;
-      gap:10px;
+    .trip .meta{
       margin-top:8px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      flex:1;
-      padding:11px 16px;
-      border-radius:999px;
-      border:none;
-      font-size:15px;
-      font-weight:900;
-      cursor:pointer;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-decoration:none;
-      text-align:center;
-      white-space:nowrap;
-      transition:all 0.2s ease;
-    }
-    .btn-view{
-      background:linear-gradient(135deg,#0ea5e9,#0284c7);
-      color:#fff;
-      box-shadow:0 7px 18px rgba(14,165,233,0.55);
-    }
-    .btn-view:hover{
-      transform:translateY(-2px);
-      box-shadow:0 10px 24px rgba(14,165,233,0.7);
-    }
-    .btn-wa{
-      background:rgba(34,197,94,0.2);
-      border:1px solid var(--accent2);
-      color:#bbf7d0;
-    }
-    .btn-wa:hover{
-      background:rgba(34,197,94,0.3);
-      transform:translateY(-2px);
-    }
-    footer{
-      margin-top:30px;
-      padding-top:20px;
-      border-top:1px solid rgba(148,163,184,0.3);
+      display:flex; flex-wrap:wrap; gap:8px;
       font-size:12px;
       color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:10px;
+      font-weight:900;
     }
-    footer span{
-      color:var(--accent);
-      font-weight:800;
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+    }
+    .price{
+      margin-top:10px;
+      font-size:16px;
+      font-weight:1100;
+      color:var(--green2);
+    }
+    .actions{display:flex; gap:10px; margin-top:12px;}
+    .btn-accept{background:var(--green2); color:#fff}
+    .btn-start{background:var(--sky); color:#fff}
+    .btn-done{background:var(--ok); color:#fff}
+    .btn-ghost{
+      background:#fff;
+      border:1px solid rgba(15,23,42,.12);
+      color:var(--text);
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 16px;
+      background: rgba(15,23,42,.92);
+      color:#fff;
+      padding:10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      display:none;
+      z-index: 20;
+      max-width: 92vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   </style>
 </head>
+
 <body>
-<div class="app">
+<header>
+  <div class="topRow">
+    <div class="brand">🚕 DIGIY DRIVER <span class="pill">Personnes • Realtime</span></div>
+    <div class="pill" id="who">…</div>
+  </div>
+</header>
 
-  <header>
-    <div class="brand">
-      <div class="brand-logo">🚗</div>
-      <div>
-        <div class="brand-title">DIGIY DRIVER</div>
-        <div class="brand-sub">Chauffeurs Privés • Sénégal</div>
+<main>
+
+  <div class="card">
+    <div class="bar">
+      <div class="field">
+        <label>📍 Zone (pickup_zone)</label>
+        <select id="zoneFilter">
+          <option value="">Toutes</option>
+          <option value="Plateau">Plateau</option>
+          <option value="Almadies">Almadies</option>
+          <option value="Yoff">Yoff</option>
+          <option value="Saly">Saly</option>
+        </select>
       </div>
-    </div>
 
-    <a href="index.html" class="back-link">
-      <span>←</span> DIGIY HUB
-    </a>
-  </header>
+      <div class="field">
+        <label>📏 Rayon</label>
+        <select id="radiusFilter">
+          <option value="2">2 km</option>
+          <option value="3">3 km</option>
+          <option value="5" selected>5 km</option>
+          <option value="8">8 km</option>
+          <option value="10">10 km</option>
+        </select>
+      </div>
 
-  <!-- HERO SECTION -->
-  <div class="hero">
-    <h2>🚗 Chauffeurs <span>Professionnels</span> • 0% Commission</h2>
-    <p>
-      Nos partenaires chauffeurs au Sénégal • Transferts AIBD, circuits, disponibilité 24/7<br>
-      <strong>Contact direct</strong> • Tarifs transparents • Sans intermédiaire
-    </p>
-    <div class="stats">
-      <div class="stat-item">✅ 1 Chauffeur actif</div>
-      <div class="stat-item">🚀 4 Bientôt disponibles</div>
-      <div class="stat-item">💬 WhatsApp direct</div>
-      <div class="stat-item">🚗 Saly - Dakar - Sénégal</div>
+      <div class="field">
+        <label>🎛️ Vue</label>
+        <select id="viewFilter">
+          <option value="open" selected>Demandes ouvertes (requested)</option>
+          <option value="mine">Mes courses (accepted/ongoing)</option>
+          <option value="all">Tout (requested/accepted/ongoing)</option>
+        </select>
+      </div>
     </div>
   </div>
 
-  <section class="grid">
-
-    <!-- 1) LAMINE - CHAUFFEUR ACTIF -->
-    <div class="card">
-      <div class="photo">
-        <img src="https://digiylyfe.com/wp-content/uploads/2025/05/CHAUFFEUR-LAMINE-1-e1757908803734.webp" alt="Chauffeur privé Lamine Saly - Carte professionnelle">
-        <div class="hub-badge">⭐ ACTIF</div>
-      </div>
-      <div class="name">🚗 Lamine</div>
-      <div class="type">Chauffeur Privé Professionnel</div>
-      <div class="city">📍 Saly • Petite Côte • Dakar</div>
-      <div class="desc">
-        Transferts AIBD, circuits touristiques, disponibilité sur demande.
-        Véhicule climatisé, conduite sécurisée, connaissance parfaite du Sénégal.
-      </div>
-      <div class="price">💰 Sur demande • Devis personnalisé</div>
-      <div class="actions">
-        <a class="btn btn-view" href="https://digiylyfe.com/partenaires-lamine/" target="_blank">Voir la fiche</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221784413680','Salam Lamine, je viens de DIGIY DRIVER et je veux un devis pour un transfert/circuit.');">
-          💬 WhatsApp
-        </button>
-      </div>
+  <!-- Bandeau soft (on ne vire pas) -->
+  <div class="card status" id="softCard" style="display:none">
+    <div class="left">
+      <div class="title" id="softTitle">⚠️ Profil à compléter</div>
+      <div class="sub" id="softSub">On te laisse entrer. Mets tes infos chauffeur quand tu peux.</div>
     </div>
+    <div class="badge warn">Soft-guard</div>
+  </div>
 
-    <!-- 2) PLACEHOLDER - CHAUFFEUR DAKAR -->
-    <div class="card" style="opacity:0.7;position:relative;">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,0.95);color:#fff;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-        🚀 BIENTÔT DISPONIBLE
-      </div>
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80" alt="Chauffeur privé Dakar">
-      </div>
-      <div class="name">🚗 [Nom chauffeur]</div>
-      <div class="type">Chauffeur Privé • Dakar</div>
-      <div class="city">📍 Dakar & Banlieue</div>
-      <div class="desc">
-        Transferts professionnels, missions business, déplacements quotidiens.
-        Véhicule haut de gamme, ponctualité garantie.
-      </div>
-      <div class="price">💰 Tarifs compétitifs</div>
-      <div class="actions">
-        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
-        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
-      </div>
+  <div class="card status">
+    <div class="left">
+      <div class="title" id="statusTitle">Connexion…</div>
+      <div class="sub" id="statusSub">Chargement Supabase / GPS</div>
     </div>
+    <div class="badge" id="gpsBadge">GPS: …</div>
+  </div>
 
-    <!-- 3) PLACEHOLDER - CHAUFFEUR SAINT-LOUIS -->
-    <div class="card" style="opacity:0.7;position:relative;">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,0.95);color:#fff;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-        🚀 BIENTÔT DISPONIBLE
-      </div>
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1552519507-d9a4e5a17f78?auto=format&fit=crop&w=800&q=80" alt="Chauffeur privé Saint-Louis">
-      </div>
-      <div class="name">🚗 [Nom chauffeur]</div>
-      <div class="type">Chauffeur Privé • Saint-Louis</div>
-      <div class="city">📍 Saint-Louis & Nord</div>
-      <div class="desc">
-        Circuits découverte Saint-Louis, île de Gorée, Lac Rose.
-        Guide local expérimenté, anglais/français parlé.
-      </div>
-      <div class="price">💰 Circuits touristiques</div>
-      <div class="actions">
-        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
-        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
-      </div>
+  <div class="card status">
+    <div class="left">
+      <div class="title">👤 Dashboard Chauffeur</div>
+      <div class="sub" id="meLine">Chargement profil…</div>
     </div>
-
-    <!-- 4) PLACEHOLDER - CHAUFFEUR CASAMANCE -->
-    <div class="card" style="opacity:0.7;position:relative;">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,0.95);color:#fff;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-        🚀 BIENTÔT DISPONIBLE
-      </div>
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80" alt="Chauffeur privé Casamance">
-      </div>
-      <div class="name">🚗 [Nom chauffeur]</div>
-      <div class="type">Chauffeur Privé • Casamance</div>
-      <div class="city">📍 Ziguinchor & Casamance</div>
-      <div class="desc">
-        Spécialiste circuits Casamance, bolongs, villages traditionnels.
-        4x4 disponible, connaissance terrain exceptionnelle.
-      </div>
-      <div class="price">💰 Aventure & authenticité</div>
-      <div class="actions">
-        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
-        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
-      </div>
+    <div class="actionsTop">
+      <button class="btn-light" id="btnReload">🔄 Recharger</button>
+      <button class="btn-light" id="btnLogout">🚪 Déconnexion</button>
     </div>
+  </div>
 
-    <!-- 5) PLACEHOLDER - CHAUFFEUR THIÈS -->
-    <div class="card" style="opacity:0.7;position:relative;">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,0.95);color:#fff;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-        🚀 BIENTÔT DISPONIBLE
-      </div>
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Chauffeur privé Thiès">
-      </div>
-      <div class="name">🚗 [Nom chauffeur]</div>
-      <div class="type">Chauffeur Privé • Thiès</div>
-      <div class="city">📍 Thiès & Région</div>
-      <div class="desc">
-        Liaisons Thiès-Dakar quotidiennes, transferts aéroport AIBD.
-        Service régulier, tarifs négociables pour abonnements.
-      </div>
-      <div class="price">💰 Formules abonnement</div>
-      <div class="actions">
-        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
-        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
-      </div>
-    </div>
+  <div class="grid" id="trips"></div>
+</main>
 
-  </section>
+<div class="toast" id="toast"></div>
 
-  <footer>
-    <div>DIGIY DRIVER • <span>Module DIGIYLYFE</span> — Saly → Sénégal → Afrique ∞</div>
-    <div>0% commission • Contact direct chauffeurs • Tarifs transparents</div>
-  </footer>
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-</div>
+  /* PORTE HUB */
+  const DIGIY_GATE = "https://beauville.github.io/digiy-hub/";
+  function STOP(){
+    location.replace(DIGIY_GATE);
+    throw new Error("DIGIY_GATE");
+  }
 
-<script>
-function wa(phone, msg){
-  const clean = phone.replace(/\s+/g,"").replace("+","");
-  const txt = encodeURIComponent(msg || "");
-  const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
-  window.open(url, "_blank");
-}
+  /* SUPABASE */
+  const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+  const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA";
+
+  globalThis.__sb ||= createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const sb = globalThis.__sb;
+
+  /* UI */
+  const tripsEl = document.getElementById("trips");
+  const zoneFilter = document.getElementById("zoneFilter");
+  const radiusFilter = document.getElementById("radiusFilter");
+  const viewFilter = document.getElementById("viewFilter");
+  const whoEl = document.getElementById("who");
+  const statusTitle = document.getElementById("statusTitle");
+  const statusSub = document.getElementById("statusSub");
+  const gpsBadge = document.getElementById("gpsBadge");
+  const meLine = document.getElementById("meLine");
+  const toastEl = document.getElementById("toast");
+  const btnReload = document.getElementById("btnReload");
+  const btnLogout = document.getElementById("btnLogout");
+  const softCard = document.getElementById("softCard");
+  const softTitle = document.getElementById("softTitle");
+  const softSub = document.getElementById("softSub");
+
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.style.display = "block";
+    clearTimeout(globalThis.__t);
+    globalThis.__t = setTimeout(()=> toastEl.style.display="none", 2400);
+  }
+
+  function showSoft(title, sub){
+    softTitle.textContent = title;
+    softSub.textContent = sub;
+    softCard.style.display = "flex";
+  }
+
+  async function main(){
+    // Session obligatoire (seule vraie raison de virer)
+    const { data: sess } = await sb.auth.getSession();
+    const session = sess?.session;
+
+    if (!session){
+      statusTitle.textContent = "❌ Non connecté";
+      statusSub.textContent = "Retour HUB…";
+      whoEl.textContent = "Offline";
+      STOP();
+    }
+
+    const uid = session.user.id;
+    whoEl.textContent = (session.user.phone || session.user.email || "Chauffeur");
+    statusTitle.textContent = "🟢 En ligne";
+    statusSub.textContent = "Chargement profil & courses…";
+
+    // Profil : on tente, mais on NE VIRE PAS si ça échoue
+    let profile = null;
+    let profError = null;
+
+    try{
+      const res = await sb
+        .from("profiles")
+        .select("role_auto, pro_type, active_modules")
+        .eq("id", uid)
+        .maybeSingle();
+
+      profile = res.data || null;
+      profError = res.error || null;
+    }catch(e){
+      profError = e;
+      profile = null;
+    }
+
+    // Cas clair : si profil dit FRET => dehors (seule interdiction dure)
+    if (profile){
+      const proType = (profile.pro_type || "").toLowerCase();
+      const mods = Array.isArray(profile.active_modules) ? profile.active_modules : [];
+      if (proType === "fret" || mods.includes("fret")){
+        STOP();
+      }
+      meLine.textContent = `ID: ${uid.slice(0,6)}… • ROLE: ${profile.role_auto || "?"} • TYPE: ${profile.pro_type || "?"}`;
+    } else {
+      // Profil absent / RLS / erreur -> SOFT ONLY
+      showSoft("⚠️ Profil pas prêt", "Ton accès est OK. On n’a pas encore pu lire ton profil (RLS/profil). Tu complèteras après.");
+      meLine.textContent = `ID: ${uid.slice(0,6)}… • Mode: DRIVER (soft)`;
+      if (profError) console.warn("profiles read error (soft):", profError);
+    }
+
+    // Logout
+    btnLogout?.addEventListener("click", async ()=>{
+      await sb.auth.signOut();
+      STOP();
+    });
+
+    // GPS
+    let driverLat = null, driverLng = null;
+
+    function setGPSBadge(){
+      gpsBadge.textContent = (driverLat && driverLng) ? "GPS: OK" : "GPS: OFF";
+    }
+    setGPSBadge();
+
+    function distanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2-lat1) * Math.PI/180;
+      const dLon = (lon2-lon1) * Math.PI/180;
+      const a =
+        Math.sin(dLat/2)**2 +
+        Math.cos(lat1*Math.PI/180) *
+        Math.cos(lat2*Math.PI/180) *
+        Math.sin(dLon/2)**2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (pos)=>{
+          driverLat = pos.coords.latitude;
+          driverLng = pos.coords.longitude;
+          setGPSBadge();
+        },
+        ()=>{
+          setGPSBadge();
+          statusSub.textContent = "GPS refusé • filtrage distance désactivé";
+        },
+        { enableHighAccuracy:true, maximumAge: 8000, timeout: 12000 }
+      );
+    } else {
+      statusSub.textContent = "GPS indisponible • filtrage distance désactivé";
+    }
+
+    // Store
+    const store = new Map();
+
+    function passesFilters(trip){
+      const z = zoneFilter.value;
+      const r = parseFloat(radiusFilter.value || "5");
+      const v = viewFilter.value;
+
+      if (v === "open" && trip.status !== "requested") return false;
+      if (v === "mine" && !(trip.status === "accepted" || trip.status === "ongoing")) return false;
+      if (v === "all" && !["requested","accepted","ongoing"].includes(trip.status)) return false;
+
+      if (z && (trip.pickup_zone || "") !== z) return false;
+
+      if (driverLat && driverLng && trip.pickup_lat && trip.pickup_lng) {
+        const d = distanceKm(driverLat, driverLng, trip.pickup_lat, trip.pickup_lng);
+        if (d > r) return false;
+      }
+      return true;
+    }
+
+    function formatTripMeta(trip){
+      const z = trip.pickup_zone ? `📍 ${trip.pickup_zone}` : "📍 Zone ?";
+      const c = trip.pickup_city ? `🏙️ ${trip.pickup_city}` : "🏙️ Ville ?";
+
+      let distStr = null;
+      if (driverLat && driverLng && trip.pickup_lat && trip.pickup_lng) {
+        const d = distanceKm(driverLat, driverLng, trip.pickup_lat, trip.pickup_lng);
+        distStr = `📏 ${d.toFixed(1)} km`;
+      }
+
+      const km = trip.distance_km ? `🛣️ ${trip.distance_km} km` : null;
+      const min = trip.duration_min ? `⏱️ ${trip.duration_min} min` : null;
+
+      return [c, z, distStr, km, min].filter(Boolean);
+    }
+
+    function renderAll(){
+      tripsEl.innerHTML = "";
+      const items = Array.from(store.values())
+        .filter(passesFilters)
+        .sort((a,b)=> (new Date(b.created_at) - new Date(a.created_at)));
+
+      if (!items.length){
+        tripsEl.innerHTML = `
+          <div class="trip" style="grid-column:1/-1">
+            <div class="route">Aucune course dans tes filtres</div>
+            <div class="meta">
+              <span class="tag">Zone=Toutes</span>
+              <span class="tag">Rayon=10km</span>
+              <span class="tag">Vue=Demandes ouvertes</span>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      for (const trip of items) {
+        const card = document.createElement("div");
+        card.className = "trip";
+
+        const route = `📍 ${trip.pickup_city || "?"} → ${trip.dropoff_city || "?"}`;
+        const metaTags = formatTripMeta(trip).map(x=>`<span class="tag">${x}</span>`).join("");
+
+        let actionsHtml = "";
+        if (trip.status === "requested") {
+          actionsHtml = `
+            <div class="actions">
+              <button class="btn-accept" data-id="${trip.id}" data-act="accept">Accepter</button>
+            </div>
+          `;
+        } else if (trip.status === "accepted") {
+          actionsHtml = `
+            <div class="actions">
+              <button class="btn-start" data-id="${trip.id}" data-act="start">Démarrer</button>
+              <button class="btn-ghost" data-id="${trip.id}" data-act="refresh">Rafraîchir</button>
+            </div>
+          `;
+        } else if (trip.status === "ongoing") {
+          actionsHtml = `
+            <div class="actions">
+              <button class="btn-done" data-id="${trip.id}" data-act="complete">Terminer</button>
+              <button class="btn-ghost" data-id="${trip.id}" data-act="refresh">Rafraîchir</button>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="head">
+            <div>
+              <div class="route">${route}</div>
+              <div class="meta">${metaTags}</div>
+              <div class="price">💰 ${(trip.amount ?? 0)} F CFA</div>
+            </div>
+            <div class="pill" style="color:#0f172a;background:#fff;border-color:rgba(15,23,42,.15)">
+              ${trip.status}
+            </div>
+          </div>
+          ${actionsHtml}
+        `;
+
+        tripsEl.appendChild(card);
+      }
+    }
+
+    async function rpcAction(action, tripId){
+      try{
+        if (!tripId) return;
+
+        toast(`⏳ ${action.toUpperCase()}…`);
+        let res;
+
+        if (action === "accept") res = await sb.rpc("accept_trip", { p_trip_id: tripId });
+        else if (action === "start") res = await sb.rpc("start_trip", { p_trip_id: tripId });
+        else if (action === "complete") res = await sb.rpc("complete_trip", { p_trip_id: tripId });
+        else if (action === "refresh") { await loadInitial(); toast("✅ Rafraîchi"); return; }
+        else return;
+
+        if (res?.error){
+          console.error(res.error);
+          toast("❌ " + res.error.message);
+          return;
+        }
+
+        toast("✅ OK");
+      }catch(e){
+        console.error(e);
+        toast("❌ Erreur action");
+      }
+    }
+
+    document.addEventListener("click", (e)=>{
+      const btn = e.target?.closest("button[data-act]");
+      if (!btn) return;
+      rpcAction(btn.getAttribute("data-act"), btn.getAttribute("data-id"));
+    });
+
+    async function loadInitial(){
+      const { data, error } = await sb
+        .from("driver_trips")
+        .select("*")
+        .in("status", ["requested","accepted","ongoing"])
+        .order("created_at", { ascending:false })
+        .limit(200);
+
+      if (error){
+        console.error(error);
+        statusSub.textContent = "Erreur chargement (driver_trips)";
+        tripsEl.innerHTML = `
+          <div class="trip" style="grid-column:1/-1">
+            <div class="route">⚠️ driver_trips inaccessible</div>
+            <div class="meta">
+              <span class="tag">Table/view manquante ?</span>
+              <span class="tag">RLS bloque ?</span>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      store.clear();
+      (data || []).forEach(t => t?.id && store.set(t.id, t));
+      renderAll();
+      statusSub.textContent = "Realtime actif • attente de courses";
+    }
+
+    btnReload?.addEventListener("click", async ()=>{
+      await loadInitial();
+      toast("✅ Rechargé");
+    });
+
+    zoneFilter.addEventListener("change", renderAll);
+    radiusFilter.addEventListener("change", renderAll);
+    viewFilter.addEventListener("change", renderAll);
+    setInterval(()=>{ renderAll(); }, 7000);
+
+    await loadInitial();
+
+    sb.channel("driver-trips-live")
+      .on("postgres_changes", { event:"INSERT", schema:"public", table:"driver_trips" }, (p)=>{
+        const t = p.new;
+        if (!t?.id) return;
+        store.set(t.id, t);
+        renderAll();
+        if (t.status === "requested") toast("🚕 Nouvelle demande !");
+      })
+      .on("postgres_changes", { event:"UPDATE", schema:"public", table:"driver_trips" }, (p)=>{
+        const t = p.new;
+        if (!t?.id) return;
+        if (["requested","accepted","ongoing"].includes(t.status)) store.set(t.id, t);
+        else store.delete(t.id);
+        renderAll();
+      })
+      .subscribe();
+  }
+
+  main();
 </script>
-
 </body>
 </html>
