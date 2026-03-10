@@ -15,6 +15,7 @@
       --green:#22c55e;
       --green2:#16a34a;
       --sky:#0ea5e9;
+      --gold:#facc15;
       --bg:#f0fdf4;
       --card:#ffffff;
       --text:#0f172a;
@@ -28,6 +29,9 @@
       --bd:rgba(15,23,42,.10);
       --chip:#ecfdf5;
       --chipBd:rgba(34,197,94,.16);
+      --dark:#0f172a;
+      --softWhite:rgba(255,255,255,.22);
+      --softWhiteBd:rgba(255,255,255,.35);
     }
 
     *{box-sizing:border-box}
@@ -42,17 +46,17 @@
     header{
       position:sticky;
       top:0;
-      z-index:10;
+      z-index:20;
       padding:16px 14px;
       background:linear-gradient(90deg,var(--green),#4ade80);
       color:#fff;
       box-shadow:0 10px 22px rgba(34,197,94,.32);
     }
 
-    .wrap{max-width:1040px; margin:0 auto; padding:14px;}
+    .wrap{max-width:1080px; margin:0 auto; padding:14px;}
 
     .topRow{
-      max-width:1040px;
+      max-width:1080px;
       margin:0 auto;
       display:flex;
       align-items:center;
@@ -72,8 +76,8 @@
     }
 
     .pill{
-      background:rgba(255,255,255,.22);
-      border:1px solid rgba(255,255,255,.35);
+      background:var(--softWhite);
+      border:1px solid var(--softWhiteBd);
       padding:7px 11px;
       border-radius:999px;
       font-size:12px;
@@ -83,6 +87,44 @@
       align-items:center;
       justify-content:center;
       gap:8px;
+    }
+
+    .pill.dark{
+      background:rgba(15,23,42,.18);
+      border-color:rgba(15,23,42,.18);
+    }
+
+    .header-right{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .lang-switch{
+      display:flex;
+      gap:6px;
+      padding:4px;
+      border-radius:999px;
+      background:var(--softWhite);
+      border:1px solid var(--softWhiteBd);
+    }
+
+    .lang-switch button{
+      border:none;
+      padding:7px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:1000;
+      font-size:12px;
+      background:transparent;
+      color:#fff;
+    }
+
+    .lang-switch button.active{
+      background:#0f172a;
+      color:#fff;
     }
 
     .card{
@@ -145,20 +187,62 @@
       color:var(--warnTx);
     }
 
-    .trust-row{
+    .statsRow{
       display:flex;
       flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .statChip{
+      padding:9px 12px;
+      border-radius:999px;
+      background:var(--chip);
+      border:1px solid var(--chipBd);
+      color:#166534;
+      font-size:12px;
+      font-weight:1000;
+      display:inline-flex;
+      align-items:center;
       gap:8px;
     }
 
-    .trust-chip{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--chipBd);
-      background:var(--chip);
-      color:#166534;
-      font-size:12px;
-      font-weight:900;
+    .navRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .navBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:11px 14px;
+      border-radius:14px;
+      font-weight:1000;
+      font-size:14px;
+      text-decoration:none;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      color:var(--text);
+    }
+
+    .navBtn.main{
+      background:var(--green2);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .navBtn.sky{
+      background:var(--sky);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .navBtn.gold{
+      background:rgba(250,204,21,.14);
+      color:#7c5b00;
+      border-color:rgba(250,204,21,.28);
     }
 
     .bar{
@@ -236,6 +320,7 @@
       color:var(--muted);
       font-size:13px;
       line-height:1.5;
+      min-height:38px;
     }
 
     .actions{
@@ -260,7 +345,10 @@
       user-select:none;
     }
 
-    button:disabled{opacity:.55; cursor:not-allowed}
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
 
     .btn-main{background:var(--green2); color:#fff}
     .btn-sky{background:var(--sky); color:#fff}
@@ -295,36 +383,11 @@
       font-size:13px;
       font-weight:900;
       display:none;
-      z-index:20;
+      z-index:30;
       max-width:92vw;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-    }
-
-    .lang-switch{
-      display:flex;
-      gap:6px;
-      padding:4px;
-      border-radius:999px;
-      background:rgba(255,255,255,.22);
-      border:1px solid rgba(255,255,255,.35);
-    }
-
-    .lang-switch button{
-      border:none;
-      padding:7px 12px;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:1000;
-      font-size:12px;
-      background:transparent;
-      color:#fff;
-    }
-
-    .lang-switch button.active{
-      background:#0f172a;
-      color:#fff;
     }
 
     @media(max-width:860px){
@@ -342,12 +405,14 @@
       <span class="pill" data-i18n="gallery_title">Galerie Chauffeurs</span>
     </div>
 
-    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+    <div class="header-right">
+      <div class="pill dark" id="countPill">…</div>
+      <div class="pill dark" id="onlinePill">…</div>
+
       <div class="lang-switch" aria-label="Language switch">
         <button id="lang-fr" class="active" type="button">FR</button>
         <button id="lang-wo" type="button">WO</button>
       </div>
-      <div class="pill" id="countPill">…</div>
     </div>
   </div>
 </header>
@@ -358,17 +423,23 @@
       <div class="left">
         <div class="title" data-i18n="hero_title">🔎 Trouve un chauffeur près de toi</div>
         <div class="sub" data-i18n="hero_sub">
-          Filtre par zone / recherche. Contact direct WhatsApp. Paiement direct (0% commission).
+          Filtre par zone, recherche, puis contacte directement le bon profil sur WhatsApp. Paiement direct. 0% commission.
         </div>
       </div>
       <div class="badge" id="liveBadge" data-i18n="badge_public">Public</div>
     </div>
 
-    <div class="trust-row">
-      <div class="trust-chip" data-i18n="trust_0">0% commission</div>
-      <div class="trust-chip" data-i18n="trust_1">WhatsApp direct</div>
-      <div class="trust-chip" data-i18n="trust_2">Paiement direct</div>
-      <div class="trust-chip" data-i18n="trust_3">Afrique enracinée</div>
+    <div class="statsRow">
+      <div class="statChip" id="statTotal">🚕 …</div>
+      <div class="statChip" id="statOnline">🟢 …</div>
+      <div class="statChip" id="statZones">📍 …</div>
+    </div>
+
+    <div class="navRow">
+      <a class="navBtn gold" id="galleryBtnTop" href="#" data-i18n="nav_gallery">🚕 Galerie</a>
+      <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Commander</a>
+      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Devenir chauffeur</a>
+      <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Cockpit DRIVER</a>
     </div>
   </div>
 
@@ -402,10 +473,12 @@
   <div class="card footCta">
     <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ?</div>
     <div class="small" data-i18n="cta_driver_sub">Crée ta fiche et reçois des clients en direct.</div>
+
     <div class="actions" style="justify-content:center; margin-top:12px;">
-      <a class="btn btn-main" id="joinBtnBottom" href="https://driver.digiylyfe.com/" rel="noopener" data-i18n="cta_become_driver">Devenir chauffeur</a>
-      <a class="btn btn-ghost" href="https://wa.me/221771342889" rel="noopener" data-i18n="cta_whatsapp">WhatsApp</a>
-      <a class="btn btn-sky" id="orderBtnBottom" href="https://driver.digiylyfe.com/" rel="noopener" data-i18n="cta_order_ride">Commander une course</a>
+      <a class="btn btn-ghost" id="galleryBtnBottom" href="#" data-i18n="nav_gallery">Galerie</a>
+      <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Commander une course</a>
+      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Devenir chauffeur</a>
+      <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Cockpit DRIVER</a>
     </div>
   </div>
 </main>
@@ -424,10 +497,10 @@
       badge_loading: "Chargement…",
       badge_fallback: "⚠️ Public (fallback)",
 
-      trust_0: "0% commission",
-      trust_1: "WhatsApp direct",
-      trust_2: "Paiement direct",
-      trust_3: "Afrique enracinée",
+      nav_gallery: "🚕 Galerie",
+      nav_order: "📲 Commander",
+      nav_recruit: "🦅 Devenir chauffeur",
+      nav_cockpit: "🚖 Cockpit DRIVER",
 
       label_zone: "📍 Zone",
       zone_all: "Toutes",
@@ -441,6 +514,13 @@
       avail_offline: "Hors-ligne",
 
       count_drivers: (n) => `${n} chauffeur(s)`,
+      online_now: (n) => `${n} en ligne maintenant`,
+      zones_live: (n) => `${n} zone(s) actives`,
+
+      stat_total: (n) => `🚕 ${n} profil(s) visibles`,
+      stat_online: (n) => `🟢 ${n} en ligne maintenant`,
+      stat_zones: (n) => `📍 ${n} zone(s) actives`,
+
       empty_title: "Aucun chauffeur trouvé",
       empty_tag_1: "Change les filtres",
       empty_tag_2: "Ou contacte WhatsApp",
@@ -457,7 +537,6 @@
       cta_driver_title: "Vous êtes chauffeur ?",
       cta_driver_sub: "Crée ta fiche et reçois des clients en direct.",
       cta_become_driver: "Devenir chauffeur",
-      cta_whatsapp: "WhatsApp",
       cta_order_ride: "Commander une course",
 
       fallback_title: "⚠️ Galerie pas encore branchée",
@@ -474,10 +553,10 @@
       badge_loading: "Di yük…",
       badge_fallback: "⚠️ Public (fallback)",
 
-      trust_0: "0% commission",
-      trust_1: "WhatsApp ci diggante",
-      trust_2: "Fey bu jublu",
-      trust_3: "Afrig bu aff",
+      nav_gallery: "🚕 Galerie",
+      nav_order: "📲 Jox ma course",
+      nav_recruit: "🦅 Nekkal chauffeur",
+      nav_cockpit: "🚖 Cockpit DRIVER",
 
       label_zone: "📍 Zone",
       zone_all: "Yépp",
@@ -491,6 +570,12 @@
       avail_offline: "Hors-ligne",
 
       count_drivers: (n) => `${n} chauffeur`,
+      online_now: (n) => `${n} ci ligne léegi`,
+      zones_live: (n) => `${n} zone yi dox`,
+      stat_total: (n) => `🚕 ${n} profil yu visible`,
+      stat_online: (n) => `🟢 ${n} ci ligne léegi`,
+      stat_zones: (n) => `📍 ${n} zone yi dox`,
+
       empty_title: "Amul chauffeur bu ñu gis",
       empty_tag_1: "Soppi filtre yi",
       empty_tag_2: "Walla bataaxal WhatsApp",
@@ -507,7 +592,6 @@
       cta_driver_title: "Yow, yaa di chauffeur ?",
       cta_driver_sub: "Def sa fiche te jot client yi ci direct.",
       cta_become_driver: "Nekkal chauffeur",
-      cta_whatsapp: "WhatsApp",
       cta_order_ride: "Jox ma course",
 
       fallback_title: "⚠️ Galerie bi du connecté",
@@ -542,10 +626,13 @@
 
     document.getElementById("lang-fr")?.classList.toggle("active", CURRENT_LANG==="fr");
     document.getElementById("lang-wo")?.classList.toggle("active", CURRENT_LANG==="wo");
+
+    refreshTopStats();
+    render();
   }
 
-  document.getElementById("lang-fr").addEventListener("click", ()=>{ applyLanguage("fr"); render(); });
-  document.getElementById("lang-wo").addEventListener("click", ()=>{ applyLanguage("wo"); render(); });
+  document.getElementById("lang-fr").addEventListener("click", ()=> applyLanguage("fr"));
+  document.getElementById("lang-wo").addEventListener("click", ()=> applyLanguage("wo"));
 
   const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA";
@@ -553,12 +640,13 @@
 
   const PUBLIC_SOURCE = "public_driver_cards";
 
-  // Ajuste ces deux rails si besoin
-  const DRIVER_JOIN_URL = "https://driver.digiylyfe.com/";
-  const ORDER_RIDE_URL  = "https://driver.digiylyfe.com/";
-
   const qs = new URLSearchParams(location.search);
   const slug = (qs.get("slug") || "").trim();
+
+  const GALLERY_URL = location.pathname + location.search;
+  const ORDER_RIDE_URL = "https://driver.digiylyfe.com/";
+  const DRIVER_JOIN_URL = "https://pro-driver.digiylyfe.com/";
+  const COCKPIT_URL = "https://pro-driver.digiylyfe.com/cockpit.html";
 
   function withSlug(url){
     if (!slug) return url;
@@ -572,13 +660,27 @@
   const qFilter = document.getElementById("qFilter");
   const availFilter = document.getElementById("availFilter");
   const countPill = document.getElementById("countPill");
+  const onlinePill = document.getElementById("onlinePill");
   const liveBadge = document.getElementById("liveBadge");
   const toastEl = document.getElementById("toast");
-  const joinBtnBottom = document.getElementById("joinBtnBottom");
-  const orderBtnBottom = document.getElementById("orderBtnBottom");
 
-  if (joinBtnBottom) joinBtnBottom.href = withSlug(DRIVER_JOIN_URL);
-  if (orderBtnBottom) orderBtnBottom.href = withSlug(ORDER_RIDE_URL);
+  const statTotal = document.getElementById("statTotal");
+  const statOnline = document.getElementById("statOnline");
+  const statZones = document.getElementById("statZones");
+
+  [
+    ["galleryBtnTop", GALLERY_URL],
+    ["galleryBtnBottom", GALLERY_URL],
+    ["orderBtnTop", ORDER_RIDE_URL],
+    ["orderBtnBottom", ORDER_RIDE_URL],
+    ["joinBtnTop", DRIVER_JOIN_URL],
+    ["joinBtnBottom", DRIVER_JOIN_URL],
+    ["cockpitBtnTop", COCKPIT_URL],
+    ["cockpitBtnBottom", COCKPIT_URL]
+  ].forEach(([id, url])=>{
+    const el = document.getElementById(id);
+    if (el) el.href = withSlug(url);
+  });
 
   let ALL = [];
 
@@ -606,6 +708,16 @@
 
   function normalizeText(v){
     return String(v || "").trim();
+  }
+
+  function getZoneCount(items){
+    return new Set(
+      items.map(d => normalizeText(d.zone)).filter(Boolean)
+    ).size;
+  }
+
+  function getOnlineCount(items){
+    return items.filter(d => d.is_online === true).length;
   }
 
   function sortDrivers(rows){
@@ -637,6 +749,15 @@
       zones.map(z => `<option value="${esc(z)}">${esc(z)}</option>`).join("");
 
     if (zones.includes(current)) zoneFilter.value = current;
+  }
+
+  function refreshTopStats(){
+    countPill.textContent = t("count_drivers", ALL.length);
+    onlinePill.textContent = t("online_now", getOnlineCount(ALL));
+
+    statTotal.textContent = t("stat_total", ALL.length);
+    statOnline.textContent = t("stat_online", getOnlineCount(ALL));
+    statZones.textContent = t("stat_zones", getZoneCount(ALL));
   }
 
   function passes(d){
@@ -747,12 +868,17 @@
 
       ALL = Array.isArray(data) ? data : [];
       rebuildZoneOptions(ALL);
+      refreshTopStats();
       liveBadge.textContent = t("badge_public");
       render();
     }catch(e){
       console.warn("Public gallery error:", e);
       liveBadge.textContent = t("badge_fallback");
       countPill.textContent = "…";
+      onlinePill.textContent = "…";
+      statTotal.textContent = "🚕 …";
+      statOnline.textContent = "🟢 …";
+      statZones.textContent = "📍 …";
       ALL = [];
 
       driversEl.innerHTML = `
