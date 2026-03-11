@@ -3,44 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Galerie Chauffeurs Ambassadeurs — DIGIY DRIVER</title>
-  <meta name="theme-color" content="#22c55e" />
+  <title>DIGIY DRIVER AMBASSADEUR — Galerie Classe</title>
+  <meta name="theme-color" content="#0b1220" />
   <meta
     name="description"
-    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique des chauffeurs, zones, disponibilité, contact direct WhatsApp."
+    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique premium des chauffeurs, contact direct WhatsApp."
   />
 
   <style>
     :root{
-      --green:#22c55e;
-      --green2:#16a34a;
-      --sky:#0ea5e9;
-      --gold:#facc15;
-      --bg:#f0fdf4;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --shadow:0 12px 28px rgba(2,6,23,.08);
-      --radius:18px;
-      --warn:#f59e0b;
-      --warnBg:rgba(245,158,11,.12);
-      --warnBd:rgba(245,158,11,.35);
-      --warnTx:#7c2d12;
-      --bd:rgba(15,23,42,.10);
-      --chip:#ecfdf5;
-      --chipBd:rgba(34,197,94,.16);
-      --dark:#0f172a;
-      --softWhite:rgba(255,255,255,.22);
-      --softWhiteBd:rgba(255,255,255,.35);
+      --bg:#071018;
+      --bg2:#0b1521;
+      --panel:#0f1b2a;
+      --panel-2:#132235;
+      --card:#0f1a29;
+      --line:rgba(255,255,255,.10);
+      --line-soft:rgba(255,255,255,.06);
+      --text:#f8fafc;
+      --muted:rgba(226,232,240,.72);
+      --gold:#f4c95d;
+      --gold-2:#d4a63a;
+      --green:#1fa86a;
+      --green-2:#157a4f;
+      --sky:#3b82f6;
+      --danger:#f59e0b;
+      --shadow:0 18px 60px rgba(0,0,0,.40);
+      --radius:22px;
     }
 
     *{box-sizing:border-box}
-
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#dcfce7 0%,var(--bg) 55%,#fff 100%);
       color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(244,201,93,.10), transparent 55%),
+        radial-gradient(900px 560px at 100% 10%, rgba(31,168,106,.12), transparent 55%),
+        linear-gradient(180deg, #08111a 0%, #0b1220 42%, #070d15 100%);
     }
 
     .floating-back{
@@ -54,87 +54,99 @@
       gap:8px;
       padding:12px 16px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.28);
-      background:linear-gradient(135deg,#facc15 0%, #22c55e 100%);
-      color:#0f172a;
+      border:1px solid rgba(244,201,93,.24);
+      background:linear-gradient(135deg, rgba(244,201,93,.96), rgba(31,168,106,.94));
+      color:#071018;
       text-decoration:none;
       font-size:14px;
       font-weight:1000;
       line-height:1;
-      box-shadow:0 16px 40px rgba(0,0,0,.22);
+      box-shadow:0 16px 40px rgba(0,0,0,.26);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
       transition:transform .18s ease, box-shadow .18s ease;
     }
-
     .floating-back:hover{
       transform:translateY(-1px);
-      box-shadow:0 20px 46px rgba(0,0,0,.28);
+      box-shadow:0 20px 46px rgba(0,0,0,.32);
     }
 
-    .floating-back:active{
-      transform:translateY(0);
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      padding:16px 14px;
-      background:linear-gradient(90deg,var(--green),#4ade80);
-      color:#fff;
-      box-shadow:0 10px 22px rgba(34,197,94,.32);
-    }
-
-    .wrap{max-width:1080px; margin:0 auto; padding:14px;}
-
-    .topRow{
-      max-width:1080px;
+    .page{
+      max-width:1180px;
       margin:0 auto;
+      padding:18px 14px 40px;
+    }
+
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
+      padding:10px 0 14px;
     }
 
     .brand{
-      font-weight:1000;
-      letter-spacing:.3px;
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:17px;
-      white-space:nowrap;
+      gap:14px;
+      min-width:0;
       flex-wrap:wrap;
     }
 
-    .pill{
-      background:var(--softWhite);
-      border:1px solid var(--softWhiteBd);
-      padding:7px 11px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      white-space:nowrap;
+    .brand-badge{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(244,201,93,1), rgba(212,166,58,.92));
+      color:#08111a;
+      font-size:24px;
+      font-weight:1000;
+      box-shadow:0 14px 36px rgba(244,201,93,.22);
+      border:1px solid rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+
+    .brand-copy{
+      min-width:0;
+    }
+
+    .eyebrow{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
       gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.20);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
+      font-size:11px;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
 
-    .pill.dark{
-      background:rgba(15,23,42,.18);
-      border-color:rgba(15,23,42,.18);
+    .brand-title{
+      margin-top:8px;
+      font-size:22px;
+      font-weight:1000;
+      letter-spacing:.02em;
+      line-height:1.05;
     }
 
-    .pill.goldline{
-      background:rgba(250,204,21,.16);
-      border-color:rgba(250,204,21,.30);
-      color:#fff8d8;
+    .brand-sub{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+      line-height:1.45;
+      max-width:720px;
     }
 
-    .header-right{
+    .top-actions{
       display:flex;
       gap:10px;
       align-items:center;
@@ -142,44 +154,212 @@
       justify-content:flex-end;
     }
 
+    .pill{
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:950;
+      border:1px solid var(--line);
+      color:var(--text);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .pill.gold{
+      color:#ffe8a6;
+      border-color:rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+    }
+
+    .pill.green{
+      color:#c8ffe5;
+      border-color:rgba(31,168,106,.25);
+      background:rgba(31,168,106,.10);
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--green);
+      box-shadow:0 0 0 4px rgba(31,168,106,.16);
+    }
+
     .lang-switch{
       display:flex;
       gap:6px;
       padding:4px;
       border-radius:999px;
-      background:var(--softWhite);
-      border:1px solid var(--softWhiteBd);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
     }
 
     .lang-switch button{
       border:none;
-      padding:7px 12px;
+      padding:8px 12px;
       border-radius:999px;
       cursor:pointer;
       font-weight:1000;
       font-size:12px;
       background:transparent;
-      color:#fff;
+      color:var(--text);
     }
 
     .lang-switch button.active{
-      background:#0f172a;
-      color:#fff;
-    }
-
-    .card{
-      background:#ffffffcc;
-      backdrop-filter:blur(7px);
-      border:1px solid rgba(15,23,42,.08);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:14px;
-      margin-bottom:12px;
+      background:#f8fafc;
+      color:#09111a;
     }
 
     .hero{
+      position:relative;
+      overflow:hidden;
+      margin-top:8px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(700px 320px at 8% 0%, rgba(244,201,93,.12), transparent 60%),
+        radial-gradient(700px 360px at 100% 20%, rgba(31,168,106,.14), transparent 60%),
+        linear-gradient(180deg, rgba(15,27,42,.92), rgba(11,18,32,.96));
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .hero-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .hero-main h1{
+      margin:14px 0 10px;
+      font-size:clamp(34px, 5vw, 58px);
+      line-height:1.02;
+      font-weight:1000;
+      letter-spacing:-.03em;
+    }
+
+    .hero-main h1 .gold{
+      background:linear-gradient(135deg, #fff4c7, var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero-main p{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.7;
+      font-weight:750;
+    }
+
+    .hero-signature{
+      margin-top:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
+      font-size:13px;
+      font-weight:1000;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .hero-badge{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:950;
+    }
+
+    .hero-badge b{
+      color:#fff2be;
+    }
+
+    .hero-panel{
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:16px;
       display:grid;
       gap:12px;
+      align-content:start;
+    }
+
+    .panel-title{
+      font-size:14px;
+      font-weight:1000;
+      color:#ffe8a6;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .panel-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .panel-box{
+      border-radius:16px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,.04);
+      padding:12px;
+    }
+
+    .panel-k{
+      font-size:11px;
+      color:var(--muted);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .panel-v{
+      margin-top:8px;
+      font-size:20px;
+      font-weight:1000;
+      color:var(--text);
+    }
+
+    .panel-note{
+      border-radius:16px;
+      border:1px solid rgba(244,201,93,.16);
+      background:rgba(244,201,93,.07);
+      color:#fff2be;
+      font-size:13px;
+      line-height:1.55;
+      font-weight:800;
+      padding:12px;
+    }
+
+    .card{
+      margin-top:14px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:16px;
     }
 
     .status{
@@ -198,16 +378,17 @@
 
     .status .title{
       font-weight:1000;
-      font-size:18px;
+      font-size:19px;
       line-height:1.2;
+      color:#fff4c7;
     }
 
     .status .sub{
-      font-size:13px;
+      font-size:14px;
       color:var(--muted);
       font-weight:800;
-      line-height:1.45;
-      max-width:720px;
+      line-height:1.55;
+      max-width:760px;
     }
 
     .badge{
@@ -215,30 +396,31 @@
       font-weight:1000;
       padding:8px 10px;
       border-radius:999px;
-      background:#dcfce7;
-      border:1px solid rgba(34,197,94,.22);
-      color:#14532d;
+      border:1px solid rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
       white-space:nowrap;
     }
 
     .badge.warn{
-      background:var(--warnBg);
-      border:1px solid var(--warnBd);
-      color:var(--warnTx);
+      background:rgba(245,158,11,.10);
+      border-color:rgba(245,158,11,.28);
+      color:#ffd8a6;
     }
 
     .statsRow{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
+      margin-top:14px;
     }
 
     .statChip{
-      padding:9px 12px;
+      padding:10px 13px;
       border-radius:999px;
-      background:var(--chip);
-      border:1px solid var(--chipBd);
-      color:#166534;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#d8fce8;
       font-size:12px;
       font-weight:1000;
       display:inline-flex;
@@ -250,6 +432,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:10px;
+      margin-top:14px;
     }
 
     .navBtn{
@@ -257,32 +440,38 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding:11px 14px;
+      padding:12px 15px;
       border-radius:14px;
       font-weight:1000;
       font-size:14px;
       text-decoration:none;
-      border:1px solid rgba(15,23,42,.12);
-      background:#fff;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
       color:var(--text);
+      transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .navBtn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(244,201,93,.24);
     }
 
     .navBtn.main{
-      background:var(--green2);
+      background:linear-gradient(135deg, var(--green), var(--green-2));
       color:#fff;
       border-color:transparent;
+      box-shadow:0 12px 24px rgba(31,168,106,.22);
     }
 
     .navBtn.sky{
-      background:var(--sky);
+      background:linear-gradient(135deg, #3b82f6, #2563eb);
       color:#fff;
       border-color:transparent;
     }
 
     .navBtn.gold{
-      background:rgba(250,204,21,.14);
-      color:#7c5b00;
-      border-color:rgba(250,204,21,.28);
+      background:linear-gradient(135deg, rgba(244,201,93,.18), rgba(212,166,58,.12));
+      color:#fff1bd;
+      border-color:rgba(244,201,93,.22);
     }
 
     .bar{
@@ -296,50 +485,113 @@
       color:var(--muted);
       font-weight:900;
       display:block;
-      margin-bottom:6px;
+      margin-bottom:7px;
     }
 
     select,input{
       width:100%;
-      padding:11px 12px;
+      padding:12px 13px;
       border-radius:14px;
-      border:1px solid rgba(15,23,42,.12);
+      border:1px solid var(--line);
       outline:none;
       font-size:14px;
-      background:#fff;
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:900;
+    }
+
+    select option{
+      color:#08111a;
+    }
+
+    input::placeholder{
+      color:rgba(226,232,240,.45);
     }
 
     .grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
+      gap:14px;
+      margin-top:14px;
     }
 
     .driver{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      border:1px solid rgba(15,23,42,.08);
-      padding:14px;
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(500px 180px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
+        linear-gradient(180deg, rgba(19,34,53,.96), rgba(11,18,32,.98));
+      box-shadow:0 18px 40px rgba(0,0,0,.28);
+      padding:16px;
+      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .driver:hover{
+      transform:translateY(-2px);
+      border-color:rgba(244,201,93,.24);
+      box-shadow:0 22px 50px rgba(0,0,0,.34);
     }
 
-    .head{
+    .driver::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:3px;
+      background:linear-gradient(90deg, rgba(244,201,93,.98), rgba(31,168,106,.92));
+    }
+
+    .driver-top{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
+    }
+
+    .identity{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      min-width:0;
+    }
+
+    .avatar{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(244,201,93,.18), rgba(31,168,106,.18));
+      border:1px solid rgba(244,201,93,.18);
+      color:#fff2be;
+      font-size:18px;
+      font-weight:1000;
+      flex:0 0 auto;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .identity-copy{
+      min-width:0;
     }
 
     .name{
       font-weight:1000;
-      font-size:15px;
-      line-height:1.2;
+      font-size:18px;
+      line-height:1.15;
+      color:#fff4c7;
+    }
+
+    .titleline{
+      margin-top:6px;
+      font-size:12px;
+      color:#d7fbe9;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
     }
 
     .meta{
-      margin-top:8px;
+      margin-top:10px;
       display:flex;
       flex-wrap:wrap;
       gap:8px;
@@ -349,24 +601,56 @@
     }
 
     .tag{
-      padding:6px 10px;
+      padding:7px 10px;
       border-radius:999px;
-      border:1px solid var(--bd);
-      background:#fff;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .tag.gold{
+      border-color:rgba(244,201,93,.22);
+      color:#fff1bd;
+      background:rgba(244,201,93,.08);
+    }
+
+    .tag.green{
+      border-color:rgba(31,168,106,.24);
+      color:#d4ffe7;
+      background:rgba(31,168,106,.10);
+    }
+
+    .tag.off{
+      color:#dbe6f3;
+    }
+
+    .side-badge{
+      padding:8px 11px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.18);
+      background:rgba(244,201,93,.08);
+      color:#fff1bd;
+      font-size:11px;
+      font-weight:1000;
+      white-space:nowrap;
     }
 
     .desc{
-      margin-top:12px;
+      margin-top:14px;
       color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-      min-height:38px;
+      font-size:14px;
+      line-height:1.7;
+      min-height:48px;
+      font-weight:750;
     }
 
     .actions{
       display:flex;
       gap:10px;
-      margin-top:12px;
+      margin-top:14px;
       flex-wrap:wrap;
     }
 
@@ -375,7 +659,7 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding:11px 12px;
+      padding:12px 13px;
       border:none;
       border-radius:14px;
       font-weight:1000;
@@ -383,6 +667,7 @@
       cursor:pointer;
       text-decoration:none;
       user-select:none;
+      transition:transform .16s ease, filter .16s ease;
     }
 
     button:disabled{
@@ -390,25 +675,37 @@
       cursor:not-allowed;
     }
 
-    .btn-main{background:var(--green2); color:#fff}
-    .btn-sky{background:var(--sky); color:#fff}
+    .btn-main{
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      color:#08111a;
+      box-shadow:0 12px 24px rgba(244,201,93,.16);
+    }
+
+    .btn-sky{
+      background:linear-gradient(135deg, #3b82f6, #2563eb);
+      color:#fff;
+    }
+
     .btn-ghost{
-      background:#fff;
-      border:1px solid rgba(15,23,42,.12);
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
       color:var(--text);
     }
 
     .footCta{text-align:center}
     .footCta .big{
       font-weight:1100;
-      font-size:16px;
+      font-size:17px;
+      color:#fff4c7;
     }
     .footCta .small{
       margin-top:6px;
       color:var(--muted);
       font-weight:900;
       font-size:13px;
-      line-height:1.35;
+      line-height:1.5;
+      max-width:760px;
+      margin-inline:auto;
     }
 
     .toast{
@@ -416,7 +713,7 @@
       left:50%;
       transform:translateX(-50%);
       bottom:16px;
-      background:rgba(15,23,42,.92);
+      background:rgba(8,17,26,.94);
       color:#fff;
       padding:10px 12px;
       border-radius:999px;
@@ -428,6 +725,11 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      border:1px solid var(--line);
+    }
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
     }
 
     @media(max-width:860px){
@@ -442,6 +744,8 @@
         padding:11px 14px;
         font-size:13px;
       }
+      .hero{padding:18px}
+      .brand-title{font-size:20px}
     }
   </style>
 </head>
@@ -451,17 +755,23 @@
   ↩️ Retour site
 </a>
 
-<header>
-  <div class="topRow">
+<div class="page">
+  <div class="topbar">
     <div class="brand">
-      🚕 DIGIY DRIVER
-      <span class="pill goldline" data-i18n="gallery_title">AMBASSADEUR</span>
-      <span class="pill" data-i18n="gallery_subtitle">Un style • Un savoir-être</span>
+      <div class="brand-badge">🚕</div>
+      <div class="brand-copy">
+        <div class="eyebrow" data-i18n="eyebrow">DIGIY DRIVER AMBASSADEUR</div>
+        <div class="brand-title" data-i18n="brand_title">La mobilité avec style et savoir-être.</div>
+        <div class="brand-sub" data-i18n="brand_sub">
+          Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.
+        </div>
+      </div>
     </div>
 
-    <div class="header-right">
-      <div class="pill dark" id="countPill">…</div>
-      <div class="pill dark" id="onlinePill">…</div>
+    <div class="top-actions">
+      <div class="pill gold"><span>👑</span><span data-i18n="pill_class">Sélection Ambassadeur</span></div>
+      <div class="pill green"><span class="dot"></span><span id="onlinePill">…</span></div>
+      <div class="pill" id="countPill">…</div>
 
       <div class="lang-switch" aria-label="Language switch">
         <button id="lang-fr" class="active" type="button">FR</button>
@@ -469,24 +779,66 @@
       </div>
     </div>
   </div>
-</header>
 
-<main class="wrap">
-  <div class="card hero">
-    <div class="status">
-      <div class="left">
-        <div class="title" data-i18n="hero_title">DIGIY DRIVER AMBASSADEUR</div>
-        <div class="sub" data-i18n="hero_sub">
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="eyebrow" data-i18n="hero_eyebrow">Galerie publique premium</div>
+        <h1>
+          <span class="gold" data-i18n="hero_title">DIGIY DRIVER AMBASSADEUR</span>
+        </h1>
+        <p data-i18n="hero_sub">
           La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
+        </p>
+
+        <div class="hero-signature" data-i18n="hero_signature">
+          Un style. Un savoir-être. Une présence.
+        </div>
+
+        <div class="hero-badges">
+          <div class="hero-badge" data-i18n="hero_badge_1"><b>Ambassadeur</b> = représentation de la maison</div>
+          <div class="hero-badge" data-i18n="hero_badge_2">Contact direct • WhatsApp</div>
+          <div class="hero-badge" data-i18n="hero_badge_3">0% commission</div>
         </div>
       </div>
-      <div class="badge" id="liveBadge" data-i18n="badge_public">Public</div>
-    </div>
 
-    <div class="statsRow">
-      <div class="statChip" id="statTotal">🚕 …</div>
-      <div class="statChip" id="statOnline">🟢 …</div>
-      <div class="statChip" id="statZones">📍 …</div>
+      <aside class="hero-panel">
+        <div class="panel-title" data-i18n="panel_title">Lecture du rail</div>
+        <div class="panel-grid">
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_count_k">Profils visibles</div>
+            <div class="panel-v" id="statTotal">—</div>
+          </div>
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_online_k">En ligne</div>
+            <div class="panel-v" id="statOnline">—</div>
+          </div>
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_zone_k">Zones actives</div>
+            <div class="panel-v" id="statZones">—</div>
+          </div>
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_public_k">Statut</div>
+            <div class="panel-v" id="liveBadge">Public</div>
+          </div>
+        </div>
+
+        <div class="panel-note" data-i18n="panel_note">
+          Ici, on ne pousse pas la masse. On met en avant des profils qui portent une certaine tenue de service.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="card">
+    <div class="status">
+      <div class="left">
+        <div class="title" data-i18n="section_title">Trouver le bon ambassadeur</div>
+        <div class="sub" data-i18n="section_sub">
+          Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.
+        </div>
+      </div>
+      <div class="badge" id="badgeTop" data-i18n="badge_public">Public</div>
     </div>
 
     <div class="navRow">
@@ -496,10 +848,8 @@
       <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Devenir ambassadeur</a>
       <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Cockpit DRIVER</a>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="bar">
+    <div class="bar" style="margin-top:14px;">
       <div class="field">
         <label data-i18n="label_zone">📍 Zone</label>
         <select id="zoneFilter">
@@ -527,7 +877,9 @@
 
   <div class="card footCta">
     <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ambassadeur ?</div>
-    <div class="small" data-i18n="cta_driver_sub">Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.</div>
+    <div class="small" data-i18n="cta_driver_sub">
+      Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.
+    </div>
 
     <div class="actions" style="justify-content:center; margin-top:12px;">
       <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
@@ -537,7 +889,7 @@
       <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Cockpit DRIVER</a>
     </div>
   </div>
-</main>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -546,10 +898,29 @@
 
   const DIGIY_LANG = {
     fr: {
-      gallery_title: "AMBASSADEUR",
-      gallery_subtitle: "Un style • Un savoir-être",
+      eyebrow: "DIGIY DRIVER AMBASSADEUR",
+      brand_title: "La mobilité avec style et savoir-être.",
+      brand_sub: "Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.",
+      pill_class: "Sélection Ambassadeur",
+
+      hero_eyebrow: "Galerie publique premium",
       hero_title: "DIGIY DRIVER AMBASSADEUR",
       hero_sub: "La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",
+      hero_signature: "Un style. Un savoir-être. Une présence.",
+      hero_badge_1: "Ambassadeur = représentation de la maison",
+      hero_badge_2: "Contact direct • WhatsApp",
+      hero_badge_3: "0% commission",
+
+      panel_title: "Lecture du rail",
+      panel_count_k: "Profils visibles",
+      panel_online_k: "En ligne",
+      panel_zone_k: "Zones actives",
+      panel_public_k: "Statut",
+      panel_note: "Ici, on ne pousse pas la masse. On met en avant des profils qui portent une certaine tenue de service.",
+
+      section_title: "Trouver le bon ambassadeur",
+      section_sub: "Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.",
+
       badge_public: "Public",
       badge_loading: "Chargement…",
       badge_fallback: "⚠️ Public (fallback)",
@@ -575,9 +946,9 @@
       online_now: (n) => `${n} en ligne maintenant`,
       zones_live: (n) => `${n} zone(s) actives`,
 
-      stat_total: (n) => `🚕 ${n} profil(s) visibles`,
-      stat_online: (n) => `🟢 ${n} en ligne maintenant`,
-      stat_zones: (n) => `📍 ${n} zone(s) actives`,
+      stat_total: (n) => `${n}`,
+      stat_online: (n) => `${n}`,
+      stat_zones: (n) => `${n}`,
 
       empty_title: "Aucun chauffeur trouvé",
       empty_tag_1: "Change les filtres",
@@ -587,6 +958,7 @@
 
       driver_default_name: "Chauffeur Ambassadeur",
       driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. La mobilité avec style et savoir-être.",
+      driver_tagline: "Mobilité avec style et savoir-être",
       tag_online: "🟢 En ligne",
       tag_offline: "⚪ Hors-ligne",
       pill_public: "Ambassadeur",
@@ -605,10 +977,29 @@
     },
 
     wo: {
-      gallery_title: "AMBASSADEUR",
-      gallery_subtitle: "Style • Savoir-être",
+      eyebrow: "DIGIY DRIVER AMBASSADEUR",
+      brand_title: "Mobility ak style ak savoir-être.",
+      brand_sub: "Galerie bii dafay won li gën a am solo: taxaw, teey, ak melokaanu service bi.",
+      pill_class: "Sélection Ambassadeur",
+
+      hero_eyebrow: "Galerie publique premium",
       hero_title: "DIGIY DRIVER AMBASSADEUR",
       hero_sub: "Mobility ak style ak savoir-être. Tànn zone, seetal profil yi, te jokkook chauffeur bi ci WhatsApp.",
+      hero_signature: "Style. Savoir-être. Présence.",
+      hero_badge_1: "Ambassadeur = ku di teewal kër gi",
+      hero_badge_2: "Contact direct • WhatsApp",
+      hero_badge_3: "0% commission",
+
+      panel_title: "Lecture du rail",
+      panel_count_k: "Profils visibles",
+      panel_online_k: "Ci ligne",
+      panel_zone_k: "Zones actives",
+      panel_public_k: "Statut",
+      panel_note: "Fii, du mbooloo rekk. Ñuy jëkk ci profil yu yor teey ak yëngu-yëngu bu rafet.",
+
+      section_title: "Seetal ambassadeur bi gën a baax",
+      section_sub: "Seet ci zone, dëkk walla voiture ngir gis profil bi la gën a yombal.",
+
       badge_public: "Public",
       badge_loading: "Di yük…",
       badge_fallback: "⚠️ Public (fallback)",
@@ -633,9 +1024,10 @@
       count_drivers: (n) => `${n} chauffeur`,
       online_now: (n) => `${n} ci ligne léegi`,
       zones_live: (n) => `${n} zone yi dox`,
-      stat_total: (n) => `🚕 ${n} profil yu visible`,
-      stat_online: (n) => `🟢 ${n} ci ligne léegi`,
-      stat_zones: (n) => `📍 ${n} zone yi dox`,
+
+      stat_total: (n) => `${n}`,
+      stat_online: (n) => `${n}`,
+      stat_zones: (n) => `${n}`,
 
       empty_title: "Amul chauffeur bu ñu gis",
       empty_tag_1: "Soppi filtre yi",
@@ -645,6 +1037,7 @@
 
       driver_default_name: "Chauffeur Ambassadeur",
       driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. Mobility ak style ak savoir-être.",
+      driver_tagline: "Mobility ak style ak savoir-être",
       tag_online: "🟢 Ci ligne",
       tag_offline: "⚪ Hors-ligne",
       pill_public: "Ambassadeur",
@@ -725,6 +1118,7 @@
   const countPill = document.getElementById("countPill");
   const onlinePill = document.getElementById("onlinePill");
   const liveBadge = document.getElementById("liveBadge");
+  const badgeTop = document.getElementById("badgeTop");
   const toastEl = document.getElementById("toast");
 
   const statTotal = document.getElementById("statTotal");
@@ -849,6 +1243,15 @@
     return true;
   }
 
+  function initials(name){
+    const parts = String(name || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2);
+    return parts.map(p => p[0]?.toUpperCase() || "").join("") || "DA";
+  }
+
   function render(){
     const items = sortDrivers(ALL.filter(passes));
     countPill.textContent = t("count_drivers", items.length);
@@ -872,7 +1275,8 @@
     }
 
     driversEl.innerHTML = items.map(d => {
-      const name = esc(d.name || t("driver_default_name"));
+      const name = d.name || t("driver_default_name");
+      const nameEsc = esc(name);
       const city = esc(d.city || "");
       const zone = esc(d.zone || "");
       const car = esc(d.car || "");
@@ -880,31 +1284,34 @@
       const online = d.is_online === true;
       const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
       const wa = normPhone(d.whatsapp);
+      const mono = esc(initials(name));
 
       const statusTag = online
-        ? `<span class="tag" style="border-color:rgba(34,197,94,.25)">${esc(t("tag_online"))}</span>`
-        : `<span class="tag">${esc(t("tag_offline"))}</span>`;
+        ? `<span class="tag green">${esc(t("tag_online"))}</span>`
+        : `<span class="tag off">${esc(t("tag_offline"))}</span>`;
 
       const rateTag = (rating && !Number.isNaN(rating))
-        ? `<span class="tag">⭐ ${rating.toFixed(1)}</span>`
+        ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>`
         : "";
 
       return `
         <div class="driver">
-          <div class="head">
-            <div>
-              <div class="name">🚕 ${name}</div>
-              <div class="meta">
-                ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
-                ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
-                ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
-                ${statusTag}
-                ${rateTag}
+          <div class="driver-top">
+            <div class="identity">
+              <div class="avatar">${mono}</div>
+              <div class="identity-copy">
+                <div class="name">${nameEsc}</div>
+                <div class="titleline">${esc(t("driver_tagline"))}</div>
+                <div class="meta">
+                  ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
+                  ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+                  ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
+                  ${statusTag}
+                  ${rateTag}
+                </div>
               </div>
             </div>
-            <div class="pill" style="color:#0f172a;background:#fff;border-color:rgba(15,23,42,.15)">
-              ${esc(t("pill_public"))}
-            </div>
+            <div class="side-badge">${esc(t("pill_public"))}</div>
           </div>
 
           <div class="desc">${desc}</div>
@@ -924,6 +1331,7 @@
 
   async function load(){
     liveBadge.textContent = t("badge_loading");
+    if (badgeTop) badgeTop.textContent = t("badge_loading");
 
     try{
       const { data, error } = await sb
@@ -937,15 +1345,17 @@
       rebuildZoneOptions(ALL);
       refreshTopStats();
       liveBadge.textContent = t("badge_public");
+      if (badgeTop) badgeTop.textContent = t("badge_public");
       render();
     }catch(e){
       console.warn("Public gallery error:", e);
       liveBadge.textContent = t("badge_fallback");
+      if (badgeTop) badgeTop.textContent = t("badge_fallback");
       countPill.textContent = "…";
       onlinePill.textContent = "…";
-      statTotal.textContent = "🚕 …";
-      statOnline.textContent = "🟢 …";
-      statZones.textContent = "📍 …";
+      statTotal.textContent = "—";
+      statOnline.textContent = "—";
+      statZones.textContent = "—";
       ALL = [];
 
       driversEl.innerHTML = `
