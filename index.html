@@ -43,6 +43,39 @@
       color:var(--text);
     }
 
+    .floating-back{
+      position:fixed;
+      top:calc(env(safe-area-inset-top, 0px) + 12px);
+      left:calc(env(safe-area-inset-left, 0px) + 12px);
+      z-index:99999;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.28);
+      background:linear-gradient(135deg,#facc15 0%, #22c55e 100%);
+      color:#0f172a;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:1000;
+      line-height:1;
+      box-shadow:0 16px 40px rgba(0,0,0,.22);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .floating-back:hover{
+      transform:translateY(-1px);
+      box-shadow:0 20px 46px rgba(0,0,0,.28);
+    }
+
+    .floating-back:active{
+      transform:translateY(0);
+    }
+
     header{
       position:sticky;
       top:0;
@@ -394,10 +427,23 @@
       .bar{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
     }
+
+    @media(max-width:768px){
+      .floating-back{
+        top:calc(env(safe-area-inset-top, 0px) + 10px);
+        left:calc(env(safe-area-inset-left, 0px) + 10px);
+        padding:11px 14px;
+        font-size:13px;
+      }
+    }
   </style>
 </head>
 
 <body>
+<a class="floating-back" id="floatingSiteBtn" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
+  ↩️ Retour site
+</a>
+
 <header>
   <div class="topRow">
     <div class="brand">
@@ -676,6 +722,7 @@
   const statZones = document.getElementById("statZones");
 
   [
+    ["floatingSiteBtn", SITE_URL],
     ["siteBtnTop", SITE_URL],
     ["siteBtnBottom", SITE_URL],
     ["galleryBtnTop", GALLERY_URL],
