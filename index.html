@@ -436,6 +436,7 @@
     </div>
 
     <div class="navRow">
+      <a class="navBtn" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
       <a class="navBtn gold" id="galleryBtnTop" href="#" data-i18n="nav_gallery">🚕 Galerie</a>
       <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Commander</a>
       <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Devenir chauffeur</a>
@@ -475,6 +476,7 @@
     <div class="small" data-i18n="cta_driver_sub">Crée ta fiche et reçois des clients en direct.</div>
 
     <div class="actions" style="justify-content:center; margin-top:12px;">
+      <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
       <a class="btn btn-ghost" id="galleryBtnBottom" href="#" data-i18n="nav_gallery">Galerie</a>
       <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Commander une course</a>
       <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Devenir chauffeur</a>
@@ -497,6 +499,7 @@
       badge_loading: "Chargement…",
       badge_fallback: "⚠️ Public (fallback)",
 
+      nav_site: "← Retour au site",
       nav_gallery: "🚕 Galerie",
       nav_order: "📲 Commander",
       nav_recruit: "🦅 Devenir chauffeur",
@@ -538,6 +541,7 @@
       cta_driver_sub: "Crée ta fiche et reçois des clients en direct.",
       cta_become_driver: "Devenir chauffeur",
       cta_order_ride: "Commander une course",
+      cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Galerie pas encore branchée",
       fallback_tag_1: "La source Supabase \"public_driver_cards\" n’est pas accessible",
@@ -553,6 +557,7 @@
       badge_loading: "Di yük…",
       badge_fallback: "⚠️ Public (fallback)",
 
+      nav_site: "← Dellu ci site bi",
       nav_gallery: "🚕 Galerie",
       nav_order: "📲 Jox ma course",
       nav_recruit: "🦅 Nekkal chauffeur",
@@ -593,6 +598,7 @@
       cta_driver_sub: "Def sa fiche te jot client yi ci direct.",
       cta_become_driver: "Nekkal chauffeur",
       cta_order_ride: "Jox ma course",
+      cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Galerie bi du connecté",
       fallback_tag_1: "Source Supabase \"public_driver_cards\" duñu ko jàpp",
@@ -643,6 +649,7 @@
   const qs = new URLSearchParams(location.search);
   const slug = (qs.get("slug") || "").trim();
 
+  const SITE_URL = "https://digiylyfe.com/";
   const GALLERY_URL = location.pathname + location.search;
   const ORDER_RIDE_URL = "https://pro-driver.digiylyfe.com/";
   const DRIVER_JOIN_URL = "https://pro-driver.digiylyfe.com/";
@@ -669,6 +676,8 @@
   const statZones = document.getElementById("statZones");
 
   [
+    ["siteBtnTop", SITE_URL],
+    ["siteBtnBottom", SITE_URL],
     ["galleryBtnTop", GALLERY_URL],
     ["galleryBtnBottom", GALLERY_URL],
     ["orderBtnTop", ORDER_RIDE_URL],
@@ -798,6 +807,7 @@
           <div class="actions">
             <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
             <a class="btn btn-ghost" href="${esc(withSlug(ORDER_RIDE_URL))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
+            <a class="btn btn-ghost" href="${esc(withSlug(SITE_URL))}" rel="noopener">${esc(t("nav_site"))}</a>
           </div>
         </div>
       `;
@@ -891,6 +901,7 @@
           <div class="actions">
             <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a>
             <a class="btn btn-ghost" href="${esc(withSlug(ORDER_RIDE_URL))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
+            <a class="btn btn-ghost" href="${esc(withSlug(SITE_URL))}" rel="noopener">${esc(t("nav_site"))}</a>
           </div>
         </div>
       `;
