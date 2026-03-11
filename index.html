@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Galerie Chauffeurs — DIGIY DRIVER</title>
+  <title>Galerie Chauffeurs Ambassadeurs — DIGIY DRIVER</title>
   <meta name="theme-color" content="#22c55e" />
   <meta
     name="description"
-    content="Galerie publique des chauffeurs DIGIY DRIVER — zones, disponibilité, contact direct WhatsApp. 0% commission."
+    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique des chauffeurs, zones, disponibilité, contact direct WhatsApp."
   />
 
   <style>
@@ -106,6 +106,7 @@
       gap:10px;
       font-size:17px;
       white-space:nowrap;
+      flex-wrap:wrap;
     }
 
     .pill{
@@ -125,6 +126,12 @@
     .pill.dark{
       background:rgba(15,23,42,.18);
       border-color:rgba(15,23,42,.18);
+    }
+
+    .pill.goldline{
+      background:rgba(250,204,21,.16);
+      border-color:rgba(250,204,21,.30);
+      color:#fff8d8;
     }
 
     .header-right{
@@ -448,7 +455,8 @@
   <div class="topRow">
     <div class="brand">
       🚕 DIGIY DRIVER
-      <span class="pill" data-i18n="gallery_title">Galerie Chauffeurs</span>
+      <span class="pill goldline" data-i18n="gallery_title">AMBASSADEUR</span>
+      <span class="pill" data-i18n="gallery_subtitle">Un style • Un savoir-être</span>
     </div>
 
     <div class="header-right">
@@ -467,9 +475,9 @@
   <div class="card hero">
     <div class="status">
       <div class="left">
-        <div class="title" data-i18n="hero_title">🔎 Trouve un chauffeur près de toi</div>
+        <div class="title" data-i18n="hero_title">DIGIY DRIVER AMBASSADEUR</div>
         <div class="sub" data-i18n="hero_sub">
-          Filtre par zone, recherche, puis contacte directement le bon profil sur WhatsApp. Paiement direct. 0% commission.
+          La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
         </div>
       </div>
       <div class="badge" id="liveBadge" data-i18n="badge_public">Public</div>
@@ -483,9 +491,9 @@
 
     <div class="navRow">
       <a class="navBtn" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="navBtn gold" id="galleryBtnTop" href="#" data-i18n="nav_gallery">🚕 Galerie</a>
+      <a class="navBtn gold" id="galleryBtnTop" href="#" data-i18n="nav_gallery">🚕 Ambassadeurs</a>
       <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Commander</a>
-      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Devenir chauffeur</a>
+      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Devenir ambassadeur</a>
       <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Cockpit DRIVER</a>
     </div>
   </div>
@@ -518,14 +526,14 @@
   <div class="grid" id="drivers"></div>
 
   <div class="card footCta">
-    <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ?</div>
-    <div class="small" data-i18n="cta_driver_sub">Crée ta fiche et reçois des clients en direct.</div>
+    <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ambassadeur ?</div>
+    <div class="small" data-i18n="cta_driver_sub">Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.</div>
 
     <div class="actions" style="justify-content:center; margin-top:12px;">
       <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="btn btn-ghost" id="galleryBtnBottom" href="#" data-i18n="nav_gallery">Galerie</a>
+      <a class="btn btn-ghost" id="galleryBtnBottom" href="#" data-i18n="nav_gallery">Ambassadeurs</a>
       <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Commander une course</a>
-      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Devenir chauffeur</a>
+      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Devenir ambassadeur</a>
       <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Cockpit DRIVER</a>
     </div>
   </div>
@@ -538,17 +546,18 @@
 
   const DIGIY_LANG = {
     fr: {
-      gallery_title: "Galerie Chauffeurs",
-      hero_title: "🔎 Trouve un chauffeur près de toi",
-      hero_sub: "Filtre par zone, recherche, puis contacte directement le bon profil sur WhatsApp. Paiement direct. 0% commission.",
+      gallery_title: "AMBASSADEUR",
+      gallery_subtitle: "Un style • Un savoir-être",
+      hero_title: "DIGIY DRIVER AMBASSADEUR",
+      hero_sub: "La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",
       badge_public: "Public",
       badge_loading: "Chargement…",
       badge_fallback: "⚠️ Public (fallback)",
 
       nav_site: "← Retour au site",
-      nav_gallery: "🚕 Galerie",
+      nav_gallery: "🚕 Ambassadeurs",
       nav_order: "📲 Commander",
-      nav_recruit: "🦅 Devenir chauffeur",
+      nav_recruit: "🦅 Devenir ambassadeur",
       nav_cockpit: "🚖 Cockpit DRIVER",
 
       label_zone: "📍 Zone",
@@ -576,16 +585,16 @@
       btn_support_whatsapp: "WhatsApp support",
       btn_order_ride: "Commander une course",
 
-      driver_default_name: "Chauffeur",
-      driver_desc_default: "Profil public DIGIY DRIVER. Contact direct, service propre, relation directe avec le client.",
+      driver_default_name: "Chauffeur Ambassadeur",
+      driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. La mobilité avec style et savoir-être.",
       tag_online: "🟢 En ligne",
       tag_offline: "⚪ Hors-ligne",
-      pill_public: "Public",
+      pill_public: "Ambassadeur",
       btn_whatsapp: "WhatsApp",
 
-      cta_driver_title: "Vous êtes chauffeur ?",
-      cta_driver_sub: "Crée ta fiche et reçois des clients en direct.",
-      cta_become_driver: "Devenir chauffeur",
+      cta_driver_title: "Vous êtes chauffeur ambassadeur ?",
+      cta_driver_sub: "Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",
+      cta_become_driver: "Devenir ambassadeur",
       cta_order_ride: "Commander une course",
       cta_whatsapp: "WhatsApp support",
 
@@ -596,17 +605,18 @@
     },
 
     wo: {
-      gallery_title: "Galerie Chauffeur yi",
-      hero_title: "🔎 Seetal chauffeur bi ci sa wet",
-      hero_sub: "Tànn zone, seet, te jëfandikoo WhatsApp ngir jënde ci diggante. Fey bu jublu. 0% commission.",
+      gallery_title: "AMBASSADEUR",
+      gallery_subtitle: "Style • Savoir-être",
+      hero_title: "DIGIY DRIVER AMBASSADEUR",
+      hero_sub: "Mobility ak style ak savoir-être. Tànn zone, seetal profil yi, te jokkook chauffeur bi ci WhatsApp.",
       badge_public: "Public",
       badge_loading: "Di yük…",
       badge_fallback: "⚠️ Public (fallback)",
 
       nav_site: "← Dellu ci site bi",
-      nav_gallery: "🚕 Galerie",
+      nav_gallery: "🚕 Ambassadeurs",
       nav_order: "📲 Jox ma course",
-      nav_recruit: "🦅 Nekkal chauffeur",
+      nav_recruit: "🦅 Nekkal ambassadeur",
       nav_cockpit: "🚖 Cockpit DRIVER",
 
       label_zone: "📍 Zone",
@@ -633,16 +643,16 @@
       btn_support_whatsapp: "WhatsApp support",
       btn_order_ride: "Jox ma course",
 
-      driver_default_name: "Chauffeur",
-      driver_desc_default: "Profil public DIGIY DRIVER. Jokkook client bi ci direct te maye service bu rafet.",
+      driver_default_name: "Chauffeur Ambassadeur",
+      driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. Mobility ak style ak savoir-être.",
       tag_online: "🟢 Ci ligne",
       tag_offline: "⚪ Hors-ligne",
-      pill_public: "Public",
+      pill_public: "Ambassadeur",
       btn_whatsapp: "WhatsApp",
 
-      cta_driver_title: "Yow, yaa di chauffeur ?",
-      cta_driver_sub: "Def sa fiche te jot client yi ci direct.",
-      cta_become_driver: "Nekkal chauffeur",
+      cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
+      cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
+      cta_become_driver: "Nekkal ambassadeur",
       cta_order_ride: "Jox ma course",
       cta_whatsapp: "WhatsApp support",
 
