@@ -1091,8 +1091,7 @@
 
   const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   const PUBLIC_SOURCE = "public_driver_cards";
 
   const qs = new URLSearchParams(location.search);
