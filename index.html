@@ -963,6 +963,7 @@
       tag_offline: "⚪ Hors-ligne",
       pill_public: "Ambassadeur",
       btn_whatsapp: "WhatsApp",
+      btn_profile: "Voir fiche",
 
       cta_driver_title: "Vous êtes chauffeur ambassadeur ?",
       cta_driver_sub: "Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",
@@ -1042,6 +1043,7 @@
       tag_offline: "⚪ Hors-ligne",
       pill_public: "Ambassadeur",
       btn_whatsapp: "WhatsApp",
+      btn_profile: "Xool fiche",
 
       cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
       cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
@@ -1063,6 +1065,53 @@
     const val = pack[key];
     if (typeof val === "function") return val(...args);
     return (val != null) ? String(val) : String((DIGIY_LANG.fr[key] ?? key));
+  }
+
+  function digiyBasePath(){
+    const parts = location.pathname.split("/").filter(Boolean);
+    const isGh = /\.github\.io$/i.test(location.hostname);
+    if(isGh && parts.length > 0) return "/" + parts[0] + "/";
+    return "/";
+  }
+
+  function digiyLocal(path){
+    path = String(path || "").replace(/^\/+/, "");
+    return digiyBasePath() + path;
+  }
+
+  const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const PUBLIC_SOURCE = "public_driver_cards";
+
+  const qs = new URLSearchParams(location.search);
+  const slug = (qs.get("slug") || "").trim();
+
+  const SITE_URL = "https://digiylyfe.com/";
+  const GALLERY_URL = location.pathname + location.search;
+  const ORDER_RIDE_URL = digiyLocal("commander-course.html");
+  const DRIVER_JOIN_URL = "https://commencer-a-payer.digiylyfe.com/?module=DRIVER";
+  const COCKPIT_URL = "https://pro-driver.digiylyfe.com/cockpit.html";
+  const PROFILE_URL = digiyLocal("fiche-chauffeur.html");
+
+  function withSlug(url){
+    const u = new URL(url, location.href);
+    if (slug) u.searchParams.set("slug", slug);
+    return u.toString();
+  }
+
+  function commanderUrlForDriver(d){
+    const u = new URL(ORDER_RIDE_URL, location.href);
+    if (d?.name) u.searchParams.set("driver", d.name);
+    if (d?.whatsapp) u.searchParams.set("wa", normPhone(d.whatsapp));
+    if (d?.slug) u.searchParams.set("slug", d.slug);
+    return u.toString();
+  }
+
+  function profileUrlForDriver(d){
+    const u = new URL(PROFILE_URL, location.href);
+    if (d?.slug) u.searchParams.set("slug", d.slug);
+    return u.toString();
   }
 
   function applyLanguage(lang){
@@ -1088,27 +1137,6 @@
 
   document.getElementById("lang-fr").addEventListener("click", ()=> applyLanguage("fr"));
   document.getElementById("lang-wo").addEventListener("click", ()=> applyLanguage("wo"));
-
-  const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  const PUBLIC_SOURCE = "public_driver_cards";
-
-  const qs = new URLSearchParams(location.search);
-  const slug = (qs.get("slug") || "").trim();
-
-  const SITE_URL = "https://digiylyfe.com/";
-  const GALLERY_URL = location.pathname + location.search;
-  const ORDER_RIDE_URL = "https://pro-driver.digiylyfe.com/";
-  const DRIVER_JOIN_URL = "https://pro-driver.digiylyfe.com/";
-  const COCKPIT_URL = "https://pro-driver.digiylyfe.com/cockpit.html";
-
-  function withSlug(url){
-    if (!slug) return url;
-    const u = new URL(url, location.href);
-    u.searchParams.set("slug", slug);
-    return u.toString();
-  }
 
   const driversEl = document.getElementById("drivers");
   const zoneFilter = document.getElementById("zoneFilter");
@@ -1161,7 +1189,8 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 
   function normPhone(p){
-    const digits = String(p ?? "").replace(/\D/g, "");
+    let digits = String(p ?? "").replace(/\D/g, "");
+    if (digits.length === 9 && digits.startsWith("7")) digits = "221" + digits;
     return digits || "";
   }
 
@@ -1321,7 +1350,12 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                 ? `<a class="btn btn-main" href="https://wa.me/${wa}" rel="noopener">${esc(t("btn_whatsapp"))}</a>`
                 : `<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`
             }
-            <a class="btn btn-ghost" href="${esc(withSlug(ORDER_RIDE_URL))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
+            ${
+              d.slug
+                ? `<a class="btn btn-ghost" href="${esc(profileUrlForDriver(d))}" rel="noopener">${esc(t("btn_profile"))}</a>`
+                : ``
+            }
+            <a class="btn btn-sky" href="${esc(commanderUrlForDriver(d))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
           </div>
         </div>
       `;
