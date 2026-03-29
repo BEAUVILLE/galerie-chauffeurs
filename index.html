@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>DIGIY DRIVER AMBASSADEUR — Galerie Classe</title>
+  <title>DIGIY DRIVER AMBASSADEUR — Galerie publique</title>
   <meta name="theme-color" content="#0b1220" />
   <meta
     name="description"
-    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique premium des chauffeurs, contact direct WhatsApp."
+    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique des chauffeurs, contact direct WhatsApp."
   />
 
   <style>
@@ -36,7 +36,7 @@
     body{
       margin:0;
       color:var(--text);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family:Outfit,Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
         radial-gradient(900px 500px at 10% 0%, rgba(244,201,93,.10), transparent 55%),
         radial-gradient(900px 560px at 100% 10%, rgba(31,168,106,.12), transparent 55%),
@@ -207,6 +207,7 @@
       font-size:12px;
       background:transparent;
       color:var(--text);
+      font-family:inherit;
     }
 
     .lang-switch button.active{
@@ -408,26 +409,6 @@
       color:#ffd8a6;
     }
 
-    .statsRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .statChip{
-      padding:10px 13px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:#d8fce8;
-      font-size:12px;
-      font-weight:1000;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-
     .navRow{
       display:flex;
       flex-wrap:wrap;
@@ -498,6 +479,7 @@
       background:rgba(255,255,255,.05);
       color:var(--text);
       font-weight:900;
+      font-family:inherit;
     }
 
     select option{
@@ -668,6 +650,7 @@
       text-decoration:none;
       user-select:none;
       transition:transform .16s ease, filter .16s ease;
+      font-family:inherit;
     }
 
     button:disabled{
@@ -803,28 +786,28 @@
       </div>
 
       <aside class="hero-panel">
-        <div class="panel-title" data-i18n="panel_title">Lecture du rail</div>
+        <div class="panel-title" data-i18n="panel_title">Vue d’ensemble</div>
         <div class="panel-grid">
           <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_count_k">Profils visibles</div>
+            <div class="panel-k" data-i18n="panel_count_k">Chauffeurs visibles</div>
             <div class="panel-v" id="statTotal">—</div>
           </div>
           <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_online_k">En ligne</div>
+            <div class="panel-k" data-i18n="panel_online_k">Contact direct</div>
             <div class="panel-v" id="statOnline">—</div>
           </div>
           <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_zone_k">Zones actives</div>
+            <div class="panel-k" data-i18n="panel_zone_k">Zones couvertes</div>
             <div class="panel-v" id="statZones">—</div>
           </div>
           <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_public_k">Statut</div>
-            <div class="panel-v" id="liveBadge">Public</div>
+            <div class="panel-k" data-i18n="panel_public_k">Visibilité</div>
+            <div class="panel-v" id="liveBadge">Galerie publique</div>
           </div>
         </div>
 
         <div class="panel-note" data-i18n="panel_note">
-          Ici, on ne pousse pas la masse. On met en avant des profils qui portent une certaine tenue de service.
+          Ici, on met en avant des profils qui portent une certaine tenue de service.
         </div>
       </aside>
     </div>
@@ -838,36 +821,36 @@
           Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.
         </div>
       </div>
-      <div class="badge" id="badgeTop" data-i18n="badge_public">Public</div>
+      <div class="badge" id="badgeTop" data-i18n="badge_public">Galerie publique</div>
     </div>
 
     <div class="navRow">
       <a class="navBtn" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="navBtn gold" id="galleryBtnTop" href="#" data-i18n="nav_gallery">🚕 Ambassadeurs</a>
-      <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Commander</a>
-      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Devenir ambassadeur</a>
-      <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Cockpit DRIVER</a>
+      <a class="navBtn gold" id="galleryBtnTop" href="#" data-i18n="nav_gallery">🚕 Nos chauffeurs</a>
+      <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Réserver un chauffeur</a>
+      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Rejoindre la sélection</a>
+      <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Mon espace chauffeur</a>
     </div>
 
     <div class="bar" style="margin-top:14px;">
       <div class="field">
-        <label data-i18n="label_zone">📍 Zone</label>
+        <label data-i18n="label_zone">📍 Zone recherchée</label>
         <select id="zoneFilter">
           <option value="" data-i18n="zone_all">Toutes</option>
         </select>
       </div>
 
       <div class="field">
-        <label data-i18n="label_search">🔎 Recherche</label>
-        <input id="qFilter" placeholder="Nom, ville, véhicule…" />
+        <label data-i18n="label_search">🔎 Nom, ville ou voiture</label>
+        <input id="qFilter" placeholder="Nom, ville ou voiture…" />
       </div>
 
       <div class="field">
-        <label data-i18n="label_avail">🟢 Dispo</label>
+        <label data-i18n="label_avail">📞 Contact</label>
         <select id="availFilter">
-          <option value="all" selected data-i18n="avail_all">Tous</option>
-          <option value="online" data-i18n="avail_online">En ligne</option>
-          <option value="offline" data-i18n="avail_offline">Hors-ligne</option>
+          <option value="all" selected data-i18n="avail_all">Tous les profils</option>
+          <option value="direct" data-i18n="avail_online">WhatsApp direct</option>
+          <option value="contact" data-i18n="avail_offline">À contacter</option>
         </select>
       </div>
     </div>
@@ -883,10 +866,10 @@
 
     <div class="actions" style="justify-content:center; margin-top:12px;">
       <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="btn btn-ghost" id="galleryBtnBottom" href="#" data-i18n="nav_gallery">Ambassadeurs</a>
-      <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Commander une course</a>
-      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Devenir ambassadeur</a>
-      <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Cockpit DRIVER</a>
+      <a class="btn btn-ghost" id="galleryBtnBottom" href="#" data-i18n="nav_gallery">Nos chauffeurs</a>
+      <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Réserver un chauffeur</a>
+      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Rejoindre la sélection</a>
+      <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Mon espace chauffeur</a>
     </div>
   </div>
 </div>
@@ -911,40 +894,40 @@
       hero_badge_2: "Contact direct • WhatsApp",
       hero_badge_3: "0% commission",
 
-      panel_title: "Lecture du rail",
-      panel_count_k: "Profils visibles",
-      panel_online_k: "En ligne",
-      panel_zone_k: "Zones actives",
-      panel_public_k: "Statut",
-      panel_note: "Ici, on ne pousse pas la masse. On met en avant des profils qui portent une certaine tenue de service.",
+      panel_title: "Vue d’ensemble",
+      panel_count_k: "Chauffeurs visibles",
+      panel_online_k: "Contact direct",
+      panel_zone_k: "Zones couvertes",
+      panel_public_k: "Visibilité",
+      panel_note: "Ici, on met en avant des profils qui portent une certaine tenue de service.",
 
       section_title: "Trouver le bon ambassadeur",
       section_sub: "Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.",
 
-      badge_public: "Public",
+      badge_public: "Galerie publique",
       badge_loading: "Chargement…",
-      badge_fallback: "⚠️ Public (fallback)",
+      badge_fallback: "⚠️ Galerie publique",
 
       nav_site: "← Retour au site",
-      nav_gallery: "🚕 Ambassadeurs",
-      nav_order: "📲 Commander",
-      nav_recruit: "🦅 Devenir ambassadeur",
-      nav_cockpit: "🚖 Cockpit DRIVER",
+      nav_gallery: "🚕 Nos chauffeurs",
+      nav_order: "📲 Réserver un chauffeur",
+      nav_recruit: "🦅 Rejoindre la sélection",
+      nav_cockpit: "🚖 Mon espace chauffeur",
 
-      label_zone: "📍 Zone",
+      label_zone: "📍 Zone recherchée",
       zone_all: "Toutes",
 
-      label_search: "🔎 Recherche",
-      search_ph: "Nom, ville, véhicule…",
+      label_search: "🔎 Nom, ville ou voiture",
+      search_ph: "Nom, ville ou voiture…",
 
-      label_avail: "🟢 Dispo",
-      avail_all: "Tous",
-      avail_online: "En ligne",
-      avail_offline: "Hors-ligne",
+      label_avail: "📞 Contact",
+      avail_all: "Tous les profils",
+      avail_online: "WhatsApp direct",
+      avail_offline: "À contacter",
 
       count_drivers: (n) => `${n} chauffeur(s)`,
-      online_now: (n) => `${n} en ligne maintenant`,
-      zones_live: (n) => `${n} zone(s) actives`,
+      online_now: (n) => `${n} en contact direct`,
+      zones_live: (n) => `${n} zone(s) couvertes`,
 
       stat_total: (n) => `${n}`,
       stat_online: (n) => `${n}`,
@@ -954,27 +937,27 @@
       empty_tag_1: "Change les filtres",
       empty_tag_2: "Ou contacte WhatsApp",
       btn_support_whatsapp: "WhatsApp support",
-      btn_order_ride: "Commander une course",
+      btn_order_ride: "Réserver un chauffeur",
 
       driver_default_name: "Chauffeur Ambassadeur",
       driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. La mobilité avec style et savoir-être.",
       driver_tagline: "Mobilité avec style et savoir-être",
-      tag_online: "🟢 En ligne",
-      tag_offline: "⚪ Hors-ligne",
-      pill_public: "Ambassadeur",
+      tag_online: "📞 WhatsApp direct",
+      tag_offline: "🕊️ À contacter",
+      pill_public: "Chauffeur sélectionné",
       btn_whatsapp: "WhatsApp",
-      btn_profile: "Voir fiche",
+      btn_profile: "Voir le profil",
 
       cta_driver_title: "Vous êtes chauffeur ambassadeur ?",
       cta_driver_sub: "Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",
-      cta_become_driver: "Devenir ambassadeur",
-      cta_order_ride: "Commander une course",
+      cta_become_driver: "Rejoindre la sélection",
+      cta_order_ride: "Réserver un chauffeur",
       cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Galerie pas encore branchée",
       fallback_tag_1: "La source Supabase \"public_driver_cards\" n’est pas accessible",
       fallback_tag_2: "RLS / vue publique à créer",
-      toast_fallback: "Galerie en mode fallback (public)"
+      toast_fallback: "Galerie en mode public"
     },
 
     wo: {
@@ -991,40 +974,40 @@
       hero_badge_2: "Contact direct • WhatsApp",
       hero_badge_3: "0% commission",
 
-      panel_title: "Lecture du rail",
-      panel_count_k: "Profils visibles",
-      panel_online_k: "Ci ligne",
-      panel_zone_k: "Zones actives",
-      panel_public_k: "Statut",
-      panel_note: "Fii, du mbooloo rekk. Ñuy jëkk ci profil yu yor teey ak yëngu-yëngu bu rafet.",
+      panel_title: "Xool bu gaaw",
+      panel_count_k: "Chauffeur yi ñuy won",
+      panel_online_k: "WhatsApp direct",
+      panel_zone_k: "Zone yi ñu mën a dikk",
+      panel_public_k: "Visibilité",
+      panel_note: "Fii, ñuy jëkk ci profil yu yor teey ak yëngu-yëngu bu rafet.",
 
       section_title: "Seetal ambassadeur bi gën a baax",
       section_sub: "Seet ci zone, dëkk walla voiture ngir gis profil bi la gën a yombal.",
 
-      badge_public: "Public",
+      badge_public: "Galerie publique",
       badge_loading: "Di yük…",
-      badge_fallback: "⚠️ Public (fallback)",
+      badge_fallback: "⚠️ Galerie publique",
 
       nav_site: "← Dellu ci site bi",
-      nav_gallery: "🚕 Ambassadeurs",
-      nav_order: "📲 Jox ma course",
-      nav_recruit: "🦅 Nekkal ambassadeur",
-      nav_cockpit: "🚖 Cockpit DRIVER",
+      nav_gallery: "🚕 Sunu chauffeurs",
+      nav_order: "📲 Réserver un chauffeur",
+      nav_recruit: "🦅 Duggal ci sélection bi",
+      nav_cockpit: "🚖 Sama espace chauffeur",
 
-      label_zone: "📍 Zone",
+      label_zone: "📍 Zone bi nga seet",
       zone_all: "Yépp",
 
-      label_search: "🔎 Seet",
-      search_ph: "Tur, dëkk, voiture…",
+      label_search: "🔎 Tur, dëkk walla voiture",
+      search_ph: "Tur, dëkk walla voiture…",
 
-      label_avail: "🟢 Dispo",
-      avail_all: "Yépp",
-      avail_online: "Ci ligne",
-      avail_offline: "Hors-ligne",
+      label_avail: "📞 Jokkook",
+      avail_all: "Profils yépp",
+      avail_online: "WhatsApp direct",
+      avail_offline: "À contacter",
 
       count_drivers: (n) => `${n} chauffeur`,
-      online_now: (n) => `${n} ci ligne léegi`,
-      zones_live: (n) => `${n} zone yi dox`,
+      online_now: (n) => `${n} ci WhatsApp direct`,
+      zones_live: (n) => `${n} zone yu ñuy liggéey`,
 
       stat_total: (n) => `${n}`,
       stat_online: (n) => `${n}`,
@@ -1034,27 +1017,27 @@
       empty_tag_1: "Soppi filtre yi",
       empty_tag_2: "Walla bataaxal WhatsApp",
       btn_support_whatsapp: "WhatsApp support",
-      btn_order_ride: "Jox ma course",
+      btn_order_ride: "Réserver un chauffeur",
 
       driver_default_name: "Chauffeur Ambassadeur",
       driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. Mobility ak style ak savoir-être.",
       driver_tagline: "Mobility ak style ak savoir-être",
-      tag_online: "🟢 Ci ligne",
-      tag_offline: "⚪ Hors-ligne",
-      pill_public: "Ambassadeur",
+      tag_online: "📞 WhatsApp direct",
+      tag_offline: "🕊️ À contacter",
+      pill_public: "Chauffeur sélectionné",
       btn_whatsapp: "WhatsApp",
-      btn_profile: "Xool fiche",
+      btn_profile: "Xool profil bi",
 
       cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
       cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
-      cta_become_driver: "Nekkal ambassadeur",
-      cta_order_ride: "Jox ma course",
+      cta_become_driver: "Duggal ci sélection bi",
+      cta_order_ride: "Réserver un chauffeur",
       cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Galerie bi du connecté",
       fallback_tag_1: "Source Supabase \"public_driver_cards\" duñu ko jàpp",
       fallback_tag_2: "RLS / vue publique war nañu ko def",
-      toast_fallback: "Galerie bi ci mode fallback (public)"
+      toast_fallback: "Galerie bi ci mode public"
     }
   };
 
@@ -1204,16 +1187,12 @@
     ).size;
   }
 
-  function getOnlineCount(items){
-    return items.filter(d => d.is_online === true).length;
+  function getDirectCount(items){
+    return items.filter(d => !!normPhone(d.whatsapp)).length;
   }
 
   function sortDrivers(rows){
     return [...rows].sort((a,b)=>{
-      const ao = a.is_online === true ? 1 : 0;
-      const bo = b.is_online === true ? 1 : 0;
-      if (bo !== ao) return bo - ao;
-
       const ar = Number(a.rating || 0);
       const br = Number(b.rating || 0);
       if (br !== ar) return br - ar;
@@ -1241,10 +1220,10 @@
 
   function refreshTopStats(){
     countPill.textContent = t("count_drivers", ALL.length);
-    onlinePill.textContent = t("online_now", getOnlineCount(ALL));
+    onlinePill.textContent = t("online_now", getDirectCount(ALL));
 
     statTotal.textContent = t("stat_total", ALL.length);
-    statOnline.textContent = t("stat_online", getOnlineCount(ALL));
+    statOnline.textContent = t("stat_online", getDirectCount(ALL));
     statZones.textContent = t("stat_zones", getZoneCount(ALL));
   }
 
@@ -1252,10 +1231,11 @@
     const z = (zoneFilter.value || "").trim();
     const q = (qFilter.value || "").trim().toLowerCase();
     const a = availFilter.value || "all";
+    const hasWhatsapp = !!normPhone(d.whatsapp);
 
     if (z && String(d.zone || "") !== z) return false;
-    if (a === "online" && d.is_online !== true) return false;
-    if (a === "offline" && d.is_online === true) return false;
+    if (a === "direct" && !hasWhatsapp) return false;
+    if (a === "contact" && hasWhatsapp) return false;
 
     if (q){
       const hay = [
@@ -1309,12 +1289,11 @@
       const zone = esc(d.zone || "");
       const car = esc(d.car || "");
       const desc = esc(d.description || t("driver_desc_default"));
-      const online = d.is_online === true;
       const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
       const wa = normPhone(d.whatsapp);
       const mono = esc(initials(name));
 
-      const statusTag = online
+      const statusTag = wa
         ? `<span class="tag green">${esc(t("tag_online"))}</span>`
         : `<span class="tag off">${esc(t("tag_offline"))}</span>`;
 
