@@ -1446,5 +1446,72 @@
   applyLanguage(CURRENT_LANG);
   load();
 </script>
+  <!-- ============================================================
+     DIGIY AUDIO — CHAUFFEUR
+     ============================================================ -->
+
+<button id="digiy-audio-driver" style="
+position:fixed;
+bottom:90px;
+left:24px;
+z-index:99999;
+background:#111827;
+color:#fff;
+font-family:'Outfit',sans-serif;
+font-weight:800;
+font-size:14px;
+padding:12px 18px;
+border-radius:999px;
+border:none;
+cursor:pointer;
+box-shadow:0 6px 18px rgba(0,0,0,.25);
+">
+▶ Écouter chauffeur
+</button>
+
+<script>
+(function(){
+
+var TEXTE = "Bienvenue. Ici, tu peux trouver un chauffeur disponible tout de suite. Appelle directement, discute du prix et pars sans attendre. Pas d’intermédiaire. Tu vois le chauffeur, tu le contactes. Simple. DIGIYLYFE.";
+
+var btn = document.getElementById('digiy-audio-driver');
+
+if(!('speechSynthesis' in window)) return;
+
+var synth = window.speechSynthesis;
+var playing = false;
+var utt;
+
+function stop(){
+  synth.cancel();
+  playing = false;
+  btn.innerHTML = "▶ Écouter chauffeur";
+}
+
+function play(){
+  synth.cancel();
+
+  utt = new SpeechSynthesisUtterance(TEXTE);
+  utt.lang = 'fr-FR';
+  utt.rate = 0.9;
+
+  utt.onend = stop;
+
+  synth.speak(utt);
+
+  playing = true;
+  btn.innerHTML = "■ Arrêter";
+}
+
+btn.onclick = function(){
+  playing ? stop() : play();
+};
+
+})();
+</script>
+
+<!-- ============================================================
+     FIN AUDIO CHAUFFEUR
+     ============================================================ -->
 </body>
 </html>
