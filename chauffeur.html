@@ -1,0 +1,1189 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>DIGIY DRIVER — Chauffeur</title>
+  <meta name="theme-color" content="#061b14"/>
+  <meta name="description" content="Fiche publique chauffeur DIGIY DRIVER. Contact direct, paiement direct, 0% commission."/>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --bg:#07140f;
+      --bg2:#0b1d15;
+      --card:#10241b;
+      --card-2:#0d2018;
+      --line:rgba(255,255,255,.10);
+      --text:#ecfff4;
+      --muted:rgba(236,255,244,.72);
+      --primary:#22c55e;
+      --primary-2:#16a34a;
+      --gold:#facc15;
+      --gold-soft:rgba(250,204,21,.12);
+      --danger:#ef4444;
+      --shadow:0 20px 60px rgba(0,0,0,.38);
+      --r:24px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(900px 520px at 10% -10%, rgba(34,197,94,.14), transparent 60%),
+        radial-gradient(900px 520px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
+        linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
+      color:var(--text);
+      font-family:"Outfit",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      padding:16px;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:auto}
+
+    .brand-top{
+      margin-bottom:12px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:22px;
+      background:rgba(255,255,255,.035);
+      box-shadow:0 14px 34px rgba(0,0,0,.22);
+      padding:10px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brand-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .brand-logo{
+      width:48px;
+      height:48px;
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+      display:grid;
+      place-items:center;
+      box-shadow:0 12px 28px rgba(250,204,21,.20);
+      flex:0 0 auto;
+    }
+
+    .brand-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .brand-title{
+      font-size:13px;
+      font-weight:1000;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:var(--gold);
+      line-height:1.1;
+    }
+
+    .brand-sub{
+      margin-top:3px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.3;
+      font-weight:850;
+    }
+
+    .brand-top .btn{
+      min-height:42px;
+      border-radius:999px;
+      padding:10px 13px;
+      font-size:13px;
+    }
+
+    @media(max-width:760px){
+      .brand-top{align-items:flex-start}
+      .brand-top .btn{width:100%}
+    }
+
+    .hero,
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
+      box-shadow:var(--shadow);
+    }
+
+    .hero{overflow:hidden}
+
+    .hero-grid-main{
+      display:grid;
+      grid-template-columns:420px 1fr;
+      min-height:430px;
+    }
+
+    @media(max-width:940px){
+      .hero-grid-main{grid-template-columns:1fr}
+    }
+
+    .hero-media{
+      position:relative;
+      min-height:320px;
+      background:#0a1712;
+    }
+
+    .hero-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      background:#0f1d17;
+    }
+
+    .hero-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.34), rgba(0,0,0,.08));
+      pointer-events:none;
+    }
+
+    .hero-media-fallback{
+      width:100%;
+      height:100%;
+      min-height:320px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(250,204,21,.18), transparent 30%),
+        radial-gradient(circle at 75% 15%, rgba(34,197,94,.14), transparent 28%),
+        linear-gradient(180deg, #111827, #0b1120);
+      color:#fff;
+      font-size:54px;
+      font-weight:1000;
+    }
+
+    .hero-badge{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(7,20,15,.72);
+      color:#fff6c9;
+      font-size:12px;
+      font-weight:950;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero-badge .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--primary);
+      box-shadow:0 0 0 4px rgba(34,197,94,.14);
+    }
+
+    .hero-content{
+      padding:24px;
+      display:grid;
+      gap:18px;
+      align-content:start;
+    }
+
+    .hero-top{
+      display:flex;
+      gap:14px;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+
+    .hero-main{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      min-width:0;
+    }
+
+    .avatar{
+      width:72px;
+      height:72px;
+      border-radius:20px;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      font-size:24px;
+      font-weight:1000;
+      color:#041b12;
+      background:linear-gradient(135deg, var(--gold), var(--primary));
+      box-shadow:0 12px 28px rgba(34,197,94,.22);
+      overflow:hidden;
+    }
+
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .avatar img.digiy-logo-fallback{
+      background:#fff;
+      object-fit:cover;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid rgba(34,197,94,.28);
+      background:rgba(34,197,94,.12);
+      color:#bbf7d0;
+      font-size:12px;
+      font-weight:950;
+      width:max-content;
+      margin-bottom:10px;
+    }
+
+    .badge .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--primary);
+      box-shadow:0 0 0 4px rgba(34,197,94,.14);
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px, 4vw, 42px);
+      line-height:1.04;
+      letter-spacing:-.02em;
+    }
+
+    .subtitle{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:16px;
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    .hero-meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      max-width:100%;
+    }
+
+    .safe-pill{
+      color:var(--gold);
+      border-color:rgba(250,204,21,.22);
+      background:var(--gold-soft);
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      min-height:48px;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:950;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn.primary{
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#041b12;
+      border-color:transparent;
+      box-shadow:0 12px 28px rgba(34,197,94,.22);
+    }
+
+    .btn.gold{
+      background:rgba(250,204,21,.12);
+      color:var(--gold);
+      border-color:rgba(250,204,21,.22);
+    }
+
+    .hero-info-grid{
+      display:grid;
+      gap:12px;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    @media(max-width:700px){
+      .hero-info-grid{grid-template-columns:1fr}
+    }
+
+    .fact{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(0,0,0,.16);
+    }
+
+    .fact .k{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .fact .v{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.5;
+    }
+
+    .grid{
+      display:grid;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    @media(min-width:920px){
+      .grid{grid-template-columns:1.05fr .95fr}
+    }
+
+    .card{padding:18px}
+
+    h2{
+      margin:0 0 10px;
+      font-size:21px;
+    }
+
+    .muted{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+      line-height:1.55;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .chip{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.16);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .rates-groups{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+
+    @media(max-width:920px){
+      .rates-groups{grid-template-columns:1fr}
+    }
+
+    .rate-group{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.15);
+      border-radius:20px;
+      padding:16px;
+    }
+
+    .rate-group h3{
+      margin:0 0 12px;
+      font-size:16px;
+      color:#fff1ad;
+    }
+
+    .rate-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .rate{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 0;
+      border-bottom:1px dashed rgba(255,255,255,.10);
+    }
+
+    .rate:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .rate-name{
+      font-weight:950;
+      line-height:1.4;
+    }
+
+    .rate-price{
+      color:var(--gold);
+      font-weight:1000;
+      white-space:nowrap;
+    }
+
+    .empty{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      font-weight:850;
+      color:var(--muted);
+    }
+
+    .client-choice{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .choice-card{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      background:rgba(0,0,0,.16);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:138px;
+    }
+
+    .choice-icon{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      font-size:24px;
+      background:rgba(250,204,21,.10);
+      border:1px solid rgba(250,204,21,.18);
+    }
+
+    .choice-card b{
+      font-size:15px;
+      line-height:1.18;
+    }
+
+    .choice-card span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      font-weight:800;
+    }
+
+    .quick-demand{
+      margin-top:14px;
+      border:1px solid rgba(250,204,21,.22);
+      border-radius:22px;
+      background:rgba(250,204,21,.075);
+      padding:15px;
+    }
+
+    .quick-demand h2{
+      color:var(--gold);
+      margin-bottom:6px;
+    }
+
+    .quick-demand p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      font-weight:800;
+    }
+
+    .quick-demand-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .audio-mini{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      z-index:80;
+      display:flex;
+      gap:8px;
+    }
+
+    .audio-mini button{
+      min-height:48px;
+      border:none;
+      border-radius:999px;
+      padding:0 14px;
+      font-family:inherit;
+      font-weight:1000;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--gold),var(--primary));
+      color:#041b12;
+      box-shadow:0 14px 30px rgba(0,0,0,.30);
+    }
+
+    .audio-mini button.stop{
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .footer{
+      margin-top:16px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .hidden{display:none !important}
+
+    @media(max-width:760px){
+      body{
+        padding:10px 10px 82px;
+        font-size:17px;
+      }
+
+      .hero-content{padding:18px}
+
+      .hero-actions{justify-content:stretch}
+
+      .hero-actions .btn{
+        width:100%;
+        min-height:52px;
+        border-radius:18px;
+        font-size:15px;
+      }
+
+      .hero-info-grid{gap:10px}
+      .fact{padding:13px}
+      .fact .k{font-size:13px}
+      .fact .v{font-size:16px}
+      .client-choice{grid-template-columns:1fr}
+      .choice-card{min-height:auto}
+
+      .quick-demand-actions{
+        display:grid;
+        grid-template-columns:1fr;
+      }
+
+      .quick-demand-actions .btn{width:100%}
+
+      .audio-mini{
+        right:10px;
+        bottom:10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="brand-top">
+      <div class="brand-left">
+        <div class="brand-logo">
+          <img src="https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png" alt="DIGIY">
+        </div>
+        <div>
+          <div class="brand-title">DIGIY DRIVER</div>
+          <div class="brand-sub">Fiche chauffeur · contact direct · 0% commission</div>
+        </div>
+      </div>
+      <a class="btn gold" id="brandBack" href="./index.html">🏠 Retour vitrine</a>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid-main">
+        <div class="hero-media" id="heroMedia">
+          <div class="hero-media-fallback">🚗</div>
+          <div class="hero-badge" id="heroBadge">
+            <span class="dot"></span>
+            Chauffeur privé
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-top">
+            <div class="hero-main">
+              <div class="avatar" id="avatar">DR</div>
+
+              <div>
+                <div class="badge" id="pubBadge"><span class="dot"></span> Chauffeur publié</div>
+                <h1 id="name">Chargement…</h1>
+                <div class="subtitle" id="subtitle">Profil public DIGIY DRIVER</div>
+
+                <div class="hero-meta">
+                  <div class="pill" id="cityPill">Ville : —</div>
+                  <div class="pill" id="vehiclePill">Véhicule : —</div>
+                  <div class="pill safe-pill" id="safePill">fiche : publique</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" id="btnWhatsApp" href="#" target="_blank" rel="noopener">💬 WhatsApp direct</a>
+              <a class="btn gold" id="btnCommander" href="./commander-course.html">🚖 Demander ce chauffeur</a>
+              <a class="btn" id="btnRetour" href="./index.html">🏠 Retour vitrine</a>
+            </div>
+          </div>
+
+          <div class="hero-info-grid">
+            <div class="fact">
+              <div class="k">Présentation</div>
+              <div class="v" id="bio">—</div>
+            </div>
+
+            <div class="fact">
+              <div class="k">Services</div>
+              <div class="v" id="services">—</div>
+            </div>
+
+            <div class="fact">
+              <div class="k">Note contact</div>
+              <div class="v" id="contactNote">—</div>
+            </div>
+
+            <div class="fact">
+              <div class="k">Contact direct</div>
+              <div class="v" id="contactDirect">WhatsApp disponible si publié par le chauffeur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Que veux-tu faire ?</h2>
+      <div class="muted">
+        Choisis l’action la plus simple. Tu peux écrire directement au chauffeur ou préparer une demande de course plus claire.
+      </div>
+
+      <div class="client-choice">
+        <a class="choice-card" id="choiceWhatsApp" href="#" target="_blank" rel="noopener">
+          <div class="choice-icon">💬</div>
+          <b>Écrire au chauffeur</b>
+          <span>WhatsApp direct pour poser une question ou confirmer une disponibilité.</span>
+        </a>
+
+        <a class="choice-card" id="choiceCommander" href="./commander-course.html">
+          <div class="choice-icon">🚖</div>
+          <b>Demander une course</b>
+          <span>Trajet, heure, personnes, bagages : DIGIY prépare le message.</span>
+        </a>
+
+        <a class="choice-card" id="choiceDetail" href="./commander-course-detail.html">
+          <div class="choice-icon">🗂️</div>
+          <b>Course détaillée</b>
+          <span>Pour l’aéroport, une journée, un budget ou un besoin spécial.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="quick-demand" id="quickDemand">
+      <h2>Note rapide chauffeur</h2>
+      <p>
+        Si ce chauffeur te convient, prépare une demande simple :
+        départ, arrivée, heure, personnes et bagages. Le contact reste direct, le paiement reste direct.
+      </p>
+      <div class="quick-demand-actions">
+        <a class="btn primary" id="quickCommander" href="./commander-course.html">📲 Préparer ma demande</a>
+        <a class="btn gold" id="quickWhatsApp" href="#" target="_blank" rel="noopener">💬 Écrire maintenant</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Zone de service</h2>
+        <div class="muted">Territoires couverts par le chauffeur.</div>
+        <div class="chips" id="zonesChips">
+          <div class="chip">Aucune zone</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Véhicule & confort</h2>
+        <div class="hero-info-grid" style="margin-top:14px">
+          <div class="fact">
+            <div class="k">Véhicule</div>
+            <div class="v" id="vehicleFull">—</div>
+          </div>
+          <div class="fact">
+            <div class="k">Confort</div>
+            <div class="v" id="comfort">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Tarifs indicatifs</h2>
+      <div class="muted">Tarifs publiés par le chauffeur. Paiement direct au pro.</div>
+      <div id="ratesList" style="margin-top:16px">
+        <div class="empty">Chargement…</div>
+      </div>
+    </section>
+
+    <div class="footer">
+      DIGIY DRIVER • Contact direct • 0% commission
+    </div>
+  </div>
+
+  <div class="audio-mini">
+    <button id="btnAudio" type="button">🎧 Écouter</button>
+    <button id="btnStopAudio" class="stop" type="button">⏹</button>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
+    });
+
+    function digiyBasePath(){
+      const parts = location.pathname.split("/").filter(Boolean);
+      const isGh = /\.github\.io$/i.test(location.hostname);
+      if(isGh && parts.length > 0) return "/" + parts[0] + "/";
+      return "/";
+    }
+
+    function digiyLocal(path){
+      path = String(path || "").replace(/^\/+/, "");
+      return digiyBasePath() + path;
+    }
+
+    function normalizeSlug(v){
+      return String(v || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\-_]/g, "")
+        .replace(/-+/g, "-")
+        .replace(/^[-_]+|[-_]+$/g, "");
+    }
+
+    function isSensitiveSlug(slug){
+      return /\d{7,}/.test(String(slug || ""));
+    }
+
+    function canExposeSlug(slug){
+      const s = normalizeSlug(slug);
+      return !!s && !isSensitiveSlug(s);
+    }
+
+    function normalizeWa(phone){
+      let clean = String(phone || "").replace(/[^\d]/g, "");
+      if(clean.length === 9 && clean.startsWith("7")) clean = "221" + clean;
+      return clean;
+    }
+
+    function cleanVisibleUrl(){
+      try{
+        const u = new URL(location.href);
+        let changed = false;
+
+        ["phone","tel","wa"].forEach(k => {
+          if(u.searchParams.has(k)){
+            u.searchParams.delete(k);
+            changed = true;
+          }
+        });
+
+        ["slug","identifiant"].forEach(k => {
+          const s = normalizeSlug(u.searchParams.get(k) || "");
+          if(s && isSensitiveSlug(s)){
+            u.searchParams.delete(k);
+            changed = true;
+          }
+        });
+
+        if(changed){
+          history.replaceState({}, "", u.pathname + u.search + u.hash);
+        }
+      }catch(_){}
+    }
+
+    const qs = new URLSearchParams(location.search);
+    const rawSlug = normalizeSlug(qs.get("slug") || qs.get("identifiant") || "");
+    const slugForRpc = rawSlug;
+    cleanVisibleUrl();
+
+    function visibleProfileUrl(){
+      try{
+        const u = new URL(location.href);
+        ["phone","tel","wa"].forEach(k => u.searchParams.delete(k));
+        ["slug","identifiant"].forEach(k => {
+          const s = normalizeSlug(u.searchParams.get(k) || "");
+          if(s && isSensitiveSlug(s)) u.searchParams.delete(k);
+        });
+        return u.toString();
+      }catch{
+        return location.origin + digiyLocal("chauffeur.html");
+      }
+    }
+
+    function money(n){
+      return Number(n || 0).toLocaleString("fr-FR") + " FCFA";
+    }
+
+    function safe(v, fallback="—"){
+      const s = String(v || "").trim();
+      return s || fallback;
+    }
+
+    function initials(name){
+      const s = safe(name, "DR");
+      return s.split(/\s+/).slice(0,2).map(x => (x[0] || "").toUpperCase()).join("") || "DR";
+    }
+
+    function waLink(phone, name){
+      const clean = normalizeWa(phone);
+      if(!clean) return "";
+      const msg = `Bonjour ${name || ""}, je vous contacte via votre fiche DIGIY DRIVER. Je cherche un chauffeur et je souhaite échanger directement avec vous.`;
+      return "https://wa.me/" + clean + "?text=" + encodeURIComponent(msg);
+    }
+
+    function commanderLink(profile, detail=false){
+      const u = new URL(digiyLocal(detail ? "commander-course-detail.html" : "commander-course.html"), location.origin);
+
+      if (profile?.display_name) u.searchParams.set("driver", profile.display_name);
+
+      const wa = normalizeWa(profile?.whatsapp || "");
+      if (wa) u.searchParams.set("wa", wa);
+
+      if (canExposeSlug(slugForRpc)){
+        u.searchParams.set("slug", slugForRpc);
+      }
+
+      u.searchParams.set("profile", visibleProfileUrl());
+      return u.toString();
+    }
+
+    function stopAudio(){
+      try{ if("speechSynthesis" in window) window.speechSynthesis.cancel(); }catch(_){}
+    }
+
+    function speakProfile(){
+      const name = document.getElementById("name")?.textContent || "ce chauffeur";
+      const city = document.getElementById("cityPill")?.textContent || "";
+      const vehicle = document.getElementById("vehiclePill")?.textContent || "";
+      const text = `Fiche DIGIY DRIVER. Tu peux contacter ${name} directement sur WhatsApp, ou préparer une demande de course. ${city}. ${vehicle}. Contact direct, paiement direct, zéro commission DIGIY.`;
+      try{
+        if(!("speechSynthesis" in window)) return;
+        stopAudio();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "fr-FR";
+        u.rate = 0.86;
+        window.speechSynthesis.speak(u);
+      }catch(_){}
+    }
+
+    document.getElementById("btnAudio")?.addEventListener("click", speakProfile);
+    document.getElementById("btnStopAudio")?.addEventListener("click", stopAudio);
+
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    function pickMainImage(p){
+      const candidates = [
+        p?.vehicle_photo,
+        p?.vehicle_photo_url,
+        p?.photo_url,
+        p?.avatar_url,
+        p?.image_url
+      ].filter(Boolean);
+
+      if (candidates.length) return candidates[0];
+
+      const vehicleType = String(p?.vehicle_type || "").toLowerCase();
+
+      if (vehicleType.includes("suv")) {
+        return "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80";
+      }
+
+      if (vehicleType.includes("berline")) {
+        return "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80";
+      }
+
+      return "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80";
+    }
+
+    function setHeroImage(profile, displayName, city){
+      const heroMedia = document.getElementById("heroMedia");
+      const imageUrl = pickMainImage(profile);
+
+      heroMedia.innerHTML = `
+        <img
+          src="${escapeHtml(imageUrl)}"
+          alt="${escapeHtml(displayName)}"
+          loading="eager"
+          onerror="this.outerHTML='<div class=&quot;hero-media-fallback&quot;>🚗</div>';"
+        />
+        <div class="hero-badge">
+          <span class="dot"></span>
+          ${escapeHtml(city ? `Chauffeur privé • ${city}` : "Chauffeur privé")}
+        </div>
+      `;
+    }
+
+    function setAvatar(profile, displayName){
+      const avatar = document.getElementById("avatar");
+      const photo = profile?.photo_url || profile?.avatar_url || "";
+
+      if(photo){
+        avatar.innerHTML = `<img src="${escapeHtml(photo)}" alt="${escapeHtml(displayName)}" onerror="this.parentNode.textContent='${escapeHtml(initials(displayName))}'">`;
+      }else{
+        avatar.innerHTML = `<img class="digiy-logo-fallback" src="https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png" alt="DIGIY" onerror="this.parentNode.textContent='${escapeHtml(initials(displayName))}'">`;
+      }
+    }
+
+    function renderZones(zones){
+      const box = document.getElementById("zonesChips");
+      if(!zones || !zones.length){
+        box.innerHTML = `<div class="chip">Zone non précisée</div>`;
+        return;
+      }
+      box.innerHTML = zones.map(z => `<div class="chip">${escapeHtml(z)}</div>`).join("");
+    }
+
+    function renderRatesGrouped(rates){
+      const box = document.getElementById("ratesList");
+
+      if(!rates || !rates.length){
+        box.innerHTML = `<div class="empty">Aucun tarif publié</div>`;
+        return;
+      }
+
+      const safeRates = rates.filter(r => r && r.is_active !== false);
+      const used = new Set();
+
+      function take(matchFn){
+        const rows = safeRates.filter(r => {
+          const id = String(r.id || r.route_label || Math.random());
+          if(used.has(id)) return false;
+          const ok = matchFn(r);
+          if(ok) used.add(id);
+          return ok;
+        });
+        return rows;
+      }
+
+      const groups = [
+        {
+          title: "Transferts interurbains",
+          items: take(r => /dakar|aibd|thi[eè]s|aeroport|airport/i.test(String(r.route_label || "")))
+        },
+        {
+          title: "Mise à disposition",
+          items: take(r => /mise à dispo|mise a dispo|dispo|journ[eé]e|4h|soir[eé]e/i.test(String(r.route_label || "")))
+        },
+        {
+          title: "Trajets locaux",
+          items: take(r => true)
+        }
+      ];
+
+      const sections = groups
+        .filter(group => group.items.length > 0)
+        .map(group => `
+          <div class="rate-group">
+            <h3>${escapeHtml(group.title)}</h3>
+            <div class="rate-list">
+              ${group.items.map(r => `
+                <div class="rate">
+                  <div class="rate-name">${escapeHtml(safe(r.route_label))}</div>
+                  <div class="rate-price">${money(r.price_fcfa)}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+
+      box.innerHTML = sections
+        ? `<div class="rates-groups">${sections}</div>`
+        : `<div class="empty">Aucun tarif publié</div>`;
+    }
+
+    function setUnavailable(message){
+      document.getElementById("name").textContent = "Chauffeur indisponible";
+      document.getElementById("subtitle").textContent = message || "Cette fiche n’est pas disponible publiquement.";
+      document.getElementById("ratesList").innerHTML = `<div class="empty">Ce chauffeur est introuvable ou non publié.</div>`;
+      document.getElementById("btnWhatsApp").classList.add("hidden");
+      document.getElementById("btnCommander").classList.add("hidden");
+      document.getElementById("quickDemand")?.classList.add("hidden");
+      document.getElementById("heroMedia").innerHTML = `
+        <div class="hero-media-fallback">🚗</div>
+        <div class="hero-badge"><span class="dot"></span> Chauffeur privé</div>
+      `;
+    }
+
+    async function boot(){
+      document.getElementById("safePill").textContent = "fiche : publique";
+      document.getElementById("btnRetour").href = digiyLocal("index.html");
+      document.getElementById("brandBack").href = digiyLocal("index.html");
+
+      if(!slugForRpc){
+        document.getElementById("name").textContent = "Lien incomplet";
+        document.getElementById("subtitle").textContent = "Impossible d’ouvrir cette fiche sans lien chauffeur.";
+        document.getElementById("ratesList").innerHTML = `<div class="empty">Cette fiche ne peut pas s’ouvrir sans lien chauffeur.</div>`;
+        document.getElementById("btnWhatsApp").classList.add("hidden");
+        document.getElementById("btnCommander").classList.add("hidden");
+        document.getElementById("quickDemand")?.classList.add("hidden");
+        return;
+      }
+
+      try{
+        const { data, error } = await sb.rpc("driver_public_profile_by_slug", { p_slug: slugForRpc });
+        if(error) throw error;
+        if(!data?.ok) throw new Error(data?.error || "not_found");
+
+        const p = data.profile || {};
+        const rates = Array.isArray(data.rates) ? data.rates : [];
+
+        const name = safe(p.display_name, "Chauffeur DIGIY");
+        const city = safe(p.city);
+        const vehicleBits = [
+          p.vehicle_type,
+          p.vehicle_brand,
+          p.vehicle_model,
+          p.vehicle_year
+        ].filter(Boolean);
+
+        const vehicleShort = [p.vehicle_type, p.vehicle_brand].filter(Boolean).join(" • ");
+        const vehicleFull = vehicleBits.join(" • ");
+
+        const services = [
+          p.airport_ok ? "Transferts aéroport" : null,
+          p.long_distance_ok ? "Longues distances" : null,
+          "Réservation directe"
+        ].filter(Boolean).join(" • ");
+
+        const comfort = [
+          p.has_ac ? "Climatisation disponible" : "Confort standard",
+          p.vehicle_color ? `Couleur ${p.vehicle_color}` : null
+        ].filter(Boolean).join(" • ");
+
+        const zones = Array.isArray(p.zones_text)
+          ? p.zones_text
+          : String(p.zones_text || "")
+              .split(",")
+              .map(s => s.trim())
+              .filter(Boolean);
+
+        document.title = `${name} — DIGIY DRIVER`;
+
+        setHeroImage(p, name, city);
+        setAvatar(p, name);
+
+        document.getElementById("name").textContent = name;
+        document.getElementById("subtitle").textContent = `${city} • ${safe(p.vehicle_type, "Chauffeur privé")}`;
+        document.getElementById("cityPill").textContent = "Ville : " + city;
+        document.getElementById("vehiclePill").textContent = "Véhicule : " + safe(vehicleShort || vehicleFull);
+        document.getElementById("bio").textContent = safe(p.bio, "Service propre, ponctuel et confortable.");
+        document.getElementById("services").textContent = services || "Service standard";
+        document.getElementById("contactNote").textContent = safe(p.contact_note, "Disponible sur réservation");
+        document.getElementById("contactDirect").textContent = p.whatsapp ? "WhatsApp direct disponible" : "WhatsApp sur demande";
+        document.getElementById("vehicleFull").textContent = safe(vehicleFull, "Véhicule confortable");
+        document.getElementById("comfort").textContent = comfort;
+
+        renderZones(zones);
+        renderRatesGrouped(rates);
+
+        const wa = document.getElementById("btnWhatsApp");
+        const waHref = waLink(p.whatsapp, name);
+
+        const choiceWhatsApp = document.getElementById("choiceWhatsApp");
+        const quickWhatsApp = document.getElementById("quickWhatsApp");
+
+        if(waHref){
+          wa.href = waHref;
+          if(choiceWhatsApp) choiceWhatsApp.href = waHref;
+          if(quickWhatsApp) quickWhatsApp.href = waHref;
+        } else {
+          wa.removeAttribute("href");
+          wa.classList.remove("primary");
+          wa.textContent = "WhatsApp indisponible";
+          if(choiceWhatsApp) choiceWhatsApp.removeAttribute("href");
+          if(quickWhatsApp) quickWhatsApp.removeAttribute("href");
+        }
+
+        const cmd = commanderLink(p);
+        const detail = commanderLink(p, true);
+
+        document.getElementById("btnCommander").href = cmd;
+        document.getElementById("choiceCommander").href = cmd;
+        document.getElementById("quickCommander").href = cmd;
+        document.getElementById("choiceDetail").href = detail;
+      }catch(e){
+        console.error(e);
+        setUnavailable("Cette fiche n’est pas disponible publiquement.");
+      }
+    }
+
+    boot();
+  </script>
+</body>
+</html>
