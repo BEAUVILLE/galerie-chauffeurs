@@ -1204,6 +1204,10 @@
     }catch(_){}
   }
 
+  function isSensitiveSlug(value){
+    return /\d{7,}/.test(String(value || "").trim().toLowerCase());
+  }
+
   cleanPublicUrl();
 
   const qs = new URLSearchParams(location.search);
@@ -1226,34 +1230,18 @@
 
     ["phone","tel","wa"].forEach((key) => u.searchParams.delete(key));
 
-    /*
-      On garde un slug seulement s’il est public. Un slug basé sur téléphone
-      ne doit pas voyager dans les boutons de navigation.
-    */
-    const safeSlug = String(slug || "").trim().toLowerCase();
-    if (keepSlug && safeSlug && !/\d{7,}/.test(safeSlug)) {
-      u.searchParams.set("slug", safeSlug);
+    if (keepSlug && slug && !isSensitiveSlug(slug)) {
+      u.searchParams.set("slug", slug);
     } else {
       u.searchParams.delete("slug");
       u.searchParams.delete("identifiant");
     }
 
-    if(url === ORDER_RIDE_URL || String(url).includes("commander-course.html")){
+    if(String(url).includes("commander-course.html")){
       u.searchParams.set("source", "galerie_chauffeurs");
     }
 
     return u.toString();
-  }
-
-  function safeDriverSlug(d){
-    const direct = String(d?.slug || d?.public_slug || d?.profile_slug || "").trim();
-
-    if(direct) return direct;
-
-    const wa = normPhone(d?.whatsapp);
-    if(wa) return "driver-" + wa;
-
-    return "";
   }
 
   function commanderUrlForDriver(d){
@@ -1264,24 +1252,20 @@
     const wa = normPhone(d?.whatsapp);
     if (wa) u.searchParams.set("wa", wa);
 
-    /*
-      Important : la réservation part vers driver.digiylyfe.com,
-      pas vers galerie-chauffeurs/commander-course.html, sinon GitHub fait 404.
-      On n’ajoute pas de slug sensible ici.
-    */
+    if (d?.slug && !isSensitiveSlug(d.slug)) {
+      u.searchParams.set("slug", d.slug);
+    }
+
     u.searchParams.set("source", "galerie_chauffeurs");
     return u.toString();
   }
 
   function profileUrlForDriver(d){
     const u = new URL(PROFILE_URL, location.href);
-    const publicSlug = safeDriverSlug(d);
 
-    /*
-      La fiche nettoie l’URL après chargement. Ici, on transmet juste
-      ce qu’il faut pour ouvrir la fiche depuis la galerie.
-    */
-    if (publicSlug) u.searchParams.set("slug", publicSlug);
+    if (d?.slug && !isSensitiveSlug(d.slug)) {
+      u.searchParams.set("slug", d.slug);
+    }
 
     return u.toString();
   }
@@ -1334,8 +1318,8 @@
     ["orderBtnBottom", ORDER_RIDE_URL, true],
     ["joinBtnTop", DRIVER_JOIN_URL, true],
     ["joinBtnBottom", DRIVER_JOIN_URL, true],
-    ["cockpitBtnTop", COCKPIT_URL, true],
-    ["cockpitBtnBottom", COCKPIT_URL, true]
+    ["cockpitBtnTop", COCKPIT_URL, false],
+    ["cockpitBtnBottom", COCKPIT_URL, false]
   ].forEach(([id, url, keepSlug])=>{
     const el = document.getElementById(id);
     if (el) el.href = hrefFor(url, keepSlug);
@@ -1489,7 +1473,7 @@
             <span class="tag">${esc(t("empty_tag_2"))}</span>
           </div>
           <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" target="_blank" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
           </div>
@@ -1518,12 +1502,10 @@
         ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>`
         : "";
 
-      const derivedSlug = safeDriverSlug(d);
-
       const driverPayload = esc(JSON.stringify({
         name: d.name || "",
         whatsapp: wa || "",
-        slug: derivedSlug || ""
+        slug: d.slug || ""
       }));
 
       return `
@@ -1555,7 +1537,7 @@
                 : `<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`
             }
             ${
-              derivedSlug
+              d.slug
                 ? `<a class="btn btn-ghost" href="${esc(profileUrlForDriver(d))}" rel="noopener">${esc(t("btn_profile"))}</a>`
                 : ``
             }
@@ -1578,10 +1560,7 @@
     if (badgeTop) badgeTop.textContent = t("badge_loading");
 
     try{
-      const { data, error } = await sb
-        .from(PUBLIC_SOURCE)
-        .select("*")
-        .limit(250);
+      const { data, error } = await sb.rpc("digiy_driver_public_gallery");
 
       if (error) throw error;
 
@@ -1610,7 +1589,7 @@
             <span class="tag">${esc(t("fallback_tag_2"))}</span>
           </div>
           <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" target="_blank" rel="noopener">${esc(t("cta_whatsapp"))}</a>
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
           </div>
@@ -1699,6 +1678,7 @@ btn.onclick = function(){
 <!-- ============================================================
      FIN AUDIO CHAUFFEUR
      ============================================================ -->
-<!-- DIGIY GALERIE CHAUFFEURS INDEX — FIX RESERVER 404 + FICHE LINK V2 — 20260504 -->
+<!-- DIGIY GALERIE CHAUFFEURS INDEX — RPC PUBLIC GALLERY V3 — 20260504 -->
 </body>
 </html>
+
