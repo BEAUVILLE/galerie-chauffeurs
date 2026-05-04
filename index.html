@@ -1013,9 +1013,9 @@
 
       nav_site: "← Retour au site",
       nav_gallery: "🚕 Nos chauffeurs",
-      nav_order: "📲 Réserver un chauffeur",
+      nav_order: "📲 Demander un chauffeur",
       nav_recruit: "🦅 Rejoindre la sélection",
-      nav_cockpit: "🚖 Mon espace chauffeur",
+      nav_cockpit: "🔐 Accès chauffeur",
 
       label_zone: "📍 Zone recherchée",
       zone_all: "Toutes",
@@ -1040,7 +1040,7 @@
       empty_tag_1: "Change les filtres",
       empty_tag_2: "Ou contacte WhatsApp",
       btn_support_whatsapp: "WhatsApp support",
-      btn_order_ride: "Réserver un chauffeur",
+      btn_order_ride: "Demander un chauffeur",
 
       driver_default_name: "Chauffeur Ambassadeur",
       driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. La mobilité avec style et savoir-être.",
@@ -1049,12 +1049,12 @@
       tag_offline: "🕊️ À contacter",
       pill_public: "Chauffeur sélectionné",
       btn_whatsapp: "WhatsApp",
-      btn_profile: "Voir le profil",
+      btn_profile: "Voir ce chauffeur",
 
       cta_driver_title: "Vous êtes chauffeur ambassadeur ?",
       cta_driver_sub: "Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",
       cta_become_driver: "Rejoindre la sélection",
-      cta_order_ride: "Réserver un chauffeur",
+      cta_order_ride: "Demander un chauffeur",
       cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Galerie pas encore branchée",
@@ -1099,7 +1099,7 @@
 
       nav_site: "← Dellu ci site bi",
       nav_gallery: "🚕 Sunu chauffeurs",
-      nav_order: "📲 Réserver un chauffeur",
+      nav_order: "📲 Demander un chauffeur",
       nav_recruit: "🦅 Duggal ci sélection bi",
       nav_cockpit: "🚖 Sama espace chauffeur",
 
@@ -1126,7 +1126,7 @@
       empty_tag_1: "Soppi filtre yi",
       empty_tag_2: "Walla bataaxal WhatsApp",
       btn_support_whatsapp: "WhatsApp support",
-      btn_order_ride: "Réserver un chauffeur",
+      btn_order_ride: "Demander un chauffeur",
 
       driver_default_name: "Chauffeur Ambassadeur",
       driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. Mobility ak style ak savoir-être.",
@@ -1135,12 +1135,12 @@
       tag_offline: "🕊️ À contacter",
       pill_public: "Chauffeur sélectionné",
       btn_whatsapp: "WhatsApp",
-      btn_profile: "Xool profil bi",
+      btn_profile: "Xool chauffeur bi",
 
       cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
       cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
       cta_become_driver: "Duggal ci sélection bi",
-      cta_order_ride: "Réserver un chauffeur",
+      cta_order_ride: "Demander un chauffeur",
       cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Galerie bi du connecté",
@@ -1178,6 +1178,34 @@
   const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   const PUBLIC_SOURCE = "public_driver_cards";
 
+  function cleanPublicUrl(){
+    try{
+      const u = new URL(location.href);
+      let changed = false;
+
+      ["phone","tel","wa"].forEach((key) => {
+        if(u.searchParams.has(key)){
+          u.searchParams.delete(key);
+          changed = true;
+        }
+      });
+
+      ["slug","identifiant"].forEach((key) => {
+        const raw = String(u.searchParams.get(key) || "").trim().toLowerCase();
+        if(/\d{7,}/.test(raw)){
+          u.searchParams.delete(key);
+          changed = true;
+        }
+      });
+
+      if(changed){
+        history.replaceState({}, "", u.pathname + u.search + u.hash);
+      }
+    }catch(_){}
+  }
+
+  cleanPublicUrl();
+
   const qs = new URLSearchParams(location.search);
   const slug = (qs.get("slug") || "").trim();
 
@@ -1188,27 +1216,73 @@
     u.hash = "drivers";
     return u.toString();
   })();
-  const ORDER_RIDE_URL = digiyLocal("commander-course.html");
+  const ORDER_RIDE_URL = "https://driver.digiylyfe.com/commander-course.html";
   const DRIVER_JOIN_URL = "https://commencer-a-payer.digiylyfe.com/?module=DRIVER";
-  const COCKPIT_URL = "https://pro-driver.digiylyfe.com/cockpit.html";
+  const COCKPIT_URL = "https://pro-driver.digiylyfe.com/pin.html";
   const PROFILE_URL = digiyLocal("fiche-chauffeur.html");
 
   function hrefFor(url, keepSlug = true){
     const u = new URL(url, location.href);
-    if (keepSlug && slug) u.searchParams.set("slug", slug);
+
+    ["phone","tel","wa"].forEach((key) => u.searchParams.delete(key));
+
+    /*
+      On garde un slug seulement s’il est public. Un slug basé sur téléphone
+      ne doit pas voyager dans les boutons de navigation.
+    */
+    const safeSlug = String(slug || "").trim().toLowerCase();
+    if (keepSlug && safeSlug && !/\d{7,}/.test(safeSlug)) {
+      u.searchParams.set("slug", safeSlug);
+    } else {
+      u.searchParams.delete("slug");
+      u.searchParams.delete("identifiant");
+    }
+
+    if(url === ORDER_RIDE_URL || String(url).includes("commander-course.html")){
+      u.searchParams.set("source", "galerie_chauffeurs");
+    }
+
     return u.toString();
+  }
+
+  function safeDriverSlug(d){
+    const direct = String(d?.slug || d?.public_slug || d?.profile_slug || "").trim();
+
+    if(direct) return direct;
+
+    const wa = normPhone(d?.whatsapp);
+    if(wa) return "driver-" + wa;
+
+    return "";
   }
 
   function commanderUrlForDriver(d){
     const u = new URL(ORDER_RIDE_URL, location.href);
+
     if (d?.name) u.searchParams.set("driver", d.name);
-    if (d?.slug) u.searchParams.set("slug", d.slug);
+
+    const wa = normPhone(d?.whatsapp);
+    if (wa) u.searchParams.set("wa", wa);
+
+    /*
+      Important : la réservation part vers driver.digiylyfe.com,
+      pas vers galerie-chauffeurs/commander-course.html, sinon GitHub fait 404.
+      On n’ajoute pas de slug sensible ici.
+    */
+    u.searchParams.set("source", "galerie_chauffeurs");
     return u.toString();
   }
 
   function profileUrlForDriver(d){
     const u = new URL(PROFILE_URL, location.href);
-    if (d?.slug) u.searchParams.set("slug", d.slug);
+    const publicSlug = safeDriverSlug(d);
+
+    /*
+      La fiche nettoie l’URL après chargement. Ici, on transmet juste
+      ce qu’il faut pour ouvrir la fiche depuis la galerie.
+    */
+    if (publicSlug) u.searchParams.set("slug", publicSlug);
+
     return u.toString();
   }
 
@@ -1415,7 +1489,7 @@
             <span class="tag">${esc(t("empty_tag_2"))}</span>
           </div>
           <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
+            <a class="btn btn-main" href="https://wa.me/221771342889" target="_blank" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
           </div>
@@ -1444,10 +1518,12 @@
         ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>`
         : "";
 
+      const derivedSlug = safeDriverSlug(d);
+
       const driverPayload = esc(JSON.stringify({
         name: d.name || "",
         whatsapp: wa || "",
-        slug: d.slug || ""
+        slug: derivedSlug || ""
       }));
 
       return `
@@ -1475,11 +1551,11 @@
           <div class="actions">
             ${
               wa
-                ? `<a class="btn btn-main" href="https://wa.me/${wa}" rel="noopener">${esc(t("btn_whatsapp"))}</a>`
+                ? `<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("btn_whatsapp"))}</a>`
                 : `<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`
             }
             ${
-              d.slug
+              derivedSlug
                 ? `<a class="btn btn-ghost" href="${esc(profileUrlForDriver(d))}" rel="noopener">${esc(t("btn_profile"))}</a>`
                 : ``
             }
@@ -1534,7 +1610,7 @@
             <span class="tag">${esc(t("fallback_tag_2"))}</span>
           </div>
           <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a>
+            <a class="btn btn-main" href="https://wa.me/221771342889" target="_blank" rel="noopener">${esc(t("cta_whatsapp"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
             <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
           </div>
@@ -1623,5 +1699,6 @@ btn.onclick = function(){
 <!-- ============================================================
      FIN AUDIO CHAUFFEUR
      ============================================================ -->
+<!-- DIGIY GALERIE CHAUFFEURS INDEX — FIX RESERVER 404 + FICHE LINK V2 — 20260504 -->
 </body>
 </html>
