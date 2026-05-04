@@ -1096,7 +1096,28 @@
       }
 
       try{
-        const { data, error } = await sb.rpc("driver_public_profile_by_slug", { p_slug: slugForRpc });
+        let data = null;
+        let error = null;
+
+        /*
+          Galerie publique :
+          - card-UUID vient du RPC digiy_driver_public_gallery()
+          - ancien slug DRIVER reste accepté en secours si une fiche historique arrive encore
+        */
+        const isCardSlug =
+          /^card-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugForRpc) ||
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugForRpc);
+
+        if(isCardSlug){
+          const res = await sb.rpc("digiy_driver_public_card_by_slug", { p_slug: slugForRpc });
+          data = res.data;
+          error = res.error;
+        }else{
+          const res = await sb.rpc("driver_public_profile_by_slug", { p_slug: slugForRpc });
+          data = res.data;
+          error = res.error;
+        }
+
         if(error) throw error;
         if(!data?.ok) throw new Error(data?.error || "not_found");
 
@@ -1185,5 +1206,7 @@
 
     boot();
   </script>
+<!-- DIGIY FICHE CHAUFFEUR — RPC PUBLIC CARD V3 — 20260504 -->
 </body>
 </html>
+
