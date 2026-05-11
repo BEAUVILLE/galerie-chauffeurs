@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>DIGIY DRIVER — Demander une course</title>
+  <meta name="theme-color" content="#061b14"/>
+  <style>
+    :root{--bg:#07140f;--bg2:#0b1d15;--card:rgba(255,255,255,.055);--line:rgba(255,255,255,.12);--text:#ecfff4;--muted:rgba(236,255,244,.74);--green:#22c55e;--gold:#facc15;--danger:#fb7185;--r:24px;--shadow:0 18px 52px rgba(0,0,0,.38)}
+    *{box-sizing:border-box}html,body{margin:0;padding:0}body{min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(900px 520px at 10% -10%,rgba(34,197,94,.16),transparent 60%),radial-gradient(900px 520px at 110% 0%,rgba(250,204,21,.12),transparent 55%),linear-gradient(180deg,var(--bg2),var(--bg));padding:14px}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}.wrap{max-width:760px;margin:0 auto;display:grid;gap:14px}.hero,.card{border:1px solid var(--line);border-radius:var(--r);background:var(--card);box-shadow:var(--shadow);overflow:hidden}.hero{padding:18px}.kicker{color:var(--gold);font-size:.78rem;font-weight:1000;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}h1{margin:0;font-size:clamp(1.7rem,7vw,2.45rem);line-height:1.03;letter-spacing:-.04em}h2{margin:0 0 10px;font-size:1.12rem}.muted{color:var(--muted);font-weight:850;line-height:1.5;margin-top:9px}.driver{margin-top:12px;border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.09);border-radius:18px;padding:12px;font-weight:950;color:#bbf7d0}.grid{display:grid;gap:10px}.card{padding:14px}.field{display:grid;gap:6px}.field label{font-size:.82rem;color:var(--muted);font-weight:950}input,textarea{width:100%;border:1px solid var(--line);border-radius:16px;background:rgba(0,0,0,.18);color:var(--text);padding:13px;font-weight:850;outline:none}textarea{min-height:92px;resize:vertical}.two{display:grid;gap:10px}@media(min-width:650px){.two{grid-template-columns:1fr 1fr}}.actions{display:grid;gap:10px;margin-top:12px}.btn{min-height:56px;border-radius:17px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);font-weight:1000;display:flex;align-items:center;justify-content:center;text-align:center;gap:8px;padding:12px;cursor:pointer}.btn.primary{background:linear-gradient(135deg,var(--green),#16a34a);color:#042012;border-color:transparent}.btn.gold{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.28);color:#fde68a}.notice{border:1px solid rgba(250,204,21,.25);background:rgba(250,204,21,.08);color:#fde68a;border-radius:18px;padding:12px;font-weight:900;line-height:1.45}.notice.bad{border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.1);color:#fecaca}.foot{text-align:center;color:rgba(236,255,244,.62);font-size:.82rem;font-weight:850;padding:8px 0}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero"><div class="kicker">DIGIY DRIVER · Demande simple</div><h1>Préparer ma course</h1><div class="muted">Le client remplit sa demande. DIGIY prépare un message clair, puis WhatsApp s’ouvre vers le chauffeur.</div><div class="driver" id="driverBox">Chargement du chauffeur…</div></section>
+    <section class="card"><h2>Ma demande</h2><div class="grid">
+      <div class="two"><div class="field"><label for="from">Départ</label><input id="from" placeholder="Ex : Saly hôtel, quartier, repère"/></div><div class="field"><label for="to">Arrivée</label><input id="to" placeholder="Ex : AIBD, Dakar, Somone"/></div></div>
+      <div class="two"><div class="field"><label for="when">Jour / heure</label><input id="when" placeholder="Ex : aujourd’hui 18h"/></div><div class="field"><label for="people">Personnes</label><input id="people" inputmode="numeric" placeholder="Ex : 2"/></div></div>
+      <div class="two"><div class="field"><label for="bags">Bagages</label><input id="bags" placeholder="Ex : 2 valises"/></div><div class="field"><label for="name">Ton nom</label><input id="name" placeholder="Ton nom"/></div></div>
+      <div class="field"><label for="note">Message en plus</label><textarea id="note" placeholder="Ex : climatisation, attente, aller-retour..."></textarea></div>
+    </div><div class="actions"><button class="btn primary" id="sendBtn" type="button">💬 Envoyer sur WhatsApp</button><a class="btn gold" id="backProfile" href="./index.html">← Retour fiche chauffeur</a></div></section>
+    <section class="notice" id="notice">Contact direct. DIGIY ne prend pas de commission et ne garde pas l’argent.</section><div class="foot">DIGIY DRIVER · Le terrain garde la main</div>
+  </main>
+  <script>
+    const qs=new URLSearchParams(location.search);const state={driver:qs.get('driver')||'Chauffeur DIGIY',wa:cleanPhone(qs.get('wa')||''),profile:qs.get('profile')||'./index.html'};
+    function cleanPhone(v){let d=String(v||'').replace(/[^\d]/g,'');if(d.length===9&&d.startsWith('7'))d='221'+d;return d}
+    function txt(id){return document.getElementById(id)?.value?.trim()||''}
+    function setNotice(t,bad=false){const n=document.getElementById('notice');n.textContent=t;n.className=bad?'notice bad':'notice'}
+    function cleanUrl(){try{const u=new URL(location.href);['wa','phone','tel'].forEach(k=>u.searchParams.delete(k));history.replaceState({},'',u.pathname+u.search+u.hash)}catch(_){}}
+    document.getElementById('driverBox').textContent='Chauffeur : '+state.driver;document.getElementById('backProfile').href=state.profile;cleanUrl();
+    document.getElementById('sendBtn').onclick=()=>{if(!state.wa){setNotice('WhatsApp du chauffeur introuvable. Retourne sur la fiche chauffeur.',true);return}const msg=['Bonjour '+state.driver+', je vous contacte via DIGIY DRIVER.','Je souhaite demander une course.','Départ : '+(txt('from')||'à préciser'),'Arrivée : '+(txt('to')||'à préciser'),'Jour / heure : '+(txt('when')||'à préciser'),'Personnes : '+(txt('people')||'à préciser'),'Bagages : '+(txt('bags')||'à préciser'),'Nom : '+(txt('name')||'à préciser'),txt('note')?'Message : '+txt('note'):'','Contact direct · 0% commission DIGIY.'].filter(Boolean).join('\n');location.href='https://wa.me/'+state.wa+'?text='+encodeURIComponent(msg)};
+  </script>
+</body>
+</html>
