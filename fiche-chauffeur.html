@@ -1,1212 +1,1946 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY DRIVER — Chauffeur</title>
-  <meta name="theme-color" content="#061b14"/>
-  <meta name="description" content="Fiche publique chauffeur DIGIY DRIVER. Contact direct, paiement direct, 0% commission."/>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>DIGIY DRIVER AMBASSADEUR — Galerie publique</title>
+  <meta name="theme-color" content="#0b1220" />
+  <meta
+    name="description"
+    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique des chauffeurs, contact direct WhatsApp."
+  />
 
   <style>
     :root{
-      --bg:#07140f;
-      --bg2:#0b1d15;
-      --card:#10241b;
-      --card-2:#0d2018;
+      --bg:#071018;
+      --bg2:#0b1521;
+      --panel:#0f1b2a;
+      --panel-2:#132235;
+      --card:#0f1a29;
       --line:rgba(255,255,255,.10);
-      --text:#ecfff4;
-      --muted:rgba(236,255,244,.72);
-      --primary:#22c55e;
-      --primary-2:#16a34a;
-      --gold:#facc15;
-      --gold-soft:rgba(250,204,21,.12);
-      --danger:#ef4444;
-      --shadow:0 20px 60px rgba(0,0,0,.38);
-      --r:24px;
-      --max:1120px;
+      --line-soft:rgba(255,255,255,.06);
+      --text:#f8fafc;
+      --muted:rgba(226,232,240,.72);
+      --gold:#f4c95d;
+      --gold-2:#d4a63a;
+      --green:#1fa86a;
+      --green-2:#157a4f;
+      --sky:#3b82f6;
+      --danger:#f59e0b;
+      --shadow:0 18px 60px rgba(0,0,0,.40);
+      --radius:22px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-
     body{
       margin:0;
-      min-height:100vh;
-      background:
-        radial-gradient(900px 520px at 10% -10%, rgba(34,197,94,.14), transparent 60%),
-        radial-gradient(900px 520px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
-        linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
       color:var(--text);
-      font-family:"Outfit",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      padding:16px;
+      font-family:Outfit,Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(244,201,93,.10), transparent 55%),
+        radial-gradient(900px 560px at 100% 10%, rgba(31,168,106,.12), transparent 55%),
+        linear-gradient(180deg, #08111a 0%, #0b1220 42%, #070d15 100%);
     }
 
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:auto}
+    .floating-back{
+      position:fixed;
+      top:calc(env(safe-area-inset-top, 0px) + 12px);
+      left:calc(env(safe-area-inset-left, 0px) + 12px);
+      z-index:99999;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.24);
+      background:linear-gradient(135deg, rgba(244,201,93,.96), rgba(31,168,106,.94));
+      color:#071018;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:900;
+      line-height:1;
+      box-shadow:0 16px 40px rgba(0,0,0,.26);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .floating-back:hover{
+      transform:translateY(-1px);
+      box-shadow:0 20px 46px rgba(0,0,0,.32);
+    }
 
-    .brand-top{
-      margin-bottom:12px;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:22px;
-      background:rgba(255,255,255,.035);
-      box-shadow:0 14px 34px rgba(0,0,0,.22);
-      padding:10px 12px;
+    .page{
+      max-width:1180px;
+      margin:0 auto;
+      padding:18px 14px 40px;
+    }
+
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
+      padding:10px 0 14px;
     }
 
-    .brand-left{
+    .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      min-width:0;
-    }
-
-    .brand-logo{
-      width:48px;
-      height:48px;
-      border-radius:18px;
-      overflow:hidden;
-      background:#fff;
-      display:grid;
-      place-items:center;
-      box-shadow:0 12px 28px rgba(250,204,21,.20);
-      flex:0 0 auto;
-    }
-
-    .brand-logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .brand-title{
-      font-size:13px;
-      font-weight:1000;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      color:var(--gold);
-      line-height:1.1;
-    }
-
-    .brand-sub{
-      margin-top:3px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.3;
-      font-weight:850;
-    }
-
-    .brand-top .btn{
-      min-height:42px;
-      border-radius:999px;
-      padding:10px 13px;
-      font-size:13px;
-    }
-
-    @media(max-width:760px){
-      .brand-top{align-items:flex-start}
-      .brand-top .btn{width:100%}
-    }
-
-    .hero,
-    .card{
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
-      box-shadow:var(--shadow);
-    }
-
-    .hero{overflow:hidden}
-
-    .hero-grid-main{
-      display:grid;
-      grid-template-columns:420px 1fr;
-      min-height:430px;
-    }
-
-    @media(max-width:940px){
-      .hero-grid-main{grid-template-columns:1fr}
-    }
-
-    .hero-media{
-      position:relative;
-      min-height:320px;
-      background:#0a1712;
-    }
-
-    .hero-media img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      background:#0f1d17;
-    }
-
-    .hero-media::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to top, rgba(0,0,0,.34), rgba(0,0,0,.08));
-      pointer-events:none;
-    }
-
-    .hero-media-fallback{
-      width:100%;
-      height:100%;
-      min-height:320px;
-      display:grid;
-      place-items:center;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(250,204,21,.18), transparent 30%),
-        radial-gradient(circle at 75% 15%, rgba(34,197,94,.14), transparent 28%),
-        linear-gradient(180deg, #111827, #0b1120);
-      color:#fff;
-      font-size:54px;
-      font-weight:1000;
-    }
-
-    .hero-badge{
-      position:absolute;
-      left:16px;
-      bottom:16px;
-      z-index:2;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(7,20,15,.72);
-      color:#fff6c9;
-      font-size:12px;
-      font-weight:950;
-      backdrop-filter:blur(8px);
-    }
-
-    .hero-badge .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--primary);
-      box-shadow:0 0 0 4px rgba(34,197,94,.14);
-    }
-
-    .hero-content{
-      padding:24px;
-      display:grid;
-      gap:18px;
-      align-content:start;
-    }
-
-    .hero-top{
-      display:flex;
       gap:14px;
-      justify-content:space-between;
-      align-items:flex-start;
+      min-width:0;
       flex-wrap:wrap;
     }
 
-    .hero-main{
+    .brand-badge{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(244,201,93,1), rgba(212,166,58,.92));
+      color:#08111a;
+      font-size:24px;
+      font-weight:900;
+      box-shadow:0 14px 36px rgba(244,201,93,.22);
+      border:1px solid rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+
+    .brand-copy{
+      min-width:0;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.20);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .brand-title{
+      margin-top:8px;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:.02em;
+      line-height:1.05;
+    }
+
+    .brand-sub{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+      line-height:1.45;
+      max-width:720px;
+    }
+
+    .top-actions{
       display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .top-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      text-decoration:none;
+      font-size:12px;
+      font-weight:900;
+      line-height:1;
+      white-space:nowrap;
+      transition:transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .top-link:hover{
+      transform:translateY(-1px);
+      border-color:rgba(244,201,93,.28);
+      background:rgba(244,201,93,.08);
+    }
+
+    .top-link.gold{
+      color:#ffe8a6;
+      border-color:rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+    }
+
+    .top-link.green{
+      color:#d4ffe7;
+      border-color:rgba(31,168,106,.25);
+      background:rgba(31,168,106,.10);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .hero-action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:13px 15px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      text-decoration:none;
+      font-size:14px;
+      font-weight:900;
+      box-shadow:0 10px 26px rgba(0,0,0,.16);
+      transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .hero-action:hover{
+      transform:translateY(-1px);
+      border-color:rgba(244,201,93,.26);
+      box-shadow:0 14px 32px rgba(0,0,0,.20);
+    }
+
+    .hero-action.main{
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      color:#071018;
+      border-color:transparent;
+    }
+
+    .hero-action.green{
+      background:linear-gradient(135deg, var(--green), var(--green-2));
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .hero-action.gold{
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      color:#071018;
+      border-color:transparent;
+    }
+
+    .pill{
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:900;
+      border:1px solid var(--line);
+      color:var(--text);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .pill.gold{
+      color:#ffe8a6;
+      border-color:rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+    }
+
+    .pill.green{
+      color:#c8ffe5;
+      border-color:rgba(31,168,106,.25);
+      background:rgba(31,168,106,.10);
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--green);
+      box-shadow:0 0 0 4px rgba(31,168,106,.16);
+    }
+
+    .lang-switch{
+      display:flex;
+      gap:6px;
+      padding:4px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+    }
+
+    .lang-switch button{
+      border:none;
+      padding:8px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:12px;
+      background:transparent;
+      color:var(--text);
+      font-family:inherit;
+    }
+
+    .lang-switch button.active{
+      background:#f8fafc;
+      color:#09111a;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      margin-top:8px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(700px 320px at 8% 0%, rgba(244,201,93,.12), transparent 60%),
+        radial-gradient(700px 360px at 100% 20%, rgba(31,168,106,.14), transparent 60%),
+        linear-gradient(180deg, rgba(15,27,42,.92), rgba(11,18,32,.96));
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .hero-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .hero-main h1{
+      margin:14px 0 10px;
+      font-size:clamp(34px, 5vw, 58px);
+      line-height:1.02;
+      font-weight:900;
+      letter-spacing:-.03em;
+    }
+
+    .hero-main h1 .gold{
+      background:linear-gradient(135deg, #fff4c7, var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero-main p{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.7;
+      font-weight:750;
+    }
+
+    .hero-signature{
+      margin-top:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .hero-badge{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .hero-badge b{
+      color:#fff2be;
+    }
+
+    .hero-panel{
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:16px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+
+    .panel-title{
+      font-size:14px;
+      font-weight:900;
+      color:#ffe8a6;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .panel-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .panel-box{
+      border-radius:16px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,.04);
+      padding:12px;
+    }
+
+    .panel-k{
+      font-size:11px;
+      color:var(--muted);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .panel-v{
+      margin-top:8px;
+      font-size:20px;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    .panel-note{
+      border-radius:16px;
+      border:1px solid rgba(244,201,93,.16);
+      background:rgba(244,201,93,.07);
+      color:#fff2be;
+      font-size:13px;
+      line-height:1.55;
+      font-weight:800;
+      padding:12px;
+    }
+
+    .card{
+      margin-top:14px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+
+    .status{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .status .left{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .status .title{
+      font-weight:900;
+      font-size:19px;
+      line-height:1.2;
+      color:#fff4c7;
+    }
+
+    .status .sub{
+      font-size:14px;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.55;
+      max-width:760px;
+    }
+
+    .badge{
+      font-size:12px;
+      font-weight:900;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.22);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
+      white-space:nowrap;
+    }
+
+    .badge.warn{
+      background:rgba(245,158,11,.10);
+      border-color:rgba(245,158,11,.28);
+      color:#ffd8a6;
+    }
+
+    .navRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .navBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 15px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:14px;
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .navBtn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(244,201,93,.24);
+    }
+
+    .navBtn.main{
+      background:linear-gradient(135deg, var(--green), var(--green-2));
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 12px 24px rgba(31,168,106,.22);
+    }
+
+    .navBtn.sky{
+      background:linear-gradient(135deg, #3b82f6, #2563eb);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .navBtn.gold{
+      background:linear-gradient(135deg, rgba(244,201,93,.18), rgba(212,166,58,.12));
+      color:#fff1bd;
+      border-color:rgba(244,201,93,.22);
+    }
+
+    .bar{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+    }
+
+    .field label{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:900;
+      display:block;
+      margin-bottom:7px;
+    }
+
+    select,input{
+      width:100%;
+      padding:12px 13px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      outline:none;
+      font-size:14px;
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:900;
+      font-family:inherit;
+    }
+
+    select option{
+      color:#08111a;
+    }
+
+    input::placeholder{
+      color:rgba(226,232,240,.45);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:14px;
+      margin-top:14px;
+    }
+
+    .driver{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(500px 180px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
+        linear-gradient(180deg, rgba(19,34,53,.96), rgba(11,18,32,.98));
+      box-shadow:0 18px 40px rgba(0,0,0,.28);
+      padding:16px;
+      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .driver:hover{
+      transform:translateY(-2px);
+      border-color:rgba(244,201,93,.24);
+      box-shadow:0 22px 50px rgba(0,0,0,.34);
+    }
+
+    .driver::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:3px;
+      background:linear-gradient(90deg, rgba(244,201,93,.98), rgba(31,168,106,.92));
+    }
+
+    .driver-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .identity{
+      display:flex;
+      gap:12px;
       align-items:flex-start;
       min-width:0;
     }
 
     .avatar{
-      width:72px;
-      height:72px;
-      border-radius:20px;
-      flex:0 0 auto;
+      width:58px;
+      height:58px;
+      border-radius:18px;
       display:grid;
       place-items:center;
-      font-size:24px;
-      font-weight:1000;
-      color:#041b12;
-      background:linear-gradient(135deg, var(--gold), var(--primary));
-      box-shadow:0 12px 28px rgba(34,197,94,.22);
-      overflow:hidden;
-    }
-
-    .avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .avatar img.digiy-logo-fallback{
-      background:#fff;
-      object-fit:cover;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 13px;
-      border-radius:999px;
-      border:1px solid rgba(34,197,94,.28);
-      background:rgba(34,197,94,.12);
-      color:#bbf7d0;
-      font-size:12px;
-      font-weight:950;
-      width:max-content;
-      margin-bottom:10px;
-    }
-
-    .badge .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--primary);
-      box-shadow:0 0 0 4px rgba(34,197,94,.14);
-    }
-
-    h1{
-      margin:0;
-      font-size:clamp(30px, 4vw, 42px);
-      line-height:1.04;
-      letter-spacing:-.02em;
-    }
-
-    .subtitle{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:16px;
-      font-weight:800;
-      line-height:1.5;
-    }
-
-    .hero-meta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      color:var(--muted);
-      font-size:12px;
+      background:linear-gradient(135deg, rgba(244,201,93,.18), rgba(31,168,106,.18));
+      border:1px solid rgba(244,201,93,.18);
+      color:#fff2be;
+      font-size:18px;
       font-weight:900;
-      max-width:100%;
+      flex:0 0 auto;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
     }
 
-    .safe-pill{
-      color:var(--gold);
-      border-color:rgba(250,204,21,.22);
-      background:var(--gold-soft);
+    .identity-copy{
+      min-width:0;
     }
 
-    .hero-actions{
+    .name{
+      font-weight:900;
+      font-size:18px;
+      line-height:1.15;
+      color:#fff4c7;
+    }
+
+    .titleline{
+      margin-top:6px;
+      font-size:12px;
+      color:#d7fbe9;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .meta{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:900;
+    }
+
+    .tag{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .tag.gold{
+      border-color:rgba(244,201,93,.22);
+      color:#fff1bd;
+      background:rgba(244,201,93,.08);
+    }
+
+    .tag.green{
+      border-color:rgba(31,168,106,.24);
+      color:#d4ffe7;
+      background:rgba(31,168,106,.10);
+    }
+
+    .tag.off{
+      color:#dbe6f3;
+    }
+
+    .side-badge{
+      padding:8px 11px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.18);
+      background:rgba(244,201,93,.08);
+      color:#fff1bd;
+      font-size:11px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .desc{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      min-height:48px;
+      font-weight:750;
+    }
+
+    .actions{
       display:flex;
       gap:10px;
+      margin-top:14px;
       flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
     }
 
-    .btn{
-      min-height:48px;
-      padding:12px 16px;
-      border-radius:14px;
-      font-weight:950;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
+    button,a.btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      cursor:pointer;
-      transition:.18s ease;
-    }
-
-    .btn:hover{transform:translateY(-1px)}
-
-    .btn.primary{
-      background:linear-gradient(135deg, var(--primary), var(--primary-2));
-      color:#041b12;
-      border-color:transparent;
-      box-shadow:0 12px 28px rgba(34,197,94,.22);
-    }
-
-    .btn.gold{
-      background:rgba(250,204,21,.12);
-      color:var(--gold);
-      border-color:rgba(250,204,21,.22);
-    }
-
-    .hero-info-grid{
-      display:grid;
-      gap:12px;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    @media(max-width:700px){
-      .hero-info-grid{grid-template-columns:1fr}
-    }
-
-    .fact{
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.09);
-      background:rgba(0,0,0,.16);
-    }
-
-    .fact .k{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:800;
-      margin-bottom:6px;
-    }
-
-    .fact .v{
-      font-size:15px;
+      padding:12px 13px;
+      border:none;
+      border-radius:14px;
       font-weight:900;
-      line-height:1.5;
-    }
-
-    .grid{
-      display:grid;
-      gap:14px;
-      margin-top:14px;
-    }
-
-    @media(min-width:920px){
-      .grid{grid-template-columns:1.05fr .95fr}
-    }
-
-    .card{padding:18px}
-
-    h2{
-      margin:0 0 10px;
-      font-size:21px;
-    }
-
-    .muted{
-      color:var(--muted);
       font-size:14px;
-      font-weight:800;
-      line-height:1.55;
+      cursor:pointer;
+      text-decoration:none;
+      user-select:none;
+      transition:transform .16s ease, filter .16s ease;
+      font-family:inherit;
     }
 
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .btn-main{
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      color:#08111a;
+      box-shadow:0 12px 24px rgba(244,201,93,.16);
+    }
+
+    .btn-sky{
+      background:linear-gradient(135deg, #3b82f6, #2563eb);
+      color:#fff;
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+
+    .footCta{text-align:center}
+    .footCta .big{
+      font-weight:900;
+      font-size:17px;
+      color:#fff4c7;
+    }
+    .featured-card-wrap{
       margin-top:14px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(560px 180px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:14px;
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
     }
 
-    .chip{
+    .featured-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .featured-head .title{
+      font-size:18px;
+      line-height:1.2;
+      font-weight:900;
+      color:#fff4c7;
+    }
+
+    .featured-head .sub{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+      font-weight:800;
+      max-width:760px;
+    }
+
+    .featured-badge{
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.16);
-      color:var(--muted);
-      font-size:12px;
+      border:1px solid rgba(31,168,106,.24);
+      background:rgba(31,168,106,.10);
+      color:#d4ffe7;
+      font-size:11px;
       font-weight:900;
-    }
-
-    .rates-groups{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:16px;
-      margin-top:16px;
-    }
-
-    @media(max-width:920px){
-      .rates-groups{grid-template-columns:1fr}
-    }
-
-    .rate-group{
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.15);
-      border-radius:20px;
-      padding:16px;
-    }
-
-    .rate-group h3{
-      margin:0 0 12px;
-      font-size:16px;
-      color:#fff1ad;
-    }
-
-    .rate-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .rate{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:12px 0;
-      border-bottom:1px dashed rgba(255,255,255,.10);
-    }
-
-    .rate:last-child{
-      border-bottom:none;
-      padding-bottom:0;
-    }
-
-    .rate-name{
-      font-weight:950;
-      line-height:1.4;
-    }
-
-    .rate-price{
-      color:var(--gold);
-      font-weight:1000;
       white-space:nowrap;
     }
 
-    .empty{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.16);
-      font-weight:850;
-      color:var(--muted);
+    .featured-card{
+      border-radius:22px;
+      border:1px solid rgba(244,201,93,.20);
+      background:
+        radial-gradient(420px 160px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
+        linear-gradient(180deg, rgba(19,34,53,.96), rgba(11,18,32,.98));
+      padding:16px;
+      box-shadow:0 18px 40px rgba(0,0,0,.24);
     }
 
-    .client-choice{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:10px;
-    }
-
-    .choice-card{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:20px;
-      background:rgba(0,0,0,.16);
-      padding:14px;
+    .featured-top{
       display:flex;
-      flex-direction:column;
-      gap:10px;
-      min-height:138px;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
-    .choice-icon{
-      width:46px;
-      height:46px;
-      border-radius:16px;
+    .featured-identity{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      min-width:0;
+    }
+
+    .featured-avatar{
+      width:70px;
+      height:70px;
+      border-radius:22px;
       display:grid;
       place-items:center;
-      font-size:24px;
-      background:rgba(250,204,21,.10);
-      border:1px solid rgba(250,204,21,.18);
+      background:linear-gradient(135deg, rgba(244,201,93,.20), rgba(31,168,106,.18));
+      border:1px solid rgba(244,201,93,.22);
+      color:#fff1bd;
+      font-size:22px;
+      font-weight:900;
+      flex:0 0 auto;
     }
 
-    .choice-card b{
-      font-size:15px;
-      line-height:1.18;
+    .featured-name{
+      font-size:22px;
+      line-height:1.15;
+      font-weight:900;
+      color:#fff4c7;
     }
 
-    .choice-card span{
+    .featured-role{
+      margin-top:5px;
+      color:#d7fbe9;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .featured-meta{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .featured-meta .tag{
+      font-size:12px;
+    }
+
+    .featured-desc{
+      margin-top:14px;
       color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
+      font-size:14px;
+      line-height:1.65;
       font-weight:800;
     }
 
-    .quick-demand{
+    .featured-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
       margin-top:14px;
-      border:1px solid rgba(250,204,21,.22);
-      border-radius:22px;
-      background:rgba(250,204,21,.075);
-      padding:15px;
     }
 
-    .quick-demand h2{
-      color:var(--gold);
-      margin-bottom:6px;
-    }
-
-    .quick-demand p{
+    .featured-empty{
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
+      padding:16px;
       color:var(--muted);
       font-size:14px;
       line-height:1.6;
       font-weight:800;
     }
 
-    .quick-demand-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
+    @media(max-width:768px){
+      .featured-top{display:block}
+      .featured-identity{margin-bottom:10px}
+      .featured-actions a,
+      .featured-actions button{width:100%}
     }
 
-    .audio-mini{
+    .toast{
       position:fixed;
-      right:14px;
-      bottom:14px;
-      z-index:80;
-      display:flex;
-      gap:8px;
-    }
-
-    .audio-mini button{
-      min-height:48px;
-      border:none;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:16px;
+      background:rgba(8,17,26,.94);
+      color:#fff;
+      padding:10px 12px;
       border-radius:999px;
-      padding:0 14px;
-      font-family:inherit;
-      font-weight:1000;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--gold),var(--primary));
-      color:#041b12;
-      box-shadow:0 14px 30px rgba(0,0,0,.30);
+      font-size:13px;
+      font-weight:900;
+      display:none;
+      z-index:30;
+      max-width:92vw;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      border:1px solid var(--line);
     }
 
-    .audio-mini button.stop{
-      background:rgba(255,255,255,.08);
-      color:var(--text);
-      border:1px solid rgba(255,255,255,.14);
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
     }
 
-    .footer{
-      margin-top:16px;
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:800;
+    @media(max-width:860px){
+      .bar{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
     }
 
-    .hidden{display:none !important}
-
-    @media(max-width:760px){
-      body{
-        padding:10px 10px 82px;
-        font-size:17px;
-      }
-
-      .hero-content{padding:18px}
-
-      .hero-actions{justify-content:stretch}
-
-      .hero-actions .btn{
+    @media(max-width:768px){
+      .top-actions{
         width:100%;
-        min-height:52px;
-        border-radius:18px;
-        font-size:15px;
+        justify-content:flex-start;
       }
-
-      .hero-info-grid{gap:10px}
-      .fact{padding:13px}
-      .fact .k{font-size:13px}
-      .fact .v{font-size:16px}
-      .client-choice{grid-template-columns:1fr}
-      .choice-card{min-height:auto}
-
-      .quick-demand-actions{
-        display:grid;
-        grid-template-columns:1fr;
+      .top-link{
+        padding:9px 11px;
       }
-
-      .quick-demand-actions .btn{width:100%}
-
-      .audio-mini{
-        right:10px;
-        bottom:10px;
+      .hero-action{
+        width:100%;
       }
+      .floating-back{
+        top:calc(env(safe-area-inset-top, 0px) + 10px);
+        left:calc(env(safe-area-inset-left, 0px) + 10px);
+        padding:11px 14px;
+        font-size:13px;
+      }
+      .hero{padding:18px}
+      .brand-title{font-size:20px}
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
+<a class="floating-back" id="floatingSiteBtn" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
+  ↩️ Retour site
+</a>
 
-    <header class="brand-top">
-      <div class="brand-left">
-        <div class="brand-logo">
-          <img src="https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png" alt="DIGIY">
-        </div>
-        <div>
-          <div class="brand-title">DIGIY DRIVER</div>
-          <div class="brand-sub">Fiche chauffeur · contact direct · 0% commission</div>
-        </div>
-      </div>
-      <a class="btn gold" id="brandBack" href="./index.html">🏠 Retour vitrine</a>
-    </header>
-
-    <section class="hero">
-      <div class="hero-grid-main">
-        <div class="hero-media" id="heroMedia">
-          <div class="hero-media-fallback">🚗</div>
-          <div class="hero-badge" id="heroBadge">
-            <span class="dot"></span>
-            Chauffeur privé
-          </div>
-        </div>
-
-        <div class="hero-content">
-          <div class="hero-top">
-            <div class="hero-main">
-              <div class="avatar" id="avatar">DR</div>
-
-              <div>
-                <div class="badge" id="pubBadge"><span class="dot"></span> Chauffeur publié</div>
-                <h1 id="name">Chargement…</h1>
-                <div class="subtitle" id="subtitle">Profil public DIGIY DRIVER</div>
-
-                <div class="hero-meta">
-                  <div class="pill" id="cityPill">Ville : —</div>
-                  <div class="pill" id="vehiclePill">Véhicule : —</div>
-                  <div class="pill safe-pill" id="safePill">fiche : publique</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-actions">
-              <a class="btn primary" id="btnWhatsApp" href="#" target="_blank" rel="noopener">💬 WhatsApp direct</a>
-              <a class="btn gold" id="btnCommander" href="./commander-course.html">🚖 Demander ce chauffeur</a>
-              <a class="btn" id="btnRetour" href="./index.html">🏠 Retour vitrine</a>
-            </div>
-          </div>
-
-          <div class="hero-info-grid">
-            <div class="fact">
-              <div class="k">Présentation</div>
-              <div class="v" id="bio">—</div>
-            </div>
-
-            <div class="fact">
-              <div class="k">Services</div>
-              <div class="v" id="services">—</div>
-            </div>
-
-            <div class="fact">
-              <div class="k">Note contact</div>
-              <div class="v" id="contactNote">—</div>
-            </div>
-
-            <div class="fact">
-              <div class="k">Contact direct</div>
-              <div class="v" id="contactDirect">WhatsApp disponible si publié par le chauffeur</div>
-            </div>
-          </div>
+<div class="page">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">🚕</div>
+      <div class="brand-copy">
+        <div class="eyebrow" data-i18n="eyebrow">DIGIY DRIVER AMBASSADEUR</div>
+        <div class="brand-title" data-i18n="brand_title">La mobilité avec style et savoir-être.</div>
+        <div class="brand-sub" data-i18n="brand_sub">
+          Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="card" style="margin-top:14px">
-      <h2>Que veux-tu faire ?</h2>
-      <div class="muted">
-        Choisis l’action la plus simple. Tu peux écrire directement au chauffeur ou préparer une demande de course plus claire.
+    <div class="top-actions">
+      <a class="top-link" href="https://digiylyfe.com/" data-i18n="top_site">🌍 Site</a>
+      <a class="top-link green" href="https://digiy-hub.digiylyfe.com/" data-i18n="top_hub">🧭 HUB</a>
+      <a class="top-link gold" href="https://tarifs.digiylyfe.com/" data-i18n="top_tarifs">📦 Tarifs</a>
+      <a class="top-link gold" id="publicCardBtnTop" href="#" data-i18n="top_public_card">🎴 Carte chauffeur</a>
+      <div class="pill gold"><span>👑</span><span data-i18n="pill_class">Sélection Ambassadeur</span></div>
+      <div class="pill green"><span class="dot"></span><span id="onlinePill">…</span></div>
+      <div class="pill" id="countPill">…</div>
+
+      <div class="lang-switch" aria-label="Language switch">
+        <button id="lang-fr" class="active" type="button">FR</button>
+        <button id="lang-wo" type="button">WO</button>
       </div>
-
-      <div class="client-choice">
-        <a class="choice-card" id="choiceWhatsApp" href="#" target="_blank" rel="noopener">
-          <div class="choice-icon">💬</div>
-          <b>Écrire au chauffeur</b>
-          <span>WhatsApp direct pour poser une question ou confirmer une disponibilité.</span>
-        </a>
-
-        <a class="choice-card" id="choiceCommander" href="./commander-course.html">
-          <div class="choice-icon">🚖</div>
-          <b>Demander une course</b>
-          <span>Trajet, heure, personnes, bagages : DIGIY prépare le message.</span>
-        </a>
-
-        <a class="choice-card" id="choiceDetail" href="./commander-course-detail.html">
-          <div class="choice-icon">🗂️</div>
-          <b>Course détaillée</b>
-          <span>Pour l’aéroport, une journée, un budget ou un besoin spécial.</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="quick-demand" id="quickDemand">
-      <h2>Note rapide chauffeur</h2>
-      <p>
-        Si ce chauffeur te convient, prépare une demande simple :
-        départ, arrivée, heure, personnes et bagages. Le contact reste direct, le paiement reste direct.
-      </p>
-      <div class="quick-demand-actions">
-        <a class="btn primary" id="quickCommander" href="./commander-course.html">📲 Préparer ma demande</a>
-        <a class="btn gold" id="quickWhatsApp" href="#" target="_blank" rel="noopener">💬 Écrire maintenant</a>
-      </div>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <h2>Zone de service</h2>
-        <div class="muted">Territoires couverts par le chauffeur.</div>
-        <div class="chips" id="zonesChips">
-          <div class="chip">Aucune zone</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Véhicule & confort</h2>
-        <div class="hero-info-grid" style="margin-top:14px">
-          <div class="fact">
-            <div class="k">Véhicule</div>
-            <div class="v" id="vehicleFull">—</div>
-          </div>
-          <div class="fact">
-            <div class="k">Confort</div>
-            <div class="v" id="comfort">—</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" style="margin-top:14px">
-      <h2>Tarifs indicatifs</h2>
-      <div class="muted">Tarifs publiés par le chauffeur. Paiement direct au pro.</div>
-      <div id="ratesList" style="margin-top:16px">
-        <div class="empty">Chargement…</div>
-      </div>
-    </section>
-
-    <div class="footer">
-      DIGIY DRIVER • Contact direct • 0% commission
     </div>
   </div>
 
-  <div class="audio-mini">
-    <button id="btnAudio" type="button">🎧 Écouter</button>
-    <button id="btnStopAudio" class="stop" type="button">⏹</button>
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="eyebrow" data-i18n="hero_eyebrow">Galerie publique premium</div>
+        <h1>
+          <span class="gold" data-i18n="hero_title">DIGIY DRIVER AMBASSADEUR</span>
+        </h1>
+        <p data-i18n="hero_sub">
+          La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
+        </p>
+
+        <div class="hero-signature" data-i18n="hero_signature">
+          Un style. Un savoir-être. Une présence.
+        </div>
+
+        <div class="hero-badges">
+          <div class="hero-badge" data-i18n="hero_badge_1"><b>Ambassadeur</b> = représentation de la maison</div>
+          <div class="hero-badge" data-i18n="hero_badge_2">Contact direct • WhatsApp</div>
+          <div class="hero-badge" data-i18n="hero_badge_3">0% commission</div>
+          <div class="hero-badge" data-i18n="hero_badge_public_only">Public uniquement : fiches chauffeur, WhatsApp, demande de course</div>
+        </div>
+
+        <div class="hero-actions" aria-label="Liens DIGIYLYFE">
+          <a class="hero-action main" href="https://digiylyfe.com/" data-i18n="hero_site">🌍 Retour site DIGIYLYFE</a>
+          <a class="hero-action green" href="https://digiy-hub.digiylyfe.com/" data-i18n="hero_hub">🧭 Ouvrir le HUB</a>
+          <a class="hero-action" href="https://tarifs.digiylyfe.com/" data-i18n="hero_tarifs">📦 Voir les tarifs</a>
+          <a class="hero-action gold" id="publicCardBtnHero" href="#" data-i18n="hero_public_card">🎴 Voir une carte chauffeur</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-title" data-i18n="panel_title">Vue d’ensemble</div>
+        <div class="panel-grid">
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_count_k">Chauffeurs visibles</div>
+            <div class="panel-v" id="statTotal">—</div>
+          </div>
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_online_k">Contact direct</div>
+            <div class="panel-v" id="statOnline">—</div>
+          </div>
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_zone_k">Zones couvertes</div>
+            <div class="panel-v" id="statZones">—</div>
+          </div>
+          <div class="panel-box">
+            <div class="panel-k" data-i18n="panel_public_k">Visibilité</div>
+            <div class="panel-v" id="liveBadge">Galerie publique</div>
+          </div>
+        </div>
+
+        <div class="panel-note" data-i18n="panel_note">
+          Ici, on met en avant des profils qui portent une certaine tenue de service.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="card">
+    <div class="status">
+      <div class="left">
+        <div class="title" data-i18n="section_title">Trouver le bon ambassadeur</div>
+        <div class="sub" data-i18n="section_sub">
+          Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.
+        </div>
+      </div>
+      <div class="badge" id="badgeTop" data-i18n="badge_public">Galerie publique</div>
+    </div>
+
+    <div class="navRow">
+      <a class="navBtn" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
+      <a class="navBtn gold" id="galleryBtnTop" href="#drivers" data-i18n="nav_gallery">🚕 Nos chauffeurs</a>
+      <a class="navBtn gold" id="publicCardBtnSection" href="#" data-i18n="nav_public_card">🎴 Carte chauffeur</a>
+      <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Réserver un chauffeur</a>
+      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Rejoindre la sélection</a>
+    </div>
+
+    <div class="featured-card-wrap" id="featuredCardWrap">
+      <div class="featured-head">
+        <div>
+          <div class="title" data-i18n="featured_title">Carte chauffeur en vitrine</div>
+          <div class="sub" data-i18n="featured_sub">Voici un vrai profil visible tout de suite. Le client voit le chauffeur, sa zone, son véhicule, puis il choisit.</div>
+        </div>
+        <div class="featured-badge" data-i18n="featured_badge">Choix direct</div>
+      </div>
+      <div id="featuredCardArea" class="featured-empty" data-i18n="featured_loading">Chargement de la carte chauffeur…</div>
+    </div>
+
+    <div class="bar" style="margin-top:14px;">
+      <div class="field">
+        <label data-i18n="label_zone">📍 Zone recherchée</label>
+        <select id="zoneFilter">
+          <option value="" data-i18n="zone_all">Toutes</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label data-i18n="label_search">🔎 Nom, ville ou voiture</label>
+        <input id="qFilter" placeholder="Nom, ville ou voiture…" />
+      </div>
+
+      <div class="field">
+        <label data-i18n="label_avail">📞 Contact</label>
+        <select id="availFilter">
+          <option value="all" selected data-i18n="avail_all">Tous les profils</option>
+          <option value="direct" data-i18n="avail_online">WhatsApp direct</option>
+          <option value="contact" data-i18n="avail_offline">À contacter</option>
+        </select>
+      </div>
+    </div>
   </div>
 
-  <script>
-    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
+  <div class="grid" id="drivers"></div>
+
+  <div class="card footCta">
+    <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ambassadeur ?</div>
+    <div class="small" data-i18n="cta_driver_sub">
+      Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.
+    </div>
+
+    <div class="actions" style="justify-content:center; margin-top:12px;">
+      <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
+      <a class="btn btn-ghost" id="galleryBtnBottom" href="#drivers" data-i18n="nav_gallery">Nos chauffeurs</a>
+      <a class="btn btn-main" id="publicCardBtnBottom" href="#" data-i18n="nav_public_card">🎴 Carte chauffeur</a>
+      <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Réserver un chauffeur</a>
+      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Rejoindre la sélection</a>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const DIGIY_LANG = {
+    fr: {
+      eyebrow: "DIGIY DRIVER AMBASSADEUR",
+      brand_title: "La mobilité avec style et savoir-être.",
+      brand_sub: "Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.",
+      pill_class: "Sélection Ambassadeur",
+      top_site: "🌍 Site",
+      top_hub: "🧭 HUB",
+      top_tarifs: "📦 Tarifs",
+      top_public_card: "🎴 Carte chauffeur",
+      hero_site: "🌍 Retour site DIGIYLYFE",
+      hero_hub: "🧭 Ouvrir le HUB",
+      hero_tarifs: "📦 Voir les tarifs",
+      hero_public_card: "🎴 Voir une carte chauffeur",
+
+      hero_eyebrow: "Galerie publique premium",
+      hero_title: "DIGIY DRIVER AMBASSADEUR",
+      hero_sub: "La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",
+      hero_signature: "Un style. Un savoir-être. Une présence.",
+      hero_badge_1: "Ambassadeur = représentation de la maison",
+      hero_badge_2: "Contact direct • WhatsApp",
+      hero_badge_3: "0% commission",
+      hero_badge_public_only: "Public rekk : fiche chauffeur, WhatsApp, demande de course",
+      hero_badge_public_only: "Public uniquement : fiches chauffeur, WhatsApp, demande de course",
+
+      panel_title: "Vue d’ensemble",
+      panel_count_k: "Chauffeurs visibles",
+      panel_online_k: "Contact direct",
+      panel_zone_k: "Zones couvertes",
+      panel_public_k: "Visibilité",
+      panel_note: "Ici, on met en avant des profils qui portent une certaine tenue de service.",
+
+      section_title: "Trouver le bon ambassadeur",
+      section_sub: "Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.",
+
+      badge_public: "Galerie publique",
+      badge_loading: "Chargement…",
+      badge_fallback: "⚠️ Galerie publique",
+
+      nav_site: "← Retour au site",
+      nav_gallery: "🚕 Nos chauffeurs",
+      nav_public_card: "🎴 Carte chauffeur",
+      nav_order: "📲 Demander un chauffeur",
+      nav_recruit: "🦅 Rejoindre la sélection",
+
+      label_zone: "📍 Zone recherchée",
+      zone_all: "Toutes",
+
+      label_search: "🔎 Nom, ville ou voiture",
+      search_ph: "Nom, ville ou voiture…",
+
+      label_avail: "📞 Contact",
+      avail_all: "Tous les profils",
+      avail_online: "WhatsApp direct",
+      avail_offline: "À contacter",
+
+      count_drivers: (n) => `${n} chauffeur(s)`,
+      online_now: (n) => `${n} en contact direct`,
+      zones_live: (n) => `${n} zone(s) couvertes`,
+
+      stat_total: (n) => `${n}`,
+      stat_online: (n) => `${n}`,
+      stat_zones: (n) => `${n}`,
+
+      empty_title: "Aucun chauffeur trouvé",
+      empty_tag_1: "Change les filtres",
+      empty_tag_2: "Ou contacte WhatsApp",
+      btn_support_whatsapp: "WhatsApp support",
+      btn_order_ride: "Demander un chauffeur",
+
+      driver_default_name: "Chauffeur Ambassadeur",
+      driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. La mobilité avec style et savoir-être.",
+      driver_tagline: "Mobilité avec style et savoir-être",
+      tag_online: "📞 WhatsApp direct",
+      tag_offline: "🕊️ À contacter",
+      pill_public: "Chauffeur sélectionné",
+      btn_whatsapp: "WhatsApp",
+      btn_profile: "Voir ce chauffeur",
+
+      featured_title: "Carte chauffeur en vitrine",
+      featured_sub: "Voici un vrai profil visible tout de suite. Le client voit le chauffeur, sa zone, son véhicule, puis il choisit.",
+      featured_badge: "Choix direct",
+      featured_loading: "Chargement de la carte chauffeur…",
+      featured_empty: "Aucun chauffeur visible pour le moment. Ajuste les filtres ou recharge la galerie.",
+      featured_profile: "Voir ce chauffeur",
+      featured_whatsapp: "WhatsApp",
+      featured_order: "Demander ce chauffeur",
+      featured_card_label: "Chauffeur en avant",
+
+      cta_driver_title: "Vous êtes chauffeur ambassadeur ?",
+      cta_driver_sub: "Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",
+      cta_become_driver: "Rejoindre la sélection",
+      cta_order_ride: "Demander un chauffeur",
+      cta_whatsapp: "WhatsApp support",
+
+      fallback_title: "⚠️ Galerie pas encore branchée",
+      fallback_tag_1: "La source Supabase \"public_driver_cards\" n’est pas accessible",
+      fallback_tag_2: "RLS / vue publique à créer",
+      toast_fallback: "Galerie en mode public"
+    },
+
+    wo: {
+      eyebrow: "DIGIY DRIVER AMBASSADEUR",
+      brand_title: "Mobility ak style ak savoir-être.",
+      brand_sub: "Galerie bii dafay won li gën a am solo: taxaw, teey, ak melokaanu service bi.",
+      pill_class: "Sélection Ambassadeur",
+      top_site: "🌍 Site",
+      top_hub: "🧭 HUB",
+      top_tarifs: "📦 Tarifs",
+      top_public_card: "🎴 Carte chauffeur",
+      hero_site: "🌍 Retour site DIGIYLYFE",
+      hero_hub: "🧭 Ouvrir le HUB",
+      hero_tarifs: "📦 Voir les tarifs",
+      hero_public_card: "🎴 Xool carte chauffeur",
+
+      hero_eyebrow: "Galerie publique premium",
+      hero_title: "DIGIY DRIVER AMBASSADEUR",
+      hero_sub: "Mobility ak style ak savoir-être. Tànn zone, seetal profil yi, te jokkook chauffeur bi ci WhatsApp.",
+      hero_signature: "Style. Savoir-être. Présence.",
+      hero_badge_1: "Ambassadeur = ku di teewal kër gi",
+      hero_badge_2: "Contact direct • WhatsApp",
+      hero_badge_3: "0% commission",
+      hero_badge_public_only: "Public uniquement : fiches chauffeur, WhatsApp, demande de course",
+
+      panel_title: "Xool bu gaaw",
+      panel_count_k: "Chauffeur yi ñuy won",
+      panel_online_k: "WhatsApp direct",
+      panel_zone_k: "Zone yi ñu mën a dikk",
+      panel_public_k: "Visibilité",
+      panel_note: "Fii, ñuy jëkk ci profil yu yor teey ak yëngu-yëngu bu rafet.",
+
+      section_title: "Seetal ambassadeur bi gën a baax",
+      section_sub: "Seet ci zone, dëkk walla voiture ngir gis profil bi la gën a yombal.",
+
+      badge_public: "Galerie publique",
+      badge_loading: "Di yük…",
+      badge_fallback: "⚠️ Galerie publique",
+
+      nav_site: "← Dellu ci site bi",
+      nav_gallery: "🚕 Sunu chauffeurs",
+      nav_public_card: "🎴 Carte chauffeur",
+      nav_order: "📲 Demander un chauffeur",
+      nav_recruit: "🦅 Duggal ci sélection bi",
+
+      label_zone: "📍 Zone bi nga seet",
+      zone_all: "Yépp",
+
+      label_search: "🔎 Tur, dëkk walla voiture",
+      search_ph: "Tur, dëkk walla voiture…",
+
+      label_avail: "📞 Jokkook",
+      avail_all: "Profils yépp",
+      avail_online: "WhatsApp direct",
+      avail_offline: "À contacter",
+
+      count_drivers: (n) => `${n} chauffeur`,
+      online_now: (n) => `${n} ci WhatsApp direct`,
+      zones_live: (n) => `${n} zone yu ñuy liggéey`,
+
+      stat_total: (n) => `${n}`,
+      stat_online: (n) => `${n}`,
+      stat_zones: (n) => `${n}`,
+
+      empty_title: "Amul chauffeur bu ñu gis",
+      empty_tag_1: "Soppi filtre yi",
+      empty_tag_2: "Walla bataaxal WhatsApp",
+      btn_support_whatsapp: "WhatsApp support",
+      btn_order_ride: "Demander un chauffeur",
+
+      driver_default_name: "Chauffeur Ambassadeur",
+      driver_desc_default: "Profil public DIGIY DRIVER AMBASSADEUR. Mobility ak style ak savoir-être.",
+      driver_tagline: "Mobility ak style ak savoir-être",
+      tag_online: "📞 WhatsApp direct",
+      tag_offline: "🕊️ À contacter",
+      pill_public: "Chauffeur sélectionné",
+      btn_whatsapp: "WhatsApp",
+      btn_profile: "Xool chauffeur bi",
+
+      featured_title: "Carte chauffeur bi ci kanam",
+      featured_sub: "Fii lañuy won benn profil bu am solo. Kilifa gi dafa gis chauffeur bi, zone bi, voiture bi, ba noppi tànn.",
+      featured_badge: "Tànn bu gaaw",
+      featured_loading: "Di yük carte chauffeur bi…",
+      featured_empty: "Amul chauffeur bu ñuy won léegi. Soppi filtre yi walla nga yeesal galerie bi.",
+      featured_profile: "Xool chauffeur bi",
+      featured_whatsapp: "WhatsApp",
+      featured_order: "Demander un chauffeur",
+      featured_card_label: "Chauffeur bi ñuy won",
+
+      cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
+      cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
+      cta_become_driver: "Duggal ci sélection bi",
+      cta_order_ride: "Demander un chauffeur",
+      cta_whatsapp: "WhatsApp support",
+
+      fallback_title: "⚠️ Galerie bi du connecté",
+      fallback_tag_1: "Source Supabase \"public_driver_cards\" duñu ko jàpp",
+      fallback_tag_2: "RLS / vue publique war nañu ko def",
+      toast_fallback: "Galerie bi ci mode public"
+    }
+  };
+
+  let CURRENT_LANG = localStorage.getItem("digiy_lang") || "fr";
+  let toastTimer = null;
+  let searchTimer = null;
+
+  function t(key, ...args){
+    const pack = DIGIY_LANG[CURRENT_LANG] || DIGIY_LANG.fr;
+    const val = pack[key];
+    if (typeof val === "function") return val(...args);
+    return (val != null) ? String(val) : String((DIGIY_LANG.fr[key] ?? key));
+  }
+
+  function digiyBasePath(){
+    const parts = location.pathname.split("/").filter(Boolean);
+    const isGh = /\.github\.io$/i.test(location.hostname);
+    if(isGh && parts.length > 0) return "/" + parts[0] + "/";
+    return "/";
+  }
+
+  function digiyLocal(path){
+    path = String(path || "").replace(/^\/+/, "");
+    return digiyBasePath() + path;
+  }
+
+  const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const PUBLIC_SOURCE = "public_driver_cards";
+
+  function cleanPublicUrl(){
+    try{
+      const u = new URL(location.href);
+      let changed = false;
+
+      ["phone","tel","wa"].forEach((key) => {
+        if(u.searchParams.has(key)){
+          u.searchParams.delete(key);
+          changed = true;
+        }
+      });
+
+      ["slug","identifiant"].forEach((key) => {
+        const raw = String(u.searchParams.get(key) || "").trim().toLowerCase();
+        if(/\d{7,}/.test(raw)){
+          u.searchParams.delete(key);
+          changed = true;
+        }
+      });
+
+      if(changed){
+        history.replaceState({}, "", u.pathname + u.search + u.hash);
+      }
+    }catch(_){}
+  }
+
+  function isSensitiveSlug(value){
+    return /\d{7,}/.test(String(value || "").trim().toLowerCase());
+  }
+
+  cleanPublicUrl();
+
+  const qs = new URLSearchParams(location.search);
+  const slug = (qs.get("slug") || "").trim();
+
+  // Ajuster ces constantes si ce fichier vit dans un autre repo / sous-domaine.
+  const SITE_URL = "https://digiylyfe.com/";
+  const GALLERY_URL = (() => {
+    const u = new URL(location.href);
+    u.hash = "drivers";
+    return u.toString();
+  })();
+  const ORDER_RIDE_URL = "https://driver.digiylyfe.com/commander-course.html";
+  const DRIVER_JOIN_URL = "https://commencer-a-payer.digiylyfe.com/?module=DRIVER";
+  const PROFILE_URL = digiyLocal("fiche-chauffeur.html");
+  const FEATURED_PUBLIC_CARD_URL = "https://beauville.github.io/galerie-chauffeurs/fiche-chauffeur.html?slug=card-ffe5d051-d028-4576-82e6-d7e1164b4fa0";
+
+  function hrefFor(url, keepSlug = true){
+    const u = new URL(url, location.href);
+
+    ["phone","tel","wa"].forEach((key) => u.searchParams.delete(key));
+
+    if (keepSlug && slug && !isSensitiveSlug(slug)) {
+      u.searchParams.set("slug", slug);
+    } else {
+      u.searchParams.delete("slug");
+      u.searchParams.delete("identifiant");
+    }
+
+    if(String(url).includes("commander-course.html")){
+      u.searchParams.set("source", "galerie_chauffeurs");
+    }
+
+    return u.toString();
+  }
+
+  function commanderUrlForDriver(d){
+    const u = new URL(ORDER_RIDE_URL, location.href);
+
+    if (d?.name) u.searchParams.set("driver", d.name);
+
+    const wa = normPhone(d?.whatsapp);
+    if (wa) u.searchParams.set("wa", wa);
+
+    if (d?.slug && !isSensitiveSlug(d.slug)) {
+      u.searchParams.set("slug", d.slug);
+    }
+
+    u.searchParams.set("source", "galerie_chauffeurs");
+    return u.toString();
+  }
+
+  function profileUrlForDriver(d){
+    const u = new URL(PROFILE_URL, location.href);
+
+    if (d?.slug && !isSensitiveSlug(d.slug)) {
+      u.searchParams.set("slug", d.slug);
+    }
+
+    return u.toString();
+  }
+
+  function applyLanguage(lang){
+    CURRENT_LANG = (lang === "wo") ? "wo" : "fr";
+    localStorage.setItem("digiy_lang", CURRENT_LANG);
+    document.documentElement.setAttribute("lang", CURRENT_LANG === "wo" ? "wo" : "fr");
+
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key = el.dataset.i18n;
+      const val = t(key);
+      if (val) el.textContent = val;
     });
 
-    function digiyBasePath(){
-      const parts = location.pathname.split("/").filter(Boolean);
-      const isGh = /\.github\.io$/i.test(location.hostname);
-      if(isGh && parts.length > 0) return "/" + parts[0] + "/";
-      return "/";
+    const q = document.getElementById("qFilter");
+    if (q) q.setAttribute("placeholder", t("search_ph"));
+
+    document.getElementById("lang-fr")?.classList.toggle("active", CURRENT_LANG==="fr");
+    document.getElementById("lang-wo")?.classList.toggle("active", CURRENT_LANG==="wo");
+
+    refreshTopStats();
+    render();
+  }
+
+  document.getElementById("lang-fr").addEventListener("click", ()=> applyLanguage("fr"));
+  document.getElementById("lang-wo").addEventListener("click", ()=> applyLanguage("wo"));
+
+  const driversEl = document.getElementById("drivers");
+  const zoneFilter = document.getElementById("zoneFilter");
+  const qFilter = document.getElementById("qFilter");
+  const availFilter = document.getElementById("availFilter");
+  const countPill = document.getElementById("countPill");
+  const onlinePill = document.getElementById("onlinePill");
+  const liveBadge = document.getElementById("liveBadge");
+  const badgeTop = document.getElementById("badgeTop");
+  const toastEl = document.getElementById("toast");
+
+  const statTotal = document.getElementById("statTotal");
+  const statOnline = document.getElementById("statOnline");
+  const statZones = document.getElementById("statZones");
+  const featuredCardArea = document.getElementById("featuredCardArea");
+
+  [
+    ["floatingSiteBtn", SITE_URL, false],
+    ["siteBtnTop", SITE_URL, false],
+    ["siteBtnBottom", SITE_URL, false],
+    ["galleryBtnTop", GALLERY_URL, false],
+    ["galleryBtnBottom", GALLERY_URL, false],
+    ["publicCardBtnTop", FEATURED_PUBLIC_CARD_URL, false],
+    ["publicCardBtnHero", FEATURED_PUBLIC_CARD_URL, false],
+    ["publicCardBtnSection", FEATURED_PUBLIC_CARD_URL, false],
+    ["publicCardBtnBottom", FEATURED_PUBLIC_CARD_URL, false],
+    ["orderBtnTop", ORDER_RIDE_URL, true],
+    ["orderBtnBottom", ORDER_RIDE_URL, true],
+    ["joinBtnTop", DRIVER_JOIN_URL, true],
+    ["joinBtnBottom", DRIVER_JOIN_URL, true]
+  ].forEach(([id, url, keepSlug])=>{
+    const el = document.getElementById(id);
+    if (el) el.href = hrefFor(url, keepSlug);
+  });
+
+  let ALL = [];
+
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.style.display = "block";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> {
+      toastEl.style.display = "none";
+    }, 2400);
+  }
+
+  function esc(s){
+    return String(s ?? "").replace(/[&<>"']/g, m => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m]));
+  }
+
+  function normPhone(p){
+    let digits = String(p ?? "").replace(/\D/g, "");
+    if (digits.length === 9 && digits.startsWith("7")) digits = "221" + digits;
+    return digits || "";
+  }
+
+  function normalizeText(v){
+    return String(v || "").trim();
+  }
+
+  function getZoneCount(items){
+    return new Set(
+      items.map(d => normalizeText(d.zone)).filter(Boolean)
+    ).size;
+  }
+
+  function getDirectCount(items){
+    return items.filter(d => !!normPhone(d.whatsapp)).length;
+  }
+
+  function sortDrivers(rows){
+    return [...rows].sort((a,b)=>{
+      const ar = Number(a.rating || 0);
+      const br = Number(b.rating || 0);
+      if (br !== ar) return br - ar;
+      return String(a.name || "").localeCompare(String(b.name || ""), "fr", { sensitivity:"base" });
+    });
+  }
+
+  function rebuildZoneOptions(items){
+    const current = zoneFilter.value || "";
+    const zones = Array.from(
+      new Set(
+        items
+          .map(d => normalizeText(d.zone))
+          .filter(Boolean)
+      )
+    ).sort((a,b)=>a.localeCompare(b, "fr", { sensitivity:"base" }));
+
+    zoneFilter.innerHTML =
+      `<option value="">${esc(t("zone_all"))}</option>` +
+      zones.map(z => `<option value="${esc(z)}">${esc(z)}</option>`).join("");
+
+    if (zones.includes(current)) zoneFilter.value = current;
+  }
+
+  function refreshTopStats(){
+    countPill.textContent = t("count_drivers", ALL.length);
+    onlinePill.textContent = t("online_now", getDirectCount(ALL));
+
+    statTotal.textContent = t("stat_total", ALL.length);
+    statOnline.textContent = t("stat_online", getDirectCount(ALL));
+    statZones.textContent = t("stat_zones", getZoneCount(ALL));
+  }
+
+  function passes(d){
+    const z = (zoneFilter.value || "").trim();
+    const q = (qFilter.value || "").trim().toLowerCase();
+    const a = availFilter.value || "all";
+    const hasWhatsapp = !!normPhone(d.whatsapp);
+
+    if (z && String(d.zone || "") !== z) return false;
+    if (a === "direct" && !hasWhatsapp) return false;
+    if (a === "contact" && hasWhatsapp) return false;
+
+    if (q){
+      const hay = [
+        d.name,
+        d.city,
+        d.zone,
+        d.car,
+        d.description
+      ].join(" ").toLowerCase();
+
+      if (!hay.includes(q)) return false;
     }
+    return true;
+  }
 
-    function digiyLocal(path){
-      path = String(path || "").replace(/^\/+/, "");
-      return digiyBasePath() + path;
-    }
+  function initials(name){
+    const parts = String(name || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2);
+    return parts.map(p => p[0]?.toUpperCase() || "").join("") || "DA";
+  }
 
-    function normalizeSlug(v){
-      return String(v || "")
-        .trim()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9\-_]/g, "")
-        .replace(/-+/g, "-")
-        .replace(/^[-_]+|[-_]+$/g, "");
-    }
+  function rememberCommanderMeta(driver){
+    try{
+      const wa = normPhone(driver?.whatsapp);
+      if (wa) sessionStorage.setItem("digiy_driver_order_wa", wa);
+      else sessionStorage.removeItem("digiy_driver_order_wa");
 
-    function isSensitiveSlug(slug){
-      return /\d{7,}/.test(String(slug || ""));
-    }
+      if (driver?.name) sessionStorage.setItem("digiy_driver_order_name", String(driver.name));
+      else sessionStorage.removeItem("digiy_driver_order_name");
 
-    function canExposeSlug(slug){
-      const s = normalizeSlug(slug);
-      return !!s && !isSensitiveSlug(s);
-    }
+      if (driver?.slug) sessionStorage.setItem("digiy_driver_order_slug", String(driver.slug));
+      else sessionStorage.removeItem("digiy_driver_order_slug");
+    }catch(_){}
+  }
 
-    function normalizeWa(phone){
-      let clean = String(phone || "").replace(/[^\d]/g, "");
-      if(clean.length === 9 && clean.startsWith("7")) clean = "221" + clean;
-      return clean;
-    }
+  function bindOrderButtons(){
+    driversEl.querySelectorAll(".js-order-btn").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        try{
+          const raw = el.getAttribute("data-driver") || "{}";
+          const parsed = JSON.parse(raw);
+          rememberCommanderMeta(parsed);
+        }catch(_){}
+      });
+    });
+  }
 
-    function cleanVisibleUrl(){
-      try{
-        const u = new URL(location.href);
-        let changed = false;
+  function getFilteredItems(){
+    return sortDrivers(ALL.filter(passes));
+  }
 
-        ["phone","tel","wa"].forEach(k => {
-          if(u.searchParams.has(k)){
-            u.searchParams.delete(k);
-            changed = true;
-          }
-        });
+  function renderFeaturedCard(items){
+    if(!featuredCardArea) return;
 
-        ["slug","identifiant"].forEach(k => {
-          const s = normalizeSlug(u.searchParams.get(k) || "");
-          if(s && isSensitiveSlug(s)){
-            u.searchParams.delete(k);
-            changed = true;
-          }
-        });
+    const list = Array.isArray(items) ? items : [];
+    const d = list[0];
 
-        if(changed){
-          history.replaceState({}, "", u.pathname + u.search + u.hash);
-        }
-      }catch(_){}
-    }
-
-    const qs = new URLSearchParams(location.search);
-    const rawSlug = normalizeSlug(qs.get("slug") || qs.get("identifiant") || "");
-    const slugForRpc = rawSlug;
-    cleanVisibleUrl();
-
-    function visibleProfileUrl(){
-      try{
-        const u = new URL(location.href);
-        ["phone","tel","wa"].forEach(k => u.searchParams.delete(k));
-        ["slug","identifiant"].forEach(k => {
-          const s = normalizeSlug(u.searchParams.get(k) || "");
-          if(s && isSensitiveSlug(s)) u.searchParams.delete(k);
-        });
-        return u.toString();
-      }catch{
-        return location.origin + digiyLocal("chauffeur.html");
-      }
-    }
-
-    function money(n){
-      return Number(n || 0).toLocaleString("fr-FR") + " FCFA";
-    }
-
-    function safe(v, fallback="—"){
-      const s = String(v || "").trim();
-      return s || fallback;
-    }
-
-    function initials(name){
-      const s = safe(name, "DR");
-      return s.split(/\s+/).slice(0,2).map(x => (x[0] || "").toUpperCase()).join("") || "DR";
-    }
-
-    function waLink(phone, name){
-      const clean = normalizeWa(phone);
-      if(!clean) return "";
-      const msg = `Bonjour ${name || ""}, je vous contacte via votre fiche DIGIY DRIVER. Je cherche un chauffeur et je souhaite échanger directement avec vous.`;
-      return "https://wa.me/" + clean + "?text=" + encodeURIComponent(msg);
-    }
-
-    function commanderLink(profile, detail=false){
-      const u = new URL(digiyLocal(detail ? "commander-course-detail.html" : "commander-course.html"), location.origin);
-
-      if (profile?.display_name) u.searchParams.set("driver", profile.display_name);
-
-      const wa = normalizeWa(profile?.whatsapp || "");
-      if (wa) u.searchParams.set("wa", wa);
-
-      if (canExposeSlug(slugForRpc)){
-        u.searchParams.set("slug", slugForRpc);
-      }
-
-      u.searchParams.set("profile", visibleProfileUrl());
-      return u.toString();
-    }
-
-    function stopAudio(){
-      try{ if("speechSynthesis" in window) window.speechSynthesis.cancel(); }catch(_){}
-    }
-
-    function speakProfile(){
-      const name = document.getElementById("name")?.textContent || "ce chauffeur";
-      const city = document.getElementById("cityPill")?.textContent || "";
-      const vehicle = document.getElementById("vehiclePill")?.textContent || "";
-      const text = `Fiche DIGIY DRIVER. Tu peux contacter ${name} directement sur WhatsApp, ou préparer une demande de course. ${city}. ${vehicle}. Contact direct, paiement direct, zéro commission DIGIY.`;
-      try{
-        if(!("speechSynthesis" in window)) return;
-        stopAudio();
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = "fr-FR";
-        u.rate = 0.86;
-        window.speechSynthesis.speak(u);
-      }catch(_){}
-    }
-
-    document.getElementById("btnAudio")?.addEventListener("click", speakProfile);
-    document.getElementById("btnStopAudio")?.addEventListener("click", stopAudio);
-
-    function escapeHtml(str){
-      return String(str ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#39;");
-    }
-
-    function pickMainImage(p){
-      const candidates = [
-        p?.vehicle_photo,
-        p?.vehicle_photo_url,
-        p?.photo_url,
-        p?.avatar_url,
-        p?.image_url
-      ].filter(Boolean);
-
-      if (candidates.length) return candidates[0];
-
-      const vehicleType = String(p?.vehicle_type || "").toLowerCase();
-
-      if (vehicleType.includes("suv")) {
-        return "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80";
-      }
-
-      if (vehicleType.includes("berline")) {
-        return "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80";
-      }
-
-      return "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80";
-    }
-
-    function setHeroImage(profile, displayName, city){
-      const heroMedia = document.getElementById("heroMedia");
-      const imageUrl = pickMainImage(profile);
-
-      heroMedia.innerHTML = `
-        <img
-          src="${escapeHtml(imageUrl)}"
-          alt="${escapeHtml(displayName)}"
-          loading="eager"
-          onerror="this.outerHTML='<div class=&quot;hero-media-fallback&quot;>🚗</div>';"
-        />
-        <div class="hero-badge">
-          <span class="dot"></span>
-          ${escapeHtml(city ? `Chauffeur privé • ${city}` : "Chauffeur privé")}
-        </div>
+    if(!d){
+      featuredCardArea.className = "featured-empty";
+      featuredCardArea.innerHTML = `
+        <div style="font-weight:900;color:#fff4c7;margin-bottom:8px">${esc(t("featured_empty"))}</div>
+        <a class="btn btn-main" href="https://beauville.github.io/galerie-chauffeurs/fiche-chauffeur.html?slug=card-ffe5d051-d028-4576-82e6-d7e1164b4fa0" rel="noopener">🎴 Voir la carte chauffeur</a>
       `;
+      return;
     }
 
-    function setAvatar(profile, displayName){
-      const avatar = document.getElementById("avatar");
-      const photo = profile?.photo_url || profile?.avatar_url || "";
+    const name = d.name || t("driver_default_name");
+    const city = esc(d.city || "");
+    const zone = esc(d.zone || "");
+    const car = esc(d.car || "");
+    const desc = esc(d.description || t("driver_desc_default"));
+    const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
+    const wa = normPhone(d.whatsapp);
+    const mono = esc(initials(name));
+    const profileUrl = d.slug ? profileUrlForDriver(d) : "";
+    const orderUrl = commanderUrlForDriver(d);
 
-      if(photo){
-        avatar.innerHTML = `<img src="${escapeHtml(photo)}" alt="${escapeHtml(displayName)}" onerror="this.parentNode.textContent='${escapeHtml(initials(displayName))}'">`;
-      }else{
-        avatar.innerHTML = `<img class="digiy-logo-fallback" src="https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png" alt="DIGIY" onerror="this.parentNode.textContent='${escapeHtml(initials(displayName))}'">`;
-      }
-    }
-
-    function renderZones(zones){
-      const box = document.getElementById("zonesChips");
-      if(!zones || !zones.length){
-        box.innerHTML = `<div class="chip">Zone non précisée</div>`;
-        return;
-      }
-      box.innerHTML = zones.map(z => `<div class="chip">${escapeHtml(z)}</div>`).join("");
-    }
-
-    function renderRatesGrouped(rates){
-      const box = document.getElementById("ratesList");
-
-      if(!rates || !rates.length){
-        box.innerHTML = `<div class="empty">Aucun tarif publié</div>`;
-        return;
-      }
-
-      const safeRates = rates.filter(r => r && r.is_active !== false);
-      const used = new Set();
-
-      function take(matchFn){
-        const rows = safeRates.filter(r => {
-          const id = String(r.id || r.route_label || Math.random());
-          if(used.has(id)) return false;
-          const ok = matchFn(r);
-          if(ok) used.add(id);
-          return ok;
-        });
-        return rows;
-      }
-
-      const groups = [
-        {
-          title: "Transferts interurbains",
-          items: take(r => /dakar|aibd|thi[eè]s|aeroport|airport/i.test(String(r.route_label || "")))
-        },
-        {
-          title: "Mise à disposition",
-          items: take(r => /mise à dispo|mise a dispo|dispo|journ[eé]e|4h|soir[eé]e/i.test(String(r.route_label || "")))
-        },
-        {
-          title: "Trajets locaux",
-          items: take(r => true)
-        }
-      ];
-
-      const sections = groups
-        .filter(group => group.items.length > 0)
-        .map(group => `
-          <div class="rate-group">
-            <h3>${escapeHtml(group.title)}</h3>
-            <div class="rate-list">
-              ${group.items.map(r => `
-                <div class="rate">
-                  <div class="rate-name">${escapeHtml(safe(r.route_label))}</div>
-                  <div class="rate-price">${money(r.price_fcfa)}</div>
-                </div>
-              `).join("")}
+    featuredCardArea.className = "featured-card";
+    featuredCardArea.innerHTML = `
+      <div class="featured-top">
+        <div class="featured-identity">
+          <div class="featured-avatar">${mono}</div>
+          <div>
+            <div class="featured-name">${esc(name)}</div>
+            <div class="featured-role">${esc(t("featured_card_label"))}</div>
+            <div class="featured-meta">
+              ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
+              ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+              ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
+              ${wa ? `<span class="tag green">${esc(t("tag_online"))}</span>` : `<span class="tag off">${esc(t("tag_offline"))}</span>`}
+              ${(rating && !Number.isNaN(rating)) ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>` : ``}
             </div>
           </div>
-        `).join("");
+        </div>
+        <div class="side-badge">${esc(t("pill_public"))}</div>
+      </div>
 
-      box.innerHTML = sections
-        ? `<div class="rates-groups">${sections}</div>`
-        : `<div class="empty">Aucun tarif publié</div>`;
-    }
+      <div class="featured-desc">${desc}</div>
 
-    function setUnavailable(message){
-      document.getElementById("name").textContent = "Chauffeur indisponible";
-      document.getElementById("subtitle").textContent = message || "Cette fiche n’est pas disponible publiquement.";
-      document.getElementById("ratesList").innerHTML = `<div class="empty">Ce chauffeur est introuvable ou non publié.</div>`;
-      document.getElementById("btnWhatsApp").classList.add("hidden");
-      document.getElementById("btnCommander").classList.add("hidden");
-      document.getElementById("quickDemand")?.classList.add("hidden");
-      document.getElementById("heroMedia").innerHTML = `
-        <div class="hero-media-fallback">🚗</div>
-        <div class="hero-badge"><span class="dot"></span> Chauffeur privé</div>
+      <div class="featured-actions">
+        ${
+          wa
+            ? `<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("featured_whatsapp"))}</a>`
+            : `<button class="btn btn-main" disabled>${esc(t("featured_whatsapp"))}</button>`
+        }
+        ${
+          profileUrl
+            ? `<a class="btn btn-ghost" href="${esc(profileUrl)}" rel="noopener">${esc(t("featured_profile"))}</a>`
+            : ``
+        }
+        <a
+          class="btn btn-sky js-order-btn"
+          href="${esc(orderUrl)}"
+          rel="noopener"
+          data-driver='${esc(JSON.stringify({name: d.name || "", whatsapp: wa || "", slug: d.slug || ""}))}'
+        >${esc(t("featured_order"))}</a>
+      </div>
+    `;
+
+    bindOrderButtons();
+  }
+
+  function render(){
+    const items = getFilteredItems();
+    countPill.textContent = t("count_drivers", items.length);
+    renderFeaturedCard(items);
+
+    if (!items.length){
+      driversEl.innerHTML = `
+        <div class="driver" style="grid-column:1/-1">
+          <div class="name">${esc(t("empty_title"))}</div>
+          <div class="meta">
+            <span class="tag">${esc(t("empty_tag_1"))}</span>
+            <span class="tag">${esc(t("empty_tag_2"))}</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
+            <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
+            <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
+          </div>
+        </div>
       `;
+      bindOrderButtons();
+      return;
     }
 
-    async function boot(){
-      document.getElementById("safePill").textContent = "fiche : publique";
-      document.getElementById("btnRetour").href = digiyLocal("index.html");
-      document.getElementById("brandBack").href = digiyLocal("index.html");
+    driversEl.innerHTML = items.map(d => {
+      const name = d.name || t("driver_default_name");
+      const nameEsc = esc(name);
+      const city = esc(d.city || "");
+      const zone = esc(d.zone || "");
+      const car = esc(d.car || "");
+      const desc = esc(d.description || t("driver_desc_default"));
+      const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
+      const wa = normPhone(d.whatsapp);
+      const mono = esc(initials(name));
 
-      if(!slugForRpc){
-        document.getElementById("name").textContent = "Lien incomplet";
-        document.getElementById("subtitle").textContent = "Impossible d’ouvrir cette fiche sans lien chauffeur.";
-        document.getElementById("ratesList").innerHTML = `<div class="empty">Cette fiche ne peut pas s’ouvrir sans lien chauffeur.</div>`;
-        document.getElementById("btnWhatsApp").classList.add("hidden");
-        document.getElementById("btnCommander").classList.add("hidden");
-        document.getElementById("quickDemand")?.classList.add("hidden");
-        return;
-      }
+      const statusTag = wa
+        ? `<span class="tag green">${esc(t("tag_online"))}</span>`
+        : `<span class="tag off">${esc(t("tag_offline"))}</span>`;
 
-      try{
-        let data = null;
-        let error = null;
+      const rateTag = (rating && !Number.isNaN(rating))
+        ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>`
+        : "";
 
-        /*
-          Galerie publique :
-          - card-UUID vient du RPC digiy_driver_public_gallery()
-          - ancien slug DRIVER reste accepté en secours si une fiche historique arrive encore
-        */
-        const isCardSlug =
-          /^card-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugForRpc) ||
-          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugForRpc);
+      const driverPayload = esc(JSON.stringify({
+        name: d.name || "",
+        whatsapp: wa || "",
+        slug: d.slug || ""
+      }));
 
-        if(isCardSlug){
-          const res = await sb.rpc("digiy_driver_public_card_by_slug", { p_slug: slugForRpc });
-          data = res.data;
-          error = res.error;
-        }else{
-          const res = await sb.rpc("driver_public_profile_by_slug", { p_slug: slugForRpc });
-          data = res.data;
-          error = res.error;
-        }
+      return `
+        <div class="driver">
+          <div class="driver-top">
+            <div class="identity">
+              <div class="avatar">${mono}</div>
+              <div class="identity-copy">
+                <div class="name">${nameEsc}</div>
+                <div class="titleline">${esc(t("driver_tagline"))}</div>
+                <div class="meta">
+                  ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
+                  ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+                  ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
+                  ${statusTag}
+                  ${rateTag}
+                </div>
+              </div>
+            </div>
+            <div class="side-badge">${esc(t("pill_public"))}</div>
+          </div>
 
-        if(error) throw error;
-        if(!data?.ok) throw new Error(data?.error || "not_found");
+          <div class="desc">${desc}</div>
 
-        const p = data.profile || {};
-        const rates = Array.isArray(data.rates) ? data.rates : [];
+          <div class="actions">
+            ${
+              wa
+                ? `<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("btn_whatsapp"))}</a>`
+                : `<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`
+            }
+            ${
+              d.slug
+                ? `<a class="btn btn-ghost" href="${esc(profileUrlForDriver(d))}" rel="noopener">${esc(t("btn_profile"))}</a>`
+                : ``
+            }
+            <a
+              class="btn btn-sky js-order-btn"
+              href="${esc(commanderUrlForDriver(d))}"
+              rel="noopener"
+              data-driver='${driverPayload}'
+            >${esc(t("btn_order_ride"))}</a>
+          </div>
+        </div>
+      `;
+    }).join("");
 
-        const name = safe(p.display_name, "Chauffeur DIGIY");
-        const city = safe(p.city);
-        const vehicleBits = [
-          p.vehicle_type,
-          p.vehicle_brand,
-          p.vehicle_model,
-          p.vehicle_year
-        ].filter(Boolean);
+    bindOrderButtons();
+  }
 
-        const vehicleShort = [p.vehicle_type, p.vehicle_brand].filter(Boolean).join(" • ");
-        const vehicleFull = vehicleBits.join(" • ");
+  async function load(){
+    liveBadge.textContent = t("badge_loading");
+    if (badgeTop) badgeTop.textContent = t("badge_loading");
 
-        const services = [
-          p.airport_ok ? "Transferts aéroport" : null,
-          p.long_distance_ok ? "Longues distances" : null,
-          "Réservation directe"
-        ].filter(Boolean).join(" • ");
+    try{
+      const { data, error } = await sb.rpc("digiy_driver_public_gallery");
 
-        const comfort = [
-          p.has_ac ? "Climatisation disponible" : "Confort standard",
-          p.vehicle_color ? `Couleur ${p.vehicle_color}` : null
-        ].filter(Boolean).join(" • ");
+      if (error) throw error;
 
-        const zones = Array.isArray(p.zones_text)
-          ? p.zones_text
-          : String(p.zones_text || "")
-              .split(",")
-              .map(s => s.trim())
-              .filter(Boolean);
+      ALL = Array.isArray(data) ? data : [];
+      rebuildZoneOptions(ALL);
+      refreshTopStats();
+      liveBadge.textContent = t("badge_public");
+      if (badgeTop) badgeTop.textContent = t("badge_public");
+      render();
+    }catch(e){
+      console.warn("Public gallery error:", e);
+      liveBadge.textContent = t("badge_fallback");
+      if (badgeTop) badgeTop.textContent = t("badge_fallback");
+      countPill.textContent = "…";
+      onlinePill.textContent = "…";
+      statTotal.textContent = "—";
+      statOnline.textContent = "—";
+      statZones.textContent = "—";
+      ALL = [];
 
-        document.title = `${name} — DIGIY DRIVER`;
+      driversEl.innerHTML = `
+        <div class="driver" style="grid-column:1/-1">
+          <div class="name">${esc(t("fallback_title"))}</div>
+          <div class="meta">
+            <span class="tag">${esc(t("fallback_tag_1"))}</span>
+            <span class="tag">${esc(t("fallback_tag_2"))}</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a>
+            <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
+            <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
+          </div>
+        </div>
+      `;
 
-        setHeroImage(p, name, city);
-        setAvatar(p, name);
-
-        document.getElementById("name").textContent = name;
-        document.getElementById("subtitle").textContent = `${city} • ${safe(p.vehicle_type, "Chauffeur privé")}`;
-        document.getElementById("cityPill").textContent = "Ville : " + city;
-        document.getElementById("vehiclePill").textContent = "Véhicule : " + safe(vehicleShort || vehicleFull);
-        document.getElementById("bio").textContent = safe(p.bio, "Service propre, ponctuel et confortable.");
-        document.getElementById("services").textContent = services || "Service standard";
-        document.getElementById("contactNote").textContent = safe(p.contact_note, "Disponible sur réservation");
-        document.getElementById("contactDirect").textContent = p.whatsapp ? "WhatsApp direct disponible" : "WhatsApp sur demande";
-        document.getElementById("vehicleFull").textContent = safe(vehicleFull, "Véhicule confortable");
-        document.getElementById("comfort").textContent = comfort;
-
-        renderZones(zones);
-        renderRatesGrouped(rates);
-
-        const wa = document.getElementById("btnWhatsApp");
-        const waHref = waLink(p.whatsapp, name);
-
-        const choiceWhatsApp = document.getElementById("choiceWhatsApp");
-        const quickWhatsApp = document.getElementById("quickWhatsApp");
-
-        if(waHref){
-          wa.href = waHref;
-          if(choiceWhatsApp) choiceWhatsApp.href = waHref;
-          if(quickWhatsApp) quickWhatsApp.href = waHref;
-        } else {
-          wa.removeAttribute("href");
-          wa.classList.remove("primary");
-          wa.textContent = "WhatsApp indisponible";
-          if(choiceWhatsApp) choiceWhatsApp.removeAttribute("href");
-          if(quickWhatsApp) quickWhatsApp.removeAttribute("href");
-        }
-
-        const cmd = commanderLink(p);
-        const detail = commanderLink(p, true);
-
-        document.getElementById("btnCommander").href = cmd;
-        document.getElementById("choiceCommander").href = cmd;
-        document.getElementById("quickCommander").href = cmd;
-        document.getElementById("choiceDetail").href = detail;
-      }catch(e){
-        console.error(e);
-        setUnavailable("Cette fiche n’est pas disponible publiquement.");
-      }
+      toast(t("toast_fallback"));
     }
+  }
 
-    boot();
-  </script>
-<!-- DIGIY FICHE CHAUFFEUR — RPC PUBLIC CARD V3 — 20260504 -->
+  zoneFilter.addEventListener("change", render);
+  availFilter.addEventListener("change", render);
+  qFilter.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(render, 120);
+  });
+
+  applyLanguage(CURRENT_LANG);
+  load();
+</script>
+  <!-- ============================================================
+     DIGIY AUDIO — CHAUFFEUR
+     ============================================================ -->
+
+<button id="digiy-audio-driver" style="
+position:fixed;
+bottom:90px;
+left:24px;
+z-index:99999;
+background:linear-gradient(135deg,#16a34a,#34d399);
+color:#04150d;
+font-family:'Outfit',sans-serif;
+font-weight:900;
+font-size:14px;
+padding:12px 18px;
+border-radius:999px;
+border:1px solid rgba(34,197,94,.38);
+cursor:pointer;
+box-shadow:0 10px 26px rgba(34,197,94,.28);
+">
+
+🎧 Écouter chauffeur
+</button>
+
+<script>
+(function(){
+
+var TEXTE = "Bienvenue. Ici, tu peux trouver un chauffeur disponible tout de suite. Appelle directement, discute du prix et pars sans attendre. Pas d’intermédiaire. Tu vois le chauffeur, tu le contactes. Simple. DIGIYLYFE.";
+
+var btn = document.getElementById('digiy-audio-driver');
+
+if(!('speechSynthesis' in window)) return;
+
+var synth = window.speechSynthesis;
+var playing = false;
+var utt;
+
+function stop(){
+  synth.cancel();
+  playing = false;
+  btn.innerHTML = "🎧 Écouter chauffeur";
+}
+
+function play(){
+  synth.cancel();
+
+  utt = new SpeechSynthesisUtterance(TEXTE);
+  utt.lang = 'fr-FR';
+  utt.rate = 0.9;
+
+  utt.onend = stop;
+
+  synth.speak(utt);
+
+  playing = true;
+  btn.innerHTML = "■ Arrêter";
+}
+
+btn.onclick = function(){
+  playing ? stop() : play();
+};
+
+})();
+</script>
+
+<!-- ============================================================
+     FIN AUDIO CHAUFFEUR
+     ============================================================ -->
+<!-- DIGIY GALERIE CHAUFFEURS INDEX — RPC PUBLIC GALLERY V3 — 20260504 -->
 </body>
 </html>
 
