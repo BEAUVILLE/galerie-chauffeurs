@@ -765,14 +765,150 @@
       font-size:17px;
       color:#fff4c7;
     }
-    .footCta .small{
-      margin-top:6px;
-      color:var(--muted);
+    .featured-card-wrap{
+      margin-top:14px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(560px 180px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:14px;
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+    }
+
+    .featured-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .featured-head .title{
+      font-size:18px;
+      line-height:1.2;
       font-weight:900;
+      color:#fff4c7;
+    }
+
+    .featured-head .sub{
+      margin-top:4px;
+      color:var(--muted);
       font-size:13px;
       line-height:1.5;
+      font-weight:800;
       max-width:760px;
-      margin-inline:auto;
+    }
+
+    .featured-badge{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(31,168,106,.24);
+      background:rgba(31,168,106,.10);
+      color:#d4ffe7;
+      font-size:11px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .featured-card{
+      border-radius:22px;
+      border:1px solid rgba(244,201,93,.20);
+      background:
+        radial-gradient(420px 160px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
+        linear-gradient(180deg, rgba(19,34,53,.96), rgba(11,18,32,.98));
+      padding:16px;
+      box-shadow:0 18px 40px rgba(0,0,0,.24);
+    }
+
+    .featured-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .featured-identity{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      min-width:0;
+    }
+
+    .featured-avatar{
+      width:70px;
+      height:70px;
+      border-radius:22px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(244,201,93,.20), rgba(31,168,106,.18));
+      border:1px solid rgba(244,201,93,.22);
+      color:#fff1bd;
+      font-size:22px;
+      font-weight:900;
+      flex:0 0 auto;
+    }
+
+    .featured-name{
+      font-size:22px;
+      line-height:1.15;
+      font-weight:900;
+      color:#fff4c7;
+    }
+
+    .featured-role{
+      margin-top:5px;
+      color:#d7fbe9;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .featured-meta{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .featured-meta .tag{
+      font-size:12px;
+    }
+
+    .featured-desc{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+      font-weight:800;
+    }
+
+    .featured-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .featured-empty{
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
+      padding:16px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      font-weight:800;
+    }
+
+    @media(max-width:768px){
+      .featured-top{display:block}
+      .featured-identity{margin-bottom:10px}
+      .featured-actions a,
+      .featured-actions button{width:100%}
     }
 
     .toast{
@@ -938,6 +1074,17 @@
       <a class="navBtn gold" id="cardBtnSection" href="#" data-i18n="nav_card">🎴 Ma carte numérique</a>
     </div>
 
+    <div class="featured-card-wrap" id="featuredCardWrap">
+      <div class="featured-head">
+        <div>
+          <div class="title" data-i18n="featured_title">Carte chauffeur en vitrine</div>
+          <div class="sub" data-i18n="featured_sub">Voici un vrai profil visible tout de suite. Le client voit le chauffeur, sa zone, son véhicule, puis il choisit.</div>
+        </div>
+        <div class="featured-badge" data-i18n="featured_badge">Choix direct</div>
+      </div>
+      <div id="featuredCardArea" class="featured-empty" data-i18n="featured_loading">Chargement de la carte chauffeur…</div>
+    </div>
+
     <div class="bar" style="margin-top:14px;">
       <div class="field">
         <label data-i18n="label_zone">📍 Zone recherchée</label>
@@ -1064,6 +1211,16 @@
       btn_whatsapp: "WhatsApp",
       btn_profile: "Voir ce chauffeur",
 
+      featured_title: "Carte chauffeur en vitrine",
+      featured_sub: "Voici un vrai profil visible tout de suite. Le client voit le chauffeur, sa zone, son véhicule, puis il choisit.",
+      featured_badge: "Choix direct",
+      featured_loading: "Chargement de la carte chauffeur…",
+      featured_empty: "Aucun chauffeur visible pour le moment. Ajuste les filtres ou recharge la galerie.",
+      featured_profile: "Voir ce chauffeur",
+      featured_whatsapp: "WhatsApp",
+      featured_order: "Demander ce chauffeur",
+      featured_card_label: "Chauffeur en avant",
+
       cta_driver_title: "Vous êtes chauffeur ambassadeur ?",
       cta_driver_sub: "Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",
       cta_become_driver: "Rejoindre la sélection",
@@ -1152,6 +1309,16 @@
       pill_public: "Chauffeur sélectionné",
       btn_whatsapp: "WhatsApp",
       btn_profile: "Xool chauffeur bi",
+
+      featured_title: "Carte chauffeur bi ci kanam",
+      featured_sub: "Fii lañuy won benn profil bu am solo. Kilifa gi dafa gis chauffeur bi, zone bi, voiture bi, ba noppi tànn.",
+      featured_badge: "Tànn bu gaaw",
+      featured_loading: "Di yük carte chauffeur bi…",
+      featured_empty: "Amul chauffeur bu ñuy won léegi. Soppi filtre yi walla nga yeesal galerie bi.",
+      featured_profile: "Xool chauffeur bi",
+      featured_whatsapp: "WhatsApp",
+      featured_order: "Demander un chauffeur",
+      featured_card_label: "Chauffeur bi ñuy won",
 
       cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
       cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
@@ -1324,6 +1491,7 @@
   const statTotal = document.getElementById("statTotal");
   const statOnline = document.getElementById("statOnline");
   const statZones = document.getElementById("statZones");
+  const featuredCardArea = document.getElementById("featuredCardArea");
 
   [
     ["floatingSiteBtn", SITE_URL, false],
@@ -1481,9 +1649,82 @@
     });
   }
 
+  function getFilteredItems(){
+    return sortDrivers(ALL.filter(passes));
+  }
+
+  function renderFeaturedCard(items){
+    if(!featuredCardArea) return;
+
+    const list = Array.isArray(items) ? items : [];
+    const d = list[0];
+
+    if(!d){
+      featuredCardArea.className = "featured-empty";
+      featuredCardArea.textContent = t("featured_empty");
+      return;
+    }
+
+    const name = d.name || t("driver_default_name");
+    const city = esc(d.city || "");
+    const zone = esc(d.zone || "");
+    const car = esc(d.car || "");
+    const desc = esc(d.description || t("driver_desc_default"));
+    const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
+    const wa = normPhone(d.whatsapp);
+    const mono = esc(initials(name));
+    const profileUrl = d.slug ? profileUrlForDriver(d) : "";
+    const orderUrl = commanderUrlForDriver(d);
+
+    featuredCardArea.className = "featured-card";
+    featuredCardArea.innerHTML = `
+      <div class="featured-top">
+        <div class="featured-identity">
+          <div class="featured-avatar">${mono}</div>
+          <div>
+            <div class="featured-name">${esc(name)}</div>
+            <div class="featured-role">${esc(t("featured_card_label"))}</div>
+            <div class="featured-meta">
+              ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
+              ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+              ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
+              ${wa ? `<span class="tag green">${esc(t("tag_online"))}</span>` : `<span class="tag off">${esc(t("tag_offline"))}</span>`}
+              ${(rating && !Number.isNaN(rating)) ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>` : ``}
+            </div>
+          </div>
+        </div>
+        <div class="side-badge">${esc(t("pill_public"))}</div>
+      </div>
+
+      <div class="featured-desc">${desc}</div>
+
+      <div class="featured-actions">
+        ${
+          wa
+            ? `<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("featured_whatsapp"))}</a>`
+            : `<button class="btn btn-main" disabled>${esc(t("featured_whatsapp"))}</button>`
+        }
+        ${
+          profileUrl
+            ? `<a class="btn btn-ghost" href="${esc(profileUrl)}" rel="noopener">${esc(t("featured_profile"))}</a>`
+            : ``
+        }
+        <a
+          class="btn btn-sky js-order-btn"
+          href="${esc(orderUrl)}"
+          rel="noopener"
+          data-driver='${esc(JSON.stringify({name: d.name || "", whatsapp: wa || "", slug: d.slug || ""}))}'
+        >${esc(t("featured_order"))}</a>
+      </div>
+    `;
+
+    bindOrderButtons();
+  }
+
   function render(){
-    const items = sortDrivers(ALL.filter(passes));
+    const items = getFilteredItems();
     countPill.textContent = t("count_drivers", items.length);
+    renderFeaturedCard(items);
 
     if (!items.length){
       driversEl.innerHTML = `
