@@ -1,1431 +1,780 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>DIGIY DRIVER AMBASSADEUR — Galerie</title>
-  <meta name="theme-color" content="#060912" />
-  <meta name="description" content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique des chauffeurs, contact direct WhatsApp." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <title>DIGIY DRIVER AMBASSADEUR — Vitrine chauffeur</title>
+  <meta name="theme-color" content="#071018" />
+  <meta name="description" content="DIGIY DRIVER AMBASSADEUR — une vitrine publique élégante pour trouver un chauffeur avec style, savoir-être, QR et contact WhatsApp direct." />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://api.qrserver.com" />
 
   <style>
-    :root {
-      --noir:       #050810;
-      --surface:    #0b0e1c;
-      --panel:      #0f1224;
-      --card:       #0d1020;
-      --line:       rgba(212,168,83,.13);
-      --line-s:     rgba(212,168,83,.07);
-      --text:       #ede8d8;
-      --muted:      rgba(237,232,216,.58);
-      --or:         #d4a853;
-      --or-l:       #f0cc80;
-      --or-d:       #a67c2e;
-      --vert:       #177557;
-      --vert-d:     #0c4d38;
-      --sky:        #2563eb;
-      --shadow:     0 28px 72px rgba(0,0,0,.60);
-      --r:          20px;
-      --serif:      'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-      --sans:       'Outfit', system-ui, sans-serif;
+    :root{
+      --bg:#050b12;
+      --bg2:#071018;
+      --ink:#f8fafc;
+      --soft:rgba(226,232,240,.76);
+      --muted:rgba(226,232,240,.58);
+      --card:rgba(12,22,34,.74);
+      --card2:rgba(15,27,42,.88);
+      --line:rgba(255,255,255,.12);
+      --line2:rgba(255,255,255,.07);
+      --gold:#f5cd66;
+      --gold2:#d4a63a;
+      --green:#20b26b;
+      --green2:#128150;
+      --blue:#3b82f6;
+      --shadow:0 24px 80px rgba(0,0,0,.44);
+      --radius:26px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--sans);
-      background: var(--noir);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* grain */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23g)'/%3E%3C/svg%3E");
-      opacity: .032; pointer-events: none; z-index: 9998;
-    }
-    /* ambient */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      font-family:Inter,Outfit,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       background:
-        radial-gradient(700px 500px at 0% 0%,   rgba(212,168,83,.075), transparent 55%),
-        radial-gradient(600px 500px at 100% 15%, rgba(23,117,87,.09),   transparent 55%),
-        radial-gradient(500px 350px at 55% 90%,  rgba(212,168,83,.05),  transparent 55%);
-      pointer-events: none; z-index: 0;
-    }
-
-    /* ───── LAYOUT ───── */
-    .page { max-width: 1200px; margin: 0 auto; padding: 0 16px 72px; position: relative; z-index: 1; }
-
-    /* ───── FLOATING BACK ───── */
-    .floating-back {
-      position: fixed;
-      top: calc(env(safe-area-inset-top,0px) + 14px);
-      left: calc(env(safe-area-inset-left,0px) + 14px);
-      z-index: 9999;
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: rgba(5,8,16,.80);
-      border: 1px solid var(--line);
-      color: var(--or-l);
-      text-decoration: none;
-      font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      transition: all .2s ease;
-    }
-    .floating-back:hover { background: rgba(212,168,83,.10); border-color: rgba(212,168,83,.30); }
-
-    /* ───── TOPBAR ───── */
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 14px; flex-wrap: wrap;
-      padding: 86px 0 0;
-    }
-
-    .brand { display: flex; align-items: center; gap: 16px; }
-
-    .brand-badge {
-      width: 52px; height: 52px; border-radius: 14px;
-      display: grid; place-items: center;
-      background: linear-gradient(135deg, var(--or), var(--or-d));
-      color: var(--noir); font-size: 22px; font-weight: 900;
-      border: 1px solid rgba(240,204,128,.28);
-      box-shadow: 0 8px 22px rgba(212,168,83,.22);
-      flex: 0 0 auto;
-    }
-
-    .eyebrow {
-      font-size: 9px; font-weight: 900; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--or); margin-bottom: 6px;
-    }
-
-    .brand-title {
-      font-family: var(--serif); font-size: 19px; font-weight: 600;
-      color: var(--text); line-height: 1.1;
-    }
-
-    .brand-sub {
-      margin-top: 4px; font-size: 12px; color: var(--muted);
-      font-weight: 600; line-height: 1.5; max-width: 440px;
-    }
-
-    .top-actions {
-      display: flex; gap: 7px; align-items: center;
-      flex-wrap: wrap; justify-content: flex-end;
-    }
-
-    .top-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 7px 13px; border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--muted); text-decoration: none;
-      font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
-      transition: all .17s ease;
-    }
-    .top-link:hover { border-color: rgba(212,168,83,.28); color: var(--or-l); background: rgba(212,168,83,.06); }
-    .top-link.or  { color: var(--or-l); border-color: rgba(212,168,83,.20); background: rgba(212,168,83,.06); }
-    .top-link.vert{ color: #9df0c8;    border-color: rgba(23,117,87,.24);   background: rgba(23,117,87,.08); }
-
-    .pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 11px; border-radius: 999px;
-      border: 1px solid var(--line);
-      font-size: 10px; font-weight: 800;
-      background: rgba(255,255,255,.04); color: var(--muted);
-    }
-    .pill.or  { color: var(--or-l); border-color: rgba(212,168,83,.20); background: rgba(212,168,83,.06); }
-    .pill.vert{ color: #9df0c8;    border-color: rgba(23,117,87,.24);   background: rgba(23,117,87,.08); }
-
-    .dot { width: 7px; height: 7px; border-radius: 999px; background: #1fc97a; box-shadow: 0 0 0 3px rgba(31,201,122,.18); flex: 0 0 auto; }
-
-    .lang-switch {
-      display: flex; gap: 3px; padding: 3px;
-      border-radius: 999px; border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-    }
-    .lang-switch button {
-      border: none; padding: 7px 12px; border-radius: 999px;
-      cursor: pointer; font-weight: 900; font-size: 10px; letter-spacing: .07em;
-      background: transparent; color: var(--muted);
-      font-family: var(--sans); text-transform: uppercase;
-      transition: all .15s ease;
-    }
-    .lang-switch button.active { background: var(--or); color: var(--noir); }
-
-    /* ───── DIVIDER ───── */
-    .divider {
-      display: flex; align-items: center; gap: 14px;
-      margin: 32px 0;
-    }
-    .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg,transparent,var(--or) 40%,var(--or) 60%,transparent); opacity: .20; }
-    .divider-glyph { font-family: var(--serif); font-size: 20px; color: var(--or); opacity: .50; line-height: 1; }
-
-    /* ───── HERO ───── */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 310px;
-      gap: 28px; align-items: start;
-    }
-
-    .hero-overline {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 7px 14px; border-radius: 999px;
-      border: 1px solid rgba(212,168,83,.20);
-      background: rgba(212,168,83,.07);
-      color: var(--or-l); font-size: 9px; font-weight: 900;
-      letter-spacing: .14em; text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(44px, 6vw, 82px);
-      font-weight: 700; line-height: .93;
-      letter-spacing: -.02em; color: var(--text);
-    }
-    .hero-title em { font-style: italic; color: var(--or-l); }
-
-    .hero-sub {
-      margin-top: 22px; font-size: 15px; line-height: 1.78;
-      color: var(--muted); font-weight: 600; max-width: 500px;
-    }
-
-    .hero-sig {
-      margin-top: 22px;
-      display: inline-flex; align-items: center; gap: 14px;
-      font-family: var(--serif); font-style: italic;
-      font-size: 17px; font-weight: 400; color: var(--or); opacity: .80;
-    }
-    .hero-sig::before, .hero-sig::after {
-      content: ''; flex: 0 0 28px; height: 1px;
-      background: var(--or); opacity: .45;
-    }
-
-    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-
-    .hero-badge {
-      padding: 7px 13px; border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--muted); font-size: 11px; font-weight: 700;
-    }
-    .hero-badge b { color: var(--or-l); }
-
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-
-    /* ───── PORTRAIT ───── */
-    .hero-portrait { position: relative; }
-
-    .portrait-frame {
-      width: 100%; aspect-ratio: 3/4;
-      border-radius: 22px; overflow: hidden;
-      border: 1px solid rgba(212,168,83,.18);
-      box-shadow: 0 32px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(212,168,83,.10);
-      position: relative; background: var(--panel);
-    }
-
-    .portrait-cap {
-      position: absolute; bottom: 14px; left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--serif); font-style: italic;
-      font-size: 12px; color: var(--or); opacity: .60;
-      white-space: nowrap; letter-spacing: .04em;
-    }
-
-    /* ───── STATS ───── */
-    .stat-row {
-      display: grid; grid-template-columns: repeat(4,1fr);
-      gap: 1px; background: var(--line);
-      border-radius: 16px; overflow: hidden;
-      border: 1px solid var(--line);
-      margin-top: 32px;
-    }
-
-    .stat-box { background: var(--surface); padding: 20px 16px; text-align: center; }
-
-    .stat-k {
-      font-size: 9px; font-weight: 900; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--muted);
-    }
-
-    .stat-v {
-      font-family: var(--serif); font-size: 34px; font-weight: 700;
-      color: var(--or-l); margin-top: 8px; line-height: 1;
-    }
-
-    /* ───── SECTION HEADER ───── */
-    .section-hd {
-      display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 16px; flex-wrap: wrap;
-      margin-top: 52px; margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-family: var(--serif); font-size: 30px; font-weight: 600;
-      color: var(--text); line-height: 1.1;
-    }
-    .section-title em { font-style: italic; color: var(--or-l); }
-    .section-sub { margin-top: 6px; font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.6; }
-
-    /* ───── BADGE ───── */
-    .badge {
-      display: inline-flex; align-items: center;
-      padding: 7px 14px; border-radius: 999px;
-      font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;
-      border: 1px solid rgba(212,168,83,.20);
-      background: rgba(212,168,83,.07);
-      color: var(--or-l); white-space: nowrap;
-      flex: 0 0 auto; align-self: flex-start; margin-top: 6px;
-    }
-    .badge.warn { border-color: rgba(245,158,11,.24); background: rgba(245,158,11,.08); color: #ffd8a6; }
-
-    /* ───── NAV ROW ───── */
-    .nav-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-
-    /* ───── FEATURED CARD ───── */
-    .featured-wrap {
-      border-radius: 22px;
-      border: 1px solid rgba(212,168,83,.18);
-      background: linear-gradient(140deg, rgba(212,168,83,.06), rgba(255,255,255,.02));
-      padding: 22px; position: relative; overflow: hidden;
-      box-shadow: 0 20px 56px rgba(0,0,0,.30);
-    }
-    .featured-wrap::before {
-      content: ''; position: absolute; inset: 0 0 auto 0;
-      height: 1px;
-      background: linear-gradient(90deg,transparent,var(--or) 30%,var(--or) 70%,transparent);
-      opacity: .50;
-    }
-
-    .featured-hd {
-      display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    .featured-inner {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px; align-items: start;
-    }
-
-    .featured-identity { display: flex; gap: 16px; align-items: flex-start; }
-
-    .featured-avatar {
-      width: 68px; height: 68px; border-radius: 18px;
-      display: grid; place-items: center;
-      background: linear-gradient(135deg,rgba(212,168,83,.18),rgba(23,117,87,.14));
-      border: 1px solid rgba(212,168,83,.22);
-      color: var(--or-l);
-      font-family: var(--serif); font-size: 26px; font-weight: 700;
-      flex: 0 0 auto;
-    }
-
-    .featured-name {
-      font-family: var(--serif); font-size: 26px; font-weight: 700;
-      color: var(--text); line-height: 1.1;
-    }
-
-    .featured-role {
-      margin-top: 4px; font-size: 9px; font-weight: 900;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--or);
-    }
-
-    .featured-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-
-    .featured-desc {
-      margin-top: 14px; font-size: 14px; line-height: 1.72;
-      color: var(--muted); font-weight: 600;
-    }
-
-    .featured-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-
-    .featured-empty {
-      border-radius: 14px; border: 1px dashed rgba(255,255,255,.10);
-      padding: 22px; color: var(--muted);
-      font-size: 14px; line-height: 1.65; font-weight: 700;
-    }
-
-    /* QR */
-    .qr-wrap {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 8px; flex: 0 0 auto;
-    }
-
-    .qr-box {
-      width: 120px; height: 120px;
-      border-radius: 14px; overflow: hidden;
-      border: 1px solid rgba(212,168,83,.22);
-      background: var(--noir);
-      display: grid; place-items: center;
-    }
-    .qr-box canvas, .qr-box img { display: block !important; }
-
-    .qr-label {
-      font-size: 8px; font-weight: 900;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--or); opacity: .55; text-align: center;
-      max-width: 120px; line-height: 1.4;
-    }
-
-    /* ───── FILTERS ───── */
-    .filters {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px; margin-top: 28px;
-    }
-
-    .field label {
-      display: block; font-size: 9px; font-weight: 900;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 8px;
-    }
-
-    select, input {
-      width: 100%; padding: 12px 14px;
-      border-radius: 12px; border: 1px solid var(--line);
-      outline: none; font-size: 13px;
-      background: rgba(255,255,255,.04);
-      color: var(--text); font-weight: 700;
-      font-family: var(--sans);
-      transition: border-color .15s ease;
-    }
-    select:focus, input:focus { border-color: rgba(212,168,83,.34); }
-    select option { color: #08090e; background: #f5f0e8; }
-    input::placeholder { color: rgba(237,232,216,.28); }
-
-    /* ───── DRIVER GRID ───── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 16px; margin-top: 22px;
-    }
-
-    .driver {
-      position: relative; border-radius: 22px;
-      border: 1px solid var(--line);
-      background: linear-gradient(160deg, var(--panel), var(--card));
-      padding: 20px; overflow: hidden;
-      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-      box-shadow: 0 8px 26px rgba(0,0,0,.22);
-    }
-    .driver:hover {
-      transform: translateY(-3px);
-      border-color: rgba(212,168,83,.26);
-      box-shadow: 0 22px 52px rgba(0,0,0,.38);
-    }
-
-    /* left accent */
-    .driver::before {
-      content: ''; position: absolute;
-      left: 0; top: 18%; bottom: 18%;
-      width: 2px;
-      background: linear-gradient(180deg,transparent,var(--or),transparent);
-      opacity: .55; border-radius: 0 2px 2px 0;
-    }
-    /* top shimmer */
-    .driver::after {
-      content: ''; position: absolute; inset: 0 0 auto 0;
-      height: 1px;
-      background: linear-gradient(90deg,transparent,rgba(212,168,83,.38),transparent);
-    }
-
-    .driver-top {
-      display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 12px;
-    }
-
-    .identity { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
-
-    .avatar {
-      width: 54px; height: 54px; border-radius: 14px;
-      display: grid; place-items: center;
-      background: linear-gradient(135deg,rgba(212,168,83,.14),rgba(23,117,87,.12));
-      border: 1px solid rgba(212,168,83,.18);
-      color: var(--or-l);
-      font-family: var(--serif); font-size: 20px; font-weight: 700;
-      flex: 0 0 auto;
-    }
-
-    .name {
-      font-family: var(--serif); font-size: 20px; font-weight: 600;
-      color: var(--text); line-height: 1.1;
-    }
-
-    .titleline {
-      margin-top: 4px; font-size: 9px; font-weight: 900;
-      letter-spacing: .10em; text-transform: uppercase; color: var(--or); opacity: .75;
-    }
-
-    .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-
-    .tag {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 9px; border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--muted); font-size: 11px; font-weight: 700;
-    }
-    .tag.or   { border-color: rgba(212,168,83,.22); color: var(--or-l); background: rgba(212,168,83,.07); }
-    .tag.vert { border-color: rgba(23,117,87,.24);  color: #9df0c8;    background: rgba(23,117,87,.08); }
-    .tag.off  { color: rgba(237,232,216,.38); }
-
-    .side-badge {
-      padding: 5px 10px; border-radius: 999px;
-      border: 1px solid rgba(212,168,83,.18);
-      background: rgba(212,168,83,.06);
-      color: var(--or-l); font-size: 9px; font-weight: 900;
-      letter-spacing: .06em; text-transform: uppercase;
-      white-space: nowrap; flex: 0 0 auto;
-    }
-
-    .desc {
-      margin-top: 14px; color: var(--muted);
-      font-size: 13px; line-height: 1.72; font-weight: 600;
-    }
-
-    /* ───── BUTTONS ───── */
-    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-
-    button, a.btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-      padding: 10px 16px; border: none; border-radius: 12px;
-      font-weight: 800; font-size: 13px; cursor: pointer;
-      text-decoration: none; user-select: none;
-      transition: all .16s ease; font-family: var(--sans);
-    }
-    button:disabled { opacity: .42; cursor: not-allowed; }
-
-    .btn-main  { background: linear-gradient(135deg,var(--or),var(--or-d)); color: var(--noir); box-shadow: 0 8px 20px rgba(212,168,83,.18); }
-    .btn-main:hover  { filter: brightness(1.08); transform: translateY(-1px); }
-    .btn-sky   { background: linear-gradient(135deg,#3b82f6,#2563eb); color: #fff; }
-    .btn-sky:hover   { filter: brightness(1.10); transform: translateY(-1px); }
-    .btn-ghost { background: rgba(255,255,255,.05); border: 1px solid var(--line); color: var(--text); }
-    .btn-ghost:hover { border-color: rgba(212,168,83,.26); background: rgba(212,168,83,.07); }
-    .btn-vert  { background: linear-gradient(135deg,var(--vert),var(--vert-d)); color: #fff; }
-    .btn-vert:hover  { filter: brightness(1.08); transform: translateY(-1px); }
-
-    .navBtn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-      padding: 10px 16px; border-radius: 12px;
-      font-weight: 800; font-size: 13px; text-decoration: none;
-      border: 1px solid var(--line); background: rgba(255,255,255,.04);
-      color: var(--text); transition: all .16s ease;
-    }
-    .navBtn:hover { border-color: rgba(212,168,83,.24); transform: translateY(-1px); }
-    .navBtn.main { background: linear-gradient(135deg,var(--vert),var(--vert-d)); color: #fff; border-color: transparent; box-shadow: 0 8px 20px rgba(23,117,87,.18); }
-    .navBtn.sky  { background: linear-gradient(135deg,#3b82f6,#2563eb); color: #fff; border-color: transparent; }
-    .navBtn.or   { background: rgba(212,168,83,.09); color: var(--or-l); border-color: rgba(212,168,83,.20); }
-
-    /* ───── FOOTER CTA ───── */
-    .footer-cta {
-      margin-top: 52px; border-radius: 22px;
-      border: 1px solid var(--line);
-      background: linear-gradient(140deg, var(--surface), var(--panel));
-      padding: 36px 28px; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .footer-cta::before {
-      content: ''; position: absolute; inset: 0 0 auto 0; height: 1px;
-      background: linear-gradient(90deg,transparent,var(--or),transparent);
-      opacity: .38;
-    }
-
-    .footer-cta .big {
-      font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--text);
-    }
-    .footer-cta .big em { font-style: italic; color: var(--or-l); }
-    .footer-cta .small { margin-top: 8px; color: var(--muted); font-size: 14px; font-weight: 600; line-height: 1.65; }
-
-    .footer-acts {
-      display: flex; justify-content: center;
-      flex-wrap: wrap; gap: 10px; margin-top: 22px;
-    }
-
-    /* ───── TOAST ───── */
-    .toast {
-      position: fixed; left: 50%; transform: translateX(-50%);
-      bottom: 26px;
-      background: rgba(5,8,16,.92); color: var(--or-l);
-      padding: 10px 18px; border-radius: 999px;
-      font-size: 12px; font-weight: 800; letter-spacing: .05em;
-      display: none; z-index: 10000; max-width: 90vw;
-      border: 1px solid var(--line); backdrop-filter: blur(16px);
-    }
-
-    /* ───── AUDIO BUTTON ───── */
-    #digiy-audio-driver {
-      position: fixed;
-      bottom: calc(env(safe-area-inset-bottom,0px) + 24px);
-      left: 20px; z-index: 9999;
-      background: linear-gradient(135deg,var(--vert),var(--vert-d));
-      color: #fff;
-      font-family: var(--sans); font-weight: 800;
-      font-size: 11px; letter-spacing: .05em;
-      padding: 10px 16px; border-radius: 999px;
-      border: 1px solid rgba(23,117,87,.40);
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(23,117,87,.22);
-    }
-
-    /* ───── RESPONSIVE ───── */
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-portrait { display: none; }
-      .stat-row { grid-template-columns: repeat(2,1fr); }
-      .featured-inner { grid-template-columns: 1fr; }
-      .qr-wrap { flex-direction: row; align-self: flex-start; }
-    }
-
-    @media (max-width: 768px) {
-      .grid { grid-template-columns: 1fr; }
-      .filters { grid-template-columns: 1fr; }
-      .hero-ctas a { width: 100%; justify-content: center; }
-      .topbar { flex-direction: column; align-items: flex-start; padding-top: 72px; }
-      .top-actions { width: 100%; }
-    }
-
-    @media (max-width: 560px) {
-      .page { padding: 0 12px 56px; }
-      .hero-title { font-size: 40px; }
+        radial-gradient(1000px 580px at 8% -8%, rgba(245,205,102,.14), transparent 58%),
+        radial-gradient(900px 620px at 110% 4%, rgba(32,178,107,.13), transparent 60%),
+        radial-gradient(700px 480px at 42% 110%, rgba(59,130,246,.08), transparent 60%),
+        linear-gradient(180deg,#06101a 0%,#071018 46%,#050b12 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:56px 56px;
+      mask-image:linear-gradient(180deg,rgba(0,0,0,.50),transparent 72%);
+      opacity:.42;
+    }
+
+    a{color:inherit}
+    .page{max-width:1180px;margin:0 auto;padding:18px 14px 42px;position:relative;z-index:1}
+
+    .floating-back{
+      position:fixed;
+      top:calc(env(safe-area-inset-top,0px) + 12px);
+      left:calc(env(safe-area-inset-left,0px) + 12px);
+      z-index:20;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 15px;
+      border-radius:999px;
+      border:1px solid rgba(245,205,102,.26);
+      background:linear-gradient(135deg,rgba(245,205,102,.96),rgba(32,178,107,.94));
+      color:#061018;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:950;
+      line-height:1;
+      box-shadow:0 18px 46px rgba(0,0,0,.32);
+      backdrop-filter:blur(12px);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      padding:8px 0 16px;
+    }
+
+    .brand{display:flex;align-items:center;gap:13px;min-width:0}
+    .mark{
+      width:58px;height:58px;border-radius:20px;display:grid;place-items:center;
+      background:radial-gradient(circle at 30% 22%,#fff0b7 0%,var(--gold) 40%,var(--green) 100%);
+      color:#061018;font-size:26px;font-weight:950;box-shadow:0 18px 44px rgba(245,205,102,.22);
+      border:1px solid rgba(255,255,255,.18);flex:0 0 auto;
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;
+      border:1px solid rgba(245,205,102,.24);background:rgba(245,205,102,.08);
+      color:#ffe7a6;font-size:11px;font-weight:950;letter-spacing:.09em;text-transform:uppercase;
+    }
+    .brand h2{margin:8px 0 0;font-size:21px;line-height:1.05;letter-spacing:-.02em}
+    .brand p{margin:6px 0 0;color:var(--muted);font-size:13px;font-weight:800;line-height:1.45;max-width:690px}
+
+    .top-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+    .mini-link,.pill{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+      padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);
+      color:var(--ink);font-size:12px;font-weight:950;white-space:nowrap;
+      transition:transform .16s ease,border-color .16s ease,background .16s ease;
+    }
+    .mini-link:hover{transform:translateY(-1px);border-color:rgba(245,205,102,.30);background:rgba(245,205,102,.08)}
+    .mini-link.gold,.pill.gold{border-color:rgba(245,205,102,.24);background:rgba(245,205,102,.08);color:#ffe7a6}
+    .mini-link.green,.pill.green{border-color:rgba(32,178,107,.28);background:rgba(32,178,107,.10);color:#d4ffe7}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 0 5px rgba(32,178,107,.14)}
+
+    .lang-switch{display:flex;gap:5px;padding:4px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+    .lang-switch button{border:0;border-radius:999px;padding:8px 11px;background:transparent;color:var(--ink);font-weight:950;cursor:pointer;font-family:inherit}
+    .lang-switch button.active{background:#f8fafc;color:#061018}
+
+    .hero{
+      position:relative;overflow:hidden;border-radius:32px;border:1px solid var(--line);
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02)),
+        radial-gradient(760px 380px at 8% 0%,rgba(245,205,102,.15),transparent 62%),
+        radial-gradient(760px 420px at 105% 18%,rgba(32,178,107,.13),transparent 60%);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:auto -120px -160px auto;width:360px;height:360px;border-radius:999px;
+      background:rgba(245,205,102,.10);filter:blur(30px);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:20px;align-items:stretch;position:relative;z-index:1}
+    .hero-copy{padding:10px 0 2px}
+    h1{margin:14px 0 12px;font-size:clamp(38px,5.4vw,66px);line-height:.98;letter-spacing:-.055em;font-weight:950}
+    .gold-text{background:linear-gradient(135deg,#fff6d4 0%,var(--gold) 48%,#e9b84a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{margin:0;max-width:740px;color:var(--soft);font-size:17px;line-height:1.72;font-weight:780}
+    .signature{
+      margin-top:16px;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(245,205,102,.23);background:rgba(245,205,102,.08);color:#ffe8ae;font-size:13px;font-weight:950;
+    }
+    .badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+    .badge{
+      display:inline-flex;align-items:center;gap:7px;padding:9px 11px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.045);color:var(--soft);font-size:12px;font-weight:950;
+    }
+    .badge b{color:#fff2be}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:19px}
+
+    .btn,.hero-btn,button.btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;border:0;cursor:pointer;
+      padding:13px 15px;border-radius:16px;font-size:14px;font-weight:950;font-family:inherit;line-height:1.1;
+      transition:transform .16s ease,filter .16s ease,border-color .16s ease;user-select:none;
+    }
+    .btn:hover,.hero-btn:hover{transform:translateY(-1px)}
+    .btn-main,.hero-btn.main{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061018;box-shadow:0 16px 34px rgba(245,205,102,.16)}
+    .btn-green,.hero-btn.green{background:linear-gradient(135deg,var(--green),var(--green2));color:white;box-shadow:0 16px 34px rgba(32,178,107,.15)}
+    .btn-blue{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff}
+    .btn-ghost,.hero-btn{background:rgba(255,255,255,.055);color:var(--ink);border:1px solid var(--line)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+    .photo-card{
+      position:relative;min-height:480px;border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.13);
+      background:#111827;box-shadow:0 22px 60px rgba(0,0,0,.34);
+    }
+    .photo-card img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.02)}
+    .photo-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,11,18,.10) 0%,rgba(5,11,18,.20) 34%,rgba(5,11,18,.82) 100%)}
+    .photo-card::after{content:"";position:absolute;inset:0;background:radial-gradient(520px 260px at 20% 0%,rgba(245,205,102,.18),transparent 58%)}
+    .photo-content{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;display:grid;gap:12px}
+    .photo-title{font-size:25px;font-weight:950;line-height:1.05;letter-spacing:-.035em;color:#fff7d4;text-shadow:0 2px 18px rgba(0,0,0,.50)}
+    .photo-sub{color:rgba(255,255,255,.82);font-size:13px;line-height:1.55;font-weight:800;max-width:520px}
+    .photo-row{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+    .qr-box{
+      display:flex;gap:10px;align-items:center;border-radius:20px;padding:10px;border:1px solid rgba(255,255,255,.16);
+      background:rgba(5,11,18,.70);backdrop-filter:blur(12px);box-shadow:0 16px 34px rgba(0,0,0,.30);
+    }
+    .qr-box img{width:92px;height:92px;border-radius:14px;background:#fff;padding:6px;display:block}
+    .qr-copy{min-width:150px}
+    .qr-copy strong{display:block;color:#fff4c7;font-size:13px;font-weight:950}
+    .qr-copy span{display:block;margin-top:5px;color:rgba(255,255,255,.72);font-size:12px;line-height:1.38;font-weight:800}
+
+    .card{
+      margin-top:14px;border-radius:var(--radius);border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.025));
+      box-shadow:0 18px 54px rgba(0,0,0,.28);padding:16px;
+    }
+    .status{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+    .status-title{font-size:20px;line-height:1.15;font-weight:950;color:#fff4c7}
+    .status-sub{margin-top:5px;color:var(--soft);font-size:14px;font-weight:780;line-height:1.55;max-width:780px}
+    .status-badge{padding:8px 11px;border-radius:999px;border:1px solid rgba(245,205,102,.24);background:rgba(245,205,102,.08);color:#ffe8ae;font-size:12px;font-weight:950;white-space:nowrap}
+
+    .navRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    .stat{border-radius:18px;border:1px solid var(--line2);background:rgba(255,255,255,.04);padding:13px}
+    .stat small{display:block;color:var(--muted);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.06em}
+    .stat b{display:block;margin-top:7px;font-size:22px;color:#fff;font-weight:950}
+
+    .featured-wrap{margin-top:14px;border-radius:24px;border:1px solid rgba(245,205,102,.18);background:rgba(245,205,102,.045);padding:14px}
+    .featured-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .featured-head h3{margin:0;font-size:19px;color:#fff4c7;line-height:1.18}
+    .featured-head p{margin:5px 0 0;color:var(--soft);font-size:13px;line-height:1.5;font-weight:780;max-width:760px}
+    .featured-label{padding:8px 10px;border-radius:999px;border:1px solid rgba(32,178,107,.26);background:rgba(32,178,107,.10);color:#d4ffe7;font-size:11px;font-weight:950}
+
+    .featured-card{
+      display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:stretch;
+      border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(15,27,42,.94),rgba(8,17,26,.96));padding:14px;
+    }
+    .featured-photo{position:relative;overflow:hidden;border-radius:20px;min-height:164px;background:#111827;border:1px solid var(--line2)}
+    .featured-photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+    .featured-photo span{position:absolute;left:10px;bottom:10px;border-radius:999px;padding:7px 9px;background:rgba(5,11,18,.72);border:1px solid rgba(255,255,255,.12);color:#fff4c7;font-size:11px;font-weight:950;z-index:2}
+    .featured-name{font-size:24px;line-height:1.1;font-weight:950;color:#fff4c7;letter-spacing:-.025em}
+    .featured-role{margin-top:6px;color:#d7fbe9;font-size:12px;font-weight:950;letter-spacing:.065em;text-transform:uppercase}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);font-size:12px;font-weight:950;color:var(--ink)}
+    .tag.green{border-color:rgba(32,178,107,.26);background:rgba(32,178,107,.10);color:#d4ffe7}
+    .tag.gold{border-color:rgba(245,205,102,.24);background:rgba(245,205,102,.08);color:#fff1bd}
+    .tag.off{color:#dbe6f3}
+    .desc{margin-top:13px;color:var(--soft);font-size:14px;line-height:1.68;font-weight:780}
+    .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+    .featured-qr{display:grid;align-content:center;justify-items:center;gap:8px;min-width:130px;border-left:1px solid var(--line2);padding-left:14px;text-align:center}
+    .featured-qr img{width:112px;height:112px;border-radius:16px;background:#fff;padding:7px;display:block}
+    .featured-qr small{font-size:11px;line-height:1.3;color:var(--muted);font-weight:900}
+    .featured-empty{border-radius:20px;border:1px dashed rgba(255,255,255,.16);background:rgba(255,255,255,.035);padding:16px;color:var(--soft);font-weight:850;line-height:1.6}
+
+    .bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+    .field label{display:block;margin-bottom:7px;font-size:12px;color:var(--muted);font-weight:950}
+    input,select{width:100%;padding:13px 13px;border-radius:16px;border:1px solid var(--line);outline:0;background:rgba(255,255,255,.055);color:var(--ink);font-size:14px;font-weight:900;font-family:inherit}
+    select option{color:#061018}
+    input::placeholder{color:rgba(226,232,240,.45)}
+
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+    .driver{
+      position:relative;overflow:hidden;border-radius:25px;border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(15,27,42,.92),rgba(8,17,26,.98));
+      box-shadow:0 18px 44px rgba(0,0,0,.28);padding:14px;transition:transform .18s ease,border-color .18s ease;
+    }
+    .driver:hover{transform:translateY(-2px);border-color:rgba(245,205,102,.25)}
+    .driver::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--gold),var(--green))}
+    .driver-top{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start}
+    .thumb{position:relative;overflow:hidden;width:96px;height:112px;border-radius:20px;border:1px solid var(--line2);background:#111827;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb .mono{position:absolute;left:8px;bottom:8px;border-radius:999px;padding:6px 8px;background:rgba(5,11,18,.72);border:1px solid rgba(255,255,255,.10);color:#fff4c7;font-size:11px;font-weight:950}
+    .driver-headline{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+    .name{font-size:19px;line-height:1.15;font-weight:950;color:#fff4c7;letter-spacing:-.015em}
+    .role{margin-top:6px;color:#d7fbe9;font-size:11px;font-weight:950;letter-spacing:.07em;text-transform:uppercase}
+    .side-badge{padding:8px 10px;border-radius:999px;border:1px solid rgba(245,205,102,.20);background:rgba(245,205,102,.08);color:#fff1bd;font-size:11px;font-weight:950;white-space:nowrap}
+    .card-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:14px}
+    .mini-qr{display:flex;align-items:center;gap:8px;border-radius:16px;border:1px solid var(--line2);background:rgba(255,255,255,.035);padding:8px;min-width:124px}
+    .mini-qr img{width:58px;height:58px;border-radius:10px;background:white;padding:4px;display:block}
+    .mini-qr span{font-size:10px;line-height:1.25;color:var(--muted);font-weight:900}
+
+    .footCta{text-align:center}
+    .footCta .big{font-size:20px;font-weight:950;color:#fff4c7}
+    .footCta .small{margin-top:7px;color:var(--soft);font-size:14px;line-height:1.55;font-weight:800}
+
+    .toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:25;display:none;max-width:92vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:999px;border:1px solid var(--line);background:rgba(5,11,18,.94);color:#fff;padding:10px 13px;font-size:13px;font-weight:950;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+
+    .audio-btn{position:fixed;right:18px;bottom:18px;z-index:22;border:1px solid rgba(245,205,102,.28);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061018;box-shadow:0 16px 36px rgba(245,205,102,.18);border-radius:999px;padding:13px 16px;font-size:14px;font-weight:950;font-family:inherit;cursor:pointer}
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .photo-card{min-height:430px}
+      .featured-card{grid-template-columns:150px 1fr}
+      .featured-qr{grid-column:1/-1;border-left:0;border-top:1px solid var(--line2);padding:12px 0 0;display:flex;justify-content:flex-start;text-align:left}
+    }
+    @media(max-width:860px){
+      .stats,.bar,.grid{grid-template-columns:1fr}
+      .featured-card{grid-template-columns:1fr}
+      .featured-photo{min-height:240px}
+      .featured-qr{justify-content:space-between}
+    }
+    @media(max-width:720px){
+      .page{padding-top:64px}
+      .top-actions{justify-content:flex-start;width:100%}
+      .hero{padding:17px;border-radius:26px}
+      .photo-card{min-height:390px;border-radius:24px}
+      .photo-row{align-items:stretch}
+      .qr-box{width:100%}
+      .hero-btn,.btn{width:100%}
+      .driver-top{grid-template-columns:82px 1fr}
+      .thumb{width:82px;height:104px;border-radius:18px}
+      .driver-headline{display:block}
+      .side-badge{display:inline-flex;margin-top:8px}
+      .card-bottom{display:block}
+      .mini-qr{margin-top:10px;width:100%}
+      .audio-btn{left:14px;right:14px;bottom:14px;width:calc(100% - 28px)}
     }
   </style>
 </head>
 
 <body>
+  <a class="floating-back" id="floatingSiteBtn" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">↩️ Retour site</a>
 
-<a class="floating-back" id="floatingSiteBtn" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-  ← Retour au site
-</a>
-
-<div class="page">
-
-  <!-- ══ TOPBAR ══ -->
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-badge">🚕</div>
-      <div>
-        <div class="eyebrow" data-i18n="eyebrow">DIGIY DRIVER AMBASSADEUR</div>
-        <div class="brand-title" data-i18n="brand_title">La mobilité avec style et savoir-être.</div>
-        <div class="brand-sub" data-i18n="brand_sub">Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.</div>
-      </div>
-    </div>
-
-    <div class="top-actions">
-      <a class="top-link" href="https://digiylyfe.com/" data-i18n="top_site">🌍 Site</a>
-      <a class="top-link vert" href="https://digiy-hub.digiylyfe.com/" data-i18n="top_hub">🧭 HUB</a>
-      <a class="top-link or" href="https://tarifs.digiylyfe.com/" data-i18n="top_tarifs">📦 Tarifs</a>
-      <a class="top-link or" id="publicCardBtnTop" href="#" data-i18n="top_public_card">🎴 Carte</a>
-      <div class="pill or"><span>👑</span><span data-i18n="pill_class">Sélection Ambassadeur</span></div>
-      <div class="pill vert"><span class="dot"></span><span id="onlinePill">…</span></div>
-      <div class="pill" id="countPill">…</div>
-      <div class="lang-switch" aria-label="Language switch">
-        <button id="lang-fr" class="active" type="button">FR</button>
-        <button id="lang-wo" type="button">WO</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ DIVIDER ══ -->
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-glyph">∞</div>
-    <div class="divider-line"></div>
-  </div>
-
-  <!-- ══ HERO ══ -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-overline" data-i18n="hero_eyebrow">Galerie publique premium</div>
-
-      <h1 class="hero-title">
-        <em data-i18n="hero_title">DIGIY DRIVER</em><br>AMBASSADEUR
-      </h1>
-
-      <p class="hero-sub" data-i18n="hero_sub">
-        La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
-      </p>
-
-      <div class="hero-sig" data-i18n="hero_signature">Un style. Un savoir-être. Une présence.</div>
-
-      <div class="hero-badges">
-        <div class="hero-badge" data-i18n="hero_badge_1"><b>Ambassadeur</b> = représentation de la maison</div>
-        <div class="hero-badge" data-i18n="hero_badge_2">Contact direct • WhatsApp</div>
-        <div class="hero-badge" data-i18n="hero_badge_3">0% commission</div>
-        <div class="hero-badge" data-i18n="hero_badge_public_only">Public uniquement : fiches chauffeur, WhatsApp, demande de course</div>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">🚕</div>
+        <div>
+          <div class="kicker" data-i18n="eyebrow">DIGIY DRIVER AMBASSADEUR</div>
+          <h2 data-i18n="brand_title">La mobilité avec style, calme et savoir-vivre.</h2>
+          <p data-i18n="brand_sub">Une vitrine sobre pour montrer la tenue, la ponctualité, la discrétion et la qualité humaine du service.</p>
+        </div>
       </div>
 
-      <div class="hero-ctas">
-        <a class="btn btn-main" href="https://digiylyfe.com/" data-i18n="hero_site">🌍 Retour site DIGIYLYFE</a>
-        <a class="btn btn-vert" href="https://digiy-hub.digiylyfe.com/" data-i18n="hero_hub">🧭 Ouvrir le HUB</a>
-        <a class="btn btn-ghost" href="https://tarifs.digiylyfe.com/" data-i18n="hero_tarifs">📦 Voir les tarifs</a>
-        <a class="btn btn-ghost" id="publicCardBtnHero" href="#" data-i18n="hero_public_card">🎴 Voir une carte chauffeur</a>
+      <nav class="top-actions" aria-label="Liens principaux">
+        <a class="mini-link" href="https://digiylyfe.com/" data-i18n="top_site">🌍 Site</a>
+        <a class="mini-link green" href="https://digiy-hub.digiylyfe.com/" data-i18n="top_hub">🧭 HUB</a>
+        <a class="mini-link gold" href="https://tarifs.digiylyfe.com/" data-i18n="top_tarifs">📦 Tarifs</a>
+        <a class="mini-link gold" id="publicCardBtnTop" href="#" data-i18n="top_public_card">🎴 Carte chauffeur</a>
+        <div class="pill gold"><span>👑</span><span data-i18n="pill_class">Sélection Ambassadeur</span></div>
+        <div class="pill green"><span class="dot"></span><span id="onlinePill">…</span></div>
+        <div class="pill" id="countPill">…</div>
+        <div class="lang-switch" aria-label="Changer la langue">
+          <button id="lang-fr" class="active" type="button">FR</button>
+          <button id="lang-wo" type="button">WO</button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Vitrine DIGIY DRIVER">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="kicker" data-i18n="hero_eyebrow">Vitrine publique premium</div>
+          <h1><span class="gold-text" data-i18n="hero_title">Un chauffeur, une tenue, une présence.</span></h1>
+          <p class="lead" data-i18n="hero_sub">Choisis un chauffeur visible, appelle directement sur WhatsApp, scanne son QR et garde la relation simple. Ici, pas de bruit : du sérieux, du respect, du terrain.</p>
+          <div class="signature" data-i18n="hero_signature">Discrétion • Ponctualité • Savoir-vivre • Contact direct</div>
+          <div class="badges">
+            <span class="badge" data-i18n="hero_badge_1"><b>Ambassadeur</b> = une image propre sur la route</span>
+            <span class="badge" data-i18n="hero_badge_2">📲 WhatsApp direct</span>
+            <span class="badge" data-i18n="hero_badge_3">🧾 QR chauffeur</span>
+            <span class="badge" data-i18n="hero_badge_4">0% commission</span>
+          </div>
+          <div class="hero-actions">
+            <a class="hero-btn main" href="https://digiylyfe.com/" data-i18n="hero_site">🌍 Retour site DIGIYLYFE</a>
+            <a class="hero-btn green" href="https://digiy-hub.digiylyfe.com/" data-i18n="hero_hub">🧭 Ouvrir le HUB</a>
+            <a class="hero-btn" href="https://tarifs.digiylyfe.com/" data-i18n="hero_tarifs">📦 Voir les tarifs</a>
+            <a class="hero-btn main" id="publicCardBtnHero" href="#" data-i18n="hero_public_card">🎴 Voir la carte chauffeur</a>
+          </div>
+        </div>
+
+        <aside class="photo-card" aria-label="Photo chauffeur premium">
+          <img class="photo" id="heroPhoto" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=82" alt="Véhicule élégant sur la route, image de service chauffeur premium" loading="eager" />
+          <div class="photo-content">
+            <div>
+              <div class="photo-title" data-i18n="photo_title">Une belle route commence par une belle présentation.</div>
+              <div class="photo-sub" data-i18n="photo_sub">Le client voit, comprend, scanne et contacte. Le chauffeur garde son nom, son lien, son argent et sa dignité.</div>
+            </div>
+            <div class="photo-row">
+              <div class="qr-box">
+                <img id="heroQr" alt="QR code de la carte chauffeur DIGIY" src="" loading="lazy" />
+                <div class="qr-copy">
+                  <strong data-i18n="qr_title">QR chauffeur</strong>
+                  <span data-i18n="qr_sub">À poser sur affiche, téléphone, carte ou vitrine.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
-    </div>
+    </section>
 
-    <!-- ══ PORTRAIT SVG ══ -->
-    <div class="hero-portrait" aria-hidden="true">
-      <div class="portrait-frame">
-        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block">
-          <defs>
-            <radialGradient id="bgG" cx="50%" cy="35%" r="65%">
-              <stop offset="0%" stop-color="#181d36"/>
-              <stop offset="100%" stop-color="#060912"/>
-            </radialGradient>
-            <radialGradient id="skinG" cx="38%" cy="30%" r="75%">
-              <stop offset="0%" stop-color="#c99060"/>
-              <stop offset="100%" stop-color="#8a5830"/>
-            </radialGradient>
-            <linearGradient id="suitG" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1c2140"/>
-              <stop offset="100%" stop-color="#0d1020"/>
-            </linearGradient>
-            <linearGradient id="lapG" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#171c34"/>
-              <stop offset="100%" stop-color="#0c1020"/>
-            </linearGradient>
-            <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#eac87a"/>
-              <stop offset="100%" stop-color="#a67c2e"/>
-            </linearGradient>
-            <linearGradient id="goldG2" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#f0cc80"/>
-              <stop offset="100%" stop-color="#c9a040"/>
-            </linearGradient>
-            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#d4a853" stop-opacity=".08"/>
-              <stop offset="100%" stop-color="#d4a853" stop-opacity="0"/>
-            </radialGradient>
-            <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-              <circle cx="7" cy="7" r=".7" fill="#d4a853" opacity=".16"/>
-            </pattern>
-            <filter id="glw"><feGaussianBlur stdDeviation="3"/></filter>
-            <filter id="soft"><feGaussianBlur stdDeviation="1.2"/></filter>
-          </defs>
-
-          <!-- BG -->
-          <rect width="300" height="400" fill="url(#bgG)"/>
-          <rect width="300" height="400" fill="url(#dots)"/>
-
-          <!-- ambient glow behind figure -->
-          <ellipse cx="150" cy="180" rx="110" ry="130" fill="url(#glow)" filter="url(#glw)"/>
-
-          <!-- subtle car silhouette bg -->
-          <g opacity=".10" transform="translate(18,308)">
-            <path d="M30,52 L62,52 L80,24 L184,22 L202,52 L236,52 L240,66 L25,66 Z" fill="#d4a853"/>
-            <rect x="84" y="26" width="36" height="22" rx="3" fill="#d4a853" opacity=".7"/>
-            <rect x="125" y="24" width="44" height="22" rx="3" fill="#d4a853" opacity=".7"/>
-            <ellipse cx="65" cy="67" rx="18" ry="9" fill="#d4a853"/>
-            <ellipse cx="196" cy="67" rx="18" ry="9" fill="#d4a853"/>
-          </g>
-
-          <!-- shadow -->
-          <ellipse cx="150" cy="393" rx="54" ry="5" fill="#000" opacity=".28"/>
-
-          <!-- LEGS -->
-          <path d="M105,264 L116,380 L140,380 L150,296 L160,380 L184,380 L195,264 Z" fill="#0c1122"/>
-
-          <!-- SHOES -->
-          <path d="M108,379 Q118,388 136,383 L128,376 Z" fill="#050810"/>
-          <path d="M192,379 Q182,388 164,383 L172,376 Z" fill="#050810"/>
-          <ellipse cx="122" cy="381" rx="18" ry="5" fill="#07090f"/>
-          <ellipse cx="178" cy="381" rx="18" ry="5" fill="#07090f"/>
-
-          <!-- SUIT BODY -->
-          <path d="M80,148 L112,136 L150,144 L188,136 L220,148 L210,266 L90,266 Z" fill="url(#suitG)"/>
-
-          <!-- LEFT ARM -->
-          <path d="M80,148 L54,244 L72,250 L106,160 Z" fill="url(#suitG)"/>
-          <!-- RIGHT ARM -->
-          <path d="M220,148 L246,244 L228,250 L194,160 Z" fill="url(#suitG)"/>
-
-          <!-- LEFT CUFF -->
-          <path d="M54,240 L72,248 L68,260 L50,252 Z" fill="#ede8d6"/>
-          <!-- RIGHT CUFF -->
-          <path d="M246,240 L228,248 L232,260 L250,252 Z" fill="#ede8d6"/>
-
-          <!-- GLOVES -->
-          <ellipse cx="52" cy="263" rx="13" ry="9" fill="#0c1122" transform="rotate(-14,52,263)"/>
-          <ellipse cx="248" cy="263" rx="13" ry="9" fill="#0c1122" transform="rotate(14,248,263)"/>
-
-          <!-- LAPELS -->
-          <path d="M112,136 L128,160 L115,212 L87,160 Z" fill="url(#lapG)"/>
-          <path d="M188,136 L172,160 L185,212 L213,160 Z" fill="url(#lapG)"/>
-
-          <!-- SHIRT -->
-          <path d="M128,136 L150,143 L172,136 L168,212 L132,212 Z" fill="#f0ece2"/>
-
-          <!-- TIE -->
-          <path d="M143,136 L157,136 L162,202 L150,212 L138,202 Z" fill="url(#goldG)"/>
-          <ellipse cx="150" cy="139" rx="8" ry="5.5" fill="#b08820"/>
-
-          <!-- SHIRT BUTTONS -->
-          <circle cx="150" cy="162" r="2.2" fill="#d4a853" opacity=".6"/>
-          <circle cx="150" cy="179" r="2.2" fill="#d4a853" opacity=".6"/>
-          <circle cx="150" cy="196" r="2.2" fill="#d4a853" opacity=".6"/>
-
-          <!-- POCKET SQUARE -->
-          <path d="M197,158 L210,153 L212,170 L199,166 Z" fill="url(#goldG2)"/>
-          <path d="M199,153 L209,149 L210,157 Z" fill="#f0cc80"/>
-
-          <!-- LAPEL PIN -->
-          <circle cx="122" cy="168" r="3.5" fill="#d4a853"/>
-          <circle cx="122" cy="168" r="2" fill="#f0cc80"/>
-
-          <!-- NECK -->
-          <rect x="136" y="116" width="28" height="22" rx="7" fill="url(#skinG)"/>
-
-          <!-- HEAD -->
-          <ellipse cx="150" cy="90" rx="34" ry="40" fill="url(#skinG)"/>
-
-          <!-- HAIR -->
-          <ellipse cx="150" cy="57" rx="34" ry="20" fill="#1a0e07"/>
-          <rect x="116" y="57" width="68" height="22" rx="10" fill="#1a0e07"/>
-          <!-- Hair detail -->
-          <path d="M118,62 Q134,54 150,52 Q166,54 182,62" stroke="#120a05" stroke-width="2" fill="none"/>
-
-          <!-- EARS -->
-          <ellipse cx="116" cy="95" rx="6.5" ry="10" fill="#b07845"/>
-          <ellipse cx="184" cy="95" rx="6.5" ry="10" fill="#b07845"/>
-          <!-- ear inner -->
-          <ellipse cx="116" cy="95" rx="3.5" ry="6" fill="#9a6030" opacity=".5"/>
-          <ellipse cx="184" cy="95" rx="3.5" ry="6" fill="#9a6030" opacity=".5"/>
-
-          <!-- EYES -->
-          <ellipse cx="134" cy="90" rx="5.5" ry="7" fill="#1a0e07"/>
-          <circle cx="134" cy="90" r="3" fill="#08090e"/>
-          <circle cx="135.5" cy="87.5" r="1.2" fill="#fff" opacity=".75"/>
-          <ellipse cx="166" cy="90" rx="5.5" ry="7" fill="#1a0e07"/>
-          <circle cx="166" cy="90" r="3" fill="#08090e"/>
-          <circle cx="167.5" cy="87.5" r="1.2" fill="#fff" opacity=".75"/>
-
-          <!-- EYEBROWS -->
-          <path d="M126,80 Q134,75 142,79" stroke="#1a0e07" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-          <path d="M158,79 Q166,75 174,80" stroke="#1a0e07" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-
-          <!-- NOSE -->
-          <path d="M146,104 Q150,114 154,104" stroke="#8a5830" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <ellipse cx="144" cy="109" rx="3" ry="2" fill="#8a5830" opacity=".40"/>
-          <ellipse cx="156" cy="109" rx="3" ry="2" fill="#8a5830" opacity=".40"/>
-
-          <!-- MOUTH — calm, dignified smile -->
-          <path d="M139,118 Q150,126 161,118" stroke="#8a5830" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <path d="M142,118 Q150,121 158,118" stroke="#c99060" stroke-width=".8" fill="none" stroke-linecap="round" opacity=".5"/>
-
-          <!-- COLLAR (white shirt collar) -->
-          <path d="M132,136 L142,152 L150,143 L158,152 L168,136" stroke="#ddd8c8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-          <!-- ─ GOLD FRAME DECORATION ─ -->
-          <!-- outer border -->
-          <rect x="7" y="7" width="286" height="386" rx="18" fill="none" stroke="#d4a853" stroke-width=".8" opacity=".18"/>
-          <!-- inner border -->
-          <rect x="13" y="13" width="274" height="374" rx="14" fill="none" stroke="#d4a853" stroke-width=".4" opacity=".12"/>
-
-          <!-- corner ornaments TL -->
-          <path d="M18,18 L46,18 L46,22 L22,22 L22,46 L18,46 Z" fill="#d4a853" opacity=".42"/>
-          <!-- corner TR -->
-          <path d="M282,18 L254,18 L254,22 L278,22 L278,46 L282,46 Z" fill="#d4a853" opacity=".42"/>
-          <!-- corner BL -->
-          <path d="M18,382 L46,382 L46,378 L22,378 L22,354 L18,354 Z" fill="#d4a853" opacity=".42"/>
-          <!-- corner BR -->
-          <path d="M282,382 L254,382 L254,378 L278,378 L278,354 L282,354 Z" fill="#d4a853" opacity=".42"/>
-
-          <!-- mid-side ornaments -->
-          <path d="M7,195 L14,200 L7,205 Z" fill="#d4a853" opacity=".30"/>
-          <path d="M293,195 L286,200 L293,205 Z" fill="#d4a853" opacity=".30"/>
-
-          <!-- TOP EAGLE -->
-          <text x="150" y="7" text-anchor="middle" font-size="0">🦅</text>
-          <!-- Gold text at top -->
-          <text x="150" y="24" text-anchor="middle" fill="#d4a853" font-family="'Outfit',sans-serif" font-size="7" letter-spacing="5" font-weight="900" opacity=".48">DIGIY</text>
-
-          <!-- BOTTOM LINE + LABEL -->
-          <line x1="55" y1="394" x2="245" y2="394" stroke="#d4a853" stroke-width=".5" opacity=".22"/>
-          <text x="150" y="401" text-anchor="middle" fill="#d4a853" font-family="'Outfit',sans-serif" font-size="7" letter-spacing="5" font-weight="900" opacity=".50">DRIVER · AMBASSADEUR</text>
-        </svg>
-
-        <div class="portrait-cap">Ambassadeur · Savoir-être</div>
+    <section class="card">
+      <div class="status">
+        <div>
+          <div class="status-title" data-i18n="section_title">Trouver le bon chauffeur</div>
+          <div class="status-sub" data-i18n="section_sub">Filtre par zone, ville ou véhicule. Puis contacte directement le profil qui inspire confiance.</div>
+        </div>
+        <div class="status-badge" id="badgeTop" data-i18n="badge_loading">Chargement…</div>
       </div>
-    </div>
-  </section>
 
-  <!-- ══ STATS ══ -->
-  <div class="stat-row">
-    <div class="stat-box">
-      <div class="stat-k" data-i18n="panel_count_k">Chauffeurs visibles</div>
-      <div class="stat-v" id="statTotal">—</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-k" data-i18n="panel_online_k">Contact direct</div>
-      <div class="stat-v" id="statOnline">—</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-k" data-i18n="panel_zone_k">Zones couvertes</div>
-      <div class="stat-v" id="statZones">—</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-k" data-i18n="panel_public_k">Visibilité</div>
-      <div class="stat-v" id="liveBadge" style="font-family:var(--sans);font-size:12px;font-weight:800;color:var(--or);margin-top:10px">Galerie publique</div>
-    </div>
-  </div>
-
-  <!-- ══ SECTION HEADER ══ -->
-  <div class="section-hd">
-    <div>
-      <div class="section-title"><em data-i18n="section_title">Trouver le bon ambassadeur</em></div>
-      <div class="section-sub" data-i18n="section_sub">Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.</div>
-    </div>
-    <div class="badge" id="badgeTop">Galerie publique</div>
-  </div>
-
-  <!-- ══ NAV ROW ══ -->
-  <div class="nav-row">
-    <a class="navBtn" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
-    <a class="navBtn or" id="galleryBtnTop" href="#drivers" data-i18n="nav_gallery">🚕 Nos chauffeurs</a>
-    <a class="navBtn or" id="publicCardBtnSection" href="#" data-i18n="nav_public_card">🎴 Carte chauffeur</a>
-    <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Réserver un chauffeur</a>
-    <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Rejoindre la sélection</a>
-  </div>
-
-  <!-- ══ FEATURED CARD ══ -->
-  <div class="featured-wrap" id="featuredCardWrap">
-    <div class="featured-hd">
-      <div>
-        <div class="section-title" style="font-size:22px" data-i18n="featured_title">Carte chauffeur en vitrine</div>
-        <div class="section-sub" data-i18n="featured_sub">Le client voit le chauffeur, sa zone, son véhicule, puis il choisit.</div>
+      <div class="navRow">
+        <a class="btn btn-ghost" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
+        <a class="btn btn-ghost" id="galleryBtnTop" href="#drivers" data-i18n="nav_gallery">🚕 Nos chauffeurs</a>
+        <a class="btn btn-main" id="publicCardBtnSection" href="#" data-i18n="nav_public_card">🎴 Carte chauffeur</a>
+        <a class="btn btn-blue" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Demander un chauffeur</a>
+        <a class="btn btn-green" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Rejoindre la sélection</a>
       </div>
-      <div class="badge" data-i18n="featured_badge">Choix direct</div>
-    </div>
-    <div id="featuredCardArea" class="featured-empty" data-i18n="featured_loading">Chargement de la carte chauffeur…</div>
-  </div>
 
-  <!-- ══ FILTERS ══ -->
-  <div class="filters">
-    <div class="field">
-      <label data-i18n="label_zone">📍 Zone recherchée</label>
-      <select id="zoneFilter">
-        <option value="" data-i18n="zone_all">Toutes</option>
-      </select>
-    </div>
-    <div class="field">
-      <label data-i18n="label_search">🔎 Nom, ville ou voiture</label>
-      <input id="qFilter" placeholder="Nom, ville ou voiture…" />
-    </div>
-    <div class="field">
-      <label data-i18n="label_avail">📞 Contact</label>
-      <select id="availFilter">
-        <option value="all" selected data-i18n="avail_all">Tous les profils</option>
-        <option value="direct" data-i18n="avail_online">WhatsApp direct</option>
-        <option value="contact" data-i18n="avail_offline">À contacter</option>
-      </select>
-    </div>
-  </div>
+      <div class="stats" aria-label="Statistiques galerie">
+        <div class="stat"><small data-i18n="panel_count_k">Chauffeurs visibles</small><b id="statTotal">—</b></div>
+        <div class="stat"><small data-i18n="panel_online_k">Contact direct</small><b id="statOnline">—</b></div>
+        <div class="stat"><small data-i18n="panel_zone_k">Zones couvertes</small><b id="statZones">—</b></div>
+        <div class="stat"><small data-i18n="panel_public_k">Visibilité</small><b id="liveBadge">—</b></div>
+      </div>
 
-  <!-- ══ DRIVER GRID ══ -->
-  <div class="grid" id="drivers"></div>
+      <div class="featured-wrap">
+        <div class="featured-head">
+          <div>
+            <h3 data-i18n="featured_title">Carte chauffeur en vitrine</h3>
+            <p data-i18n="featured_sub">Une fiche propre : photo, zone, véhicule, WhatsApp et QR. Le client n’a pas besoin de chercher, il comprend vite.</p>
+          </div>
+          <div class="featured-label" data-i18n="featured_badge">Choix direct</div>
+        </div>
+        <div id="featuredCardArea" class="featured-empty" data-i18n="featured_loading">Chargement de la carte chauffeur…</div>
+      </div>
 
-  <!-- ══ FOOTER CTA ══ -->
-  <div class="footer-cta">
-    <div class="big"><em data-i18n="cta_driver_title">Vous êtes chauffeur ambassadeur ?</em></div>
-    <div class="small" data-i18n="cta_driver_sub">Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.</div>
-    <div class="footer-acts">
-      <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="btn btn-ghost" id="galleryBtnBottom" href="#drivers" data-i18n="nav_gallery">Nos chauffeurs</a>
-      <a class="btn btn-main" id="publicCardBtnBottom" href="#" data-i18n="nav_public_card">🎴 Carte chauffeur</a>
-      <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Réserver un chauffeur</a>
-      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Rejoindre la sélection</a>
-    </div>
-  </div>
+      <div class="bar">
+        <div class="field">
+          <label data-i18n="label_zone">📍 Zone recherchée</label>
+          <select id="zoneFilter"><option value="" data-i18n="zone_all">Toutes</option></select>
+        </div>
+        <div class="field">
+          <label data-i18n="label_search">🔎 Nom, ville ou voiture</label>
+          <input id="qFilter" placeholder="Nom, ville ou voiture…" />
+        </div>
+        <div class="field">
+          <label data-i18n="label_avail">📞 Contact</label>
+          <select id="availFilter">
+            <option value="all" selected data-i18n="avail_all">Tous les profils</option>
+            <option value="direct" data-i18n="avail_online">WhatsApp direct</option>
+            <option value="contact" data-i18n="avail_offline">À contacter</option>
+          </select>
+        </div>
+      </div>
+    </section>
 
-</div><!-- /page -->
+    <section class="grid" id="drivers" aria-label="Liste des chauffeurs"></section>
 
-<div class="toast" id="toast"></div>
+    <section class="card footCta">
+      <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ambassadeur ?</div>
+      <div class="small" data-i18n="cta_driver_sub">Rejoins DIGIY DRIVER et montre ton service avec une fiche propre, un QR et un contact direct.</div>
+      <div class="actions" style="justify-content:center; margin-top:13px;">
+        <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
+        <a class="btn btn-ghost" id="galleryBtnBottom" href="#drivers" data-i18n="nav_gallery">🚕 Nos chauffeurs</a>
+        <a class="btn btn-main" id="publicCardBtnBottom" href="#" data-i18n="nav_public_card">🎴 Carte chauffeur</a>
+        <a class="btn btn-blue" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Demander un chauffeur</a>
+        <a class="btn btn-green" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Rejoindre la sélection</a>
+      </div>
+    </section>
+  </main>
 
-<button id="digiy-audio-driver">🎧 Écouter</button>
+  <button id="digiy-audio-driver" class="audio-btn" type="button">🎧 Écouter DIGIY</button>
+  <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════
-     JAVASCRIPT — logique complète préservée + QR
-════════════════════════════════════════════════ -->
 <script type="module">
   import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-  /* ─── i18n ─── */
   const DIGIY_LANG = {
     fr: {
-      eyebrow:"DIGIY DRIVER AMBASSADEUR",brand_title:"La mobilité avec style et savoir-être.",brand_sub:"Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.",pill_class:"Sélection Ambassadeur",top_site:"🌍 Site",top_hub:"🧭 HUB",top_tarifs:"📦 Tarifs",top_public_card:"🎴 Carte chauffeur",hero_site:"🌍 Retour site DIGIYLYFE",hero_hub:"🧭 Ouvrir le HUB",hero_tarifs:"📦 Voir les tarifs",hero_public_card:"🎴 Voir une carte chauffeur",hero_eyebrow:"Galerie publique premium",hero_title:"DIGIY DRIVER AMBASSADEUR",hero_sub:"La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",hero_signature:"Un style. Un savoir-être. Une présence.",hero_badge_1:"Ambassadeur = représentation de la maison",hero_badge_2:"Contact direct • WhatsApp",hero_badge_3:"0% commission",hero_badge_public_only:"Public uniquement : fiches chauffeur, WhatsApp, demande de course",panel_title:"Vue d'ensemble",panel_count_k:"Chauffeurs visibles",panel_online_k:"Contact direct",panel_zone_k:"Zones couvertes",panel_public_k:"Visibilité",panel_note:"Ici, on met en avant des profils qui portent une certaine tenue de service.",section_title:"Trouver le bon ambassadeur",section_sub:"Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.",badge_public:"Galerie publique",badge_loading:"Chargement…",badge_fallback:"⚠️ Galerie publique",nav_site:"← Retour au site",nav_gallery:"🚕 Nos chauffeurs",nav_public_card:"🎴 Carte chauffeur",nav_order:"📲 Demander un chauffeur",nav_recruit:"🦅 Rejoindre la sélection",label_zone:"📍 Zone recherchée",zone_all:"Toutes",label_search:"🔎 Nom, ville ou voiture",search_ph:"Nom, ville ou voiture…",label_avail:"📞 Contact",avail_all:"Tous les profils",avail_online:"WhatsApp direct",avail_offline:"À contacter",count_drivers:(n)=>`${n} chauffeur(s)`,online_now:(n)=>`${n} en contact direct`,zones_live:(n)=>`${n} zone(s) couvertes`,stat_total:(n)=>`${n}`,stat_online:(n)=>`${n}`,stat_zones:(n)=>`${n}`,empty_title:"Aucun chauffeur trouvé",empty_tag_1:"Change les filtres",empty_tag_2:"Ou contacte WhatsApp",btn_support_whatsapp:"WhatsApp support",btn_order_ride:"Demander un chauffeur",driver_default_name:"Chauffeur Ambassadeur",driver_desc_default:"Profil public DIGIY DRIVER AMBASSADEUR. La mobilité avec style et savoir-être.",driver_tagline:"Mobilité avec style et savoir-être",tag_online:"📞 WhatsApp direct",tag_offline:"🕊️ À contacter",pill_public:"Chauffeur sélectionné",btn_whatsapp:"WhatsApp",btn_profile:"Voir ce chauffeur",featured_title:"Carte chauffeur en vitrine",featured_sub:"Voici un vrai profil visible tout de suite. Le client voit le chauffeur, sa zone, son véhicule, puis il choisit.",featured_badge:"Choix direct",featured_loading:"Chargement de la carte chauffeur…",featured_empty:"Aucun chauffeur visible pour le moment. Ajuste les filtres ou recharge la galerie.",featured_profile:"Voir ce chauffeur",featured_whatsapp:"WhatsApp",featured_order:"Demander ce chauffeur",featured_card_label:"Chauffeur en avant",qr_label:"Scanner",cta_driver_title:"Vous êtes chauffeur ambassadeur ?",cta_driver_sub:"Rejoins DIGIY DRIVER AMBASSADEUR et fais grandir ta présence avec style et savoir-être.",cta_become_driver:"Rejoindre la sélection",cta_order_ride:"Demander un chauffeur",cta_whatsapp:"WhatsApp support",fallback_title:"⚠️ Galerie pas encore branchée",fallback_tag_1:"La source Supabase \"public_driver_cards\" n'est pas accessible",fallback_tag_2:"RLS / vue publique à créer",toast_fallback:"Galerie en mode public"
+      eyebrow:"DIGIY DRIVER AMBASSADEUR",
+      brand_title:"La mobilité avec style, calme et savoir-vivre.",
+      brand_sub:"Une vitrine sobre pour montrer la tenue, la ponctualité, la discrétion et la qualité humaine du service.",
+      top_site:"🌍 Site", top_hub:"🧭 HUB", top_tarifs:"📦 Tarifs", top_public_card:"🎴 Carte chauffeur",
+      pill_class:"Sélection Ambassadeur",
+      hero_eyebrow:"Vitrine publique premium",
+      hero_title:"Un chauffeur, une tenue, une présence.",
+      hero_sub:"Choisis un chauffeur visible, appelle directement sur WhatsApp, scanne son QR et garde la relation simple. Ici, pas de bruit : du sérieux, du respect, du terrain.",
+      hero_signature:"Discrétion • Ponctualité • Savoir-vivre • Contact direct",
+      hero_badge_1:"Ambassadeur = une image propre sur la route",
+      hero_badge_2:"📲 WhatsApp direct", hero_badge_3:"🧾 QR chauffeur", hero_badge_4:"0% commission",
+      hero_site:"🌍 Retour site DIGIYLYFE", hero_hub:"🧭 Ouvrir le HUB", hero_tarifs:"📦 Voir les tarifs", hero_public_card:"🎴 Voir la carte chauffeur",
+      photo_title:"Une belle route commence par une belle présentation.",
+      photo_sub:"Le client voit, comprend, scanne et contacte. Le chauffeur garde son nom, son lien, son argent et sa dignité.",
+      qr_title:"QR chauffeur", qr_sub:"À poser sur affiche, téléphone, carte ou vitrine.",
+      section_title:"Trouver le bon chauffeur", section_sub:"Filtre par zone, ville ou véhicule. Puis contacte directement le profil qui inspire confiance.",
+      badge_loading:"Chargement…", badge_public:"Galerie publique", badge_fallback:"Mode vitrine",
+      nav_site:"← Retour au site", nav_gallery:"🚕 Nos chauffeurs", nav_public_card:"🎴 Carte chauffeur", nav_order:"📲 Demander un chauffeur", nav_recruit:"🦅 Rejoindre la sélection",
+      panel_count_k:"Chauffeurs visibles", panel_online_k:"Contact direct", panel_zone_k:"Zones couvertes", panel_public_k:"Visibilité",
+      featured_title:"Carte chauffeur en vitrine", featured_sub:"Une fiche propre : photo, zone, véhicule, WhatsApp et QR. Le client n’a pas besoin de chercher, il comprend vite.", featured_badge:"Choix direct", featured_loading:"Chargement de la carte chauffeur…",
+      featured_empty:"Aucun chauffeur visible pour le moment. La vitrine reste prête avec QR et contact direct.", featured_profile:"Voir la fiche", featured_whatsapp:"WhatsApp", featured_order:"Demander ce chauffeur", featured_label:"Chauffeur en avant",
+      label_zone:"📍 Zone recherchée", zone_all:"Toutes", label_search:"🔎 Nom, ville ou voiture", search_ph:"Nom, ville ou voiture…", label_avail:"📞 Contact", avail_all:"Tous les profils", avail_online:"WhatsApp direct", avail_offline:"À contacter",
+      count_drivers:n=>`${n} chauffeur(s)`, online_now:n=>`${n} WhatsApp direct`, zones_live:n=>`${n} zone(s)`, stat_total:n=>`${n}`, stat_online:n=>`${n}`, stat_zones:n=>`${n}`,
+      empty_title:"Aucun chauffeur trouvé", empty_tag_1:"Change les filtres", empty_tag_2:"Ou passe par WhatsApp", btn_support_whatsapp:"WhatsApp support", btn_order_ride:"Demander un chauffeur",
+      driver_default_name:"Chauffeur Ambassadeur", driver_desc_default:"Profil public DIGIY DRIVER. Service discret, ponctuel et direct.", driver_tagline:"Service discret au savoir-vivre", tag_online:"📞 WhatsApp direct", tag_offline:"🕊️ À contacter", pill_public:"Sélectionné", btn_whatsapp:"WhatsApp", btn_profile:"Voir la fiche", scan_label:"Scanner la fiche",
+      cta_driver_title:"Vous êtes chauffeur ambassadeur ?", cta_driver_sub:"Rejoins DIGIY DRIVER et montre ton service avec une fiche propre, un QR et un contact direct.", cta_become_driver:"Rejoindre la sélection", cta_order_ride:"Demander un chauffeur", cta_whatsapp:"WhatsApp support",
+      fallback_title:"Vitrine prête — connexion galerie à vérifier", fallback_tag_1:"La source publique n’a pas répondu", fallback_tag_2:"Le QR et les liens restent disponibles", toast_fallback:"Vitrine en mode présentation"
     },
     wo: {
-      eyebrow:"DIGIY DRIVER AMBASSADEUR",brand_title:"Mobility ak style ak savoir-être.",brand_sub:"Galerie bii dafay won li gën a am solo: taxaw, teey, ak melokaanu service bi.",pill_class:"Sélection Ambassadeur",top_site:"🌍 Site",top_hub:"🧭 HUB",top_tarifs:"📦 Tarifs",top_public_card:"🎴 Carte chauffeur",hero_site:"🌍 Retour site DIGIYLYFE",hero_hub:"🧭 Ouvrir le HUB",hero_tarifs:"📦 Voir les tarifs",hero_public_card:"🎴 Xool carte chauffeur",hero_eyebrow:"Galerie publique premium",hero_title:"DIGIY DRIVER AMBASSADEUR",hero_sub:"Mobility ak style ak savoir-être. Tànn zone, seetal profil yi, te jokkook chauffeur bi ci WhatsApp.",hero_signature:"Style. Savoir-être. Présence.",hero_badge_1:"Ambassadeur = ku di teewal kër gi",hero_badge_2:"Contact direct • WhatsApp",hero_badge_3:"0% commission",hero_badge_public_only:"Public uniquement : fiches chauffeur, WhatsApp, demande de course",panel_title:"Xool bu gaaw",panel_count_k:"Chauffeur yi ñuy won",panel_online_k:"WhatsApp direct",panel_zone_k:"Zone yi ñu mën a dikk",panel_public_k:"Visibilité",panel_note:"Fii, ñuy jëkk ci profil yu yor teey ak yëngu-yëngu bu rafet.",section_title:"Seetal ambassadeur bi gën a baax",section_sub:"Seet ci zone, dëkk walla voiture ngir gis profil bi la gën a yombal.",badge_public:"Galerie publique",badge_loading:"Di yük…",badge_fallback:"⚠️ Galerie publique",nav_site:"← Dellu ci site bi",nav_gallery:"🚕 Sunu chauffeurs",nav_public_card:"🎴 Carte chauffeur",nav_order:"📲 Demander un chauffeur",nav_recruit:"🦅 Duggal ci sélection bi",label_zone:"📍 Zone bi nga seet",zone_all:"Yépp",label_search:"🔎 Tur, dëkk walla voiture",search_ph:"Tur, dëkk walla voiture…",label_avail:"📞 Jokkook",avail_all:"Profils yépp",avail_online:"WhatsApp direct",avail_offline:"À contacter",count_drivers:(n)=>`${n} chauffeur`,online_now:(n)=>`${n} ci WhatsApp direct`,zones_live:(n)=>`${n} zone yu ñuy liggéey`,stat_total:(n)=>`${n}`,stat_online:(n)=>`${n}`,stat_zones:(n)=>`${n}`,empty_title:"Amul chauffeur bu ñu gis",empty_tag_1:"Soppi filtre yi",empty_tag_2:"Walla bataaxal WhatsApp",btn_support_whatsapp:"WhatsApp support",btn_order_ride:"Demander un chauffeur",driver_default_name:"Chauffeur Ambassadeur",driver_desc_default:"Profil public DIGIY DRIVER AMBASSADEUR. Mobility ak style ak savoir-être.",driver_tagline:"Mobility ak style ak savoir-être",tag_online:"📞 WhatsApp direct",tag_offline:"🕊️ À contacter",pill_public:"Chauffeur sélectionné",btn_whatsapp:"WhatsApp",btn_profile:"Xool chauffeur bi",featured_title:"Carte chauffeur bi ci kanam",featured_sub:"Fii lañuy won benn profil bu am solo. Kilifa gi dafa gis chauffeur bi, zone bi, voiture bi, ba noppi tànn.",featured_badge:"Tànn bu gaaw",featured_loading:"Di yük carte chauffeur bi…",featured_empty:"Amul chauffeur bu ñuy won léegi. Soppi filtre yi walla nga yeesal galerie bi.",featured_profile:"Xool chauffeur bi",featured_whatsapp:"WhatsApp",featured_order:"Demander un chauffeur",featured_card_label:"Chauffeur bi ñuy won",qr_label:"Scanner",cta_driver_title:"Yow, yaa di chauffeur ambassadeur ?",cta_driver_sub:"Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",cta_become_driver:"Duggal ci sélection bi",cta_order_ride:"Demander un chauffeur",cta_whatsapp:"WhatsApp support",fallback_title:"⚠️ Galerie bi du connecté",fallback_tag_1:"Source Supabase \"public_driver_cards\" duñu ko jàpp",fallback_tag_2:"RLS / vue publique war nañu ko def",toast_fallback:"Galerie bi ci mode public"
+      eyebrow:"DIGIY DRIVER AMBASSADEUR",
+      brand_title:"Yoonu tukki ak teey, style ak savoir-vivre.",
+      brand_sub:"Vitrine bu rafet ngir won teey, ponctualité, discretion ak jikko ju rafet ci service bi.",
+      top_site:"🌍 Site", top_hub:"🧭 HUB", top_tarifs:"📦 Tarifs", top_public_card:"🎴 Carte chauffeur",
+      pill_class:"Sélection Ambassadeur",
+      hero_eyebrow:"Vitrine publique premium",
+      hero_title:"Chauffeur, teey, présence.",
+      hero_sub:"Tànnal chauffeur bi nga gis, woo ko ci WhatsApp, scan QR bi. Fi, du bari wax : jëf ju leer, teey ak respect.",
+      hero_signature:"Discrétion • Ponctualité • Savoir-vivre • Contact direct",
+      hero_badge_1:"Ambassadeur = melokaan bu rafet ci yoon wi",
+      hero_badge_2:"📲 WhatsApp direct", hero_badge_3:"🧾 QR chauffeur", hero_badge_4:"0% commission",
+      hero_site:"🌍 Retour site DIGIYLYFE", hero_hub:"🧭 Ouvrir le HUB", hero_tarifs:"📦 Voir les tarifs", hero_public_card:"🎴 Xool carte chauffeur",
+      photo_title:"Yoon wu rafet dafay tàmbalee ci présentation bu rafet.",
+      photo_sub:"Client bi gis, xam, scan, jokkook. Chauffeur bi mooy yor turam, lienam ak xaalisam.",
+      qr_title:"QR chauffeur", qr_sub:"À poser ci affiche, téléphone, carte walla vitrine.",
+      section_title:"Seetal chauffeur bi gën", section_sub:"Filtre ci zone, dëkk walla voiture. Ba noppi jokkook profil bi nga gëm.",
+      badge_loading:"Di yük…", badge_public:"Galerie publique", badge_fallback:"Mode vitrine",
+      nav_site:"← Dellu ci site bi", nav_gallery:"🚕 Sunu chauffeurs", nav_public_card:"🎴 Carte chauffeur", nav_order:"📲 Demander chauffeur", nav_recruit:"🦅 Duggal ci sélection bi",
+      panel_count_k:"Chauffeur yi", panel_online_k:"Contact direct", panel_zone_k:"Zone yi", panel_public_k:"Visibilité",
+      featured_title:"Carte chauffeur ci vitrine", featured_sub:"Fiche bu rafet : photo, zone, voiture, WhatsApp ak QR. Client bi xam lépp bu gaaw.", featured_badge:"Choix direct", featured_loading:"Di yük carte chauffeur bi…",
+      featured_empty:"Amul chauffeur bu ñuy won léegi. Vitrine bi am na QR ak contact direct.", featured_profile:"Xool fiche bi", featured_whatsapp:"WhatsApp", featured_order:"Demander chauffeur bii", featured_label:"Chauffeur ci kanam",
+      label_zone:"📍 Zone bi", zone_all:"Yépp", label_search:"🔎 Tur, dëkk walla voiture", search_ph:"Tur, dëkk walla voiture…", label_avail:"📞 Contact", avail_all:"Profils yépp", avail_online:"WhatsApp direct", avail_offline:"À contacter",
+      count_drivers:n=>`${n} chauffeur`, online_now:n=>`${n} WhatsApp direct`, zones_live:n=>`${n} zone`, stat_total:n=>`${n}`, stat_online:n=>`${n}`, stat_zones:n=>`${n}`,
+      empty_title:"Amul chauffeur bu ñu gis", empty_tag_1:"Soppi filtre yi", empty_tag_2:"Walla WhatsApp", btn_support_whatsapp:"WhatsApp support", btn_order_ride:"Demander chauffeur",
+      driver_default_name:"Chauffeur Ambassadeur", driver_desc_default:"Profil public DIGIY DRIVER. Service bu teey, ponctuel ak direct.", driver_tagline:"Service discret ak savoir-vivre", tag_online:"📞 WhatsApp direct", tag_offline:"🕊️ À contacter", pill_public:"Sélectionné", btn_whatsapp:"WhatsApp", btn_profile:"Xool fiche bi", scan_label:"Scan fiche bi",
+      cta_driver_title:"Yow, yaa di chauffeur ambassadeur ?", cta_driver_sub:"Duggal ci DIGIY DRIVER ak fiche bu rafet, QR ak contact direct.", cta_become_driver:"Duggal ci sélection bi", cta_order_ride:"Demander chauffeur", cta_whatsapp:"WhatsApp support",
+      fallback_title:"Vitrine bi pare na — connexion galerie à vérifier", fallback_tag_1:"Source publique bi tontuwul", fallback_tag_2:"QR ak liens yi baax nañu", toast_fallback:"Vitrine ci mode présentation"
     }
   };
 
-  let CURRENT_LANG = localStorage.getItem("digiy_lang") || "fr";
-  let toastTimer = null;
-  let searchTimer = null;
-
-  function t(key,...args){
-    const pack = DIGIY_LANG[CURRENT_LANG]||DIGIY_LANG.fr;
-    const val  = pack[key];
-    if(typeof val==="function") return val(...args);
-    return(val!=null)?String(val):String((DIGIY_LANG.fr[key]??key));
-  }
-
-  function digiyBasePath(){
-    const parts=location.pathname.split("/").filter(Boolean);
-    const isGh=/\.github\.io$/i.test(location.hostname);
-    if(isGh&&parts.length>0) return "/"+parts[0]+"/";
-    return "/";
-  }
-  function digiyLocal(path){ path=String(path||"").replace(/^\/+/,""); return digiyBasePath()+path; }
-
-  /* ─── Supabase ─── */
-  const SUPABASE_URL    = "https://wesqmwjjtsefyjnluosj.supabase.co";
+  const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
   const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  /* ─── URL helpers ─── */
+  const SITE_URL = "https://digiylyfe.com/";
+  const ORDER_RIDE_URL = "https://driver.digiylyfe.com/commander-course.html";
+  const DRIVER_JOIN_URL = "https://commencer-a-payer.digiylyfe.com/?module=DRIVER";
+  const FEATURED_PUBLIC_CARD_URL = "https://beauville.github.io/galerie-chauffeurs/fiche-chauffeur.html?slug=card-ffe5d051-d028-4576-82e6-d7e1164b4fa0";
+  const DEFAULT_DRIVER_PHOTO = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=82";
+
+  let CURRENT_LANG = localStorage.getItem("digiy_lang") || "fr";
+  let ALL = [];
+  let toastTimer = null;
+  let searchTimer = null;
+
+  const $ = (id) => document.getElementById(id);
+  const driversEl = $("drivers"), zoneFilter = $("zoneFilter"), qFilter = $("qFilter"), availFilter = $("availFilter");
+  const countPill = $("countPill"), onlinePill = $("onlinePill"), liveBadge = $("liveBadge"), badgeTop = $("badgeTop"), toastEl = $("toast");
+  const statTotal = $("statTotal"), statOnline = $("statOnline"), statZones = $("statZones"), featuredCardArea = $("featuredCardArea");
+
+  function t(key,...args){
+    const pack = DIGIY_LANG[CURRENT_LANG] || DIGIY_LANG.fr;
+    const val = pack[key] ?? DIGIY_LANG.fr[key] ?? key;
+    return typeof val === "function" ? val(...args) : String(val);
+  }
+  function esc(s){return String(s ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+  function normPhone(p){let digits=String(p ?? "").replace(/\D/g,""); if(digits.length===9 && digits.startsWith("7")) digits="221"+digits; return digits || "";}
+  function isSensitiveSlug(value){return /\d{7,}/.test(String(value || "").trim().toLowerCase());}
+  function normalizeText(v){return String(v || "").trim();}
+  function initials(name){return String(name||"").trim().split(/\s+/).filter(Boolean).slice(0,2).map(p=>p[0]?.toUpperCase()||"").join("") || "DA";}
+  function qrUrl(data,size=180){return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=8&data=${encodeURIComponent(data)}`;}
+
+  function digiyBasePath(){
+    const parts = location.pathname.split("/").filter(Boolean);
+    const isGh = /\.github\.io$/i.test(location.hostname);
+    if(isGh && parts.length > 0) return "/" + parts[0] + "/";
+    return "/";
+  }
+  function digiyLocal(path){return digiyBasePath() + String(path || "").replace(/^\/+/,"");}
+  const PROFILE_URL = digiyLocal("fiche-chauffeur.html");
+  const GALLERY_URL = (()=>{const u = new URL(location.href); u.hash = "drivers"; return u.toString();})();
+
   function cleanPublicUrl(){
     try{
-      const u=new URL(location.href);let changed=false;
-      ["phone","tel","wa"].forEach(k=>{if(u.searchParams.has(k)){u.searchParams.delete(k);changed=true;}});
-      ["slug","identifiant"].forEach(k=>{
-        const raw=String(u.searchParams.get(k)||"").trim().toLowerCase();
-        if(/\d{7,}/.test(raw)){u.searchParams.delete(k);changed=true;}
-      });
-      if(changed) history.replaceState({},"",(u.pathname+u.search+u.hash));
-    }catch(_){}
+      const u = new URL(location.href);
+      let changed = false;
+      ["phone","tel","wa"].forEach(key=>{ if(u.searchParams.has(key)){u.searchParams.delete(key); changed = true;} });
+      ["slug","identifiant"].forEach(key=>{ const raw=String(u.searchParams.get(key)||"").trim().toLowerCase(); if(/\d{7,}/.test(raw)){u.searchParams.delete(key); changed = true;} });
+      if(changed) history.replaceState({},"",u.pathname + u.search + u.hash);
+    }catch(_){ }
   }
-
-  function isSensitiveSlug(v){ return /\d{7,}/.test(String(v||"").trim().toLowerCase()); }
   cleanPublicUrl();
 
-  const qs   = new URLSearchParams(location.search);
-  const slug = (qs.get("slug")||"").trim();
+  const qs = new URLSearchParams(location.search);
+  const slug = (qs.get("slug") || "").trim();
 
-  const SITE_URL          = "https://digiylyfe.com/";
-  const GALLERY_URL       = (()=>{ const u=new URL(location.href); u.hash="drivers"; return u.toString(); })();
-  const ORDER_RIDE_URL    = "https://driver.digiylyfe.com/commander-course.html";
-  const DRIVER_JOIN_URL   = "https://commencer-a-payer.digiylyfe.com/?module=DRIVER";
-  const PROFILE_URL       = digiyLocal("fiche-chauffeur.html");
-  const FEATURED_PUBLIC_CARD_URL = "https://beauville.github.io/galerie-chauffeurs/fiche-chauffeur.html?slug=card-ffe5d051-d028-4576-82e6-d7e1164b4fa0";
-  const GALLERY_CANONICAL = "https://beauville.github.io/galerie-chauffeurs/";
-
-  function hrefFor(url,keepSlug=true){
-    const u=new URL(url,location.href);
-    ["phone","tel","wa"].forEach(k=>u.searchParams.delete(k));
-    if(keepSlug&&slug&&!isSensitiveSlug(slug)) u.searchParams.set("slug",slug);
-    else{ u.searchParams.delete("slug"); u.searchParams.delete("identifiant"); }
+  function hrefFor(url, keepSlug=true){
+    const u = new URL(url, location.href);
+    ["phone","tel","wa"].forEach(key=>u.searchParams.delete(key));
+    if(keepSlug && slug && !isSensitiveSlug(slug)) u.searchParams.set("slug",slug);
+    else {u.searchParams.delete("slug"); u.searchParams.delete("identifiant");}
     if(String(url).includes("commander-course.html")) u.searchParams.set("source","galerie_chauffeurs");
     return u.toString();
   }
-
+  function profileUrlForDriver(d){
+    const u = new URL(PROFILE_URL, location.href);
+    if(d?.slug && !isSensitiveSlug(d.slug)) u.searchParams.set("slug",d.slug);
+    return u.toString();
+  }
   function commanderUrlForDriver(d){
-    const u=new URL(ORDER_RIDE_URL,location.href);
-    if(d?.name) u.searchParams.set("driver",d.name);
-    const wa=normPhone(d?.whatsapp);
-    if(wa) u.searchParams.set("wa",wa);
-    if(d?.slug&&!isSensitiveSlug(d.slug)) u.searchParams.set("slug",d.slug);
+    const u = new URL(ORDER_RIDE_URL, location.href);
+    if(d?.name) u.searchParams.set("driver", d.name);
+    const wa = normPhone(d?.whatsapp);
+    if(wa) u.searchParams.set("wa", wa);
+    if(d?.slug && !isSensitiveSlug(d.slug)) u.searchParams.set("slug", d.slug);
     u.searchParams.set("source","galerie_chauffeurs");
     return u.toString();
   }
+  function photoForDriver(d){return d?.photo_url || d?.cover_url || d?.avatar_url || d?.image_url || DEFAULT_DRIVER_PHOTO;}
+  function publicUrlForDriver(d){return d?.slug ? profileUrlForDriver(d) : FEATURED_PUBLIC_CARD_URL;}
 
-  function profileUrlForDriver(d){
-    const u=new URL(PROFILE_URL,location.href);
-    if(d?.slug&&!isSensitiveSlug(d.slug)) u.searchParams.set("slug",d.slug);
-    return u.toString();
+  function getZoneCount(items){return new Set(items.map(d=>normalizeText(d.zone)).filter(Boolean)).size;}
+  function getDirectCount(items){return items.filter(d=>!!normPhone(d.whatsapp)).length;}
+  function sortDrivers(rows){return [...rows].sort((a,b)=>{const ar=Number(a.rating||0), br=Number(b.rating||0); if(br!==ar) return br-ar; return String(a.name||"").localeCompare(String(b.name||""),"fr",{sensitivity:"base"});});}
+
+  function toast(msg){toastEl.textContent=msg;toastEl.style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.style.display="none",2400);}
+  function rememberCommanderMeta(driver){
+    try{
+      const wa = normPhone(driver?.whatsapp);
+      if(wa) sessionStorage.setItem("digiy_driver_order_wa", wa); else sessionStorage.removeItem("digiy_driver_order_wa");
+      if(driver?.name) sessionStorage.setItem("digiy_driver_order_name", String(driver.name)); else sessionStorage.removeItem("digiy_driver_order_name");
+      if(driver?.slug) sessionStorage.setItem("digiy_driver_order_slug", String(driver.slug)); else sessionStorage.removeItem("digiy_driver_order_slug");
+    }catch(_){ }
   }
-
-  /* ─── Apply language ─── */
-  function applyLanguage(lang){
-    CURRENT_LANG=(lang==="wo")?"wo":"fr";
-    localStorage.setItem("digiy_lang",CURRENT_LANG);
-    document.documentElement.setAttribute("lang",CURRENT_LANG==="wo"?"wo":"fr");
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key=el.dataset.i18n;
-      const val=t(key);
-      if(val) el.textContent=val;
-    });
-    const q=document.getElementById("qFilter");
-    if(q) q.setAttribute("placeholder",t("search_ph"));
-    document.getElementById("lang-fr")?.classList.toggle("active",CURRENT_LANG==="fr");
-    document.getElementById("lang-wo")?.classList.toggle("active",CURRENT_LANG==="wo");
-    refreshTopStats();
-    render();
-  }
-
-  document.getElementById("lang-fr").addEventListener("click",()=>applyLanguage("fr"));
-  document.getElementById("lang-wo").addEventListener("click",()=>applyLanguage("wo"));
-
-  /* ─── DOM refs ─── */
-  const driversEl    = document.getElementById("drivers");
-  const zoneFilter   = document.getElementById("zoneFilter");
-  const qFilter      = document.getElementById("qFilter");
-  const availFilter  = document.getElementById("availFilter");
-  const countPill    = document.getElementById("countPill");
-  const onlinePill   = document.getElementById("onlinePill");
-  const liveBadge    = document.getElementById("liveBadge");
-  const badgeTop     = document.getElementById("badgeTop");
-  const toastEl      = document.getElementById("toast");
-  const statTotal    = document.getElementById("statTotal");
-  const statOnline   = document.getElementById("statOnline");
-  const statZones    = document.getElementById("statZones");
-  const featuredCardArea = document.getElementById("featuredCardArea");
-
-  /* ─── Static links ─── */
-  [
-    ["floatingSiteBtn",      SITE_URL,                false],
-    ["siteBtnTop",           SITE_URL,                false],
-    ["siteBtnBottom",        SITE_URL,                false],
-    ["galleryBtnTop",        GALLERY_URL,             false],
-    ["galleryBtnBottom",     GALLERY_URL,             false],
-    ["publicCardBtnTop",     FEATURED_PUBLIC_CARD_URL,false],
-    ["publicCardBtnHero",    FEATURED_PUBLIC_CARD_URL,false],
-    ["publicCardBtnSection", FEATURED_PUBLIC_CARD_URL,false],
-    ["publicCardBtnBottom",  FEATURED_PUBLIC_CARD_URL,false],
-    ["orderBtnTop",          ORDER_RIDE_URL,          true],
-    ["orderBtnBottom",       ORDER_RIDE_URL,          true],
-    ["joinBtnTop",           DRIVER_JOIN_URL,         true],
-    ["joinBtnBottom",        DRIVER_JOIN_URL,         true],
-  ].forEach(([id,url,keepSlug])=>{
-    const el=document.getElementById(id);
-    if(el) el.href=hrefFor(url,keepSlug);
-  });
-
-  /* ─── Data ─── */
-  let ALL=[];
-
-  /* ─── Utilities ─── */
-  function toast(msg){
-    toastEl.textContent=msg; toastEl.style.display="block";
-    clearTimeout(toastTimer);
-    toastTimer=setTimeout(()=>{ toastEl.style.display="none"; },2400);
-  }
-
-  function esc(s){
-    return String(s??"").replace(/[&<>"']/g,m=>({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[m]));
-  }
-
-  function normPhone(p){
-    let d=String(p??"").replace(/\D/g,"");
-    if(d.length===9&&d.startsWith("7")) d="221"+d;
-    return d||"";
-  }
-
-  function normalizeText(v){ return String(v||"").trim(); }
-
-  function getZoneCount(items){
-    return new Set(items.map(d=>normalizeText(d.zone)).filter(Boolean)).size;
-  }
-
-  function getDirectCount(items){
-    return items.filter(d=>!!normPhone(d.whatsapp)).length;
-  }
-
-  function sortDrivers(rows){
-    return [...rows].sort((a,b)=>{
-      const ar=Number(a.rating||0),br=Number(b.rating||0);
-      if(br!==ar) return br-ar;
-      return String(a.name||"").localeCompare(String(b.name||""),"fr",{sensitivity:"base"});
+  function bindOrderButtons(root=document){
+    root.querySelectorAll(".js-order-btn").forEach(el=>{
+      el.addEventListener("click",()=>{try{rememberCommanderMeta(JSON.parse(el.getAttribute("data-driver")||"{}"));}catch(_){ }});
     });
   }
 
   function rebuildZoneOptions(items){
-    const current=zoneFilter.value||"";
-    const zones=Array.from(new Set(items.map(d=>normalizeText(d.zone)).filter(Boolean)))
-      .sort((a,b)=>a.localeCompare(b,"fr",{sensitivity:"base"}));
-    zoneFilter.innerHTML=`<option value="">${esc(t("zone_all"))}</option>`+
-      zones.map(z=>`<option value="${esc(z)}">${esc(z)}</option>`).join("");
-    if(zones.includes(current)) zoneFilter.value=current;
+    const current = zoneFilter.value || "";
+    const zones = Array.from(new Set(items.map(d=>normalizeText(d.zone)).filter(Boolean))).sort((a,b)=>a.localeCompare(b,"fr",{sensitivity:"base"}));
+    zoneFilter.innerHTML = `<option value="">${esc(t("zone_all"))}</option>` + zones.map(z=>`<option value="${esc(z)}">${esc(z)}</option>`).join("");
+    if(zones.includes(current)) zoneFilter.value = current;
   }
-
   function refreshTopStats(){
-    countPill.textContent=t("count_drivers",ALL.length);
-    onlinePill.textContent=t("online_now",getDirectCount(ALL));
-    statTotal.textContent=t("stat_total",ALL.length);
-    statOnline.textContent=t("stat_online",getDirectCount(ALL));
-    statZones.textContent=t("stat_zones",getZoneCount(ALL));
+    countPill.textContent = t("count_drivers", ALL.length);
+    onlinePill.textContent = t("online_now", getDirectCount(ALL));
+    statTotal.textContent = t("stat_total", ALL.length);
+    statOnline.textContent = t("stat_online", getDirectCount(ALL));
+    statZones.textContent = t("stat_zones", getZoneCount(ALL));
   }
-
   function passes(d){
-    const z=(zoneFilter.value||"").trim();
-    const q=(qFilter.value||"").trim().toLowerCase();
-    const a=availFilter.value||"all";
-    const hasWa=!!normPhone(d.whatsapp);
-    if(z&&String(d.zone||"")!==z) return false;
-    if(a==="direct"&&!hasWa) return false;
-    if(a==="contact"&&hasWa) return false;
-    if(q){
-      const hay=[d.name,d.city,d.zone,d.car,d.description].join(" ").toLowerCase();
-      if(!hay.includes(q)) return false;
-    }
+    const z=(zoneFilter.value||"").trim(), q=(qFilter.value||"").trim().toLowerCase(), a=availFilter.value||"all", hasWhatsapp=!!normPhone(d.whatsapp);
+    if(z && String(d.zone||"")!==z) return false;
+    if(a==="direct" && !hasWhatsapp) return false;
+    if(a==="contact" && hasWhatsapp) return false;
+    if(q){const hay=[d.name,d.city,d.zone,d.car,d.vehicle_label,d.description].join(" ").toLowerCase(); if(!hay.includes(q)) return false;}
     return true;
   }
+  function getFilteredItems(){return sortDrivers(ALL.filter(passes));}
 
-  function initials(name){
-    const parts=String(name||"").trim().split(/\s+/).filter(Boolean).slice(0,2);
-    return parts.map(p=>p[0]?.toUpperCase()||"").join("")||"DA";
-  }
-
-  function rememberCommanderMeta(driver){
-    try{
-      const wa=normPhone(driver?.whatsapp);
-      if(wa) sessionStorage.setItem("digiy_driver_order_wa",wa);
-      else sessionStorage.removeItem("digiy_driver_order_wa");
-      if(driver?.name) sessionStorage.setItem("digiy_driver_order_name",String(driver.name));
-      else sessionStorage.removeItem("digiy_driver_order_name");
-      if(driver?.slug) sessionStorage.setItem("digiy_driver_order_slug",String(driver.slug));
-      else sessionStorage.removeItem("digiy_driver_order_slug");
-    }catch(_){}
-  }
-
-  function bindOrderButtons(){
-    driversEl.querySelectorAll(".js-order-btn").forEach(el=>{
-      el.addEventListener("click",()=>{
-        try{ const raw=el.getAttribute("data-driver")||"{}"; rememberCommanderMeta(JSON.parse(raw)); }catch(_){}
-      });
-    });
-  }
-
-  /* ─── QR code init ─── */
-  function renderQR(containerId, url){
-    const el=document.getElementById(containerId);
-    if(!el) return;
-    if(typeof QRCode==="undefined"){ el.textContent="QR"; return; }
-    try{
-      new QRCode(el,{
-        text: url,
-        width: 116, height: 116,
-        colorDark: "#d4a853",
-        colorLight: "#050810",
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    }catch(e){ console.warn("QR",e); }
-  }
-
-  function getFilteredItems(){ return sortDrivers(ALL.filter(passes)); }
-
-  /* ─── Featured card ─── */
   function renderFeaturedCard(items){
-    if(!featuredCardArea) return;
-    const list=Array.isArray(items)?items:[];
-    const d=list[0];
-
+    const d = (Array.isArray(items) && items[0]) ? items[0] : null;
     if(!d){
-      featuredCardArea.className="featured-empty";
-      featuredCardArea.innerHTML=`
-        <div style="font-weight:900;color:var(--text);margin-bottom:8px;font-family:var(--serif);font-size:18px;">${esc(t("featured_empty"))}</div>
-        <a class="btn btn-main" href="${esc(FEATURED_PUBLIC_CARD_URL)}" rel="noopener">🎴 Voir la carte chauffeur</a>
-      `;
+      featuredCardArea.className = "featured-empty";
+      featuredCardArea.innerHTML = `<div style="font-weight:950;color:#fff4c7;margin-bottom:10px">${esc(t("featured_empty"))}</div><a class="btn btn-main" href="${esc(FEATURED_PUBLIC_CARD_URL)}" rel="noopener">🎴 ${esc(t("nav_public_card"))}</a>`;
       return;
     }
+    const name=d.name || t("driver_default_name"), city=esc(d.city||""), zone=esc(d.zone||""), car=esc(d.car||d.vehicle_label||""), desc=esc(d.description || t("driver_desc_default"));
+    const rating=(d.rating!=null && d.rating!=="") ? Number(d.rating) : null;
+    const wa=normPhone(d.whatsapp), profile=publicUrlForDriver(d), order=commanderUrlForDriver(d), photo=photoForDriver(d), qr=qrUrl(profile,180);
+    featuredCardArea.className = "featured-card";
+    featuredCardArea.innerHTML = `
+      <div class="featured-photo"><img src="${esc(photo)}" alt="Photo de ${esc(name)}" loading="lazy" onerror="this.src='${esc(DEFAULT_DRIVER_PHOTO)}'"><span>${esc(initials(name))}</span></div>
+      <div>
+        <div class="featured-name">${esc(name)}</div>
+        <div class="featured-role">${esc(t("featured_label"))}</div>
+        <div class="meta">
+          ${city?`<span class="tag">🏙️ ${city}</span>`:""}
+          ${zone?`<span class="tag">📍 ${zone}</span>`:""}
+          ${car?`<span class="tag">🚗 ${car}</span>`:""}
+          ${wa?`<span class="tag green">${esc(t("tag_online"))}</span>`:`<span class="tag off">${esc(t("tag_offline"))}</span>`}
+          ${(rating && !Number.isNaN(rating)) ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>`:""}
+        </div>
+        <div class="desc">${desc}</div>
+        <div class="actions">
+          ${wa?`<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("featured_whatsapp"))}</a>`:`<button class="btn btn-main" disabled>${esc(t("featured_whatsapp"))}</button>`}
+          <a class="btn btn-ghost" href="${esc(profile)}" rel="noopener">${esc(t("featured_profile"))}</a>
+          <a class="btn btn-blue js-order-btn" href="${esc(order)}" rel="noopener" data-driver='${esc(JSON.stringify({name:d.name||"",whatsapp:wa||"",slug:d.slug||""}))}'>${esc(t("featured_order"))}</a>
+        </div>
+      </div>
+      <div class="featured-qr"><img src="${esc(qr)}" alt="QR code de ${esc(name)}" loading="lazy"><small>${esc(t("scan_label"))}</small></div>
+    `;
+    bindOrderButtons(featuredCardArea);
+  }
 
-    const name      = d.name||t("driver_default_name");
-    const city      = esc(d.city||"");
-    const zone      = esc(d.zone||"");
-    const car       = esc(d.car||"");
-    const desc      = esc(d.description||t("driver_desc_default"));
-    const rating    = (d.rating!=null&&d.rating!=="")? Number(d.rating):null;
-    const wa        = normPhone(d.whatsapp);
-    const mono      = esc(initials(name));
-    const profileUrl= d.slug?profileUrlForDriver(d):"";
-    const orderUrl  = commanderUrlForDriver(d);
-    const qrTarget  = profileUrl||GALLERY_CANONICAL;
-    const qrId      = "featured-qr-"+Date.now();
-
-    featuredCardArea.className="";
-    featuredCardArea.innerHTML=`
-      <div class="featured-inner">
-        <div>
-          <div class="featured-identity">
-            <div class="featured-avatar">${mono}</div>
+  function render(){
+    const items = getFilteredItems();
+    countPill.textContent = t("count_drivers", items.length);
+    renderFeaturedCard(items);
+    if(!items.length){
+      driversEl.innerHTML = `
+        <article class="driver" style="grid-column:1/-1">
+          <div class="name">${esc(t("empty_title"))}</div>
+          <div class="meta"><span class="tag">${esc(t("empty_tag_1"))}</span><span class="tag">${esc(t("empty_tag_2"))}</span></div>
+          <div class="actions"><a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a><a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL,true))}" rel="noopener">${esc(t("btn_order_ride"))}</a></div>
+        </article>`;
+      return;
+    }
+    driversEl.innerHTML = items.map(d=>{
+      const name=d.name || t("driver_default_name"), city=esc(d.city||""), zone=esc(d.zone||""), car=esc(d.car||d.vehicle_label||""), desc=esc(d.description || t("driver_desc_default"));
+      const wa=normPhone(d.whatsapp), rating=(d.rating!=null && d.rating!=="") ? Number(d.rating) : null, profile=publicUrlForDriver(d), order=commanderUrlForDriver(d), photo=photoForDriver(d), qr=qrUrl(profile,140);
+      const payload=esc(JSON.stringify({name:d.name||"",whatsapp:wa||"",slug:d.slug||""}));
+      return `
+        <article class="driver">
+          <div class="driver-top">
+            <div class="thumb"><img src="${esc(photo)}" alt="Photo de ${esc(name)}" loading="lazy" onerror="this.src='${esc(DEFAULT_DRIVER_PHOTO)}'"><span class="mono">${esc(initials(name))}</span></div>
             <div>
-              <div class="featured-name">${esc(name)}</div>
-              <div class="featured-role">${esc(t("featured_card_label"))}</div>
-              <div class="featured-meta">
+              <div class="driver-headline"><div><div class="name">${esc(name)}</div><div class="role">${esc(t("driver_tagline"))}</div></div><div class="side-badge">${esc(t("pill_public"))}</div></div>
+              <div class="meta">
                 ${city?`<span class="tag">🏙️ ${city}</span>`:""}
                 ${zone?`<span class="tag">📍 ${zone}</span>`:""}
                 ${car?`<span class="tag">🚗 ${car}</span>`:""}
-                ${wa?`<span class="tag vert">${esc(t("tag_online"))}</span>`:`<span class="tag off">${esc(t("tag_offline"))}</span>`}
-                ${(rating&&!Number.isNaN(rating))?`<span class="tag or">⭐ ${rating.toFixed(1)}</span>`:""}
+                ${wa?`<span class="tag green">${esc(t("tag_online"))}</span>`:`<span class="tag off">${esc(t("tag_offline"))}</span>`}
+                ${(rating && !Number.isNaN(rating)) ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>`:""}
               </div>
             </div>
-          </div>
-          <div class="featured-desc">${desc}</div>
-          <div class="featured-actions">
-            ${wa
-              ?`<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("featured_whatsapp"))}</a>`
-              :`<button class="btn btn-main" disabled>${esc(t("featured_whatsapp"))}</button>`}
-            ${profileUrl?`<a class="btn btn-ghost" href="${esc(profileUrl)}" rel="noopener">${esc(t("featured_profile"))}</a>`:""}
-            <a class="btn btn-sky js-order-btn" href="${esc(orderUrl)}" rel="noopener"
-              data-driver='${esc(JSON.stringify({name:d.name||"",whatsapp:wa||"",slug:d.slug||""}))}'>
-              ${esc(t("featured_order"))}
-            </a>
-          </div>
-        </div>
-        <div class="qr-wrap">
-          <div class="qr-box" id="${esc(qrId)}"></div>
-          <div class="qr-label">${esc(t("qr_label"))}<br>Galerie DIGIY</div>
-        </div>
-      </div>
-    `;
-
-    // Render QR
-    setTimeout(()=>renderQR(qrId, qrTarget), 60);
-    bindOrderButtons();
-  }
-
-  /* ─── Main render ─── */
-  function render(){
-    const items=getFilteredItems();
-    countPill.textContent=t("count_drivers",items.length);
-    renderFeaturedCard(items);
-
-    if(!items.length){
-      driversEl.innerHTML=`
-        <div class="driver" style="grid-column:1/-1">
-          <div class="name" style="font-family:var(--serif)">${esc(t("empty_title"))}</div>
-          <div class="meta">
-            <span class="tag">${esc(t("empty_tag_1"))}</span>
-            <span class="tag">${esc(t("empty_tag_2"))}</span>
-          </div>
-          <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("btn_support_whatsapp"))}</a>
-            <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL,true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
-            <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL,false))}" rel="noopener">${esc(t("nav_site"))}</a>
-          </div>
-        </div>
-      `;
-      bindOrderButtons();
-      return;
-    }
-
-    driversEl.innerHTML=items.map(d=>{
-      const name    = d.name||t("driver_default_name");
-      const nameEsc = esc(name);
-      const city    = esc(d.city||"");
-      const zone    = esc(d.zone||"");
-      const car     = esc(d.car||"");
-      const desc    = esc(d.description||t("driver_desc_default"));
-      const rating  = (d.rating!=null&&d.rating!=="")? Number(d.rating):null;
-      const wa      = normPhone(d.whatsapp);
-      const mono    = esc(initials(name));
-      const driverPayload=esc(JSON.stringify({name:d.name||"",whatsapp:wa||"",slug:d.slug||""}));
-
-      const statusTag=wa
-        ?`<span class="tag vert">${esc(t("tag_online"))}</span>`
-        :`<span class="tag off">${esc(t("tag_offline"))}</span>`;
-      const rateTag=(rating&&!Number.isNaN(rating))
-        ?`<span class="tag or">⭐ ${rating.toFixed(1)}</span>`
-        :"";
-
-      return `
-        <div class="driver">
-          <div class="driver-top">
-            <div class="identity">
-              <div class="avatar">${mono}</div>
-              <div class="identity-copy">
-                <div class="name">${nameEsc}</div>
-                <div class="titleline">${esc(t("driver_tagline"))}</div>
-                <div class="meta">
-                  ${city?`<span class="tag">🏙️ ${city}</span>`:""}
-                  ${zone?`<span class="tag">📍 ${zone}</span>`:""}
-                  ${car?`<span class="tag">🚗 ${car}</span>`:""}
-                  ${statusTag}
-                  ${rateTag}
-                </div>
-              </div>
-            </div>
-            <div class="side-badge">${esc(t("pill_public"))}</div>
           </div>
           <div class="desc">${desc}</div>
-          <div class="actions">
-            ${wa
-              ?`<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("btn_whatsapp"))}</a>`
-              :`<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`}
-            ${d.slug?`<a class="btn btn-ghost" href="${esc(profileUrlForDriver(d))}" rel="noopener">${esc(t("btn_profile"))}</a>`:""}
-            <a class="btn btn-sky js-order-btn" href="${esc(commanderUrlForDriver(d))}" rel="noopener"
-              data-driver='${driverPayload}'>${esc(t("btn_order_ride"))}</a>
+          <div class="card-bottom">
+            <div class="actions">
+              ${wa?`<a class="btn btn-main" href="https://wa.me/${wa}" target="_blank" rel="noopener">${esc(t("btn_whatsapp"))}</a>`:`<button class="btn btn-main" disabled>${esc(t("btn_whatsapp"))}</button>`}
+              <a class="btn btn-ghost" href="${esc(profile)}" rel="noopener">${esc(t("btn_profile"))}</a>
+              <a class="btn btn-blue js-order-btn" href="${esc(order)}" rel="noopener" data-driver='${payload}'>${esc(t("btn_order_ride"))}</a>
+            </div>
+            <div class="mini-qr"><img src="${esc(qr)}" alt="QR code de ${esc(name)}" loading="lazy"><span>${esc(t("scan_label"))}</span></div>
           </div>
-        </div>
-      `;
+        </article>`;
     }).join("");
-
-    bindOrderButtons();
+    bindOrderButtons(driversEl);
   }
 
-  /* ─── Load ─── */
+  function applyLanguage(lang){
+    CURRENT_LANG = lang === "wo" ? "wo" : "fr";
+    localStorage.setItem("digiy_lang", CURRENT_LANG);
+    document.documentElement.setAttribute("lang", CURRENT_LANG === "wo" ? "wo" : "fr");
+    document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent = t(el.dataset.i18n);});
+    qFilter?.setAttribute("placeholder", t("search_ph"));
+    $("lang-fr")?.classList.toggle("active", CURRENT_LANG === "fr");
+    $("lang-wo")?.classList.toggle("active", CURRENT_LANG === "wo");
+    refreshTopStats();
+    render();
+  }
+
+  [
+    ["floatingSiteBtn",SITE_URL,false],["siteBtnTop",SITE_URL,false],["siteBtnBottom",SITE_URL,false],
+    ["galleryBtnTop",GALLERY_URL,false],["galleryBtnBottom",GALLERY_URL,false],
+    ["publicCardBtnTop",FEATURED_PUBLIC_CARD_URL,false],["publicCardBtnHero",FEATURED_PUBLIC_CARD_URL,false],["publicCardBtnSection",FEATURED_PUBLIC_CARD_URL,false],["publicCardBtnBottom",FEATURED_PUBLIC_CARD_URL,false],
+    ["orderBtnTop",ORDER_RIDE_URL,true],["orderBtnBottom",ORDER_RIDE_URL,true],["joinBtnTop",DRIVER_JOIN_URL,true],["joinBtnBottom",DRIVER_JOIN_URL,true]
+  ].forEach(([id,url,keepSlug])=>{const el=$(id); if(el) el.href = hrefFor(url, keepSlug);});
+  $("heroQr").src = qrUrl(FEATURED_PUBLIC_CARD_URL,180);
+
   async function load(){
-    liveBadge.textContent=t("badge_loading");
-    if(badgeTop) badgeTop.textContent=t("badge_loading");
+    liveBadge.textContent = t("badge_loading");
+    badgeTop.textContent = t("badge_loading");
     try{
-      const {data,error}=await sb.rpc("digiy_driver_public_gallery");
+      const { data, error } = await sb.rpc("digiy_driver_public_gallery");
       if(error) throw error;
-      ALL=Array.isArray(data)?data:[];
-      rebuildZoneOptions(ALL);
-      refreshTopStats();
-      liveBadge.textContent=t("badge_public");
-      if(badgeTop) badgeTop.textContent=t("badge_public");
+      ALL = Array.isArray(data) ? data : [];
+      rebuildZoneOptions(ALL); refreshTopStats();
+      liveBadge.textContent = t("badge_public"); badgeTop.textContent = t("badge_public");
       render();
     }catch(e){
-      console.warn("Public gallery error:",e);
-      liveBadge.textContent=t("badge_fallback");
-      if(badgeTop) badgeTop.textContent=t("badge_fallback");
-      countPill.textContent="…"; onlinePill.textContent="…";
-      statTotal.textContent="—"; statOnline.textContent="—"; statZones.textContent="—";
-      ALL=[];
-      driversEl.innerHTML=`
-        <div class="driver" style="grid-column:1/-1">
-          <div class="name" style="font-family:var(--serif)">${esc(t("fallback_title"))}</div>
-          <div class="meta">
-            <span class="tag">${esc(t("fallback_tag_1"))}</span>
-            <span class="tag">${esc(t("fallback_tag_2"))}</span>
-          </div>
-          <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a>
-            <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL,true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
-            <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL,false))}" rel="noopener">${esc(t("nav_site"))}</a>
-          </div>
-        </div>
-      `;
+      console.warn("DIGIY DRIVER gallery error:", e);
+      ALL = [];
+      rebuildZoneOptions(ALL); refreshTopStats();
+      liveBadge.textContent = t("badge_fallback"); badgeTop.textContent = t("badge_fallback");
+      driversEl.innerHTML = `<article class="driver" style="grid-column:1/-1"><div class="name">${esc(t("fallback_title"))}</div><div class="meta"><span class="tag">${esc(t("fallback_tag_1"))}</span><span class="tag">${esc(t("fallback_tag_2"))}</span></div><div class="actions"><a class="btn btn-main" href="https://wa.me/221771342889" rel="noopener">${esc(t("cta_whatsapp"))}</a><a class="btn btn-ghost" href="${esc(FEATURED_PUBLIC_CARD_URL)}" rel="noopener">${esc(t("nav_public_card"))}</a></div></article>`;
+      renderFeaturedCard([]);
       toast(t("toast_fallback"));
     }
   }
 
-  /* ─── Events ─── */
+  $("lang-fr").addEventListener("click",()=>applyLanguage("fr"));
+  $("lang-wo").addEventListener("click",()=>applyLanguage("wo"));
   zoneFilter.addEventListener("change",render);
   availFilter.addEventListener("change",render);
-  qFilter.addEventListener("input",()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(render,120); });
+  qFilter.addEventListener("input",()=>{clearTimeout(searchTimer); searchTimer=setTimeout(render,120);});
 
   applyLanguage(CURRENT_LANG);
   load();
 </script>
 
-<!-- ── AUDIO CHAUFFEUR ── -->
 <script>
 (function(){
-  var TEXTE="Bienvenue. Ici, tu peux trouver un chauffeur disponible tout de suite. Appelle directement, discute du prix et pars sans attendre. Pas d'intermédiaire. Tu vois le chauffeur, tu le contactes. Simple. DIGIYLYFE.";
-  var btn=document.getElementById('digiy-audio-driver');
-  if(!('speechSynthesis' in window)){if(btn)btn.style.display='none';return;}
-  var synth=window.speechSynthesis,playing=false,utt;
-  function stop(){synth.cancel();playing=false;btn.innerHTML="🎧 Écouter";}
-  function play(){synth.cancel();utt=new SpeechSynthesisUtterance(TEXTE);utt.lang='fr-FR';utt.rate=0.9;utt.onend=stop;synth.speak(utt);playing=true;btn.innerHTML="■ Arrêter";}
-  btn.onclick=function(){playing?stop():play();};
+  const btn = document.getElementById("digiy-audio-driver");
+  if(!btn || !("speechSynthesis" in window)) return;
+  const TEXTE = "Bienvenue dans DIGIY DRIVER. Ici, le chauffeur n'est pas perdu dans la masse. Il se présente proprement, avec sa photo, sa zone, son véhicule, son QR et son WhatsApp direct. Le client voit, scanne, contacte, et le terrain garde la main. Discrétion, ponctualité, savoir-vivre. DIGIYLYFE.";
+  const synth = window.speechSynthesis;
+  let playing = false;
+  function stop(){synth.cancel(); playing=false; btn.textContent="🎧 Écouter DIGIY";}
+  function play(){
+    synth.cancel();
+    const utt = new SpeechSynthesisUtterance(TEXTE);
+    utt.lang = "fr-FR"; utt.rate = .86; utt.pitch = 1.02; utt.onend = stop;
+    synth.speak(utt); playing=true; btn.textContent="■ Arrêter";
+  }
+  btn.addEventListener("click",()=> playing ? stop() : play());
+  window.addEventListener("pagehide",stop);
 })();
 </script>
 
-<!-- DIGIY GALERIE CHAUFFEURS — VERSION RAFFINÉE — 20260514 -->
+<!-- DIGIY DRIVER AMBASSADEUR — Vitrine publique premium QR/photo — 20260514 -->
 </body>
 </html>
