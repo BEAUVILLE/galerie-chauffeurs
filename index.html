@@ -232,6 +232,12 @@
       border-color:transparent;
     }
 
+    .hero-action.gold{
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      color:#071018;
+      border-color:transparent;
+    }
+
     .pill{
       border-radius:999px;
       padding:8px 12px;
@@ -843,6 +849,7 @@
       <a class="top-link" href="https://digiylyfe.com/" data-i18n="top_site">🌍 Site</a>
       <a class="top-link green" href="https://digiy-hub.digiylyfe.com/" data-i18n="top_hub">🧭 HUB</a>
       <a class="top-link gold" href="https://tarifs.digiylyfe.com/" data-i18n="top_tarifs">📦 Tarifs</a>
+      <a class="top-link gold" id="cardBtnTop" href="https://pro-driver.digiylyfe.com/qr.html" data-i18n="top_card">🎴 Carte pro</a>
       <div class="pill gold"><span>👑</span><span data-i18n="pill_class">Sélection Ambassadeur</span></div>
       <div class="pill green"><span class="dot"></span><span id="onlinePill">…</span></div>
       <div class="pill" id="countPill">…</div>
@@ -879,6 +886,7 @@
           <a class="hero-action main" href="https://digiylyfe.com/" data-i18n="hero_site">🌍 Retour site DIGIYLYFE</a>
           <a class="hero-action green" href="https://digiy-hub.digiylyfe.com/" data-i18n="hero_hub">🧭 Ouvrir le HUB</a>
           <a class="hero-action" href="https://tarifs.digiylyfe.com/" data-i18n="hero_tarifs">📦 Voir les tarifs</a>
+          <a class="hero-action gold" id="heroCardBtn" href="https://pro-driver.digiylyfe.com/qr.html" data-i18n="hero_card">🎴 Ma carte numérique</a>
         </div>
       </div>
 
@@ -927,6 +935,7 @@
       <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Réserver un chauffeur</a>
       <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">🦅 Rejoindre la sélection</a>
       <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Mon espace chauffeur</a>
+      <a class="navBtn gold" id="cardBtnSection" href="#" data-i18n="nav_card">🎴 Ma carte numérique</a>
     </div>
 
     <div class="bar" style="margin-top:14px;">
@@ -967,6 +976,7 @@
       <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Réserver un chauffeur</a>
       <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">Rejoindre la sélection</a>
       <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Mon espace chauffeur</a>
+      <a class="btn btn-main" id="cardBtnBottom" href="#" data-i18n="nav_card">🎴 Ma carte numérique</a>
     </div>
   </div>
 </div>
@@ -985,9 +995,11 @@
       top_site: "🌍 Site",
       top_hub: "🧭 HUB",
       top_tarifs: "📦 Tarifs",
+      top_card: "🎴 Carte pro",
       hero_site: "🌍 Retour site DIGIYLYFE",
       hero_hub: "🧭 Ouvrir le HUB",
       hero_tarifs: "📦 Voir les tarifs",
+      hero_card: "🎴 Ma carte numérique",
 
       hero_eyebrow: "Galerie publique premium",
       hero_title: "DIGIY DRIVER AMBASSADEUR",
@@ -1016,6 +1028,7 @@
       nav_order: "📲 Demander un chauffeur",
       nav_recruit: "🦅 Rejoindre la sélection",
       nav_cockpit: "🔐 Accès chauffeur",
+      nav_card: "🎴 Ma carte numérique",
 
       label_zone: "📍 Zone recherchée",
       zone_all: "Toutes",
@@ -1071,9 +1084,11 @@
       top_site: "🌍 Site",
       top_hub: "🧭 HUB",
       top_tarifs: "📦 Tarifs",
+      top_card: "🎴 Carte pro",
       hero_site: "🌍 Retour site DIGIYLYFE",
       hero_hub: "🧭 Ouvrir le HUB",
       hero_tarifs: "📦 Voir les tarifs",
+      hero_card: "🎴 Ma carte numérique",
 
       hero_eyebrow: "Galerie publique premium",
       hero_title: "DIGIY DRIVER AMBASSADEUR",
@@ -1102,6 +1117,7 @@
       nav_order: "📲 Demander un chauffeur",
       nav_recruit: "🦅 Duggal ci sélection bi",
       nav_cockpit: "🚖 Sama espace chauffeur",
+      nav_card: "🎴 Sama carte numérique",
 
       label_zone: "📍 Zone bi nga seet",
       zone_all: "Yépp",
@@ -1223,6 +1239,7 @@
   const ORDER_RIDE_URL = "https://driver.digiylyfe.com/commander-course.html";
   const DRIVER_JOIN_URL = "https://commencer-a-payer.digiylyfe.com/?module=DRIVER";
   const COCKPIT_URL = "https://pro-driver.digiylyfe.com/pin.html";
+  const CARD_URL = "https://pro-driver.digiylyfe.com/qr.html";
   const PROFILE_URL = digiyLocal("fiche-chauffeur.html");
 
   function hrefFor(url, keepSlug = true){
@@ -1319,7 +1336,11 @@
     ["joinBtnTop", DRIVER_JOIN_URL, true],
     ["joinBtnBottom", DRIVER_JOIN_URL, true],
     ["cockpitBtnTop", COCKPIT_URL, false],
-    ["cockpitBtnBottom", COCKPIT_URL, false]
+    ["cockpitBtnBottom", COCKPIT_URL, false],
+    ["cardBtnTop", CARD_URL, true],
+    ["heroCardBtn", CARD_URL, true],
+    ["cardBtnSection", CARD_URL, true],
+    ["cardBtnBottom", CARD_URL, true]
   ].forEach(([id, url, keepSlug])=>{
     const el = document.getElementById(id);
     if (el) el.href = hrefFor(url, keepSlug);
@@ -1681,4 +1702,5 @@ btn.onclick = function(){
 <!-- DIGIY GALERIE CHAUFFEURS INDEX — RPC PUBLIC GALLERY V3 — 20260504 -->
 </body>
 </html>
+
 
