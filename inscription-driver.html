@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#123c2d"/>
   <meta name="robots" content="index,follow"/>
-  <meta name="digiy-version" content="inscription-driver-fiche-message-whatsapp-memoire-20260608"/>
+  <meta name="digiy-version" content="inscription-driver-fiche-verifiee-no-precheck-20260608"/>
 
   <title>Inscription chauffeur — DIGIY DRIVER</title>
   <meta name="description" content="Inscription chauffeur DIGIY DRIVER : Jakarta, bus, taxi-local, VTC, chauffeur privé. Contact direct, 0% commission, fiche chauffeur et QR."/>
@@ -436,14 +436,16 @@
       <h1>Inscription chauffeur</h1>
       <p>
         Remplis ta fiche chauffeur. DIGIY prépare le message propre avec tes infos,
-        ton tarif choisi, ton paiement Wave et ta demande d’activation.
+        ton tarif choisi volontairement, ton paiement Wave et ta demande d’inscription.
+        Le paiement ne publie pas automatiquement la fiche : DIGIY vérifie d’abord que la présentation est complète, lisible et cohérente.
       </p>
 
       <div class="pills">
-        <span class="pill">Fiche chauffeur</span>
+        <span class="pill">Fiche chauffeur vérifiée</span>
         <span class="pill">QR & carte digitale</span>
         <span class="pill">0% commission</span>
         <span class="pill">Contact direct WhatsApp</span>
+        <span class="pill">Aucun tarif précoché</span>
       </div>
     </section>
 
@@ -459,7 +461,7 @@
 
           <div class="field">
             <label for="phone">Téléphone WhatsApp</label>
-            <input id="phone" placeholder="Ex : +221 77 000 00 00" inputmode="tel" autocomplete="tel" required/>
+            <input id="phone" placeholder="Ex : +221 77 000 00 00" autocomplete="tel" inputmode="tel" required/>
           </div>
         </div>
 
@@ -490,38 +492,38 @@
 
           <div class="field">
             <label for="vehicle">Véhicule</label>
-            <input id="vehicle" placeholder="Ex : Toyota, Hyundai, Jakarta, bus" autocomplete="off"/>
+            <input id="vehicle" placeholder="Ex : Toyota, Hyundai, Jakarta, bus"/>
           </div>
         </div>
 
         <div class="row">
           <div class="field">
             <label for="places">Nombre de places</label>
-            <input id="places" placeholder="Ex : 4 places" autocomplete="off"/>
+            <input id="places" placeholder="Ex : 4 places"/>
           </div>
 
           <div class="field">
             <label for="services">Services</label>
-            <input id="services" placeholder="Ex : AIBD, courses, circuits, nuit" autocomplete="off"/>
+            <input id="services" placeholder="Ex : AIBD, courses, circuits, nuit"/>
           </div>
         </div>
 
         <div class="field">
           <label for="bio">Petite présentation</label>
-          <textarea id="bio" autocomplete="off" placeholder="Ex : Chauffeur sérieux, ponctuel, disponible pour transferts AIBD et déplacements sur la Petite Côte."></textarea>
+          <textarea id="bio" placeholder="Ex : Chauffeur sérieux, ponctuel, disponible pour transferts AIBD et déplacements sur la Petite Côte."></textarea>
         </div>
       </form>
 
       <aside class="card gold">
         <h2>2 · Tarif & paiement Wave</h2>
         <p class="note">
-          Choisis ton niveau DRIVER, puis paie par Wave. Après paiement, indique la preuve :
-          nom utilisé, montant, date/heure ou référence Wave.
+          Choisis volontairement ton niveau DRIVER, puis paie par Wave. Aucun tarif n’est précoché.
+          Après paiement, indique la preuve : nom utilisé, montant, date/heure ou référence Wave.
         </p>
 
         <div class="tarifs" role="radiogroup" aria-label="Choix tarif chauffeur">
           <label class="tarif">
-            <input type="radio" name="plan" value="DRIVER Jakarta" data-code="1A" data-amount="5500" data-eur="9" checked/>
+            <input type="radio" name="plan" value="DRIVER Jakarta" data-code="1A" data-amount="5500" data-eur="9"/>
             1A · Jakarta
             <strong>5 500 FCFA</strong>
             <small>9 € · présence simple</small>
@@ -560,29 +562,31 @@
 
           <div class="payline">
             <b>Montant choisi</b>
-            <span id="payAmount">5 500 FCFA · 9 €</span>
+            <span id="payAmount">Choisis un tarif</span>
           </div>
         </div>
 
         <div class="proofHint">
           Après paiement Wave, envoie la capture ou la preuve sur WhatsApp.
-          DIGIY vérifie puis accompagne l’ouverture DRIVER.
+          DIGIY vérifie le paiement et la qualité de présentation avant affichage public.
+        </div>
+
+        <div class="proofHint">
+          <strong>Fiche vérifiée DIGIY.</strong><br>
+          DIGIY vérifie que les informations sont complètes, lisibles et cohérentes.
+          DIGIY ne remplace pas les obligations légales du chauffeur : véhicule, documents,
+          conduite et service restent sous la responsabilité du professionnel.
         </div>
 
         <div class="field">
           <label for="paymentRef">📝 Note / preuve paiement</label>
-          <textarea id="paymentRef" autocomplete="off" placeholder="Ex : Paiement Wave envoyé pour DRIVER 1C — 19 900 FCFA — au nom de Lamine Diop — tél +221 77 000 00 00."></textarea>
+          <textarea id="paymentRef" placeholder="Ex : Paiement Wave envoyé pour DRIVER 1C — 19 900 FCFA — au nom de Lamine Diop — tél +221 77 000 00 00."></textarea>
         </div>
 
         <div class="actions">
           <button class="btn gold" type="button" id="buildMsg">Préparer mon message</button>
           <button class="btn" type="button" id="saveLocal">Sauvegarder ici</button>
         </div>
-
-        <p class="note">
-          Les infos saisies peuvent rester mémorisées sur ce téléphone pour éviter de tout retaper.
-          WhatsApp reçoit la fiche chauffeur complète + paiement.
-        </p>
       </aside>
     </section>
 
@@ -600,7 +604,8 @@
 
       <p class="note">
         Rien n’est activé automatiquement : DIGIY reçoit ta demande, vérifie le paiement
-        et prépare ton accès chauffeur.
+        et vérifie seulement la fiche de présentation. Le chauffeur reste responsable de son véhicule,
+        de ses documents, de sa conduite et de son service.
       </p>
     </section>
 
@@ -650,11 +655,15 @@
       function chosenPlan(){
         const c = document.querySelector('input[name="plan"]:checked');
 
+        if(!c){
+          return null;
+        }
+
         return {
-          code: c?.dataset.code || "1C",
-          name: c?.value || "DRIVER",
-          amount: c?.dataset.amount || "19900",
-          eur: c?.dataset.eur || "29"
+          code: c.dataset.code,
+          name: c.value,
+          amount: c.dataset.amount,
+          eur: c.dataset.eur
         };
       }
 
@@ -675,38 +684,43 @@
 
       function updateAmount(){
         const p = chosenPlan();
-        els.payAmount.textContent = fmtFcfa(p.amount) + " FCFA · " + p.eur + " €";
+        els.payAmount.textContent = p
+          ? fmtFcfa(p.amount) + " FCFA · " + p.eur + " €"
+          : "Choisis un tarif";
       }
 
       function buildMessage(){
         const p = chosenPlan();
         const paymentNote = val("paymentRef") || "à compléter après paiement Wave";
+        const planLine = p ? (p.code + " · " + p.name) : "à choisir volontairement";
+        const amountLine = p ? (fmtFcfa(p.amount) + " FCFA · " + p.eur + " €") : "à compléter";
 
         const msg = [
           "Bonjour JB, je souhaite faire mon inscription chauffeur DIGIY DRIVER.",
           "",
+          "STATUT : dossier reçu · paiement et fiche à vérifier avant affichage public.",
+          "DIGIY vérifie la fiche de présentation, pas une certification chauffeur officielle.",
+          "",
           "Date de demande : " + nowFr(),
           "",
-          "PAIEMENT",
-          "Module : " + p.code + " · " + p.name,
-          "Montant choisi : " + fmtFcfa(p.amount) + " FCFA · " + p.eur + " €",
-          "Paiement Wave : " + WAVE_LABEL,
-          "Note / preuve paiement : " + paymentNote,
+          "🚗 Module : " + planLine,
+          "💳 Montant choisi : " + amountLine,
+          "🏦 Paiement Wave : " + WAVE_LABEL,
+          "📝 Note / preuve paiement : " + paymentNote,
           "",
-          "INFOS CHAUFFEUR",
-          "Nom chauffeur : " + (val("fullName") || "à compléter"),
-          "Téléphone WhatsApp : " + (val("phone") || "à compléter"),
-          "Ville : " + (val("city") || "à compléter"),
-          "Zone : " + (val("zone") || "à compléter"),
-          "Type de transport : " + (val("transportType") || "à compléter"),
-          "Véhicule : " + (val("vehicle") || "à compléter"),
-          "Places : " + (val("places") || "à compléter"),
-          "Services : " + (val("services") || "à compléter"),
+          "👤 Nom chauffeur : " + (val("fullName") || "à compléter"),
+          "📞 Téléphone : " + (val("phone") || "à compléter"),
+          "🏙️ Ville : " + (val("city") || "à compléter"),
+          "📍 Zone : " + (val("zone") || "à compléter"),
+          "🚕 Type : " + (val("transportType") || "à compléter"),
+          "🚘 Véhicule : " + (val("vehicle") || "à compléter"),
+          "👥 Places : " + (val("places") || "à compléter"),
+          "🧭 Services : " + (val("services") || "à compléter"),
           "",
-          "PRÉSENTATION",
+          "📝 Présentation :",
           val("bio") || "à compléter",
           "",
-          "Merci de vérifier mon paiement et de préparer mon accès DIGIY DRIVER."
+          "Merci de vérifier mon paiement, la cohérence de ma fiche, puis de préparer mon accès DIGIY DRIVER."
         ].join("\n");
 
         els.resultBox.textContent = msg;
@@ -743,7 +757,11 @@
         }
       });
 
-      function collectLocalData(){
+      document.getElementById("saveLocal").addEventListener("click", function(){
+        saveLocalDraft(false);
+      });
+
+      function saveLocalDraft(silent){
         const data = {};
 
         [
@@ -760,34 +778,14 @@
         ].forEach(k => data[k] = val(k));
 
         data.plan = chosenPlan();
-        data.updated_at = new Date().toISOString();
-        return data;
-      }
 
-      function saveFormLocal(showAlert){
         try{
-          localStorage.setItem("digiy_driver_inscription_form", JSON.stringify(collectLocalData()));
-          if(showAlert) alert("Fiche sauvegardée sur ce téléphone ✅");
+          localStorage.setItem("digiy_driver_inscription_form", JSON.stringify(data));
+          if(!silent) alert("Fiche sauvegardée sur ce téléphone ✅");
         }catch(_){
-          if(showAlert) alert("Sauvegarde locale impossible sur cet appareil.");
+          if(!silent) alert("Sauvegarde locale impossible sur cet appareil.");
         }
       }
-
-      document.getElementById("saveLocal").addEventListener("click", function(){
-        saveFormLocal(true);
-      });
-
-      ["fullName","phone","city","zone","transportType","vehicle","places","services","bio","paymentRef"].forEach(function(id){
-        if(!els[id]) return;
-
-        els[id].addEventListener("input", function(){
-          saveFormLocal(false);
-        });
-
-        els[id].addEventListener("change", function(){
-          saveFormLocal(false);
-        });
-      });
 
       try{
         const raw = localStorage.getItem("digiy_driver_inscription_form");
@@ -802,16 +800,25 @@
           });
 
           if(data.plan && data.plan.code){
-            const planInput = document.querySelector('input[name="plan"][data-code="' + data.plan.code + '"]');
-            if(planInput) planInput.checked = true;
+            const radio = document.querySelector('input[name="plan"][data-code="' + data.plan.code + '"]');
+            if(radio) radio.checked = true;
           }
         }
       }catch(_){}
+
+      Object.keys(els).forEach(k => {
+        const el = els[k];
+        if(!el || !el.addEventListener) return;
+        el.addEventListener("input", () => saveLocalDraft(true));
+        el.addEventListener("change", () => saveLocalDraft(true));
+      });
 
       updateAmount();
     })();
   </script>
 </body>
 </html>
+
+
 
 
