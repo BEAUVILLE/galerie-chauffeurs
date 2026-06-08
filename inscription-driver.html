@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#123c2d"/>
   <meta name="robots" content="index,follow"/>
-  <meta name="digiy-version" content="inscription-driver-fiche-mobile-terrain-wave-note-20260604"/>
+  <meta name="digiy-version" content="inscription-driver-fiche-message-whatsapp-memoire-20260608"/>
 
   <title>Inscription chauffeur — DIGIY DRIVER</title>
   <meta name="description" content="Inscription chauffeur DIGIY DRIVER : Jakarta, bus, taxi-local, VTC, chauffeur privé. Contact direct, 0% commission, fiche chauffeur et QR."/>
@@ -454,24 +454,24 @@
         <div class="row">
           <div class="field">
             <label for="fullName">Nom complet</label>
-            <input id="fullName" placeholder="Ex : Lamine Diop" required/>
+            <input id="fullName" placeholder="Ex : Lamine Diop" autocomplete="name" required/>
           </div>
 
           <div class="field">
             <label for="phone">Téléphone WhatsApp</label>
-            <input id="phone" placeholder="Ex : +221 77 000 00 00" required/>
+            <input id="phone" placeholder="Ex : +221 77 000 00 00" inputmode="tel" autocomplete="tel" required/>
           </div>
         </div>
 
         <div class="row">
           <div class="field">
             <label for="city">Ville principale</label>
-            <input id="city" placeholder="Ex : Saly, Dakar, Mbour"/>
+            <input id="city" placeholder="Ex : Saly, Dakar, Mbour" autocomplete="address-level2"/>
           </div>
 
           <div class="field">
             <label for="zone">Zone de travail</label>
-            <input id="zone" placeholder="Ex : Petite Côte, AIBD, Dakar"/>
+            <input id="zone" placeholder="Ex : Petite Côte, AIBD, Dakar" autocomplete="address-level2"/>
           </div>
         </div>
 
@@ -490,25 +490,25 @@
 
           <div class="field">
             <label for="vehicle">Véhicule</label>
-            <input id="vehicle" placeholder="Ex : Toyota, Hyundai, Jakarta, bus"/>
+            <input id="vehicle" placeholder="Ex : Toyota, Hyundai, Jakarta, bus" autocomplete="off"/>
           </div>
         </div>
 
         <div class="row">
           <div class="field">
             <label for="places">Nombre de places</label>
-            <input id="places" placeholder="Ex : 4 places"/>
+            <input id="places" placeholder="Ex : 4 places" autocomplete="off"/>
           </div>
 
           <div class="field">
             <label for="services">Services</label>
-            <input id="services" placeholder="Ex : AIBD, courses, circuits, nuit"/>
+            <input id="services" placeholder="Ex : AIBD, courses, circuits, nuit" autocomplete="off"/>
           </div>
         </div>
 
         <div class="field">
           <label for="bio">Petite présentation</label>
-          <textarea id="bio" placeholder="Ex : Chauffeur sérieux, ponctuel, disponible pour transferts AIBD et déplacements sur la Petite Côte."></textarea>
+          <textarea id="bio" autocomplete="off" placeholder="Ex : Chauffeur sérieux, ponctuel, disponible pour transferts AIBD et déplacements sur la Petite Côte."></textarea>
         </div>
       </form>
 
@@ -571,13 +571,18 @@
 
         <div class="field">
           <label for="paymentRef">📝 Note / preuve paiement</label>
-          <textarea id="paymentRef" placeholder="Ex : Paiement Wave envoyé pour DRIVER 1C — 19 900 FCFA — au nom de Lamine Diop — tél +221 77 000 00 00."></textarea>
+          <textarea id="paymentRef" autocomplete="off" placeholder="Ex : Paiement Wave envoyé pour DRIVER 1C — 19 900 FCFA — au nom de Lamine Diop — tél +221 77 000 00 00."></textarea>
         </div>
 
         <div class="actions">
           <button class="btn gold" type="button" id="buildMsg">Préparer mon message</button>
           <button class="btn" type="button" id="saveLocal">Sauvegarder ici</button>
         </div>
+
+        <p class="note">
+          Les infos saisies peuvent rester mémorisées sur ce téléphone pour éviter de tout retaper.
+          WhatsApp reçoit la fiche chauffeur complète + paiement.
+        </p>
       </aside>
     </section>
 
@@ -682,21 +687,23 @@
           "",
           "Date de demande : " + nowFr(),
           "",
-          "🚗 Module : " + p.code + " · " + p.name,
-          "💳 Montant choisi : " + fmtFcfa(p.amount) + " FCFA · " + p.eur + " €",
-          "🏦 Paiement Wave : " + WAVE_LABEL,
-          "📝 Note / preuve paiement : " + paymentNote,
+          "PAIEMENT",
+          "Module : " + p.code + " · " + p.name,
+          "Montant choisi : " + fmtFcfa(p.amount) + " FCFA · " + p.eur + " €",
+          "Paiement Wave : " + WAVE_LABEL,
+          "Note / preuve paiement : " + paymentNote,
           "",
-          "👤 Nom chauffeur : " + (val("fullName") || "à compléter"),
-          "📞 Téléphone : " + (val("phone") || "à compléter"),
-          "🏙️ Ville : " + (val("city") || "à compléter"),
-          "📍 Zone : " + (val("zone") || "à compléter"),
-          "🚕 Type : " + (val("transportType") || "à compléter"),
-          "🚘 Véhicule : " + (val("vehicle") || "à compléter"),
-          "👥 Places : " + (val("places") || "à compléter"),
-          "🧭 Services : " + (val("services") || "à compléter"),
+          "INFOS CHAUFFEUR",
+          "Nom chauffeur : " + (val("fullName") || "à compléter"),
+          "Téléphone WhatsApp : " + (val("phone") || "à compléter"),
+          "Ville : " + (val("city") || "à compléter"),
+          "Zone : " + (val("zone") || "à compléter"),
+          "Type de transport : " + (val("transportType") || "à compléter"),
+          "Véhicule : " + (val("vehicle") || "à compléter"),
+          "Places : " + (val("places") || "à compléter"),
+          "Services : " + (val("services") || "à compléter"),
           "",
-          "📝 Présentation :",
+          "PRÉSENTATION",
           val("bio") || "à compléter",
           "",
           "Merci de vérifier mon paiement et de préparer mon accès DIGIY DRIVER."
@@ -736,7 +743,7 @@
         }
       });
 
-      document.getElementById("saveLocal").addEventListener("click", function(){
+      function collectLocalData(){
         const data = {};
 
         [
@@ -753,13 +760,33 @@
         ].forEach(k => data[k] = val(k));
 
         data.plan = chosenPlan();
+        data.updated_at = new Date().toISOString();
+        return data;
+      }
 
+      function saveFormLocal(showAlert){
         try{
-          localStorage.setItem("digiy_driver_inscription_form", JSON.stringify(data));
-          alert("Fiche sauvegardée sur ce téléphone ✅");
+          localStorage.setItem("digiy_driver_inscription_form", JSON.stringify(collectLocalData()));
+          if(showAlert) alert("Fiche sauvegardée sur ce téléphone ✅");
         }catch(_){
-          alert("Sauvegarde locale impossible sur cet appareil.");
+          if(showAlert) alert("Sauvegarde locale impossible sur cet appareil.");
         }
+      }
+
+      document.getElementById("saveLocal").addEventListener("click", function(){
+        saveFormLocal(true);
+      });
+
+      ["fullName","phone","city","zone","transportType","vehicle","places","services","bio","paymentRef"].forEach(function(id){
+        if(!els[id]) return;
+
+        els[id].addEventListener("input", function(){
+          saveFormLocal(false);
+        });
+
+        els[id].addEventListener("change", function(){
+          saveFormLocal(false);
+        });
       });
 
       try{
@@ -773,6 +800,11 @@
               els[k].value = data[k];
             }
           });
+
+          if(data.plan && data.plan.code){
+            const planInput = document.querySelector('input[name="plan"][data-code="' + data.plan.code + '"]');
+            if(planInput) planInput.checked = true;
+          }
         }
       }catch(_){}
 
@@ -781,4 +813,5 @@
   </script>
 </body>
 </html>
+
 
