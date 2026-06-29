@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#123c2d"/>
   <meta name="robots" content="index,follow"/>
-  <meta name="digiy-version" content="inscription-driver-fiche-verifiee-no-precheck-20260608"/>
+  <meta name="digiy-version" content="inscription-driver-france-senegal-grille-pays-no-jakarta-france-20260629"/>
 
   <title>Inscription chauffeur — DIGIY DRIVER</title>
-  <meta name="description" content="Inscription chauffeur DIGIY DRIVER : Jakarta, bus, taxi-local, VTC, chauffeur privé. Contact direct, 0% commission, fiche chauffeur et QR."/>
+  <meta name="description" content="Inscription chauffeur DIGIY DRIVER : Sénégal et France, fiche chauffeur vérifiée, QR, contact direct, 0% commission. Jakarta disponible au Sénégal uniquement ; France sans Jakarta."/>
 
   <style>
     :root{
@@ -260,6 +260,28 @@
       font-weight:850;
     }
 
+    .tarif.disabled{
+      opacity:.42;
+      filter:grayscale(.2);
+      cursor:not-allowed;
+      position:relative;
+    }
+
+    .tarif.disabled:after{
+      content:"Non proposé en France";
+      display:block;
+      margin-top:8px;
+      width:max-content;
+      max-width:100%;
+      border-radius:999px;
+      border:1px solid rgba(250,204,21,.38);
+      background:rgba(250,204,21,.12);
+      color:#fff8db;
+      padding:6px 9px;
+      font-size:11px;
+      font-weight:1000;
+    }
+
     .waveHero{
       margin-top:10px;
       padding:18px;
@@ -446,6 +468,8 @@
         <span class="pill">0% commission</span>
         <span class="pill">Contact direct WhatsApp</span>
         <span class="pill">Aucun tarif précoché</span>
+        <span class="pill">France : pas de Jakarta</span>
+        <span class="pill">Grille pays · pas taux de change</span>
       </div>
     </section>
 
@@ -467,14 +491,22 @@
 
         <div class="row">
           <div class="field">
-            <label for="city">Ville principale</label>
-            <input id="city" placeholder="Ex : Saly, Dakar, Mbour" autocomplete="address-level2"/>
+            <label for="country">Pays du chauffeur</label>
+            <select id="country">
+              <option value="Senegal">🇸🇳 Sénégal</option>
+              <option value="France">🇫🇷 France</option>
+            </select>
           </div>
 
           <div class="field">
-            <label for="zone">Zone de travail</label>
-            <input id="zone" placeholder="Ex : Petite Côte, AIBD, Dakar" autocomplete="address-level2"/>
+            <label for="city">Ville principale</label>
+            <input id="city" placeholder="Ex : Saly, Dakar, Mbour, Sarlat, Bordeaux, Paris" autocomplete="address-level2"/>
           </div>
+        </div>
+
+        <div class="field">
+          <label for="zone">Zone de travail</label>
+          <input id="zone" placeholder="Ex : Petite Côte, AIBD, Dakar, Sarlat, Arcachon, Bordeaux, Paris" autocomplete="address-level2"/>
         </div>
 
         <div class="row">
@@ -484,7 +516,7 @@
               <option>Chauffeur privé</option>
               <option>Taxi local</option>
               <option>VTC</option>
-              <option>Jakarta</option>
+              <option data-country="Senegal">Jakarta</option>
               <option>Bus / minibus</option>
               <option>Transport touristique</option>
             </select>
@@ -492,7 +524,7 @@
 
           <div class="field">
             <label for="vehicle">Véhicule</label>
-            <input id="vehicle" placeholder="Ex : Toyota, Hyundai, Jakarta, bus"/>
+            <input id="vehicle" placeholder="Ex : Toyota, Hyundai, bus, van, berline"/>
           </div>
         </div>
 
@@ -515,38 +547,39 @@
       </form>
 
       <aside class="card gold">
-        <h2>2 · Tarif & paiement Wave</h2>
+        <h2>2 · Grille pays & règlement</h2>
         <p class="note">
-          Choisis volontairement ton niveau DRIVER, puis paie par Wave. Aucun tarif n’est précoché.
-          Après paiement, indique la preuve : nom utilisé, montant, date/heure ou référence Wave.
+          Choisis volontairement ton niveau DRIVER. La grille Sénégal est en FCFA ; la grille France est en euros,
+          adaptée au marché France et au pouvoir d’achat. Ce n’est pas une conversion au taux de change.
+          France : règlement par Sendwave vers le Wave Sénégal officiel.
         </p>
 
         <div class="tarifs" role="radiogroup" aria-label="Choix tarif chauffeur">
-          <label class="tarif">
-            <input type="radio" name="plan" value="DRIVER Jakarta" data-code="1A" data-amount="5500" data-eur="9"/>
+          <label class="tarif" data-senegal-only="1">
+            <input type="radio" name="plan" value="DRIVER Jakarta" data-code="1A" data-amount="5500" data-eur-fr="" data-country="Senegal"/>
             1A · Jakarta
             <strong>5 500 FCFA</strong>
-            <small>9 € · présence simple</small>
+            <small>Sénégal uniquement · pas proposé en France</small>
           </label>
 
           <label class="tarif">
-            <input type="radio" name="plan" value="DRIVER Bus" data-code="1B" data-amount="12000" data-eur="19"/>
-            1B · Bus
-            <strong>12 000 FCFA</strong>
-            <small>19 € · transport groupe</small>
+            <input type="radio" name="plan" value="DRIVER Bus" data-code="1B" data-amount="12000" data-eur-fr="35"/>
+            1B · Bus / groupe
+            <strong>12 000 FCFA · 35 €</strong>
+            <small>Sénégal : 12 000 FCFA · France : 35 €</small>
           </label>
 
           <label class="tarif">
-            <input type="radio" name="plan" value="DRIVER" data-code="1C" data-amount="19900" data-eur="29"/>
+            <input type="radio" name="plan" value="DRIVER" data-code="1C" data-amount="19900" data-eur-fr="45"/>
             1C · Driver
-            <strong>19 900 FCFA</strong>
-            <small>29 € · chauffeur pro</small>
+            <strong>19 900 FCFA · 45 €</strong>
+            <small>Sénégal : 19 900 FCFA · France : 45 €</small>
           </label>
         </div>
 
         <div class="waveHero">
-          <small>Paiement Wave officiel</small>
-          <strong>Wave : JB BEAUVILLE · +221 77 134 28 89</strong>
+          <small>Paiement officiel</small>
+          <strong>France : Sendwave → Wave Sénégal · Sénégal : Wave direct</strong>
         </div>
 
         <div class="paybox" aria-label="Paiement Wave DIGIY">
@@ -561,14 +594,20 @@
           </div>
 
           <div class="payline">
+            <b>Mode de règlement</b>
+            <span id="payMode">Sénégal : Wave direct</span>
+          </div>
+
+          <div class="payline">
             <b>Montant choisi</b>
             <span id="payAmount">Choisis un tarif</span>
           </div>
         </div>
 
-        <div class="proofHint">
-          Après paiement Wave, envoie la capture ou la preuve sur WhatsApp.
-          DIGIY vérifie le paiement et la qualité de présentation avant affichage public.
+        <div class="proofHint" id="paymentHint">
+          Sénégal : paie directement par Wave. France : télécharge ou ouvre Sendwave, choisis Sénégal,
+          puis règle vers Wave Sénégal au nom de JB BEAUVILLE · +221 77 134 28 89.
+          Après règlement, envoie la capture ou la preuve sur WhatsApp.
         </div>
 
         <div class="proofHint">
@@ -580,7 +619,7 @@
 
         <div class="field">
           <label for="paymentRef">📝 Note / preuve paiement</label>
-          <textarea id="paymentRef" placeholder="Ex : Paiement Wave envoyé pour DRIVER 1C — 19 900 FCFA — au nom de Lamine Diop — tél +221 77 000 00 00."></textarea>
+          <textarea id="paymentRef" placeholder="Ex Sénégal : paiement Wave DRIVER 1C — 19 900 FCFA. Ex France : Sendwave DRIVER 1C — 45 € vers Wave Sénégal JB BEAUVILLE."></textarea>
         </div>
 
         <div class="actions">
@@ -633,11 +672,12 @@
       "use strict";
 
       const DIGIY_WA = "221771342889";
-      const WAVE_LABEL = "Wave : JB BEAUVILLE · +221 77 134 28 89";
+      const WAVE_LABEL = "JB BEAUVILLE · +221 77 134 28 89";
 
       const els = {
         fullName: document.getElementById("fullName"),
         phone: document.getElementById("phone"),
+        country: document.getElementById("country"),
         city: document.getElementById("city"),
         zone: document.getElementById("zone"),
         transportType: document.getElementById("transportType"),
@@ -647,10 +687,20 @@
         bio: document.getElementById("bio"),
         paymentRef: document.getElementById("paymentRef"),
         payAmount: document.getElementById("payAmount"),
+        payMode: document.getElementById("payMode"),
+        paymentHint: document.getElementById("paymentHint"),
         resultBox: document.getElementById("resultBox"),
         waBtn: document.getElementById("waBtn"),
         stickyWa: document.getElementById("stickyWa")
       };
+
+      function currentCountry(){
+        return (els.country?.value || "Senegal").trim();
+      }
+
+      function isFrance(){
+        return currentCountry() === "France";
+      }
 
       function chosenPlan(){
         const c = document.querySelector('input[name="plan"]:checked');
@@ -663,7 +713,8 @@
           code: c.dataset.code,
           name: c.value,
           amount: c.dataset.amount,
-          eur: c.dataset.eur
+          eurFr: c.dataset.eurFr || "",
+          country: c.dataset.country || "All"
         };
       }
 
@@ -682,18 +733,61 @@
         });
       }
 
+      function amountLineFor(plan){
+        if(!plan) return "à compléter";
+
+        if(isFrance()){
+          if(plan.code === "1A") return "Non proposé en France";
+          return (plan.eurFr || "à confirmer") + " € · tarif France";
+        }
+
+        return fmtFcfa(plan.amount) + " FCFA · tarif Sénégal";
+      }
+
+      function paymentModeLine(){
+        return isFrance()
+          ? "Sendwave France → Wave Sénégal JB BEAUVILLE +221 77 134 28 89"
+          : "Wave direct Sénégal → JB BEAUVILLE +221 77 134 28 89";
+      }
+
+      function updateCountryRules(){
+        const france = isFrance();
+
+        document.querySelectorAll('label.tarif[data-senegal-only="1"]').forEach(label => {
+          const input = label.querySelector('input[name="plan"]');
+          label.classList.toggle("disabled", france);
+          if(input){
+            input.disabled = france;
+            if(france && input.checked) input.checked = false;
+          }
+        });
+
+        const jakartaOption = els.transportType?.querySelector('option[data-country="Senegal"]');
+        if(jakartaOption){
+          jakartaOption.disabled = france;
+          if(france && els.transportType.value === "Jakarta") els.transportType.value = "Chauffeur privé";
+        }
+
+        if(els.payMode) els.payMode.textContent = paymentModeLine();
+
+        if(els.paymentHint){
+          els.paymentHint.textContent = france
+            ? "France : télécharge ou ouvre Sendwave, choisis Sénégal, puis règle vers le Wave Sénégal officiel au nom de JB BEAUVILLE · +221 77 134 28 89. Envoie ensuite la preuve sur WhatsApp."
+            : "Sénégal : paie directement par Wave au nom de JB BEAUVILLE · +221 77 134 28 89. Envoie ensuite la preuve sur WhatsApp.";
+        }
+      }
+
       function updateAmount(){
+        updateCountryRules();
         const p = chosenPlan();
-        els.payAmount.textContent = p
-          ? fmtFcfa(p.amount) + " FCFA · " + p.eur + " €"
-          : "Choisis un tarif";
+        els.payAmount.textContent = p ? amountLineFor(p) : "Choisis un tarif";
       }
 
       function buildMessage(){
         const p = chosenPlan();
         const paymentNote = val("paymentRef") || "à compléter après paiement Wave";
         const planLine = p ? (p.code + " · " + p.name) : "à choisir volontairement";
-        const amountLine = p ? (fmtFcfa(p.amount) + " FCFA · " + p.eur + " €") : "à compléter";
+        const amountLine = p ? amountLineFor(p) : "à compléter";
 
         const msg = [
           "Bonjour JB, je souhaite faire mon inscription chauffeur DIGIY DRIVER.",
@@ -705,7 +799,8 @@
           "",
           "🚗 Module : " + planLine,
           "💳 Montant choisi : " + amountLine,
-          "🏦 Paiement Wave : " + WAVE_LABEL,
+          "🌍 Pays chauffeur : " + (currentCountry() === "France" ? "France" : "Sénégal"),
+          "🏦 Mode de règlement : " + paymentModeLine(),
           "📝 Note / preuve paiement : " + paymentNote,
           "",
           "👤 Nom chauffeur : " + (val("fullName") || "à compléter"),
@@ -720,7 +815,7 @@
           "📝 Présentation :",
           val("bio") || "à compléter",
           "",
-          "Merci de vérifier mon paiement, la cohérence de ma fiche, puis de préparer mon accès DIGIY DRIVER."
+          "Merci de vérifier mon règlement, la cohérence de ma fiche, puis de préparer mon accès DIGIY DRIVER."
         ].join("\n");
 
         els.resultBox.textContent = msg;
@@ -734,6 +829,15 @@
         }catch(_){}
 
         return msg;
+      }
+
+
+      if(els.country){
+        els.country.addEventListener("change", function(){
+          updateAmount();
+          buildMessage();
+          saveLocalDraft(true);
+        });
       }
 
       document.querySelectorAll('input[name="plan"]').forEach(r => {
@@ -767,6 +871,7 @@
         [
           "fullName",
           "phone",
+          "country",
           "city",
           "zone",
           "transportType",
@@ -819,6 +924,11 @@
 </body>
 </html>
 
+
+
+
+
+   
 
 
 
