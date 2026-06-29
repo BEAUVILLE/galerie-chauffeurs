@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>DIGIY DRIVER AMBASSADEUR — Galerie publique</title>
-  <meta name="digiy-build" content="driver-ambassadeur-baptiste-direct-sans-babacar-fr-en-wo-20260620" />
+  <title>DIGIY DRIVER INTERNATIONAL — France · Sénégal · Ambassadeurs</title>
+  <meta name="digiy-build" content="driver-international-france-senegal-ambassadeur-20260629" />
   <meta name="theme-color" content="#0b1220" />
   <meta
     name="description"
-    content="DIGIY DRIVER AMBASSADEUR — La mobilité avec style et savoir-être. Galerie publique des chauffeurs, contact direct WhatsApp."
+    content="DIGIY DRIVER INTERNATIONAL — France · Sénégal · mobilité avec style, savoir-être, contact direct WhatsApp/SMS et 0% commission."
   />
 
   <style>
@@ -1014,6 +1014,178 @@
       .baptiste-actions{grid-template-columns:1fr}
     }
 
+    /* ===== DIGIY DRIVER INTERNATIONAL — France / Sénégal ===== */
+    .international-card{
+      margin-top:14px;
+      border-radius:28px;
+      border:1px solid rgba(244,201,93,.22);
+      background:
+        radial-gradient(760px 260px at 0% 0%, rgba(244,201,93,.12), transparent 60%),
+        radial-gradient(720px 260px at 100% 0%, rgba(31,168,106,.14), transparent 62%),
+        linear-gradient(180deg, rgba(15,27,42,.96), rgba(7,16,24,.98));
+      box-shadow:0 18px 52px rgba(0,0,0,.30);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .international-card::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:4px;
+      background:linear-gradient(90deg, rgba(59,130,246,.92), rgba(244,201,93,.98), rgba(31,168,106,.98));
+    }
+
+    .international-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+
+    .international-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(244,201,93,.24);
+      background:rgba(244,201,93,.08);
+      color:#ffe8a6;
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .international-card h2{
+      margin:10px 0 8px;
+      color:#fff4c7;
+      font-size:clamp(24px,4vw,42px);
+      line-height:1.04;
+      font-weight:950;
+      letter-spacing:-.03em;
+      max-width:820px;
+    }
+
+    .international-card p{
+      margin:0;
+      color:rgba(226,232,240,.78);
+      font-size:14px;
+      line-height:1.65;
+      font-weight:820;
+      max-width:860px;
+    }
+
+    .international-badge{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(31,168,106,.26);
+      background:rgba(31,168,106,.10);
+      color:#d4ffe7;
+      font-size:12px;
+      font-weight:950;
+      white-space:nowrap;
+    }
+
+    .international-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .international-box{
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:100%;
+    }
+
+    .international-box .box-title{
+      font-size:16px;
+      font-weight:950;
+      color:#fff4c7;
+      line-height:1.25;
+    }
+
+    .international-box .box-copy{
+      margin-top:8px;
+      color:rgba(226,232,240,.74);
+      font-size:13px;
+      line-height:1.6;
+      font-weight:800;
+    }
+
+    .international-points{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .international-point{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:#f8fafc;
+      font-size:11px;
+      font-weight:900;
+    }
+
+    .international-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .international-action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:46px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      text-decoration:none;
+      font-size:14px;
+      font-weight:950;
+      color:#f8fafc;
+    }
+
+    .international-action.green{
+      background:linear-gradient(135deg,var(--green),var(--green-2));
+      border-color:transparent;
+      color:#fff;
+    }
+
+    .international-action.gold{
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      border-color:transparent;
+      color:#071018;
+    }
+
+    .bar{
+      grid-template-columns:1fr 1fr 1fr 1fr;
+    }
+
+    @media(max-width:980px){
+      .international-grid{grid-template-columns:1fr}
+    }
+
 
     @media(max-width:768px){
       .featured-top{display:block}
@@ -1218,9 +1390,9 @@
       <div class="brand-badge">🚕</div>
       <div class="brand-copy">
         <div class="eyebrow" data-i18n="eyebrow">DIGIY DRIVER AMBASSADEUR</div>
-        <div class="brand-title" data-i18n="brand_title">La mobilité avec style et savoir-être.</div>
+        <div class="brand-title" data-i18n="brand_title">Mobilité internationale avec style et savoir-être.</div>
         <div class="brand-sub" data-i18n="brand_sub">
-          Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.
+          Une galerie pensée pour relier Sénégal, France et diaspora autour de chauffeurs visibles, sérieux et joignables.
         </div>
       </div>
     </div>
@@ -1252,7 +1424,7 @@
           <span class="gold" data-i18n="hero_title">DIGIY DRIVER AMBASSADEUR</span>
         </h1>
         <p data-i18n="hero_sub">
-          La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
+          France ↔ Sénégal. Filtre par pays, zone ou véhicule, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
         </p>
 
         <div class="hero-signature" data-i18n="hero_signature">
@@ -1260,7 +1432,7 @@
         </div>
 
         <div class="hero-badges">
-          <div class="hero-badge" data-i18n="hero_badge_1"><b>Ambassadeur</b> = représentation de la maison</div>
+          <div class="hero-badge" data-i18n="hero_badge_1"><b>France ↔ Sénégal</b> = pont de confiance</div>
           <div class="hero-badge" data-i18n="hero_badge_2">Contact direct • WhatsApp</div>
           <div class="hero-badge" data-i18n="hero_badge_3">0% commission</div>
         </div>
@@ -1300,6 +1472,63 @@
           Ici, on met en avant des profils qui portent une certaine tenue de service.
         </div>
       </aside>
+    </div>
+  </section>
+
+  <section class="international-card" id="axe-international">
+    <div class="international-head">
+      <div>
+        <div class="international-kicker" data-i18n="intl_kicker">🌍 Axe international France ↔ Sénégal</div>
+        <h2 data-i18n="intl_title">Deux terrains, une même tenue de service.</h2>
+        <p data-i18n="intl_intro">
+          DIGIY DRIVER AMBASSADEUR structure la mobilité entre le Sénégal, la France et la diaspora :
+          accueil, transfert, tourisme, chauffeur sérieux, contact direct, 0% commission.
+        </p>
+      </div>
+      <div class="international-badge" data-i18n="intl_badge">France · Sénégal · Diaspora</div>
+    </div>
+
+    <div class="international-grid">
+      <article class="international-box">
+        <div class="box-title" data-i18n="intl_senegal_title">🇸🇳 Sénégal — terrain, accueil, confiance</div>
+        <div class="box-copy" data-i18n="intl_senegal_copy">
+          AIBD, Dakar, Saly, Mbour, Petite Côte : le client arrive, il veut un chauffeur clair, présentable, joignable et fiable.
+        </div>
+        <div class="international-points">
+          <span class="international-point" data-i18n="intl_senegal_p1">✈️ Aéroport</span>
+          <span class="international-point" data-i18n="intl_senegal_p2">🏨 Hôtels</span>
+          <span class="international-point" data-i18n="intl_senegal_p3">🌴 Tourisme</span>
+        </div>
+      </article>
+
+      <article class="international-box">
+        <div class="box-title" data-i18n="intl_france_title">🇫🇷 France — diaspora, départs, retours</div>
+        <div class="box-copy" data-i18n="intl_france_copy">
+          France, Sarlat, Arcachon, Bordeaux, Paris : on prépare les trajets, les retours au pays, les familles, les séjours et les partenaires.
+        </div>
+        <div class="international-points">
+          <span class="international-point" data-i18n="intl_france_p1">🧳 Diaspora</span>
+          <span class="international-point" data-i18n="intl_france_p2">🚆 Gares</span>
+          <span class="international-point" data-i18n="intl_france_p3">🤝 Partenaires</span>
+        </div>
+      </article>
+
+      <article class="international-box">
+        <div class="box-title" data-i18n="intl_bridge_title">🌉 Pont DIGIY — même règle des deux côtés</div>
+        <div class="box-copy" data-i18n="intl_bridge_copy">
+          Pas de plateforme qui avale la relation. Le client choisit, le chauffeur répond, le paiement reste direct, la réputation reste au professionnel.
+        </div>
+        <div class="international-points">
+          <span class="international-point" data-i18n="intl_bridge_p1">💬 Contact direct</span>
+          <span class="international-point" data-i18n="intl_bridge_p2">🧾 Traçabilité</span>
+          <span class="international-point" data-i18n="intl_bridge_p3">0% commission</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="international-actions">
+      <a class="international-action green" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20souhaite%20organiser%20un%20trajet%20au%20S%C3%A9n%C3%A9gal%20via%20DIGIY%20DRIVER%20INTERNATIONAL." target="_blank" rel="noopener" data-i18n="intl_btn_senegal">🇸🇳 Demande Sénégal</a>
+      <a class="international-action gold" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20souhaite%20pr%C3%A9parer%20un%20trajet%20France%20%E2%86%94%20S%C3%A9n%C3%A9gal%20via%20DIGIY%20DRIVER%20INTERNATIONAL." target="_blank" rel="noopener" data-i18n="intl_btn_france">🇫🇷 Demande France ↔ Sénégal</a>
     </div>
   </section>
 
@@ -1381,6 +1610,13 @@
 
     <div class="bar" style="margin-top:14px;">
       <div class="field">
+        <label data-i18n="label_country">🌍 Pays / axe</label>
+        <select id="countryFilter">
+          <option value="" data-i18n="country_all">Tous</option>
+        </select>
+      </div>
+
+      <div class="field">
         <label data-i18n="label_zone">📍 Zone recherchée</label>
         <select id="zoneFilter">
           <option value="" data-i18n="zone_all">Toutes</option>
@@ -1431,8 +1667,8 @@
   const DIGIY_LANG = {
     fr: {
       eyebrow: "DIGIY DRIVER AMBASSADEUR",
-      brand_title: "La mobilité avec style et savoir-être.",
-      brand_sub: "Une galerie pensée pour montrer non pas la masse, mais la tenue, la présence et la qualité humaine du service.",
+      brand_title: "Mobilité internationale avec style et savoir-être.",
+      brand_sub: "Une galerie pensée pour relier Sénégal, France et diaspora autour de chauffeurs visibles, sérieux et joignables.",
       pill_class: "Sélection Ambassadeur",
       top_site: "🌍 Site",
       top_hub: "🧭 HUB",
@@ -1449,11 +1685,33 @@
 
       hero_eyebrow: "Galerie publique premium",
       hero_title: "DIGIY DRIVER AMBASSADEUR",
-      hero_sub: "La mobilité avec style et savoir-être. Filtre par zone, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",
+      hero_sub: "France ↔ Sénégal. Filtre par pays, zone ou véhicule, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",
       hero_signature: "Un style. Un savoir-être. Une présence.",
-      hero_badge_1: "Ambassadeur = représentation de la maison",
+      hero_badge_1: "France ↔ Sénégal = pont de confiance",
       hero_badge_2: "Contact direct • WhatsApp",
       hero_badge_3: "0% commission",
+
+      intl_kicker: "🌍 Axe international France ↔ Sénégal",
+      intl_title: "Deux terrains, une même tenue de service.",
+      intl_intro: "DIGIY DRIVER AMBASSADEUR structure la mobilité entre le Sénégal, la France et la diaspora : accueil, transfert, tourisme, chauffeur sérieux, contact direct, 0% commission.",
+      intl_badge: "France · Sénégal · Diaspora",
+      intl_senegal_title: "🇸🇳 Sénégal — terrain, accueil, confiance",
+      intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte : le client arrive, il veut un chauffeur clair, présentable, joignable et fiable.",
+      intl_senegal_p1: "✈️ Aéroport",
+      intl_senegal_p2: "🏨 Hôtels",
+      intl_senegal_p3: "🌴 Tourisme",
+      intl_france_title: "🇫🇷 France — diaspora, départs, retours",
+      intl_france_copy: "France, Sarlat, Arcachon, Bordeaux, Paris : on prépare les trajets, les retours au pays, les familles, les séjours et les partenaires.",
+      intl_france_p1: "🧳 Diaspora",
+      intl_france_p2: "🚆 Gares",
+      intl_france_p3: "🤝 Partenaires",
+      intl_bridge_title: "🌉 Pont DIGIY — même règle des deux côtés",
+      intl_bridge_copy: "Pas de plateforme qui avale la relation. Le client choisit, le chauffeur répond, le paiement reste direct, la réputation reste au professionnel.",
+      intl_bridge_p1: "💬 Contact direct",
+      intl_bridge_p2: "🧾 Traçabilité",
+      intl_bridge_p3: "0% commission",
+      intl_btn_senegal: "🇸🇳 Demande Sénégal",
+      intl_btn_france: "🇫🇷 Demande France ↔ Sénégal",
 
       panel_title: "Vue d’ensemble",
       panel_count_k: "Chauffeurs visibles",
@@ -1477,6 +1735,8 @@
       nav_card: "🚖 Chauffeur Baptiste",
       nav_lexique: "🇸🇳 Lexique Wolof",
 
+      label_country: "🌍 Pays / axe",
+      country_all: "Tous",
       label_zone: "📍 Zone recherchée",
       zone_all: "Toutes",
 
@@ -1572,6 +1832,28 @@
       hero_badge_2: "Contact direct • WhatsApp",
       hero_badge_3: "0% commission",
 
+      intl_kicker: "🌍 Axe international France ↔ Sénégal",
+      intl_title: "Ñaari terrain, benn tenue service.",
+      intl_intro: "DIGIY DRIVER AMBASSADEUR dafay taxawal mobilité diggante Sénégal, France ak diaspora : accueil, transfert, tourisme, chauffeur sérieux, contact direct, 0% commission.",
+      intl_badge: "France · Sénégal · Diaspora",
+      intl_senegal_title: "🇸🇳 Sénégal — terrain, accueil, kóolute",
+      intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte : client bi dafa bëgg chauffeur bu leer, présentable, joignable te wóor.",
+      intl_senegal_p1: "✈️ Aéroport",
+      intl_senegal_p2: "🏨 Hôtels",
+      intl_senegal_p3: "🌴 Tourisme",
+      intl_france_title: "🇫🇷 France — diaspora, départs, retours",
+      intl_france_copy: "France, Sarlat, Arcachon, Bordeaux, Paris : ñuy waajal trajets, retours au pays, familles, séjours ak partenaires.",
+      intl_france_p1: "🧳 Diaspora",
+      intl_france_p2: "🚆 Gares",
+      intl_france_p3: "🤝 Partenaires",
+      intl_bridge_title: "🌉 Pont DIGIY — benn règle ci ñaari wet yi",
+      intl_bridge_copy: "Amul plateforme buy lekk relation bi. Client bi mooy tànn, chauffeur bi mooy tontu, paiement bi direct la, réputation bi des ci pro bi.",
+      intl_bridge_p1: "💬 Contact direct",
+      intl_bridge_p2: "🧾 Traçabilité",
+      intl_bridge_p3: "0% commission",
+      intl_btn_senegal: "🇸🇳 Demande Sénégal",
+      intl_btn_france: "🇫🇷 Demande France ↔ Sénégal",
+
       panel_title: "Xool bu gaaw",
       panel_count_k: "Chauffeur yi ñuy won",
       panel_online_k: "WhatsApp direct",
@@ -1594,6 +1876,8 @@
       nav_card: "🎴 Chauffeur Baptiste",
       nav_lexique: "🇸🇳 Lexique Wolof",
 
+      label_country: "🌍 Pays / axe",
+      country_all: "Yépp",
       label_zone: "📍 Zone bi nga seet",
       zone_all: "Yépp",
 
@@ -1672,12 +1956,14 @@
       top_hub: "🧭 HUB",
       top_tarifs: "📦 Pricing",
       top_card: "🚖 Baptiste driver",
+      top_lexique: "🇸🇳 Wolof Lexicon",
       top_join: "📝 Driver registration",
       top_baptiste_driver: "🚖 Baptiste driver",
       hero_site: "🌍 Back to DIGIYLYFE",
       hero_hub: "🧭 Open the HUB",
       hero_tarifs: "📦 View pricing",
       hero_card: "🚖 Baptiste driver",
+      hero_lexique: "🇸🇳 Wolof Lexicon",
       hero_join: "📝 Driver registration",
       hero_baptiste_driver: "🚖 View Baptiste driver",
 
@@ -1688,6 +1974,28 @@
       hero_badge_1: "Ambassador = representation of the house",
       hero_badge_2: "Direct contact • WhatsApp",
       hero_badge_3: "0% commission",
+
+      intl_kicker: "🌍 International axis France ↔ Senegal",
+      intl_title: "Two fields, one service standard.",
+      intl_intro: "DIGIY DRIVER AMBASSADOR structures mobility between Senegal, France and the diaspora: welcome, transfer, tourism, serious driver, direct contact, 0% commission.",
+      intl_badge: "France · Senegal · Diaspora",
+      intl_senegal_title: "🇸🇳 Senegal — field, welcome, trust",
+      intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte: the client arrives and needs a clear, presentable, reachable and reliable driver.",
+      intl_senegal_p1: "✈️ Airport",
+      intl_senegal_p2: "🏨 Hotels",
+      intl_senegal_p3: "🌴 Tourism",
+      intl_france_title: "🇫🇷 France — diaspora, departures, returns",
+      intl_france_copy: "France, Sarlat, Arcachon, Bordeaux, Paris: prepare rides, returns home, families, stays and partners.",
+      intl_france_p1: "🧳 Diaspora",
+      intl_france_p2: "🚆 Stations",
+      intl_france_p3: "🤝 Partners",
+      intl_bridge_title: "🌉 DIGIY bridge — one rule on both sides",
+      intl_bridge_copy: "No platform eats the relationship. The client chooses, the driver answers, payment stays direct, reputation stays with the professional.",
+      intl_bridge_p1: "💬 Direct contact",
+      intl_bridge_p2: "🧾 Traceability",
+      intl_bridge_p3: "0% commission",
+      intl_btn_senegal: "🇸🇳 Senegal request",
+      intl_btn_france: "🇫🇷 France ↔ Senegal request",
 
       panel_title: "Overview",
       panel_count_k: "Visible drivers",
@@ -1709,8 +2017,11 @@
       nav_recruit: "📝 Driver registration",
       nav_cockpit: "🔐 Driver access",
       nav_card: "🚖 Baptiste driver",
+      nav_lexique: "🇸🇳 Wolof Lexicon",
       nav_baptiste_driver: "🚖 Baptiste driver",
 
+      label_country: "🌍 Country / axis",
+      country_all: "All",
       label_zone: "📍 Area searched",
       zone_all: "All",
 
@@ -1795,6 +2106,8 @@
     if (typeof val === "function") return val(...args);
     return (val != null) ? String(val) : String((DIGIY_LANG.fr[key] ?? key));
   }
+
+  window.t = t;
 
   function digiyBasePath(){
     const parts = location.pathname.split("/").filter(Boolean);
@@ -1936,6 +2249,8 @@
     document.getElementById("lang-en")?.classList.toggle("active", CURRENT_LANG==="en");
     document.getElementById("lang-wo")?.classList.toggle("active", CURRENT_LANG==="wo");
 
+    rebuildCountryOptions(ALL);
+    rebuildZoneOptions(ALL);
     refreshTopStats();
     render();
   }
@@ -1945,6 +2260,7 @@
   document.getElementById("lang-wo").addEventListener("click", ()=> applyLanguage("wo"));
 
   const driversEl = document.getElementById("drivers");
+  const countryFilter = document.getElementById("countryFilter");
   const zoneFilter = document.getElementById("zoneFilter");
   const qFilter = document.getElementById("qFilter");
   const availFilter = document.getElementById("availFilter");
@@ -2045,6 +2361,44 @@
     return String(v || "").trim();
   }
 
+  function normalizeAscii(v){
+    return String(v || "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function getCountryValue(d){
+    const explicit = normalizeText(d?.country || d?.pays || d?.country_name || d?.territory || d?.axe || d?.market);
+    const raw = normalizeAscii(explicit);
+    if(raw){
+      if(/senegal|senegal/.test(raw)) return "Sénégal";
+      if(/france|francais|française|francais/.test(raw)) return "France";
+      if(/international|diaspora|france.*senegal|senegal.*france/.test(raw)) return "International";
+      return explicit;
+    }
+
+    const hay = normalizeAscii([
+      d?.name,
+      d?.slug,
+      d?.city,
+      d?.zone,
+      d?.car,
+      d?.description
+    ].join(" "));
+
+    if(/saly|mbour|dakar|aibd|blaise|diagne|senegal|petite\s*cote|thies|thiès|touba|somone|ngor|almadies|yoff/.test(hay)) return "Sénégal";
+    if(/france|sarlat|arcachon|bordeaux|paris|marseille|toulouse|lyon|dordogne|gironde|nouvelle\s*aquitaine|roissy|orly|charles\s*de\s*gaulle/.test(hay)) return "France";
+    if(/diaspora|international|france\s*senegal|senegal\s*france/.test(hay)) return "International";
+
+    return "";
+  }
+
+  function getCountryCount(items){
+    return new Set(items.map(d => getCountryValue(d)).filter(Boolean)).size;
+  }
+
   function getZoneCount(items){
     return new Set(
       items.map(d => normalizeText(d.zone)).filter(Boolean)
@@ -2077,6 +2431,29 @@
     });
   }
 
+  function rebuildCountryOptions(items){
+    if(!countryFilter) return;
+
+    const current = countryFilter.value || "";
+    const base = ["Sénégal", "France", "International"];
+    const found = Array.from(
+      new Set(
+        (Array.isArray(items) ? items : [])
+          .map(d => getCountryValue(d))
+          .filter(Boolean)
+      )
+    );
+
+    const countries = Array.from(new Set([...base, ...found]))
+      .sort((a,b)=>a.localeCompare(b, "fr", { sensitivity:"base" }));
+
+    countryFilter.innerHTML =
+      `<option value="">${esc(t("country_all"))}</option>` +
+      countries.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+
+    if (countries.includes(current)) countryFilter.value = current;
+  }
+
   function rebuildZoneOptions(items){
     const current = zoneFilter.value || "";
     const zones = Array.from(
@@ -2104,23 +2481,26 @@
   }
 
   function passes(d){
+    const c = (countryFilter?.value || "").trim();
     const z = (zoneFilter.value || "").trim();
-    const q = (qFilter.value || "").trim().toLowerCase();
+    const q = normalizeAscii(qFilter.value || "");
     const a = availFilter.value || "all";
     const hasWhatsapp = !!normPhone(d.whatsapp);
 
+    if (c && getCountryValue(d) !== c) return false;
     if (z && String(d.zone || "") !== z) return false;
     if (a === "direct" && !hasWhatsapp) return false;
     if (a === "contact" && hasWhatsapp) return false;
 
     if (q){
-      const hay = [
+      const hay = normalizeAscii([
         d.name,
         d.city,
         d.zone,
         d.car,
-        d.description
-      ].join(" ").toLowerCase();
+        d.description,
+        getCountryValue(d)
+      ].join(" "));
 
       if (!hay.includes(q)) return false;
     }
@@ -2182,6 +2562,7 @@
     const city = esc(d.city || "");
     const zone = esc(d.zone || "");
     const car = esc(d.car || "");
+    const country = esc(getCountryValue(d) || "");
     const desc = esc(d.description || t("driver_desc_default"));
     const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
     const wa = normPhone(d.whatsapp);
@@ -2202,6 +2583,7 @@
             <div class="featured-meta">
               ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
               ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+              ${country ? `<span class="tag gold">🌍 ${country}</span>` : ``}
               ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
               ${wa ? `<span class="tag green">${esc(t("tag_online"))}</span>` : `<span class="tag off">${esc(t("tag_offline"))}</span>`}
               ${(rating && !Number.isNaN(rating)) ? `<span class="tag gold">⭐ ${rating.toFixed(1)}</span>` : ``}
@@ -2272,6 +2654,7 @@
       const city = esc(d.city || "");
       const zone = esc(d.zone || "");
       const car = esc(d.car || "");
+      const country = esc(getCountryValue(d) || "");
       const desc = esc(d.description || t("driver_desc_default"));
       const rating = (d.rating != null && d.rating !== "") ? Number(d.rating) : null;
       const wa = normPhone(d.whatsapp);
@@ -2304,6 +2687,7 @@
                 <div class="meta">
                   ${city ? `<span class="tag">🏙️ ${city}</span>` : ``}
                   ${zone ? `<span class="tag">📍 ${zone}</span>` : ``}
+                  ${country ? `<span class="tag gold">🌍 ${country}</span>` : ``}
                   ${car ? `<span class="tag">🚗 ${car}</span>` : ``}
                   ${statusTag}
                   ${rateTag}
@@ -2355,6 +2739,7 @@
       if (error) throw error;
 
       ALL = (Array.isArray(data) ? data : []).filter(d => !isBlockedDriver(d));
+      rebuildCountryOptions(ALL);
       rebuildZoneOptions(ALL);
       refreshTopStats();
       liveBadge.textContent = t("badge_public");
@@ -2391,6 +2776,7 @@
     }
   }
 
+  countryFilter?.addEventListener("change", render);
   zoneFilter.addEventListener("change", render);
   availFilter.addEventListener("change", render);
   qFilter.addEventListener("input", () => {
@@ -2495,6 +2881,111 @@
 <!-- DIGIY FIX 20260620: Baptiste direct link forced, old card buttons anti-404, Babacar/BABACARD hidden. -->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
