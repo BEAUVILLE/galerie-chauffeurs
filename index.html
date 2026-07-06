@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DIGIY DRIVER INTERNATIONAL — France · Sénégal · Ambassadeurs</title>
-  <meta name="digiy-build" content="driver-international-france-senegal-ambassadeur-20260629" />
+  <meta name="digiy-build" content="driver-international-lazy-supabase-20260706" />
   <meta name="theme-color" content="#0b1220" />
   <meta
     name="description"
@@ -1662,7 +1662,10 @@
 <div class="toast" id="toast"></div>
 
 <script type="module">
-  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+  /* FIX 20260706 : import Supabase lazy — même correctif que la page client.
+     Avant : import statique en tête de module -> CDN lent/bloqué = tout le module
+     mourait (langues, filtres, galerie ET carte fallback). Maintenant : le module
+     vit sans le CDN, seul load() en dépend, et son échec affiche la carte fallback. */
 
   const DIGIY_LANG = {
     fr: {
@@ -2123,7 +2126,14 @@
 
   const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let _sb = null;
+  async function getSb(){
+    if (_sb) return _sb;
+    const mod = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
+    _sb = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    return _sb;
+  }
   const PUBLIC_SOURCE = "public_driver_cards";
 
   function cleanPublicUrl(){
@@ -2734,6 +2744,7 @@
     if (badgeTop) badgeTop.textContent = t("badge_loading");
 
     try{
+      const sb = await getSb();
       const { data, error } = await sb.rpc("digiy_driver_public_gallery");
 
       if (error) throw error;
@@ -2746,7 +2757,7 @@
       if (badgeTop) badgeTop.textContent = t("badge_public");
       render();
     }catch(e){
-      console.warn("Public gallery error:", e);
+      console.warn("Public gallery error:", (e && (e.code || e.status || "")) + " " + (e && (e.message || e.error_description || e.hint) || JSON.stringify(e)));
       liveBadge.textContent = t("badge_fallback");
       if (badgeTop) badgeTop.textContent = t("badge_fallback");
       countPill.textContent = "…";
@@ -2881,6 +2892,217 @@
 <!-- DIGIY FIX 20260620: Baptiste direct link forced, old card buttons anti-404, Babacar/BABACARD hidden. -->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
