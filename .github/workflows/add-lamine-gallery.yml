@@ -1,0 +1,119 @@
+name: Ajouter Lamine à la galerie DRIVER
+
+on:
+  push:
+    paths:
+      - ".github/workflows/add-lamine-gallery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Ajouter Lamine sans casser la galerie
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+
+          def replace_once(old, new, label):
+              global text
+              if old not in text:
+                  if new in text:
+                      print(f"Déjà posé : {label}")
+                      return
+                  raise SystemExit(f"Repère introuvable : {label}")
+              text = text.replace(old, new, 1)
+              print(f"Posé : {label}")
+
+          text = text.replace(
+              '<meta name="digiy-build" content="driver-international-lot-verite-course-20260710" />',
+              '<meta name="digiy-build" content="driver-international-lamine-20260713" />',
+              1
+          )
+
+          css_marker = """    .driver{\n      position:relative;"""
+          css_patch = """    .driver-card-preview{\n      display:block;\n      margin:14px 0 0;\n      padding:6px;\n      border-radius:18px;\n      border:1px solid rgba(244,201,93,.28);\n      background:rgba(255,255,255,.04);\n      overflow:hidden;\n    }\n    .driver-card-preview img{\n      display:block;\n      width:100%;\n      height:auto;\n      border-radius:13px;\n      background:#fff;\n    }\n\n    .driver{\n      position:relative;"""
+          if ".driver-card-preview{" not in text:
+              replace_once(css_marker, css_patch, "style carte officielle")
+
+          profile_old = """  function profileUrlForDriver(d){\n    const u = new URL(PROFILE_URL, location.href);\n\n    if (d?.slug && !isSensitiveSlug(d.slug)) {\n      u.searchParams.set("slug", d.slug);\n    }\n\n    return u.toString();\n  }"""
+          profile_new = """  function profileUrlForDriver(d){\n    const direct = normalizeText(d?.profile_url || d?.url_fiche || d?.public_url || d?.url || "");\n    if (direct){\n      try{ return new URL(direct, location.href).toString(); }catch(_){ }\n    }\n\n    const u = new URL(PROFILE_URL, location.href);\n    if (d?.slug && !isSensitiveSlug(d.slug)) {\n      u.searchParams.set("slug", d.slug);\n    }\n    return u.toString();\n  }"""
+          if "d?.profile_url || d?.url_fiche" not in text:
+              replace_once(profile_old, profile_new, "route vers la fiche officielle")
+
+          all_old = """  let ALL = [];"""
+          all_new = """  const LAMINE_DRIVER = {\n    name: "Lamine",\n    slug: "lamine",\n    city: "Saly",\n    zone: "Saly · Mbour · Somone · Ngaparou · Petite Côte · AIBD · Dakar",\n    country: "Sénégal",\n    car: "Chauffeur privé",\n    description: "Transfert AIBD, courses locales, trajets vers Dakar, circuits Petite Côte et mise à disposition. Contact et paiement directs au chauffeur.",\n    whatsapp: "221784413680",\n    rating: 5,\n    profile_url: "https://partenaire-lamine.digiylyfe.com/",\n    card_image: "https://partenaire-lamine.digiylyfe.com/carte-visite.png"\n  };\n\n  function withLamine(rows){\n    const clean = (Array.isArray(rows) ? rows : []).filter(d => !isBlockedDriver(d));\n    let found = false;\n    const merged = clean.map(d => {\n      const isLamine = normalizeAscii(d?.slug) === "lamine" || normalizeAscii(d?.name) === "lamine";\n      if (!isLamine) return d;\n      found = true;\n      return { ...LAMINE_DRIVER, ...d, profile_url: d?.profile_url || d?.url_fiche || LAMINE_DRIVER.profile_url, card_image: d?.card_image || LAMINE_DRIVER.card_image };\n    });\n    return found ? merged : [LAMINE_DRIVER, ...merged];\n  }\n\n  let ALL = [];"""
+          if "const LAMINE_DRIVER = {" not in text:
+              replace_once(all_old, all_new, "fiche Lamine garantie")
+
+          featured_old = """    const mono = esc(initials(name));\n    const profileUrl = d.slug ? profileUrlForDriver(d) : \"\";\n    const orderUrl = commanderUrlForDriver(d);"""
+          featured_new = """    const mono = esc(initials(name));\n    const profileUrl = profileUrlForDriver(d);\n    const cardImage = normalizeText(d.card_image || d.card_url || "");\n    const orderUrl = commanderUrlForDriver(d);"""
+          if "const cardImage = normalizeText(d.card_image" not in text:
+              replace_once(featured_old, featured_new, "données carte dans la fiche vedette")
+
+          featured_desc_old = """      <div class=\"featured-desc\">${desc}</div>\n\n      <div class=\"featured-actions\">"""
+          featured_desc_new = """      <div class=\"featured-desc\">${desc}</div>\n      ${cardImage ? `<a class=\"driver-card-preview\" href=\"${esc(cardImage)}\" target=\"_blank\" rel=\"noopener\"><img src=\"${esc(cardImage)}\" alt=\"Carte officielle de ${esc(name)}\" loading=\"eager\"></a>` : ``}\n\n      <div class=\"featured-actions\">"""
+          if "Carte officielle de ${esc(name)}" not in text:
+              replace_once(featured_desc_old, featured_desc_new, "carte visible dans la vedette")
+
+          list_mono_old = """      const mono = esc(initials(name));\n\n      const statusTag = wa"""
+          list_mono_new = """      const mono = esc(initials(name));\n      const profileUrl = profileUrlForDriver(d);\n      const cardImage = normalizeText(d.card_image || d.card_url || "");\n\n      const statusTag = wa"""
+          if text.count("const cardImage = normalizeText(d.card_image") < 2:
+              replace_once(list_mono_old, list_mono_new, "données carte dans la liste")
+
+          list_desc_old = """          <div class=\"desc\">${desc}</div>\n\n          <div class=\"actions\">"""
+          list_desc_new = """          <div class=\"desc\">${desc}</div>\n          ${cardImage ? `<a class=\"driver-card-preview\" href=\"${esc(cardImage)}\" target=\"_blank\" rel=\"noopener\"><img src=\"${esc(cardImage)}\" alt=\"Carte officielle de ${esc(name)}\" loading=\"lazy\"></a>` : ``}\n\n          <div class=\"actions\">"""
+          if text.count("Carte officielle de ${esc(name)}") < 2:
+              replace_once(list_desc_old, list_desc_new, "carte visible dans la liste")
+
+          profile_action_old = """            ${\n              d.slug\n                ? `<a class=\"btn btn-ghost\" href=\"${esc(profileUrlForDriver(d))}\" rel=\"noopener\">${esc(t(\"btn_profile\"))}</a>`\n                : ``\n            }"""
+          profile_action_new = """            ${\n              profileUrl\n                ? `<a class=\"btn btn-ghost\" href=\"${esc(profileUrl)}\" rel=\"noopener\">${esc(t(\"btn_profile\"))}</a>`\n                : ``\n            }"""
+          if "href=\"${esc(profileUrl)}\"" not in text:
+              replace_once(profile_action_old, profile_action_new, "bouton fiche directe")
+
+          load_old = """      ALL = (Array.isArray(data) ? data : []).filter(d => !isBlockedDriver(d));"""
+          load_new = """      ALL = withLamine(Array.isArray(data) ? data : []);"""
+          if load_new not in text:
+              replace_once(load_old, load_new, "fusion Supabase + Lamine")
+
+          fallback_pattern = re.compile(
+              r"      ALL = \[\];\n\n      driversEl\.innerHTML = `.*?      `;\n\n      toast\(t\(\"toast_fallback\"\)\);",
+              re.S
+          )
+          fallback_new = """      ALL = withLamine([]);\n      rebuildCountryOptions(ALL);\n      rebuildZoneOptions(ALL);\n      refreshTopStats();\n      render();\n      toast(t("toast_fallback"));"""
+          if "ALL = withLamine([]);" not in text:
+              text, count = fallback_pattern.subn(fallback_new, text, count=1)
+              if count != 1:
+                  raise SystemExit("Repère introuvable : secours Lamine")
+              print("Posé : secours Lamine")
+
+          if "partenaire-lamine.digiylyfe.com" not in text or "carte-visite.png" not in text:
+              raise SystemExit("Contrôle final Lamine échoué")
+
+          path.write_text(text, encoding="utf-8")
+          print("Galerie DRIVER mise à jour avec Lamine.")
+          PY
+
+      - name: Enregistrer la galerie
+        shell: bash
+        run: |
+          git config user.name "DIGIYLYFE Builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "La galerie contient déjà Lamine."
+            exit 0
+          fi
+          git commit -m "Ajouter Lamine à la galerie DRIVER"
+          git push
