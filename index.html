@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DIGIY DRIVER INTERNATIONAL — France · Sénégal · Ambassadeurs</title>
-  <meta name="digiy-build" content="driver-international-lot-verite-course-20260710" />
+  <meta name="digiy-build" content="driver-international-lamine-20260713" />
   <meta name="theme-color" content="#0b1220" />
   <meta
     name="description"
@@ -580,6 +580,23 @@
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:14px;
       margin-top:14px;
+    }
+
+    .driver-card-preview{
+      display:block;
+      margin:14px 0 0;
+      padding:6px;
+      border-radius:18px;
+      border:1px solid rgba(244,201,93,.28);
+      background:rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .driver-card-preview img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:13px;
+      background:#fff;
     }
 
     .driver{
@@ -2221,12 +2238,15 @@
   }
 
   function profileUrlForDriver(d){
-    const u = new URL(PROFILE_URL, location.href);
+    const direct = normalizeText(d?.profile_url || d?.url_fiche || d?.public_url || d?.url || "");
+    if (direct){
+      try{ return new URL(direct, location.href).toString(); }catch(_){ }
+    }
 
+    const u = new URL(PROFILE_URL, location.href);
     if (d?.slug && !isSensitiveSlug(d.slug)) {
       u.searchParams.set("slug", d.slug);
     }
-
     return u.toString();
   }
 
@@ -2316,6 +2336,32 @@
     const el = document.getElementById(id);
     if (el) el.href = CARD_URL;
   });
+
+  const LAMINE_DRIVER = {
+    name: "Lamine",
+    slug: "lamine",
+    city: "Saly",
+    zone: "Saly · Mbour · Somone · Ngaparou · Petite Côte · AIBD · Dakar",
+    country: "Sénégal",
+    car: "Chauffeur privé",
+    description: "Transfert AIBD, courses locales, trajets vers Dakar, circuits Petite Côte et mise à disposition. Contact et paiement directs au chauffeur.",
+    whatsapp: "221784413680",
+    rating: 5,
+    profile_url: "https://partenaire-lamine.digiylyfe.com/",
+    card_image: "https://partenaire-lamine.digiylyfe.com/carte-visite.png"
+  };
+
+  function withLamine(rows){
+    const clean = (Array.isArray(rows) ? rows : []).filter(d => !isBlockedDriver(d));
+    let found = false;
+    const merged = clean.map(d => {
+      const isLamine = normalizeAscii(d?.slug) === "lamine" || normalizeAscii(d?.name) === "lamine";
+      if (!isLamine) return d;
+      found = true;
+      return { ...LAMINE_DRIVER, ...d, profile_url: d?.profile_url || d?.url_fiche || LAMINE_DRIVER.profile_url, card_image: d?.card_image || LAMINE_DRIVER.card_image };
+    });
+    return found ? merged : [LAMINE_DRIVER, ...merged];
+  }
 
   let ALL = [];
 
@@ -2572,7 +2618,8 @@
     const smsUrl = smsUrlForDriver(d);
     const whatsUrl = whatsappUrlForDriver(d);
     const mono = esc(initials(name));
-    const profileUrl = d.slug ? profileUrlForDriver(d) : "";
+    const profileUrl = profileUrlForDriver(d);
+    const cardImage = normalizeText(d.card_image || d.card_url || "");
     const orderUrl = commanderUrlForDriver(d);
 
     featuredCardArea.className = "featured-card";
@@ -2597,6 +2644,7 @@
       </div>
 
       <div class="featured-desc">${desc}</div>
+      ${cardImage ? `<a class="driver-card-preview" href="${esc(cardImage)}" target="_blank" rel="noopener"><img src="${esc(cardImage)}" alt="Carte officielle de ${esc(name)}" loading="eager"></a>` : ``}
 
       <div class="featured-actions">
         ${
@@ -2664,6 +2712,8 @@
       const smsUrl = smsUrlForDriver(d);
       const whatsUrl = whatsappUrlForDriver(d);
       const mono = esc(initials(name));
+      const profileUrl = profileUrlForDriver(d);
+      const cardImage = normalizeText(d.card_image || d.card_url || "");
 
       const statusTag = wa
         ? `<span class="tag green">${esc(t("tag_online"))}</span>`
@@ -2701,6 +2751,7 @@
           </div>
 
           <div class="desc">${desc}</div>
+          ${cardImage ? `<a class="driver-card-preview" href="${esc(cardImage)}" target="_blank" rel="noopener"><img src="${esc(cardImage)}" alt="Carte officielle de ${esc(name)}" loading="lazy"></a>` : ``}
 
           <div class="actions">
             ${
@@ -2742,7 +2793,7 @@
 
       if (error) throw error;
 
-      ALL = (Array.isArray(data) ? data : []).filter(d => !isBlockedDriver(d));
+      ALL = withLamine(Array.isArray(data) ? data : []);
       rebuildCountryOptions(ALL);
       rebuildZoneOptions(ALL);
       refreshTopStats();
@@ -2758,24 +2809,11 @@
       statTotal.textContent = "—";
       statOnline.textContent = "—";
       statZones.textContent = "—";
-      ALL = [];
-
-      driversEl.innerHTML = `
-        <div class="driver" style="grid-column:1/-1">
-          <div class="name">${esc(t("fallback_title"))}</div>
-          <div class="meta">
-            <span class="tag">${esc(t("fallback_tag_1"))}</span>
-            <span class="tag">${esc(t("fallback_tag_2"))}</span>
-          </div>
-          <div class="actions">
-            <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20chauffeur%20via%20DIGIY%20DRIVER%20AMBASSADEUR." rel="noopener">${esc(t("cta_whatsapp"))}</a>
-            <a class="btn btn-sky" href="sms:+221771342889?&body=Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20chauffeur%20via%20DIGIY%20DRIVER%20AMBASSADEUR.">SMS</a>
-            <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
-            <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
-          </div>
-        </div>
-      `;
-
+      ALL = withLamine([]);
+      rebuildCountryOptions(ALL);
+      rebuildZoneOptions(ALL);
+      refreshTopStats();
+      render();
       toast(t("toast_fallback"));
     }
   }
