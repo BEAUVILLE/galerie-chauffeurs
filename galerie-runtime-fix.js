@@ -75,12 +75,10 @@
   }
 
   function keepOneLamineBusinessCard(){
-    /* Supprime toutes les anciennes cartes créées par les correctifs précédents. */
     document.querySelectorAll(".digiy-lamine-card-box").forEach(function(box){
       box.remove();
     });
 
-    /* La vitrine haute reste courte : aucune carte de visite dupliquée ici. */
     document.querySelectorAll("#featuredCardArea .driver-card-box").forEach(function(box){
       box.remove();
     });
@@ -99,8 +97,12 @@
 
         kept = true;
 
-        /* Le clic sur la carte ouvre toujours la fiche officielle, jamais l’image seule. */
-        var cardLink = box.querySelector(".driver-card-click") || box.querySelector("a:has(img)");
+        var cardLink = box.querySelector(".driver-card-click");
+        if(!cardLink){
+          var image = box.querySelector("img");
+          cardLink = image && image.closest ? image.closest("a") : null;
+        }
+
         if(cardLink){
           cardLink.href = LAMINE_PROFILE;
           cardLink.target = "_blank";
