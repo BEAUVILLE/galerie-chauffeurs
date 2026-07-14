@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DIGIY DRIVER INTERNATIONAL — France · Sénégal · Ambassadeurs</title>
-  <meta name="digiy-build" content="driver-international-lamine-20260713" />
+  <meta name="digiy-build" content="driver-lamine-card-direct-share-20260714" />
   <meta name="theme-color" content="#0b1220" />
   <meta
     name="description"
@@ -580,23 +580,6 @@
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:14px;
       margin-top:14px;
-    }
-
-    .driver-card-preview{
-      display:block;
-      margin:14px 0 0;
-      padding:6px;
-      border-radius:18px;
-      border:1px solid rgba(244,201,93,.28);
-      background:rgba(255,255,255,.04);
-      overflow:hidden;
-    }
-    .driver-card-preview img{
-      display:block;
-      width:100%;
-      height:auto;
-      border-radius:13px;
-      background:#fff;
     }
 
     .driver{
@@ -1393,7 +1376,44 @@
       .hero{padding:18px}
       .brand-title{font-size:20px}
     }
-  </style>
+  
+    .driver-card-box{
+      margin-top:14px;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(244,201,93,.18);
+      background:rgba(255,255,255,.04);
+    }
+    .driver-card-click{display:block;text-decoration:none;cursor:pointer}
+    .driver-card-click:hover img{transform:translateY(-2px);box-shadow:0 18px 38px rgba(0,0,0,.34)}
+    .driver-card-box img{
+      display:block;
+      width:100%;
+      max-width:360px;
+      margin:0 auto;
+      height:auto;
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 12px 30px rgba(0,0,0,.24);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .driver-card-note{
+      margin-top:10px;
+      color:#ffe8a6;
+      font-size:12px;
+      font-weight:900;
+      line-height:1.45;
+      text-align:center;
+    }
+    .driver-card-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:center;
+      margin-top:12px;
+    }
+
+</style>
 </head>
 
 <body>
@@ -1419,7 +1439,6 @@
       <a class="top-link green" href="https://digiy-hub.digiylyfe.com/" data-i18n="top_hub">🧭 HUB</a>
       <a class="top-link gold" href="https://tarifs.digiylyfe.com/" data-i18n="top_tarifs">📦 Tarifs</a>
       <a class="top-link green" id="joinBtnHeader" href="https://galerie-chauffeurs.digiylyfe.com/inscription-driver" data-i18n="top_join">📝 Inscription chauffeur</a>
-      <a class="top-link gold" id="cardBtnTop" href="https://digiy-driver-part-bapt.digiylyfe.com/" data-i18n="top_card">🚖 Chauffeur Baptiste</a>
       <a class="top-link gold" id="lexiqueBtnTop" href="https://driver-client.digiylyfe.com/lexique-driver.html?v=lexique-driver-v2-mobile-20260607" data-i18n="top_lexique">🇸🇳 Lexique Wolof</a>
       <div class="pill gold"><span>👑</span><span data-i18n="pill_class">Sélection Ambassadeur</span></div>
       <div class="pill green"><span class="dot"></span><span id="onlinePill">…</span></div>
@@ -1459,7 +1478,6 @@
           <a class="hero-action green" href="https://digiy-hub.digiylyfe.com/" data-i18n="hero_hub">🧭 Ouvrir le HUB</a>
           <a class="hero-action main" id="heroJoinBtn" href="https://galerie-chauffeurs.digiylyfe.com/inscription-driver" data-i18n="hero_join">📝 Inscription chauffeur</a>
           <a class="hero-action" href="https://tarifs.digiylyfe.com/" data-i18n="hero_tarifs">📦 Voir les tarifs</a>
-          <a class="hero-action gold" id="heroCardBtn" href="https://digiy-driver-part-bapt.digiylyfe.com/" data-i18n="hero_card">🚖 Chauffeur Baptiste</a>
           <a class="hero-action gold" id="heroLexiqueBtn" href="https://driver-client.digiylyfe.com/lexique-driver.html?v=lexique-driver-v2-mobile-20260607" data-i18n="hero_lexique">🇸🇳 Lexique Wolof</a>
         </div>
       </div>
@@ -1550,23 +1568,6 @@
   </section>
 
 
-  <section class="baptiste-direct-card" id="chauffeur-baptiste">
-    <div class="baptiste-direct-grid">
-      <div>
-        <div class="baptiste-kicker">🚖 Lien chauffeur sûr</div>
-        <h2>Chauffeur Baptiste</h2>
-        <p>
-          Porte directe officielle vers la fiche chauffeur Baptiste. Ce lien remplace les anciennes cartes qui pouvaient ouvrir une page 404.
-          Le client ouvre, lit, puis contacte directement.
-        </p>
-        <div class="baptiste-note">DIGIY DRIVER · contact direct · 0% commission · lien vérifié</div>
-      </div>
-      <div class="baptiste-actions">
-        <a class="baptiste-action main" id="baptisteDirectMain" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener">🚖 Ouvrir le chauffeur Baptiste</a>
-        <a class="baptiste-action gold" id="baptisteDirectAlt" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener">↗️ Ouvrir la fiche officielle</a>
-      </div>
-    </div>
-  </section>
 
 
   <section class="digiy-audio-reader" aria-label="Lecteur audio DIGIY DRIVER">
@@ -1611,14 +1612,13 @@
       <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Réserver un chauffeur</a>
       <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">📝 Inscription chauffeur</a>
       <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚖 Mon espace chauffeur</a>
-      <a class="navBtn gold" id="cardBtnSection" href="#" data-i18n="nav_card">🚖 Chauffeur Baptiste</a>
     </div>
 
     <div class="featured-card-wrap" id="featuredCardWrap">
       <div class="featured-head">
         <div>
-          <div class="title" data-i18n="featured_title">Chauffeur Baptiste en vitrine</div>
-          <div class="sub" data-i18n="featured_sub">Lien direct sûr vers le chauffeur Baptiste. Le client ouvre la fiche officielle, puis contacte directement.</div>
+          <div class="title" data-i18n="featured_title">Chauffeur en vitrine</div>
+          <div class="sub" data-i18n="featured_sub">Le premier chauffeur disponible apparaît ici. Ouvrez sa fiche officielle puis contactez-le directement.</div>
         </div>
         <div class="featured-badge" data-i18n="featured_badge">Choix direct</div>
       </div>
@@ -1671,7 +1671,6 @@
       <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Réserver un chauffeur</a>
       <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">📝 Inscription chauffeur</a>
       <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Mon espace chauffeur</a>
-      <a class="btn btn-main" id="cardBtnBottom" href="#" data-i18n="nav_card">🚖 Chauffeur Baptiste</a>
     </div>
   </div>
 </div>
@@ -1694,13 +1693,13 @@
       top_hub: "🧭 HUB",
       top_tarifs: "📦 Tarifs",
       top_join: "📝 Inscription chauffeur",
-      top_card: "🚖 Chauffeur Baptiste",
+      top_card: "🚖 Carte chauffeur",
       top_lexique: "🇸🇳 Lexique Wolof",
       hero_site: "🌍 Retour site DIGIYLYFE",
       hero_hub: "🧭 Ouvrir le HUB",
       hero_join: "📝 Inscription chauffeur",
       hero_tarifs: "📦 Voir les tarifs",
-      hero_card: "🚖 Chauffeur Baptiste",
+      hero_card: "🚖 Carte chauffeur",
       hero_lexique: "🇸🇳 Lexique Wolof",
 
       hero_eyebrow: "Galerie publique premium",
@@ -1752,7 +1751,7 @@
       nav_order: "📲 Demander un chauffeur",
       nav_recruit: "📝 Inscription chauffeur",
       nav_cockpit: "🔐 Accès chauffeur",
-      nav_card: "🚖 Chauffeur Baptiste",
+      nav_card: "🚖 Carte chauffeur",
       nav_lexique: "🇸🇳 Lexique Wolof",
 
       label_country: "🌍 Pays / axe",
@@ -1792,8 +1791,8 @@
       btn_sms: "SMS",
       btn_profile: "Voir ce chauffeur",
 
-      featured_title: "Chauffeur Baptiste en vitrine",
-      featured_sub: "Lien direct sûr vers le chauffeur Baptiste. Le client ouvre la fiche officielle, puis contacte directement.",
+      featured_title: "Chauffeur en vitrine",
+      featured_sub: "Le premier chauffeur disponible apparaît ici. Ouvrez sa fiche officielle puis contactez-le directement.",
       featured_badge: "Choix direct",
       featured_loading: "Chargement de la carte chauffeur…",
       featured_empty: "Aucun chauffeur visible pour le moment. Ajuste les filtres ou recharge la galerie.",
@@ -1823,7 +1822,7 @@
       audio_sms: "📩 Demander par SMS",
       audio_unavailable: "🎧 Audio non disponible",
       audio_playing: "🔊 Lecture en cours",
-      audio_spoken: "Bienvenue dans DIGIY DRIVER Ambassadeur. Ici, le client regarde les profils, la zone, le véhicule et la fiche du chauffeur avant de choisir. Pour Baptiste, la porte officielle est directe et sûre. Pour faire une demande, le client peut passer par WhatsApp ou par SMS. Le contact reste direct. Pas d'intermédiaire inutile. Zéro commission. Le chauffeur garde sa relation, son nom et son argent. DIGIY met de l'ordre et de la lumière. Le terrain garde la main."
+      audio_spoken: "Bienvenue dans DIGIY DRIVER Ambassadeur. Ici, le client regarde les profils, la zone, le véhicule et la fiche du chauffeur avant de choisir. Pour Lamine, la fiche officielle et la carte sont accessibles directement. Pour faire une demande, le client peut passer par WhatsApp ou par SMS. Le contact reste direct. Pas d'intermédiaire inutile. Zéro commission. Le chauffeur garde sa relation, son nom et son argent. DIGIY met de l'ordre et de la lumière. Le terrain garde la main."
     },
 
     wo: {
@@ -1848,15 +1847,15 @@
       hero_title: "DIGIY DRIVER AMBASSADEUR",
       hero_sub: "Mobility ak style ak savoir-être. Tànn zone, seetal profil yi, te jokkook chauffeur bi ci WhatsApp.",
       hero_signature: "Style. Savoir-être. Présence.",
-      hero_badge_1: "Ambassadeur = ku di teewal kër gi",
+      hero_badge_1: "France ↔ Sénégal = pont de confiance",
       hero_badge_2: "Contact direct • WhatsApp",
       hero_badge_3: "0% commission",
 
       intl_kicker: "🌍 Axe international France ↔ Sénégal",
-      intl_title: "Ñaari terrain, benn tenue service.",
+      intl_title: "Ñaari terrain, benn tenue de service.",
       intl_intro: "DIGIY DRIVER AMBASSADEUR dafay taxawal mobilité diggante Sénégal, France ak diaspora : accueil, transfert, tourisme, chauffeur sérieux, contact direct, 0% commission.",
       intl_badge: "France · Sénégal · Diaspora",
-      intl_senegal_title: "🇸🇳 Sénégal — terrain, accueil, kóolute",
+      intl_senegal_title: "🇸🇳 Sénégal — terrain, accueil, confiance",
       intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte : client bi dafa bëgg chauffeur bu leer, présentable, joignable te wóor.",
       intl_senegal_p1: "✈️ Aéroport",
       intl_senegal_p2: "🏨 Hôtels",
@@ -1874,15 +1873,15 @@
       intl_btn_senegal: "🇸🇳 Demande Sénégal",
       intl_btn_france: "🇫🇷 Demande France ↔ Sénégal",
 
-      panel_title: "Xool bu gaaw",
-      panel_count_k: "Chauffeur yi ñuy won",
-      panel_online_k: "WhatsApp direct",
-      panel_zone_k: "Zone yi ñu mën a dikk",
+      panel_title: "Vue d’ensemble",
+      panel_count_k: "Chauffeurs visibles",
+      panel_online_k: "Contact direct",
+      panel_zone_k: "Zones couvertes",
       panel_public_k: "Visibilité",
-      panel_note: "Fii, ñuy jëkk ci profil yu yor teey ak yëngu-yëngu bu rafet.",
+      panel_note: "Fii, ñu ngi won profil yu am tenue de service.",
 
-      section_title: "Seetal ambassadeur bi gën a baax",
-      section_sub: "Seet ci zone, dëkk walla voiture ngir gis profil bi la gën a yombal.",
+      section_title: "Tànn ambassadeur bi la gënal",
+      section_sub: "Seet ci zone, dëkk walla xeetu oto ngir gis profil bi la gënal.",
 
       badge_public: "Galerie publique",
       badge_loading: "Di yük…",
@@ -1893,25 +1892,25 @@
       nav_order: "📲 Demander un chauffeur",
       nav_recruit: "📝 Inscription chauffeur",
       nav_cockpit: "🚖 Sama espace chauffeur",
-      nav_card: "🎴 Chauffeur Baptiste",
+      nav_card: "🎴 Carte chauffeur",
       nav_lexique: "🇸🇳 Lexique Wolof",
 
-      label_country: "🌍 Pays / axe",
+      label_country: "🌍 Réew / axe",
       country_all: "Yépp",
-      label_zone: "📍 Zone bi nga seet",
+      label_zone: "📍 Zone bi nga soxla",
       zone_all: "Yépp",
 
-      label_search: "🔎 Tur, dëkk walla voiture",
-      search_ph: "Tur, dëkk walla voiture…",
+      label_search: "🔎 Tur, dëkk walla oto",
+      search_ph: "Tur, dëkk walla oto…",
 
-      label_avail: "📞 Jokkook",
-      avail_all: "Profils yépp",
+      label_avail: "📞 Contact",
+      avail_all: "Profil yépp",
       avail_online: "WhatsApp direct",
       avail_offline: "À contacter",
 
       count_drivers: (n) => `${n} chauffeur`,
-      online_now: (n) => `${n} ci WhatsApp direct`,
-      zones_live: (n) => `${n} zone yu ñuy liggéey`,
+      online_now: (n) => `${n} ci contact direct`,
+      zones_live: (n) => `${n} zone`,
 
       stat_total: (n) => `${n}`,
       stat_online: (n) => `${n}`,
@@ -1919,7 +1918,7 @@
 
       empty_title: "Amul chauffeur bu ñu gis",
       empty_tag_1: "Soppi filtre yi",
-      empty_tag_2: "Walla bataaxal WhatsApp",
+      empty_tag_2: "Walla jokkool ci WhatsApp",
       btn_support_whatsapp: "WhatsApp support",
       btn_order_ride: "Demander un chauffeur",
 
@@ -1935,82 +1934,82 @@
 
       featured_title: "Carte chauffeur bi ci kanam",
       featured_sub: "Fii lañuy won benn profil bu am solo. Kilifa gi dafa gis chauffeur bi, zone bi, voiture bi, ba noppi tànn.",
-      featured_badge: "Tànn bu gaaw",
+      featured_badge: "Choix direct",
       featured_loading: "Di yük carte chauffeur bi…",
       featured_empty: "Amul chauffeur bu ñuy won léegi. Soppi filtre yi walla nga yeesal galerie bi.",
       featured_profile: "Xool chauffeur bi",
       featured_whatsapp: "WhatsApp",
       featured_sms: "SMS",
       featured_order: "Demander un chauffeur",
-      featured_card_label: "Chauffeur bi ñuy won",
+      featured_card_label: "Chauffeur en avant",
 
       cta_driver_title: "Yow, yaa di chauffeur ambassadeur ?",
-      cta_driver_sub: "Duggal sa bopp ci DIGIY DRIVER AMBASSADEUR ak style ak savoir-être.",
+      cta_driver_sub: "Dugg ci DIGIY DRIVER AMBASSADEUR te yokk sa présence ak style ak savoir-être.",
       cta_become_driver: "📝 Inscription chauffeur",
       cta_order_ride: "Demander un chauffeur",
       cta_whatsapp: "WhatsApp support",
 
-      fallback_title: "⚠️ Galerie bi du connecté",
-      fallback_tag_1: "Source Supabase \"public_driver_cards\" duñu ko jàpp",
-      fallback_tag_2: "RLS / vue publique war nañu ko def",
-      toast_fallback: "Galerie bi ci mode public",
-      audio_kicker: "🎧 DIGIY di leeral client bi",
+      fallback_title: "⚠️ Galerie bi belum branché",
+      fallback_tag_1: "Source publique bi amul accès",
+      fallback_tag_2: "RLS / vue publique",
+      toast_fallback: "Galerie ci mode public",
+      audio_kicker: "🎧 DIGIY dafay leeral client bi",
       audio_title: "Déglu bala ngay tànn chauffeur",
-      audio_text: "Ba voix bi waxee, client bi xam na ne mën na xool profil yi, carte numérique bi, vidéo bu am, te def demande ci WhatsApp walla SMS.",
+      audio_text: "Kàddu gi dafay jàppale client bi : dafay xam ne mën na xool profil yi, ubbi carte numérique bi, gis vidéo de présentation bu amee, ba noppi def demande bu yomb ci WhatsApp walla SMS.",
       audio_note: "Client bi mooy tànn, mooy jokkook chauffeur bi. DIGIY du jël commission.",
       audio_play: "🎧 Déglu fiche bi",
       audio_stop: "⏹ Taxawal",
-      audio_whatsapp: "💬 Demande ci WhatsApp",
-      audio_sms: "📩 Demande ci SMS",
-      audio_unavailable: "🎧 Audio du am ci navigateur bi",
-      audio_playing: "🔊 Lecture bi đang dox",
-      audio_spoken: "Bienvenue ci DIGIY Driver Ambassadeur. Fii client bi dafay xool profil yi, zone bi, voiture bi ak fiche chauffeur bi bala muy tànn. Baptiste am na lien direct officiel bu wóor. Ngir def demande, client bi mën na jaar ci WhatsApp walla SMS. Contact bi direct la. Amul commission. Chauffeur bi mooy tëye relation bi, turam ak xaalisam. DIGIY dafay yokk ordre ak lumière. Terrain bi mooy am ndox mi."
+      audio_whatsapp: "💬 Demander ci WhatsApp",
+      audio_sms: "📩 Demander ci SMS",
+      audio_unavailable: "🎧 Audio amul",
+      audio_playing: "🔊 Lecture mi ngi dox",
+      audio_spoken: "Bienvenue ci DIGIY Driver Ambassadeur. Fii client bi dafay xool profil yi, zone bi, voiture bi ak fiche chauffeur bi bala muy tànn. Lamine am na fiche officielle ak carte bu ñu mën a ubbi direct. Ngir def demande, client bi mën na jaar ci WhatsApp walla SMS. Contact bi direct la. Amul commission. Chauffeur bi mooy tëye relation bi, turam ak xaalisam. DIGIY dafay yokk ordre ak lumière. Terrain bi mooy am ndox mi."
     },
 
     en: {
       eyebrow: "DIGIY DRIVER AMBASSADOR",
-      brand_title: "Mobility with style and service manners.",
+      brand_title: "International mobility with style and service attitude.",
       brand_sub: "A gallery designed to show not volume, but presence, attitude and human quality of service.",
       pill_class: "Ambassador Selection",
-      top_site: "🌍 Site",
+      top_site: "🌍 Website",
       top_hub: "🧭 HUB",
       top_tarifs: "📦 Pricing",
-      top_card: "🚖 Baptiste driver",
-      top_lexique: "🇸🇳 Wolof Lexicon",
       top_join: "📝 Driver registration",
-      top_baptiste_driver: "🚖 Baptiste driver",
+      top_card: "🚖 Driver card",
+      top_lexique: "🇸🇳 Wolof glossary",
+      top_baptiste_driver: "🚖 Driver card",
       hero_site: "🌍 Back to DIGIYLYFE",
       hero_hub: "🧭 Open the HUB",
-      hero_tarifs: "📦 View pricing",
-      hero_card: "🚖 Baptiste driver",
-      hero_lexique: "🇸🇳 Wolof Lexicon",
       hero_join: "📝 Driver registration",
-      hero_baptiste_driver: "🚖 View Baptiste driver",
+      hero_tarifs: "📦 View pricing",
+      hero_card: "🚖 Driver card",
+      hero_lexique: "🇸🇳 Wolof glossary",
+      hero_baptiste_driver: "🚖 View driver card",
 
       hero_eyebrow: "Premium public gallery",
       hero_title: "DIGIY DRIVER AMBASSADOR",
-      hero_sub: "Mobility with style and service manners. Filter by area, view profiles, then contact the right driver directly on WhatsApp.",
-      hero_signature: "Style. Service manners. Presence.",
-      hero_badge_1: "Ambassador = representation of the house",
+      hero_sub: "France ↔ Senegal. Filter by country, area or vehicle, review profiles, then contact the right driver directly on WhatsApp.",
+      hero_signature: "Style. Service attitude. Presence.",
+      hero_badge_1: "France ↔ Senegal = bridge of trust",
       hero_badge_2: "Direct contact • WhatsApp",
       hero_badge_3: "0% commission",
 
-      intl_kicker: "🌍 International axis France ↔ Senegal",
-      intl_title: "Two fields, one service standard.",
+      intl_kicker: "🌍 International route France ↔ Senegal",
+      intl_title: "Two territories, one service standard.",
       intl_intro: "DIGIY DRIVER AMBASSADOR structures mobility between Senegal, France and the diaspora: welcome, transfer, tourism, serious driver, direct contact, 0% commission.",
       intl_badge: "France · Senegal · Diaspora",
       intl_senegal_title: "🇸🇳 Senegal — field, welcome, trust",
-      intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte: the client arrives and needs a clear, presentable, reachable and reliable driver.",
+      intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte: the client arrives and wants a clear, presentable, reachable and reliable driver.",
       intl_senegal_p1: "✈️ Airport",
       intl_senegal_p2: "🏨 Hotels",
       intl_senegal_p3: "🌴 Tourism",
       intl_france_title: "🇫🇷 France — diaspora, departures, returns",
-      intl_france_copy: "France, Sarlat, Arcachon, Bordeaux, Paris: prepare rides, returns home, families, stays and partners.",
+      intl_france_copy: "France, Sarlat, Arcachon, Bordeaux, Paris: prepare journeys, returns home, families, stays and partners.",
       intl_france_p1: "🧳 Diaspora",
       intl_france_p2: "🚆 Stations",
       intl_france_p3: "🤝 Partners",
-      intl_bridge_title: "🌉 DIGIY bridge — one rule on both sides",
-      intl_bridge_copy: "No platform eats the relationship. The client chooses, the driver answers, payment stays direct, reputation stays with the professional.",
+      intl_bridge_title: "🌉 DIGIY bridge — same rule on both sides",
+      intl_bridge_copy: "No platform takes over the relationship. The client chooses, the driver responds, payment stays direct and reputation stays with the professional.",
       intl_bridge_p1: "💬 Direct contact",
       intl_bridge_p2: "🧾 Traceability",
       intl_bridge_p3: "0% commission",
@@ -2022,31 +2021,31 @@
       panel_online_k: "Direct contact",
       panel_zone_k: "Covered areas",
       panel_public_k: "Visibility",
-      panel_note: "Here, we highlight profiles that carry a certain level of service attitude.",
+      panel_note: "This space highlights profiles that carry a certain service standard.",
 
       section_title: "Find the right ambassador",
-      section_sub: "Search by area, city or vehicle type to find the profile that fits your need.",
+      section_sub: "Search by country, area, city or vehicle type to find the right profile.",
 
       badge_public: "Public gallery",
       badge_loading: "Loading…",
       badge_fallback: "⚠️ Public gallery",
 
-      nav_site: "← Back to site",
+      nav_site: "← Back to website",
       nav_gallery: "🚕 Our drivers",
       nav_order: "📲 Request a driver",
       nav_recruit: "📝 Driver registration",
       nav_cockpit: "🔐 Driver access",
-      nav_card: "🚖 Baptiste driver",
-      nav_lexique: "🇸🇳 Wolof Lexicon",
-      nav_baptiste_driver: "🚖 Baptiste driver",
+      nav_card: "🚖 Driver card",
+      nav_lexique: "🇸🇳 Wolof glossary",
+      nav_baptiste_driver: "🚖 Driver card",
 
-      label_country: "🌍 Country / axis",
+      label_country: "🌍 Country / route",
       country_all: "All",
-      label_zone: "📍 Area searched",
+      label_zone: "📍 Requested area",
       zone_all: "All",
 
-      label_search: "🔎 Name, city or car",
-      search_ph: "Name, city or car…",
+      label_search: "🔎 Name, city or vehicle",
+      search_ph: "Name, city or vehicle…",
 
       label_avail: "📞 Contact",
       avail_all: "All profiles",
@@ -2054,62 +2053,61 @@
       avail_offline: "To contact",
 
       count_drivers: (n) => `${n} driver(s)`,
-      online_now: (n) => `${n} with direct contact`,
-      zones_live: (n) => `${n} covered area(s)`,
+      online_now: (n) => `${n} direct contact`,
+      zones_live: (n) => `${n} area(s) covered`,
 
       stat_total: (n) => `${n}`,
       stat_online: (n) => `${n}`,
       stat_zones: (n) => `${n}`,
 
       empty_title: "No driver found",
-      empty_tag_1: "Change the filters",
+      empty_tag_1: "Change filters",
       empty_tag_2: "Or contact WhatsApp",
       btn_support_whatsapp: "WhatsApp support",
       btn_order_ride: "Request a driver",
 
       driver_default_name: "Ambassador Driver",
-      driver_desc_default: "Public DIGIY DRIVER AMBASSADOR profile. Mobility with style and service manners.",
-      driver_tagline: "Mobility with style and service manners",
+      driver_desc_default: "Public DIGIY DRIVER AMBASSADOR profile. Mobility with style and service attitude.",
+      driver_tagline: "Mobility with style and service attitude",
       tag_online: "📞 Direct WhatsApp",
       tag_offline: "🕊️ To contact",
       pill_public: "Selected driver",
       btn_whatsapp: "WhatsApp",
       btn_sms: "SMS",
-      btn_profile: "View this driver",
+      btn_profile: "View driver",
 
-      featured_title: "Driver card in showcase",
-      featured_sub: "Here is a real profile visible right away. The client sees the driver, area and vehicle, then chooses.",
+      featured_title: "Featured driver card",
+      featured_sub: "One highlighted profile appears here. Review the driver, area and vehicle, then choose.",
       featured_badge: "Direct choice",
       featured_loading: "Loading driver card…",
       featured_empty: "No visible driver for now. Adjust filters or reload the gallery.",
-      featured_profile: "View this driver",
+      featured_profile: "View driver",
       featured_whatsapp: "WhatsApp",
       featured_sms: "SMS",
       featured_order: "Request this driver",
       featured_card_label: "Featured driver",
 
       cta_driver_title: "Are you an ambassador driver?",
-      cta_driver_sub: "Join DIGIY DRIVER AMBASSADOR and grow your presence with style and service manners.",
+      cta_driver_sub: "Join DIGIY DRIVER AMBASSADOR and grow your presence with style and service attitude.",
       cta_become_driver: "📝 Driver registration",
       cta_order_ride: "Request a driver",
       cta_whatsapp: "WhatsApp support",
 
       fallback_title: "⚠️ Gallery not connected yet",
-      fallback_tag_1: "The Supabase source \"public_driver_cards\" is not accessible",
-      fallback_tag_2: "RLS / public view to create",
+      fallback_tag_1: "The public source is not accessible",
+      fallback_tag_2: "RLS / public view",
       toast_fallback: "Gallery in public mode",
-
-      audio_kicker: "🎧 DIGIY explains to the client",
-      audio_title: "Listen before choosing your driver",
-      audio_text: "The voice reassures the client: they understand that they can view profiles, open the digital card, watch a presentation video when available, then make a simple request by WhatsApp or SMS.",
-      audio_note: "The client stays in control: they choose, contact directly, and DIGIY takes no commission.",
+      audio_kicker: "🎧 DIGIY explains it to the client",
+      audio_title: "Listen before choosing a driver",
+      audio_text: "The voice puts the client at ease: they understand that they can review profiles, open the digital card, watch a presentation video when available, then make a simple request by WhatsApp or SMS.",
+      audio_note: "The client stays in control: they choose, they contact directly, DIGIY takes no commission.",
       audio_play: "🎧 Listen to the page",
       audio_stop: "⏹ Stop",
       audio_whatsapp: "💬 Request by WhatsApp",
       audio_sms: "📩 Request by SMS",
       audio_unavailable: "🎧 Audio unavailable",
-      audio_playing: "🔊 Playing…",
-      audio_spoken: "Welcome to DIGIY Driver Ambassador. Here, the client views profiles, area, vehicle and the driver page before choosing. Baptiste has a direct official safe link. To make a request, the client can use WhatsApp or SMS. Contact stays direct. No useless middleman. Zero commission. The driver keeps the relationship, their name and their money. DIGIY brings order and visibility. The field keeps control."
+      audio_playing: "🔊 Playing",
+      audio_spoken: "Welcome to DIGIY Driver Ambassador. Here, the client views profiles, area, vehicle and the driver page before choosing. Lamine has a direct official profile and shareable card. To make a request, the client can use WhatsApp or SMS. Contact stays direct. No useless middleman. Zero commission. The driver keeps the relationship, their name and their money. DIGIY brings order and visibility. The field keeps control."
     }
   };
 
@@ -2198,8 +2196,9 @@
   const ORDER_RIDE_URL = "https://driver.digiylyfe.com/commander-course.html";
   const DRIVER_JOIN_URL = "https://galerie-chauffeurs.digiylyfe.com/inscription-driver";
   const COCKPIT_URL = "https://pro-driver.digiylyfe.com/pin.html";
-  const BAPTISTE_DRIVER_URL = "https://digiy-driver-part-bapt.digiylyfe.com/";
-  const CARD_URL = BAPTISTE_DRIVER_URL;
+  const LAMINE_PROFILE_URL = "https://partenaire-lamine.digiylyfe.com/";
+  const CARD_URL = LAMINE_PROFILE_URL;
+  const CARD_IMAGE_URL = "https://partenaire-lamine.digiylyfe.com/carte-visite.png";
   const PROFILE_URL = digiyLocal("fiche-chauffeur.html");
 
   function hrefFor(url, keepSlug = true){
@@ -2239,8 +2238,8 @@
 
   function profileUrlForDriver(d){
     const direct = normalizeText(d?.profile_url || d?.url_fiche || d?.public_url || d?.url || "");
-    if (direct){
-      try{ return new URL(direct, location.href).toString(); }catch(_){ }
+    if (direct) {
+      try { return new URL(direct, location.href).toString(); } catch(_) {}
     }
 
     const u = new URL(PROFILE_URL, location.href);
@@ -2318,50 +2317,11 @@
     ["joinBtnTop", DRIVER_JOIN_URL, true],
     ["joinBtnBottom", DRIVER_JOIN_URL, true],
     ["cockpitBtnTop", COCKPIT_URL, false],
-    ["cockpitBtnBottom", COCKPIT_URL, false],
-    ["cardBtnTop", BAPTISTE_DRIVER_URL, false],
-    ["heroCardBtn", BAPTISTE_DRIVER_URL, false],
-    ["cardBtnSection", BAPTISTE_DRIVER_URL, false],
-    ["cardBtnBottom", BAPTISTE_DRIVER_URL, false],
-    ["baptisteDirectMain", BAPTISTE_DRIVER_URL, false],
-    ["baptisteDirectAlt", BAPTISTE_DRIVER_URL, false]
+    ["cockpitBtnBottom", COCKPIT_URL, false]
   ].forEach(([id, url, keepSlug])=>{
     const el = document.getElementById(id);
     if (el) el.href = hrefFor(url, keepSlug);
   });
-
-  // Chauffeur Baptiste officielle : lien public fixe à conserver tel quel.
-  // Important : on ne repasse pas par hrefFor(), sinon le slug de la carte peut être retiré ou remplacé.
-  ["cardBtnTop", "heroCardBtn", "cardBtnSection", "cardBtnBottom"].forEach((id)=>{
-    const el = document.getElementById(id);
-    if (el) el.href = CARD_URL;
-  });
-
-  const LAMINE_DRIVER = {
-    name: "Lamine",
-    slug: "lamine",
-    city: "Saly",
-    zone: "Saly · Mbour · Somone · Ngaparou · Petite Côte · AIBD · Dakar",
-    country: "Sénégal",
-    car: "Chauffeur privé",
-    description: "Transfert AIBD, courses locales, trajets vers Dakar, circuits Petite Côte et mise à disposition. Contact et paiement directs au chauffeur.",
-    whatsapp: "221784413680",
-    rating: 5,
-    profile_url: "https://partenaire-lamine.digiylyfe.com/",
-    card_image: "https://partenaire-lamine.digiylyfe.com/carte-visite.png"
-  };
-
-  function withLamine(rows){
-    const clean = (Array.isArray(rows) ? rows : []).filter(d => !isBlockedDriver(d));
-    let found = false;
-    const merged = clean.map(d => {
-      const isLamine = normalizeAscii(d?.slug) === "lamine" || normalizeAscii(d?.name) === "lamine";
-      if (!isLamine) return d;
-      found = true;
-      return { ...LAMINE_DRIVER, ...d, profile_url: d?.profile_url || d?.url_fiche || LAMINE_DRIVER.profile_url, card_image: d?.card_image || LAMINE_DRIVER.card_image };
-    });
-    return found ? merged : [LAMINE_DRIVER, ...merged];
-  }
 
   let ALL = [];
 
@@ -2467,8 +2427,47 @@
 
 
   function isBlockedDriver(d){
-    /* Aucun prénom n’est bloqué. Une fiche retirée doit être ciblée par son identifiant exact côté données. */
-    return false;
+    const hay = normalizeAscii([
+      d?.name,
+      d?.slug,
+      d?.profile_url,
+      d?.url_fiche,
+      d?.public_url,
+      d?.url
+    ].join(" "));
+
+    return hay.includes("baptiste") || hay.includes("babacar") || hay.includes("babacard");
+  }
+
+  const LAMINE_DRIVER = {
+    name: "Lamine",
+    slug: "lamine",
+    city: "Saly",
+    zone: "Saly · Mbour · Somone · Ngaparou · Petite Côte · AIBD · Dakar",
+    country: "Sénégal",
+    car: "Chauffeur privé",
+    description: "Transfert AIBD, courses locales, trajets vers Dakar, circuits Petite Côte et mise à disposition. Contact et paiement directs au chauffeur.",
+    whatsapp: "221784413680",
+    rating: 5,
+    profile_url: LAMINE_PROFILE_URL,
+    card_image: CARD_IMAGE_URL
+  };
+
+  function withLamine(rows){
+    const clean = (Array.isArray(rows) ? rows : []).filter(d => !isBlockedDriver(d));
+    let found = false;
+    const merged = clean.map(d => {
+      const match = normalizeAscii(d?.slug) === "lamine" || normalizeAscii(d?.name) === "lamine" || normPhone(d?.whatsapp) === "221784413680";
+      if (!match) return d;
+      found = true;
+      return {
+        ...LAMINE_DRIVER,
+        ...d,
+        profile_url: d?.profile_url || d?.url_fiche || LAMINE_DRIVER.profile_url,
+        card_image: d?.card_image || d?.card_url || LAMINE_DRIVER.card_image
+      };
+    });
+    return found ? merged : [LAMINE_DRIVER, ...merged];
   }
 
   function sortDrivers(rows){
@@ -2595,6 +2594,69 @@
     return sortDrivers(ALL.filter(d => !isBlockedDriver(d)).filter(passes));
   }
 
+  function isLamineDriver(d){
+    const slugVal = normalizeAscii(d?.slug || "");
+    const nameVal = normalizeAscii(d?.name || "");
+    const wa = normPhone(d?.whatsapp);
+    return slugVal === "lamine" || nameVal === "lamine" || wa === "221784413680";
+  }
+
+  function cardImageUrl(){
+    return CARD_IMAGE_URL + "?v=20260714";
+  }
+
+  function shareTextForLamine(){
+    return "Lamine — Chauffeur privé à Saly\nFiche officielle : https://partenaire-lamine.digiylyfe.com/\nCarte de visite : https://partenaire-lamine.digiylyfe.com/carte-visite.png";
+  }
+
+  function renderLamineCardExtras(){
+    const shareText = shareTextForLamine();
+    const whatsappShare = "https://wa.me/?text=" + encodeURIComponent(shareText);
+    return `
+      <div class="driver-card-box">
+        <a class="driver-card-click" href="${esc(LAMINE_PROFILE_URL)}" target="_blank" rel="noopener" aria-label="Ouvrir la fiche officielle de Lamine">
+          <img src="${esc(cardImageUrl())}" alt="Carte de visite officielle de Lamine" loading="eager">
+        </a>
+        <div class="driver-card-note">🖱️ Cliquez directement sur la carte pour ouvrir la fiche officielle de Lamine.</div>
+        <div class="driver-card-actions">
+          <a class="btn btn-main" href="${esc(LAMINE_PROFILE_URL)}" target="_blank" rel="noopener">🚗 Ouvrir la fiche</a>
+          <a class="btn btn-ghost" href="${esc(cardImageUrl())}" target="_blank" rel="noopener">🖼️ Voir la carte</a>
+          <button class="btn btn-sky js-share-card" type="button" data-share-title="Lamine — Chauffeur privé à Saly" data-share-text="${esc(shareText)}" data-share-url="${esc(LAMINE_PROFILE_URL)}">📤 Partager</button>
+          <a class="btn btn-main" href="${esc(whatsappShare)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function bindShareButtons(){
+    document.querySelectorAll(".js-share-card").forEach((btn) => {
+      if (btn.dataset.shareBound === "1") return;
+      btn.dataset.shareBound = "1";
+
+      btn.addEventListener("click", async () => {
+        const title = btn.getAttribute("data-share-title") || "Lamine — Chauffeur privé";
+        const text = btn.getAttribute("data-share-text") || shareTextForLamine();
+        const url = btn.getAttribute("data-share-url") || LAMINE_PROFILE_URL;
+
+        try {
+          if (navigator.share) {
+            await navigator.share({ title, text, url });
+            return;
+          }
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+            toast("Lien de la fiche et de la carte copié.");
+            return;
+          }
+        } catch (error) {
+          if (error?.name === "AbortError") return;
+        }
+
+        window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener");
+      });
+    });
+  }
+
   function renderFeaturedCard(items){
     if(!featuredCardArea) return;
 
@@ -2618,8 +2680,7 @@
     const smsUrl = smsUrlForDriver(d);
     const whatsUrl = whatsappUrlForDriver(d);
     const mono = esc(initials(name));
-    const profileUrl = profileUrlForDriver(d);
-    const cardImage = normalizeText(d.card_image || d.card_url || "");
+    const profileUrl = d.slug ? profileUrlForDriver(d) : "";
     const orderUrl = commanderUrlForDriver(d);
 
     featuredCardArea.className = "featured-card";
@@ -2644,7 +2705,6 @@
       </div>
 
       <div class="featured-desc">${desc}</div>
-      ${cardImage ? `<a class="driver-card-preview" href="${esc(cardImage)}" target="_blank" rel="noopener"><img src="${esc(cardImage)}" alt="Carte officielle de ${esc(name)}" loading="eager"></a>` : ``}
 
       <div class="featured-actions">
         ${
@@ -2669,9 +2729,11 @@
           data-driver='${esc(JSON.stringify({name: d.name || "", whatsapp: wa || "", slug: d.slug || ""}))}'
         >${esc(t("featured_order"))}</a>
       </div>
+      ${isLamineDriver(d) ? renderLamineCardExtras() : ""}
     `;
 
     bindOrderButtons();
+    bindShareButtons();
   }
 
   function render(){
@@ -2712,8 +2774,6 @@
       const smsUrl = smsUrlForDriver(d);
       const whatsUrl = whatsappUrlForDriver(d);
       const mono = esc(initials(name));
-      const profileUrl = profileUrlForDriver(d);
-      const cardImage = normalizeText(d.card_image || d.card_url || "");
 
       const statusTag = wa
         ? `<span class="tag green">${esc(t("tag_online"))}</span>`
@@ -2751,7 +2811,6 @@
           </div>
 
           <div class="desc">${desc}</div>
-          ${cardImage ? `<a class="driver-card-preview" href="${esc(cardImage)}" target="_blank" rel="noopener"><img src="${esc(cardImage)}" alt="Carte officielle de ${esc(name)}" loading="lazy"></a>` : ``}
 
           <div class="actions">
             ${
@@ -2776,11 +2835,13 @@
               data-driver='${driverPayload}'
             >${esc(t("btn_order_ride"))}</a>
           </div>
+          ${isLamineDriver(d) ? renderLamineCardExtras() : ""}
         </div>
       `;
     }).join("");
 
     bindOrderButtons();
+    bindShareButtons();
   }
 
   async function load(){
@@ -2793,7 +2854,7 @@
 
       if (error) throw error;
 
-      ALL = withLamine(Array.isArray(data) ? data : []);
+      ALL = withLamine(data);
       rebuildCountryOptions(ALL);
       rebuildZoneOptions(ALL);
       refreshTopStats();
@@ -2814,6 +2875,24 @@
       rebuildZoneOptions(ALL);
       refreshTopStats();
       render();
+
+      /* Secours contact général conservé seulement si le rendu échoue totalement. */
+      if (!driversEl.children.length) driversEl.innerHTML = `
+        <div class="driver" style="grid-column:1/-1">
+          <div class="name">${esc(t("fallback_title"))}</div>
+          <div class="meta">
+            <span class="tag">${esc(t("fallback_tag_1"))}</span>
+            <span class="tag">${esc(t("fallback_tag_2"))}</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20chauffeur%20via%20DIGIY%20DRIVER%20AMBASSADEUR." rel="noopener">${esc(t("cta_whatsapp"))}</a>
+            <a class="btn btn-sky" href="sms:+221771342889?&body=Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20chauffeur%20via%20DIGIY%20DRIVER%20AMBASSADEUR.">SMS</a>
+            <a class="btn btn-ghost" href="${esc(hrefFor(ORDER_RIDE_URL, true))}" rel="noopener">${esc(t("btn_order_ride"))}</a>
+            <a class="btn btn-ghost" href="${esc(hrefFor(SITE_URL, false))}" rel="noopener">${esc(t("nav_site"))}</a>
+          </div>
+        </div>
+      `;
+
       toast(t("toast_fallback"));
     }
   }
@@ -2920,815 +2999,10 @@
   
 <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 
-<!-- DIGIY FIX 20260710: Baptiste direct link forced, old card buttons anti-404, aucun prénom bloqué. -->
+<!-- DIGIY FIX 20260714: Lamine direct card clickable/shareable; Baptiste and Babacar blocked. -->
+  <script src="./galerie-runtime-fix.js?v=20260714-v2" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
