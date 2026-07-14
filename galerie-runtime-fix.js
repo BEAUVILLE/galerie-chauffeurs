@@ -1,11 +1,13 @@
 /* DIGIY DRIVER — correctif local galerie
    - retire Baptiste et Babacar/Babacard
-   - ne crée plus aucune carte Lamine
-   - garde une seule carte cliquable et partageable dans le profil Lamine
+   - ne crée aucune carte supplémentaire
+   - conserve une seule carte Lamine dans la grille
+   - force le clic de la carte vers la fiche officielle de Lamine
 */
 (function(){
   "use strict";
 
+  var LAMINE_PROFILE = "https://partenaire-lamine.digiylyfe.com/";
   var REMOVED = ["baptiste", "babacar", "babacard"];
 
   function norm(value){
@@ -73,31 +75,52 @@
   }
 
   function keepOneLamineBusinessCard(){
-    /* Anciennes cartes injectées par ce runtime : toutes supprimées. */
+    /* Supprime toutes les anciennes cartes créées par les correctifs précédents. */
     document.querySelectorAll(".digiy-lamine-card-box").forEach(function(box){
       box.remove();
     });
 
-    /* La vitrine haute reste une présentation courte : aucune carte de visite ici. */
+    /* La vitrine haute reste courte : aucune carte de visite dupliquée ici. */
     document.querySelectorAll("#featuredCardArea .driver-card-box").forEach(function(box){
       box.remove();
     });
 
-    /* Dans la grille, une seule carte de visite est conservée sur le profil Lamine. */
+    var kept = false;
+
     document.querySelectorAll("#drivers .driver").forEach(function(card){
       if(!isLamineCard(card)) return;
+
       var boxes = card.querySelectorAll(".driver-card-box");
-      for(var i = 1; i < boxes.length; i++) boxes[i].remove();
+      Array.prototype.forEach.call(boxes, function(box){
+        if(kept){
+          box.remove();
+          return;
+        }
+
+        kept = true;
+
+        /* Le clic sur la carte ouvre toujours la fiche officielle, jamais l’image seule. */
+        var cardLink = box.querySelector(".driver-card-click") || box.querySelector("a:has(img)");
+        if(cardLink){
+          cardLink.href = LAMINE_PROFILE;
+          cardLink.target = "_blank";
+          cardLink.rel = "noopener";
+          cardLink.title = "Ouvrir la fiche officielle de Lamine";
+          cardLink.setAttribute("aria-label", "Ouvrir la fiche officielle de Lamine");
+        }
+      });
     });
   }
 
   function genericFeaturedCopy(){
     var title = document.querySelector("#featuredCardWrap .featured-head .title");
     var sub = document.querySelector("#featuredCardWrap .featured-head .sub");
+
     if(title){
       title.removeAttribute("data-i18n");
       title.textContent = "Chauffeur en vitrine";
     }
+
     if(sub){
       sub.removeAttribute("data-i18n");
       sub.textContent = "Le premier profil disponible selon les filtres apparaît ici. Ouvrez sa fiche officielle puis contactez-le directement.";
@@ -119,17 +142,22 @@
   }
 
   var pending = false;
+
   function schedule(){
     if(pending) return;
     pending = true;
+
     requestAnimationFrame(function(){
       pending = false;
       clean();
     });
   }
 
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
-  else schedule();
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", schedule);
+  }else{
+    schedule();
+  }
 
   window.addEventListener("load", schedule);
 
