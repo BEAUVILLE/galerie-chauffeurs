@@ -1,5 +1,5 @@
 /* DIGIY DRIVER — correctif local galerie
-   - retire Baptiste et Babacar/Babacard
+   - retire Baptiste, Babacar/Babacard, Helage, Zal et Baye
    - ne crée aucune carte supplémentaire
    - conserve une seule carte Lamine dans la grille
    - force le clic de la carte vers la fiche officielle de Lamine
@@ -8,7 +8,7 @@
   "use strict";
 
   var LAMINE_PROFILE = "https://partenaire-lamine.digiylyfe.com/";
-  var REMOVED = ["baptiste", "babacar", "babacard"];
+  var REMOVED = ["baptiste", "babacar", "babacard", "helage", "zal", "baye"];
 
   function norm(value){
     return String(value || "")
@@ -18,9 +18,16 @@
       .trim();
   }
 
+  function escapeRegex(value){
+    return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
   function hasRemoved(value){
     var text = norm(value);
-    return REMOVED.some(function(name){ return text.indexOf(name) !== -1; });
+    return REMOVED.some(function(name){
+      var pattern = new RegExp("(^|[^a-z0-9])" + escapeRegex(name) + "([^a-z0-9]|$)");
+      return pattern.test(text);
+    });
   }
 
   function isRemovedCard(card){
