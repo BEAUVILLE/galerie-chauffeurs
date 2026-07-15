@@ -295,7 +295,7 @@
     }
 
     .tarif.disabled:after{
-      content:"Non proposé en France";
+      content:attr(data-unavailable-label);
       display:block;
       margin-top:8px;
       width:max-content;
@@ -590,7 +590,7 @@
         </p>
 
         <div class="tarifs" role="radiogroup" data-i18n-aria-label="pricing_aria" aria-label="Choix tarif chauffeur">
-          <label class="tarif" data-senegal-only="1">
+          <label class="tarif" data-senegal-only="1" data-unavailable-label="Non proposé en France">
             <input type="radio" name="plan" value="DRIVER Jakarta" data-code="1A" data-amount="5500" data-eur-fr="" data-country="Senegal"/>
             <span data-i18n="plan_jakarta">1A · Jakarta</span>
             <strong>5 500 FCFA</strong>
@@ -738,8 +738,19 @@
       };
 
       const LANGUAGE_KEY = "digiy_lang";
+
+      function readStoredLanguage(){
+        try{
+          const value = localStorage.getItem(LANGUAGE_KEY);
+          return ["fr","en"].includes(value) ? value : null;
+        }catch(_){
+          return null;
+        }
+      }
+
       const urlLang = new URLSearchParams(location.search).get("lang");
-      let currentLang = ["fr","en"].includes(urlLang) ? urlLang : (["fr","en"].includes(localStorage.getItem(LANGUAGE_KEY)) ? localStorage.getItem(LANGUAGE_KEY) : "fr");
+      const storedLang = readStoredLanguage();
+      let currentLang = ["fr","en"].includes(urlLang) ? urlLang : (storedLang || "fr");
 
       const DIGIY_WA = "221771342889";
       const WAVE_LABEL = "JB BEAUVILLE · +221 77 134 28 89";
@@ -791,6 +802,9 @@
         });
         document.querySelectorAll("[data-i18n-aria-label]").forEach(el => {
           el.setAttribute("aria-label", t(el.dataset.i18nAriaLabel));
+        });
+        document.querySelectorAll('[data-senegal-only="1"]').forEach(el => {
+          el.setAttribute("data-unavailable-label", t("plan_unavailable_france"));
         });
         document.querySelectorAll("[data-lang]").forEach(button => {
           button.setAttribute("aria-pressed", String(button.dataset.lang === currentLang));
@@ -1056,6 +1070,12 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+   
 
 
 
