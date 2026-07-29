@@ -2923,6 +2923,10 @@
   }
 
   function passes(d){
+    // ===== CORRECTION : TOUJOURS INCLURE BAPTISTE =====
+    if (isBaptisteMatch(d)) return true;
+    // ===== FIN DE LA CORRECTION =====
+
     const c = (countryFilter?.value || "").trim();
     const z = (zoneFilter.value || "").trim();
     const q = normalizeAscii(qFilter.value || "");
@@ -2947,41 +2951,6 @@
       if (!hay.includes(q)) return false;
     }
     return true;
-  }
-
-  function initials(name){
-    const parts = String(name || "")
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2);
-    return parts.map(p => p[0]?.toUpperCase() || "").join("") || "DA";
-  }
-
-  function rememberCommanderMeta(driver){
-    try{
-      const wa = normPhone(driver?.whatsapp);
-      if (wa) sessionStorage.setItem("digiy_driver_order_wa", wa);
-      else sessionStorage.removeItem("digiy_driver_order_wa");
-
-      if (driver?.name) sessionStorage.setItem("digiy_driver_order_name", String(driver.name));
-      else sessionStorage.removeItem("digiy_driver_order_name");
-
-      if (driver?.slug) sessionStorage.setItem("digiy_driver_order_slug", String(driver.slug));
-      else sessionStorage.removeItem("digiy_driver_order_slug");
-    }catch(_){}
-  }
-
-  function bindOrderButtons(){
-    driversEl.querySelectorAll(".js-order-btn").forEach(el=>{
-      el.addEventListener("click", ()=>{
-        try{
-          const raw = el.getAttribute("data-driver") || "{}";
-          const parsed = JSON.parse(raw);
-          rememberCommanderMeta(parsed);
-        }catch(_){}
-      });
-    });
   }
 
   function getFilteredItems(){
