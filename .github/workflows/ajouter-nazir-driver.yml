@@ -1,0 +1,120 @@
+name: Ajouter Nazir Driver
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/ajouter-nazir-driver.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Installer le générateur QR
+        run: python -m pip install --quiet qrcode
+
+      - name: Créer la fiche et ajouter Nazir à la galerie
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.parse import quote
+          import html
+          import qrcode
+
+          phone_display = "+221 77 831 02 98"
+          phone_digits = "221778310298"
+          wa = "https://wa.me/" + phone_digits + "?text=" + quote("Bonjour Nazir Driver, je viens de DIGIYLYFE et je souhaite organiser un trajet.")
+
+          # QR vectoriel réel et scannable.
+          qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=1, border=4)
+          qr.add_data(wa)
+          qr.make(fit=True)
+          matrix = qr.get_matrix()
+          n = len(matrix)
+          qx, qy, qsize = 722, 1387, 244
+          unit = qsize / n
+          commands = []
+          for row, values in enumerate(matrix):
+              col = 0
+              while col < n:
+                  if not values[col]:
+                      col += 1
+                      continue
+                  start = col
+                  while col < n and values[col]:
+                      col += 1
+                  width = (col - start) * unit
+                  commands.append(f"M{qx + start*unit:.2f},{qy + row*unit:.2f}h{width:.2f}v{unit:.2f}h-{width:.2f}z")
+          qr_path = " ".join(commands)
+
+          svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+          <title id="title">Nazir Driver — Chauffeur DIGIY DRIVER</title>
+          <desc id="desc">Carte professionnelle avec téléphone, WhatsApp, secteurs et QR direct.</desc>
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#031d17"/><stop offset=".52" stop-color="#06402f"/><stop offset="1" stop-color="#02110d"/></linearGradient>
+            <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0a3"/><stop offset=".45" stop-color="#f2c14e"/><stop offset="1" stop-color="#a9720d"/></linearGradient>
+            <radialGradient id="glow" cx=".82" cy=".24" r=".55"><stop offset="0" stop-color="#f6c453" stop-opacity=".38"/><stop offset="1" stop-color="#f6c453" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="1080" height="1920" rx="54" fill="url(#bg)"/><rect width="1080" height="1920" rx="54" fill="url(#glow)"/><rect x="18" y="18" width="1044" height="1884" rx="46" fill="none" stroke="url(#gold)" stroke-width="6"/>
+          <g transform="translate(540 115)" fill="url(#gold)"><path d="M-55-54h76c90 0 145 50 145 134S111 214 21 214h-76zM0-8v176h24c58 0 91-32 91-88S82-8 24-8z"/><path d="M-260 3h150v34h-117zm17 57h133v31h-102zm34 54h99v29h-76zM260 3H110v34h117zm-17 57H110v31h102zm-34 54h-99v29h76z"/></g>
+          <text x="540" y="390" text-anchor="middle" fill="#f4c95d" font-family="Arial" font-size="42" font-weight="800" letter-spacing="13">DIGIY DRIVER</text>
+          <line x1="170" y1="420" x2="910" y2="420" stroke="#d8aa36" stroke-width="2"/>
+          <text x="540" y="570" text-anchor="middle" fill="url(#gold)" font-family="Arial Black,Arial" font-size="128" font-weight="900">NAZIR DRIVER</text>
+          <text x="540" y="655" text-anchor="middle" fill="#fff8df" font-family="Georgia" font-size="72" font-style="italic">Chauffeur</text>
+          <path d="M70 910 C300 700 700 720 1010 900 L1010 1050 L70 1050Z" fill="#020a08" opacity=".65"/><path d="M95 1000 C320 845 710 860 1000 980" fill="none" stroke="#f4c95d" stroke-width="10"/>
+          <g transform="translate(182 760)"><path d="M85 180 155 72c17-26 43-42 74-47l244-39c45-7 91 10 120 45l75 89 66 25c29 11 48 39 48 70v42H18v-52c0-12 7-22 18-27z" fill="#07110f" stroke="#d8aa36" stroke-width="5"/><path d="m190 84 55-18 232-36c26-4 51 5 68 25l52 64H163z" fill="#17372e" stroke="#f4c95d" stroke-width="3"/><circle cx="164" cy="256" r="57" fill="#050807" stroke="#d8aa36" stroke-width="7"/><circle cx="620" cy="256" r="57" fill="#050807" stroke="#d8aa36" stroke-width="7"/><path d="M65 193h663" stroke="#f4c95d" stroke-width="4"/></g>
+          <rect x="70" y="1080" width="940" height="190" rx="38" fill="#05291f" stroke="#f4c95d" stroke-width="4"/><text x="110" y="1150" fill="#fff" font-family="Arial" font-size="42">Tél / WhatsApp</text><text x="110" y="1225" fill="url(#gold)" font-family="Arial Black,Arial" font-size="72" font-weight="900">{phone_display}</text>
+          <rect x="70" y="1300" width="575" height="355" rx="34" fill="#04251c" stroke="#b98a28" stroke-width="3"/><text x="110" y="1360" fill="#f4c95d" font-family="Arial" font-size="34" font-weight="900">ZONE D’ACTIVITÉ</text><text x="110" y="1415" fill="#fff" font-family="Arial" font-size="31">Saly · Mbour · AIBD</text><text x="110" y="1460" fill="#fff" font-family="Arial" font-size="31">Multi-région</text><text x="110" y="1530" fill="#f4c95d" font-family="Arial" font-size="34" font-weight="900">SERVICES</text><text x="110" y="1580" fill="#fff" font-family="Arial" font-size="28">Trajets directs · Aéroport</text><text x="110" y="1622" fill="#fff" font-family="Arial" font-size="26">Déplacements régionaux · Mise à disposition</text>
+          <a href="{html.escape(wa)}" target="_blank"><rect x="670" y="1300" width="340" height="355" rx="34" fill="#fff" stroke="#f4c95d" stroke-width="5"/><text x="840" y="1355" text-anchor="middle" fill="#05291f" font-family="Arial" font-size="27" font-weight="900">QR WHATSAPP DIRECT</text><rect x="714" y="1379" width="260" height="260" fill="#fff"/><path d="{qr_path}" fill="#000"/></a>
+          <a href="{html.escape(wa)}" target="_blank"><rect x="70" y="1690" width="940" height="105" rx="32" fill="url(#gold)"/><text x="540" y="1757" text-anchor="middle" fill="#041a14" font-family="Arial Black,Arial" font-size="42" font-weight="900">CONTACTER NAZIR SUR WHATSAPP</text></a>
+          <text x="540" y="1845" text-anchor="middle" fill="#f4c95d" font-family="Arial" font-size="34" font-weight="800" letter-spacing="8">BY DIGIYLYFE</text>
+          </svg>'''
+          Path("nazir-driver-card.svg").write_text(svg, encoding="utf-8")
+
+          profile = f'''<!doctype html>
+          <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Nazir Driver — Chauffeur Saly, Mbour, AIBD | DIGIY DRIVER</title><meta name="description" content="Nazir Driver, chauffeur disponible à Saly, Mbour, AIBD et multi-région. Trajets directs, transferts aéroport et déplacements régionaux. Contact direct WhatsApp."><meta name="theme-color" content="#05291f"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html"><meta property="og:type" content="profile"><meta property="og:title" content="Nazir Driver — Chauffeur DIGIY DRIVER"><meta property="og:description" content="Saly · Mbour · AIBD · Multi-région. Contact direct par téléphone ou WhatsApp."><meta property="og:image" content="https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg">
+          <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Person","name":"Nazir Driver","jobTitle":"Chauffeur","telephone":"+221778310298","url":"https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html","image":"https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg"}}</script>
+          <style>:root{{--bg:#031b15;--panel:#062a20;--gold:#f4c95d;--text:#fff9e8;--muted:#c9d8d2;--green:#1fa86a;--line:rgba(244,201,93,.28)}}*{{box-sizing:border-box}}body{{margin:0;background:radial-gradient(900px 500px at 100% 0,rgba(244,201,93,.16),transparent 55%),linear-gradient(180deg,#02110d,var(--bg));color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}}.wrap{{max-width:980px;margin:auto;padding:18px 14px 50px}}.top{{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}}.brand{{font-weight:950;letter-spacing:.12em;color:var(--gold)}}.back{{color:var(--text);text-decoration:none;border:1px solid var(--line);padding:11px 14px;border-radius:999px;background:rgba(255,255,255,.05);font-weight:850}}.hero{{margin-top:16px;display:grid;grid-template-columns:minmax(280px,.92fr) minmax(0,1.08fr);gap:18px;align-items:start}}.visual,.panel{{border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.04);padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.38)}}.visual img{{display:block;width:100%;height:auto;border-radius:20px}}.panel{{padding:22px}}.kicker{{display:inline-flex;padding:8px 11px;border-radius:999px;background:rgba(244,201,93,.1);border:1px solid var(--line);color:#ffe8a6;font-size:12px;font-weight:950;text-transform:uppercase}}h1{{margin:14px 0 6px;font-size:clamp(42px,8vw,82px);line-height:.95;color:var(--gold)}}.role{{font-size:22px;font-weight:900}}.lead{{color:var(--muted);font-size:16px;line-height:1.7;font-weight:700}}.actions{{display:grid;grid-template-columns:1fr 1fr;gap:10px}}.btn{{min-height:54px;border-radius:17px;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;font-weight:950;padding:12px 14px;border:1px solid rgba(255,255,255,.1)}}.wa{{background:linear-gradient(135deg,#25d366,#149b4b);color:#fff}}.call{{background:linear-gradient(135deg,#f4c95d,#d4a63a);color:#031b15}}.ghost{{background:rgba(255,255,255,.055);color:#fff}}.wide{{grid-column:1/-1}}.info{{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.box{{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);padding:15px;border-radius:20px}}.box h2{{margin:0 0 10px;color:var(--gold);font-size:15px;text-transform:uppercase}}.box p,.box ul{{margin:0;color:var(--muted);line-height:1.65;font-weight:750;font-size:14px}}.box ul{{padding-left:18px}}.note{{margin-top:16px;padding:14px;border-radius:18px;border:1px solid rgba(31,168,106,.28);background:rgba(31,168,106,.1);color:#d9ffea;font-weight:850}}@media(max-width:760px){{.hero{{grid-template-columns:1fr}}.visual{{max-width:480px;margin:auto}}.info{{grid-template-columns:1fr}}}}@media(max-width:430px){{.actions{{grid-template-columns:1fr}}.wide{{grid-column:auto}}}}</style></head>
+          <body><main class="wrap"><header class="top"><div class="brand">DIGIY DRIVER · BY DIGIYLYFE</div><a class="back" href="./">← Galerie Chauffeurs</a></header><section class="hero"><div class="visual"><a href="{html.escape(wa)}" target="_blank" rel="noopener"><img src="nazir-driver-card.svg" alt="Carte professionnelle de Nazir Driver avec QR WhatsApp direct" width="1080" height="1920"></a></div><article class="panel"><div class="kicker">Fiche professionnelle</div><h1>Nazir Driver</h1><div class="role">Chauffeur · Saly · Mbour · AIBD · Multi-région</div><p class="lead">Nazir Driver est disponible pour les trajets privés et professionnels, les transferts aéroport, les déplacements régionaux et la mise à disposition. La demande, l’horaire, la disponibilité et le tarif sont confirmés directement avec le chauffeur.</p><div class="actions"><a class="btn wa wide" href="{html.escape(wa)}" target="_blank" rel="noopener">💬 Contacter sur WhatsApp</a><a class="btn call" href="tel:+221778310298">📞 Appeler</a><a class="btn ghost" href="nazir-driver-card.svg" download="carte-nazir-driver.svg">⬇️ Télécharger la carte</a><a class="btn ghost wide" href="https://driver-client.digiylyfe.com/?driver=nazir-driver&amp;wa=221778310298" target="_blank" rel="noopener">📲 Préparer une course</a></div><div class="info"><div class="box"><h2>Zone d’activité</h2><p>Saly · Mbour · AIBD · Multi-région</p></div><div class="box"><h2>Services</h2><ul><li>Trajets directs</li><li>Transferts aéroport</li><li>Déplacements régionaux</li><li>Mise à disposition</li></ul></div><div class="box"><h2>Engagements</h2><ul><li>Ponctualité</li><li>Confort</li><li>Discrétion</li><li>Sécurité</li><li>Contact direct</li></ul></div></div><div class="note">📱 Téléphone / WhatsApp : <strong>{phone_display}</strong></div></article></section></main></body></html>'''
+          Path("nazir-driver.html").write_text(profile, encoding="utf-8")
+
+          index_path = Path("index.html")
+          index = index_path.read_text(encoding="utf-8")
+          marker_id = 'data-static-driver="nazir-driver"'
+          if marker_id not in index:
+              marker = '    <article class="driver" data-static-driver="lamine"'
+              card = f'''    <!-- NAZIR DRIVER — partenaire DIGIY -->
+              <article class="driver" data-static-driver="nazir-driver" itemscope itemtype="https://schema.org/Person">
+                <meta itemprop="telephone" content="+221778310298">
+                <div class="driver-top"><div class="identity"><div class="avatar" aria-hidden="true">N</div><div class="identity-copy"><div class="name" itemprop="name">Nazir Driver</div><div class="titleline" itemprop="jobTitle">Chauffeur sur réservation</div><div class="meta"><span class="tag">🏙️ Saly · Mbour</span><span class="tag">✈️ AIBD</span><span class="tag gold">🌍 Multi-région</span><span class="tag green">WhatsApp direct</span></div></div></div><div class="side-badge">Partenaire DIGIY</div></div>
+                <div class="desc" itemprop="description">Trajets directs, transferts aéroport, déplacements régionaux et mise à disposition. Horaire, disponibilité et tarif sont confirmés directement avec Nazir Driver.</div>
+                <div class="actions"><a class="btn btn-main" href="{html.escape(wa)}" target="_blank" rel="noopener">💬 WhatsApp direct</a><a class="btn btn-sky" href="tel:+221778310298">📞 Appeler</a><a class="btn btn-ghost" href="nazir-driver.html" itemprop="url">🚗 Voir la fiche</a><a class="btn btn-sky" href="https://driver-client.digiylyfe.com/?driver=nazir-driver&amp;wa=221778310298" rel="noopener">📲 Préparer une course</a></div>
+                <div class="driver-card-box"><a class="driver-card-click" href="{html.escape(wa)}" target="_blank" rel="noopener" aria-label="Contacter Nazir Driver sur WhatsApp"><img src="nazir-driver-card.svg" alt="Carte officielle de Nazir Driver avec QR WhatsApp direct" width="1080" height="1920" loading="eager"></a><div class="driver-card-note">🖱️ Cliquez sur la carte pour ouvrir directement le WhatsApp de Nazir Driver.</div><div class="driver-card-actions"><a class="btn btn-main" href="{html.escape(wa)}" target="_blank" rel="noopener">💬 WhatsApp</a><a class="btn btn-gold" href="nazir-driver.html">🚗 Ouvrir la fiche</a><a class="btn btn-ghost" href="nazir-driver-card.svg" target="_blank" rel="noopener">🖼️ Voir la carte</a><a class="btn btn-sky" href="nazir-driver-card.svg" download="carte-nazir-driver.svg">⬇️ Télécharger</a></div></div>
+              </article>
+
+          '''
+              if marker not in index:
+                  raise SystemExit("Marqueur Lamine introuvable : index non modifié")
+              index = index.replace(marker, card + marker, 1)
+              index = index.replace('content="gallery-clean-access-lamine-baptiste-20260729-0915"', 'content="gallery-nazir-driver-20260801"', 1)
+              index_path.write_text(index, encoding="utf-8")
+          PY
+
+      - name: Publier les fichiers
+        run: |
+          git config user.name "DIGIYLYFE Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html nazir-driver.html nazir-driver-card.svg
+          if git diff --cached --quiet; then
+            echo "Nazir Driver est déjà intégré."
+          else
+            git commit -m "Ajouter Nazir Driver à la galerie"
+            git push
+          fi
