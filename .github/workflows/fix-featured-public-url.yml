@@ -1,0 +1,53 @@
+name: Corriger le lien public de la fiche chauffeur
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-featured-public-url.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remplacer l'adresse GitHub par le domaine DIGIYLYFE
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('fiche-chauffeur.html')
+          old = 'https://beauville.github.io/galerie-chauffeurs/fiche-chauffeur.html?slug=card-ffe5d051-d028-4576-82e6-d7e1164b4fa0'
+          new = 'https://galerie-chauffeurs.digiylyfe.com/fiche-chauffeur.html?slug=card-ffe5d051-d028-4576-82e6-d7e1164b4fa0'
+
+          text = path.read_text(encoding='utf-8')
+          count = text.count(old)
+          if count != 1:
+              raise SystemExit(f'Adresse attendue trouvee {count} fois au lieu de 1; aucune modification appliquee.')
+
+          updated = text.replace(old, new)
+          path.write_text(updated, encoding='utf-8')
+
+          if old in updated or updated.count(new) != 1:
+              raise SystemExit('Controle final du remplacement echoue.')
+
+          print('Lien officiel pose:', new)
+          PY
+
+      - name: Retirer le correctif temporaire et pousser
+        shell: bash
+        run: |
+          git rm .github/workflows/fix-featured-public-url.yml
+          git config user.name "DIGIYLYFE Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add fiche-chauffeur.html
+          git commit -m "Corriger le lien public de la fiche chauffeur"
+          git push
