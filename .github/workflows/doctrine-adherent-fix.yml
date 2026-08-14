@@ -1,0 +1,77 @@
+name: Doctrine adhérent galerie DRIVER
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/doctrine-adherent-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Neutraliser sélection, certification et ambassadeur
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          files = [
+            'index.html','gallery-world8.js','fiche-chauffeur.html','catalogue.html',
+            'chauffeurs.json','inscription-driver.html','nazir-driver.html',
+            'commander-course.html','commander-course-detail.html'
+          ]
+          replacements = [
+            ('DIGIY DRIVER AMBASSADEUR', 'DIGIY DRIVER'),
+            ('DIGIY DRIVER AMBASSADOR', 'DIGIY DRIVER'),
+            ('Sélection Ambassadeur', 'ADHÉRENTS DIGIYLYFE'),
+            ('Sélection ambassadeur', 'Adhérents DIGIYLYFE'),
+            ('Chauffeur ambassadeur DIGIY DRIVER', 'Chauffeur · Adhérent DIGIYLYFE'),
+            ('chauffeur ambassadeur DIGIY DRIVER', 'chauffeur · adhérent DIGIYLYFE'),
+            ('Vous êtes chauffeur ambassadeur ?', 'Vous êtes chauffeur ?'),
+            ('Trouver le bon ambassadeur', 'Trouver le bon chauffeur'),
+            ('Rejoins DIGIY DRIVER AMBASSADEUR', 'Rejoins DIGIY DRIVER'),
+            ('Rejoindre la sélection', 'Devenir adhérent'),
+            ('Sélectionné', 'Adhérent DIGIYLYFE'),
+            ('sélectionné', 'adhérent DIGIYLYFE'),
+            ('Porte directe officielle', 'Porte directe DIGIYLYFE'),
+            ('porte directe officielle', 'porte directe DIGIYLYFE'),
+            ('fiche publique officielle', 'fiche publique DIGIYLYFE'),
+            ('fiche officielle', 'fiche DIGIYLYFE'),
+            ('Fiche officielle', 'Fiche DIGIYLYFE'),
+            ('QR officiel DIGIYLYFE', 'QR DIGIYLYFE'),
+            ('QR officiel', 'QR DIGIYLYFE'),
+            ('lien vérifié', 'lien direct'),
+            ('Lien chauffeur sûr', 'Lien chauffeur direct'),
+            ('profils qui portent une certaine tenue de service', 'profils présents dans la vitrine DIGIYLYFE'),
+            ('chauffeur clair, présentable, joignable et fiable', 'chauffeur visible et joignable directement'),
+            ('chauffeurs ambassadeurs', 'chauffeurs adhérents DIGIYLYFE'),
+            ('chauffeur ambassadeur', 'chauffeur adhérent DIGIYLYFE'),
+            ('Chauffeur ambassadeur', 'Chauffeur adhérent DIGIYLYFE'),
+            ('ambassador driver', 'DIGIYLYFE member driver'),
+            ('Ambassador driver', 'DIGIYLYFE member driver'),
+            ('Ambassador', 'Member'),
+          ]
+          for name in files:
+              p = Path(name)
+              if not p.exists():
+                  continue
+              s = p.read_text(encoding='utf-8')
+              before = s
+              for old, new in replacements:
+                  s = s.replace(old, new)
+              if name == 'chauffeurs.json':
+                  s = s.replace('"designation": "Chauffeur adhérent DIGIYLYFE"', '"designation": "Chauffeur · Adhérent DIGIYLYFE"')
+              if s != before:
+                  p.write_text(s, encoding='utf-8')
+          PY
+      - name: Retirer le workflow temporaire et pousser
+        run: |
+          git config user.name 'DIGIYLYFE Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git rm .github/workflows/doctrine-adherent-fix.yml
+          git add index.html gallery-world8.js fiche-chauffeur.html catalogue.html chauffeurs.json inscription-driver.html nazir-driver.html commander-course.html commander-course-detail.html 2>/dev/null || true
+          git commit -m 'Neutraliser galerie DRIVER : adhérents DIGIYLYFE' || exit 0
+          git push
