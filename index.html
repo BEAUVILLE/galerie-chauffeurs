@@ -1,2183 +1,420 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>DIGIY DRIVER — Chauffeurs privés à Saly, AIBD et Petite Côte</title>
-  <meta name="digiy-build" content="gallery-nazir-driver-20260801" />
-  <meta name="theme-color" content="#0b1220" />
-  <meta name="description" content="Galerie DIGIY DRIVER : chauffeurs privés et transferts sur réservation entre Saly, Mbour, AIBD, Dakar et la Petite Côte. Contact direct, paiement direct au chauffeur et 0 % commission DIGIY." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://galerie-chauffeurs.digiylyfe.com/" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://galerie-chauffeurs.digiylyfe.com/" />
-  <meta property="og:title" content="DIGIY DRIVER — Chauffeurs privés à Saly, AIBD et Petite Côte" />
-  <meta property="og:description" content="Trouvez un chauffeur privé sur réservation et contactez-le directement. Transferts Saly, Mbour, AIBD, Dakar et Petite Côte." />
-  <meta property="og:image" content="https://digiylyfe.com/icon-512.png?v=20260729" />
-  <meta property="og:locale" content="fr_SN" />
-  <meta property="og:site_name" content="DIGIYLYFE" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DIGIY DRIVER — Chauffeurs privés" />
-  <meta name="twitter:description" content="Chauffeurs privés sur réservation, contact direct et 0 % commission DIGIY." />
-  <meta name="twitter:image" content="https://digiylyfe.com/icon-512.png?v=20260729" />
-
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      "@id": "https://galerie-chauffeurs.digiylyfe.com/#page",
-      "url": "https://galerie-chauffeurs.digiylyfe.com/",
-      "name": "DIGIY DRIVER — Chauffeurs privés à Saly, AIBD et Petite Côte",
-      "description": "Galerie de chauffeurs privés et services de transfert sur réservation avec contact direct.",
-      "inLanguage": "fr-SN",
-      "mainEntity": [
-        {
-          "@id": "https://partenaire-lamine.digiylyfe.com/#service"
-        },
-        {
-          "@id": "https://digiy-driver-part-bapt.digiylyfe.com/#service"
-        }
-      ]
-    },
-    {
-      "@type": "Person",
-      "@id": "https://partenaire-lamine.digiylyfe.com/#lamine",
-      "name": "Lamine",
-      "jobTitle": "Chauffeur privé",
-      "url": "https://partenaire-lamine.digiylyfe.com/",
-      "telephone": "+221784413680",
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Chauffeur privé sur réservation"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://partenaire-lamine.digiylyfe.com/#service",
-      "name": "Service de chauffeur privé sur réservation — Saly, AIBD et Petite Côte",
-      "serviceType": "Chauffeur privé sur réservation",
-      "provider": {
-        "@id": "https://partenaire-lamine.digiylyfe.com/#lamine"
-      },
-      "url": "https://partenaire-lamine.digiylyfe.com/",
-      "areaServed": [
-        {
-          "@type": "Place",
-          "name": "Saly"
-        },
-        {
-          "@type": "Place",
-          "name": "Mbour"
-        },
-        {
-          "@type": "Airport",
-          "name": "Aéroport international Blaise-Diagne (AIBD)"
-        },
-        {
-          "@type": "Place",
-          "name": "Petite Côte"
-        },
-        {
-          "@type": "City",
-          "name": "Dakar"
-        }
-      ],
-      "availableChannel": {
-        "@type": "ServiceChannel",
-        "serviceUrl": "https://partenaire-lamine.digiylyfe.com/",
-        "servicePhone": {
-          "@type": "ContactPoint",
-          "telephone": "+221784413680",
-          "contactType": "reservations"
-        }
-      }
-    },
-    {
-      "@type": "Person",
-      "@id": "https://digiy-driver-part-bapt.digiylyfe.com/#baptiste",
-      "name": "Baptiste",
-      "jobTitle": "Chauffeur adhérent DIGIYLYFE",
-      "url": "https://digiy-driver-part-bapt.digiylyfe.com/",
-      "image": "https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste-adherent.png",
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Transport avec chauffeur sur réservation"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://digiy-driver-part-bapt.digiylyfe.com/#service",
-      "name": "Service de transport avec chauffeur sur réservation — Baptiste",
-      "serviceType": "Transport avec chauffeur sur réservation",
-      "provider": {
-        "@id": "https://digiy-driver-part-bapt.digiylyfe.com/#baptiste"
-      },
-      "url": "https://digiy-driver-part-bapt.digiylyfe.com/",
-      "availableChannel": {
-        "@type": "ServiceChannel",
-        "serviceUrl": "https://digiy-driver-part-bapt.digiylyfe.com/"
-      }
-    }
-  ]
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DIGIYLYFE · Galerie Chauffeurs · Maquette Atelier V5 Adhésion</title>
+<style>
+:root {
+  --green:#073f32; --green2:#0b5d48; --gold:#d8ad46; --cream:#f5f1e6;
+  --paper:#fffefa; --ink:#16342c; --muted:#6f7f79; --line:#dfe7e2;
 }
-  </script>
-
-  <style>
-    /* ===== STYLES COMPLETS (conservés) ===== */
-    :root{
-      --bg:#071018;
-      --bg2:#0b1521;
-      --panel:#0f1b2a;
-      --panel-2:#132235;
-      --card:#0f1a29;
-      --line:rgba(255,255,255,.10);
-      --line-soft:rgba(255,255,255,.06);
-      --text:#f8fafc;
-      --muted:rgba(226,232,240,.72);
-      --gold:#f4c95d;
-      --gold-2:#d4a63a;
-      --green:#1fa86a;
-      --green-2:#157a4f;
-      --sky:#3b82f6;
-      --danger:#f59e0b;
-      --shadow:0 18px 60px rgba(0,0,0,.40);
-      --radius:22px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font-family:Outfit,Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(900px 500px at 10% 0%, rgba(244,201,93,.10), transparent 55%),
-        radial-gradient(900px 560px at 100% 10%, rgba(31,168,106,.12), transparent 55%),
-        linear-gradient(180deg, #08111a 0%, #0b1220 42%, #070d15 100%);
-    }
-
-    .floating-back{
-      position:fixed;
-      top:calc(env(safe-area-inset-top, 0px) + 12px);
-      left:calc(env(safe-area-inset-left, 0px) + 12px);
-      z-index:99999;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:12px 16px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.24);
-      background:linear-gradient(135deg, rgba(244,201,93,.96), rgba(31,168,106,.94));
-      color:#071018;
-      text-decoration:none;
-      font-size:14px;
-      font-weight:900;
-      line-height:1;
-      box-shadow:0 16px 40px rgba(0,0,0,.26);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .floating-back:hover{
-      transform:translateY(-1px);
-      box-shadow:0 20px 46px rgba(0,0,0,.32);
-    }
-
-    .page{
-      max-width:1180px;
-      margin:0 auto;
-      padding:18px 14px 40px;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:10px 0 14px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-      flex-wrap:wrap;
-    }
-
-    .brand-badge{
-      width:56px;
-      height:56px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(244,201,93,1), rgba(212,166,58,.92));
-      color:#08111a;
-      font-size:24px;
-      font-weight:900;
-      box-shadow:0 14px 36px rgba(244,201,93,.22);
-      border:1px solid rgba(255,255,255,.10);
-      flex:0 0 auto;
-    }
-
-    .brand-copy{
-      min-width:0;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.20);
-      background:rgba(244,201,93,.08);
-      color:#ffe8a6;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .brand-title{
-      margin-top:8px;
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:.02em;
-      line-height:1.05;
-    }
-
-    .brand-sub{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:800;
-      line-height:1.45;
-      max-width:720px;
-    }
-
-    .top-actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .top-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      text-decoration:none;
-      font-size:12px;
-      font-weight:900;
-      line-height:1;
-      white-space:nowrap;
-      transition:transform .16s ease, border-color .16s ease, background .16s ease;
-    }
-
-    .top-link:hover{
-      transform:translateY(-1px);
-      border-color:rgba(244,201,93,.28);
-      background:rgba(244,201,93,.08);
-    }
-
-    .top-link.gold{
-      color:#ffe8a6;
-      border-color:rgba(244,201,93,.22);
-      background:rgba(244,201,93,.08);
-    }
-
-    .top-link.green{
-      color:#d4ffe7;
-      border-color:rgba(31,168,106,.25);
-      background:rgba(31,168,106,.10);
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
-    }
-
-    .hero-action{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:13px 15px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      text-decoration:none;
-      font-size:14px;
-      font-weight:900;
-      box-shadow:0 10px 26px rgba(0,0,0,.16);
-      transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-    }
-
-    .hero-action:hover{
-      transform:translateY(-1px);
-      border-color:rgba(244,201,93,.26);
-      box-shadow:0 14px 32px rgba(0,0,0,.20);
-    }
-
-    .hero-action.main{
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      color:#071018;
-      border-color:transparent;
-    }
-
-    .hero-action.green{
-      background:linear-gradient(135deg, var(--green), var(--green-2));
-      color:#fff;
-      border-color:transparent;
-    }
-
-    .hero-action.gold{
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      color:#071018;
-      border-color:transparent;
-    }
-
-    .pill{
-      border-radius:999px;
-      padding:8px 12px;
-      font-size:12px;
-      font-weight:900;
-      border:1px solid var(--line);
-      color:var(--text);
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background:rgba(255,255,255,.05);
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-    }
-
-    .pill.gold{
-      color:#ffe8a6;
-      border-color:rgba(244,201,93,.22);
-      background:rgba(244,201,93,.08);
-    }
-
-    .pill.green{
-      color:#c8ffe5;
-      border-color:rgba(31,168,106,.25);
-      background:rgba(31,168,106,.10);
-    }
-
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--green);
-      box-shadow:0 0 0 4px rgba(31,168,106,.16);
-    }
-
-    .lang-switch{
-      display:flex;
-      gap:6px;
-      padding:4px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-    }
-
-    .lang-switch button{
-      border:none;
-      padding:8px 12px;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:900;
-      font-size:12px;
-      background:transparent;
-      color:var(--text);
-      font-family:inherit;
-    }
-
-    .lang-switch button.active{
-      background:#f8fafc;
-      color:#09111a;
-    }
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      margin-top:8px;
-      border-radius:28px;
-      border:1px solid var(--line);
-      background:
-        radial-gradient(700px 320px at 8% 0%, rgba(244,201,93,.12), transparent 60%),
-        radial-gradient(700px 360px at 100% 20%, rgba(31,168,106,.14), transparent 60%),
-        linear-gradient(180deg, rgba(15,27,42,.92), rgba(11,18,32,.96));
-      box-shadow:var(--shadow);
-      padding:22px;
-    }
-
-    .hero-grid{
-      position:relative;
-      z-index:1;
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-    }
-
-    .hero-main h1{
-      margin:14px 0 10px;
-      font-size:clamp(34px, 5vw, 58px);
-      line-height:1.02;
-      font-weight:900;
-      letter-spacing:-.03em;
-    }
-
-    .hero-main h1 .gold{
-      background:linear-gradient(135deg, #fff4c7, var(--gold));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-main p{
-      margin:0;
-      max-width:760px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.7;
-      font-weight:750;
-    }
-
-    .hero-signature{
-      margin-top:14px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.22);
-      background:rgba(244,201,93,.08);
-      color:#ffe8a6;
-      font-size:13px;
-      font-weight:900;
-    }
-
-    .hero-badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .hero-badge{
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:900;
-    }
-
-    .hero-badge b{
-      color:#fff2be;
-    }
-
-    .hero-panel{
-      border-radius:22px;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      padding:16px;
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-
-    .panel-title{
-      font-size:14px;
-      font-weight:900;
-      color:#ffe8a6;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-
-    .panel-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
-    .panel-box{
-      border-radius:16px;
-      border:1px solid var(--line-soft);
-      background:rgba(255,255,255,.04);
-      padding:12px;
-    }
-
-    .panel-k{
-      font-size:11px;
-      color:var(--muted);
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-    }
-
-    .panel-v{
-      margin-top:8px;
-      font-size:20px;
-      font-weight:900;
-      color:var(--text);
-    }
-
-    .panel-note{
-      border-radius:16px;
-      border:1px solid rgba(244,201,93,.16);
-      background:rgba(244,201,93,.07);
-      color:#fff2be;
-      font-size:13px;
-      line-height:1.55;
-      font-weight:800;
-      padding:12px;
-    }
-
-    .card{
-      margin-top:14px;
-      border-radius:24px;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      padding:16px;
-    }
-
-    .status{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .status .left{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .status .title{
-      font-weight:900;
-      font-size:19px;
-      line-height:1.2;
-      color:#fff4c7;
-    }
-
-    .status .sub{
-      font-size:14px;
-      color:var(--muted);
-      font-weight:800;
-      line-height:1.55;
-      max-width:760px;
-    }
-
-    .badge{
-      font-size:12px;
-      font-weight:900;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.22);
-      background:rgba(244,201,93,.08);
-      color:#ffe8a6;
-      white-space:nowrap;
-    }
-
-    .badge.warn{
-      background:rgba(245,158,11,.10);
-      border-color:rgba(245,158,11,.28);
-      color:#ffd8a6;
-    }
-
-    .navRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .navBtn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:12px 15px;
-      border-radius:14px;
-      font-weight:900;
-      font-size:14px;
-      text-decoration:none;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-    }
-    .navBtn:hover{
-      transform:translateY(-1px);
-      border-color:rgba(244,201,93,.24);
-    }
-
-    .navBtn.main{
-      background:linear-gradient(135deg, var(--green), var(--green-2));
-      color:#fff;
-      border-color:transparent;
-      box-shadow:0 12px 24px rgba(31,168,106,.22);
-    }
-
-    .navBtn.sky{
-      background:linear-gradient(135deg, #3b82f6, #2563eb);
-      color:#fff;
-      border-color:transparent;
-    }
-
-    .navBtn.gold{
-      background:linear-gradient(135deg, rgba(244,201,93,.18), rgba(212,166,58,.12));
-      color:#fff1bd;
-      border-color:rgba(244,201,93,.22);
-    }
-
-    .bar{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:10px;
-    }
-
-    .field label{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:900;
-      display:block;
-      margin-bottom:7px;
-    }
-
-    select,input{
-      width:100%;
-      padding:12px 13px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      outline:none;
-      font-size:14px;
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      font-weight:900;
-      font-family:inherit;
-    }
-
-    select option{
-      color:#08111a;
-    }
-
-    input::placeholder{
-      color:rgba(226,232,240,.45);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
-    }
-
-    .driver{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      border:1px solid var(--line);
-      background:
-        radial-gradient(500px 180px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
-        linear-gradient(180deg, rgba(19,34,53,.96), rgba(11,18,32,.98));
-      box-shadow:0 18px 40px rgba(0,0,0,.28);
-      padding:16px;
-      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-    }
-    .driver:hover{
-      transform:translateY(-2px);
-      border-color:rgba(244,201,93,.24);
-      box-shadow:0 22px 50px rgba(0,0,0,.34);
-    }
-
-    .driver::before{
-      content:"";
-      position:absolute;
-      inset:0 0 auto 0;
-      height:3px;
-      background:linear-gradient(90deg, rgba(244,201,93,.98), rgba(31,168,106,.92));
-    }
-
-    .driver-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .identity{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      min-width:0;
-    }
-
-    .avatar{
-      width:58px;
-      height:58px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg, rgba(244,201,93,.18), rgba(31,168,106,.18));
-      border:1px solid rgba(244,201,93,.18);
-      color:#fff2be;
-      font-size:18px;
-      font-weight:900;
-      flex:0 0 auto;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-    }
-
-    .identity-copy{
-      min-width:0;
-    }
-
-    .name{
-      font-weight:900;
-      font-size:18px;
-      line-height:1.15;
-      color:#fff4c7;
-    }
-
-    .titleline{
-      margin-top:6px;
-      font-size:12px;
-      color:#d7fbe9;
-      font-weight:900;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-    }
-
-    .meta{
-      margin-top:10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      font-size:12px;
-      color:var(--muted);
-      font-weight:900;
-    }
-
-    .tag{
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-
-    .tag.gold{
-      border-color:rgba(244,201,93,.22);
-      color:#fff1bd;
-      background:rgba(244,201,93,.08);
-    }
-
-    .tag.green{
-      border-color:rgba(31,168,106,.24);
-      color:#d4ffe7;
-      background:rgba(31,168,106,.10);
-    }
-
-    .tag.off{
-      color:#dbe6f3;
-    }
-
-    .side-badge{
-      padding:8px 11px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.18);
-      background:rgba(244,201,93,.08);
-      color:#fff1bd;
-      font-size:11px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .desc{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.7;
-      min-height:48px;
-      font-weight:750;
-    }
-
-    .actions{
-      display:flex;
-      gap:10px;
-      margin-top:14px;
-      flex-wrap:wrap;
-    }
-
-    button,a.btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:12px 13px;
-      border:none;
-      border-radius:14px;
-      font-weight:900;
-      font-size:14px;
-      cursor:pointer;
-      text-decoration:none;
-      user-select:none;
-      transition:transform .16s ease, filter .16s ease;
-      font-family:inherit;
-    }
-
-    button:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-    }
-
-    .btn-main{
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      color:#08111a;
-      box-shadow:0 12px 24px rgba(244,201,93,.16);
-    }
-
-    .btn-sky{
-      background:linear-gradient(135deg, #3b82f6, #2563eb);
-      color:#fff;
-    }
-
-    .btn-ghost{
-      background:rgba(255,255,255,.05);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-
-    .btn-gold{
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      color:#071018;
-      border:1px solid transparent;
-      box-shadow:0 12px 24px rgba(244,201,93,.16);
-    }
-
-    .footCta{text-align:center}
-    .footCta .big{
-      font-weight:900;
-      font-size:17px;
-      color:#fff4c7;
-    }
-    .featured-card-wrap{
-      margin-top:14px;
-      border-radius:22px;
-      border:1px solid var(--line);
-      background:
-        radial-gradient(560px 180px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      padding:14px;
-      box-shadow:0 14px 34px rgba(0,0,0,.18);
-    }
-
-    .featured-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:12px;
-    }
-
-    .featured-head .title{
-      font-size:18px;
-      line-height:1.2;
-      font-weight:900;
-      color:#fff4c7;
-    }
-
-    .featured-head .sub{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-      font-weight:800;
-      max-width:760px;
-    }
-
-    .featured-badge{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(31,168,106,.24);
-      background:rgba(31,168,106,.10);
-      color:#d4ffe7;
-      font-size:11px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .featured-card{
-      border-radius:22px;
-      border:1px solid rgba(244,201,93,.20);
-      background:
-        radial-gradient(420px 160px at 100% 0%, rgba(244,201,93,.08), transparent 60%),
-        linear-gradient(180deg, rgba(19,34,53,.96), rgba(11,18,32,.98));
-      padding:16px;
-      box-shadow:0 18px 40px rgba(0,0,0,.24);
-    }
-
-    .featured-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .featured-identity{
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      min-width:0;
-    }
-
-    .featured-avatar{
-      width:70px;
-      height:70px;
-      border-radius:22px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg, rgba(244,201,93,.20), rgba(31,168,106,.18));
-      border:1px solid rgba(244,201,93,.22);
-      color:#fff1bd;
-      font-size:22px;
-      font-weight:900;
-      flex:0 0 auto;
-    }
-
-    .featured-name{
-      font-size:22px;
-      line-height:1.15;
-      font-weight:900;
-      color:#fff4c7;
-    }
-
-    .featured-role{
-      margin-top:5px;
-      color:#d7fbe9;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-    }
-
-    .featured-meta{
-      margin-top:10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .featured-meta .tag{
-      font-size:12px;
-    }
-
-    .featured-desc{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.65;
-      font-weight:800;
-    }
-
-    .featured-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .featured-empty{
-      border-radius:18px;
-      border:1px dashed rgba(255,255,255,.14);
-      background:rgba(255,255,255,.03);
-      padding:16px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-      font-weight:800;
-    }
-
-
-    .baptiste-direct-card{
-      margin-top:14px;
-      border-radius:26px;
-      border:1px solid rgba(31,168,106,.34);
-      background:
-        radial-gradient(620px 220px at 0% 0%, rgba(31,168,106,.18), transparent 60%),
-        radial-gradient(520px 180px at 100% 0%, rgba(244,201,93,.14), transparent 62%),
-        linear-gradient(180deg, rgba(19,34,53,.96), rgba(7,16,24,.98));
-      box-shadow:0 18px 52px rgba(0,0,0,.30);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .baptiste-direct-card::before{
-      content:"";
-      position:absolute;
-      inset:0 0 auto 0;
-      height:4px;
-      background:linear-gradient(90deg, rgba(31,168,106,.98), rgba(244,201,93,.98));
-    }
-
-    .baptiste-direct-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
-      gap:14px;
-      align-items:center;
-    }
-
-    .baptiste-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.24);
-      background:rgba(244,201,93,.08);
-      color:#ffe8a6;
-      font-size:11px;
-      font-weight:950;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .baptiste-direct-card h2{
-      margin:10px 0 8px;
-      color:#fff4c7;
-      font-size:clamp(24px,4vw,42px);
-      line-height:1.04;
-      font-weight:950;
-      letter-spacing:-.03em;
-    }
-
-    .baptiste-direct-card p{
-      margin:0;
-      color:rgba(226,232,240,.78);
-      font-size:14px;
-      line-height:1.65;
-      font-weight:820;
-      max-width:760px;
-    }
-
-    .baptiste-actions{
-      display:grid;
-      gap:10px;
-    }
-
-    .baptiste-action{
-      min-height:52px;
-      border-radius:16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      gap:8px;
-      padding:12px 14px;
-      border:1px solid rgba(255,255,255,.10);
-      text-decoration:none;
-      font-weight:950;
-      color:#fff;
-    }
-
-    .baptiste-action.main{
-      background:linear-gradient(135deg,var(--green),var(--green-2));
-      border-color:transparent;
-      box-shadow:0 12px 28px rgba(31,168,106,.22);
-    }
-
-    .baptiste-action.gold{
-      background:linear-gradient(135deg,var(--gold),var(--gold-2));
-      color:#071018;
-      border-color:transparent;
-      box-shadow:0 12px 28px rgba(244,201,93,.18);
-    }
-
-    .baptiste-note{
-      margin-top:8px;
-      color:rgba(226,232,240,.62);
-      font-size:12px;
-      font-weight:800;
-      line-height:1.45;
-    }
-
-    @media(max-width:820px){
-      .baptiste-direct-grid{grid-template-columns:1fr}
-      .baptiste-actions{grid-template-columns:1fr}
-    }
-
-    /* ===== DIGIY DRIVER INTERNATIONAL — France / Sénégal ===== */
-    .international-card{
-      margin-top:14px;
-      border-radius:28px;
-      border:1px solid rgba(244,201,93,.22);
-      background:
-        radial-gradient(760px 260px at 0% 0%, rgba(244,201,93,.12), transparent 60%),
-        radial-gradient(720px 260px at 100% 0%, rgba(31,168,106,.14), transparent 62%),
-        linear-gradient(180deg, rgba(15,27,42,.96), rgba(7,16,24,.98));
-      box-shadow:0 18px 52px rgba(0,0,0,.30);
-      padding:18px;
-      overflow:hidden;
-      position:relative;
-    }
-
-    .international-card::before{
-      content:"";
-      position:absolute;
-      inset:0 0 auto 0;
-      height:4px;
-      background:linear-gradient(90deg, rgba(59,130,246,.92), rgba(244,201,93,.98), rgba(31,168,106,.98));
-    }
-
-    .international-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      position:relative;
-      z-index:1;
-    }
-
-    .international-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.24);
-      background:rgba(244,201,93,.08);
-      color:#ffe8a6;
-      font-size:11px;
-      font-weight:950;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .international-card h2{
-      margin:10px 0 8px;
-      color:#fff4c7;
-      font-size:clamp(24px,4vw,42px);
-      line-height:1.04;
-      font-weight:950;
-      letter-spacing:-.03em;
-      max-width:820px;
-    }
-
-    .international-card p{
-      margin:0;
-      color:rgba(226,232,240,.78);
-      font-size:14px;
-      line-height:1.65;
-      font-weight:820;
-      max-width:860px;
-    }
-
-    .international-badge{
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(31,168,106,.26);
-      background:rgba(31,168,106,.10);
-      color:#d4ffe7;
-      font-size:12px;
-      font-weight:950;
-      white-space:nowrap;
-    }
-
-    .international-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:14px;
-      position:relative;
-      z-index:1;
-    }
-
-    .international-box{
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-      min-height:100%;
-    }
-
-    .international-box .box-title{
-      font-size:16px;
-      font-weight:950;
-      color:#fff4c7;
-      line-height:1.25;
-    }
-
-    .international-box .box-copy{
-      margin-top:8px;
-      color:rgba(226,232,240,.74);
-      font-size:13px;
-      line-height:1.6;
-      font-weight:800;
-    }
-
-    .international-points{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    .international-point{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 9px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.05);
-      color:#f8fafc;
-      font-size:11px;
-      font-weight:900;
-    }
-
-    .international-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-
-    .international-action{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-height:46px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      text-decoration:none;
-      font-size:14px;
-      font-weight:950;
-      color:#f8fafc;
-    }
-
-    .international-action.green{
-      background:linear-gradient(135deg,var(--green),var(--green-2));
-      border-color:transparent;
-      color:#fff;
-    }
-
-    .international-action.gold{
-      background:linear-gradient(135deg,var(--gold),var(--gold-2));
-      border-color:transparent;
-      color:#071018;
-    }
-
-    .bar{
-      grid-template-columns:1fr 1fr 1fr 1fr;
-    }
-
-    @media(max-width:980px){
-      .international-grid{grid-template-columns:1fr}
-    }
-
-
-    @media(max-width:768px){
-      .featured-top{display:block}
-      .featured-identity{margin-bottom:10px}
-      .featured-actions a,
-      .featured-actions button{width:100%}
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:16px;
-      background:rgba(8,17,26,.94);
-      color:#fff;
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:900;
-      display:none;
-      z-index:30;
-      max-width:92vw;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      border:1px solid var(--line);
-    }
-
-    @media(max-width:980px){
-      .hero-grid{grid-template-columns:1fr}
-    }
-
-    @media(max-width:860px){
-      .bar{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-    }
-
-    /* ===== DIGIY AUDIO TERRAIN — lecteur visible ===== */
-    .digiy-audio-reader{
-      margin-top:14px;
-      border-radius:26px;
-      border:1px solid rgba(244,201,93,.24);
-      background:
-        radial-gradient(520px 180px at 0% 0%, rgba(244,201,93,.13), transparent 62%),
-        radial-gradient(520px 190px at 100% 10%, rgba(31,168,106,.14), transparent 62%),
-        linear-gradient(180deg, rgba(15,27,42,.96), rgba(7,16,24,.98));
-      box-shadow:0 18px 52px rgba(0,0,0,.30);
-      padding:16px;
-      overflow:hidden;
-      position:relative;
-    }
-
-    .digiy-audio-reader::before{
-      content:"";
-      position:absolute;
-      inset:0 0 auto 0;
-      height:3px;
-      background:linear-gradient(90deg, rgba(244,201,93,.98), rgba(31,168,106,.95), rgba(59,130,246,.88));
-    }
-
-    .audio-reader-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr);
-      gap:14px;
-      align-items:center;
-    }
-
-    .audio-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(244,201,93,.22);
-      background:rgba(244,201,93,.08);
-      color:#ffe8a6;
-      font-size:11px;
-      font-weight:950;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .digiy-audio-reader h2{
-      margin:10px 0 6px;
-      font-size:clamp(22px,3.4vw,34px);
-      line-height:1.05;
-      font-weight:950;
-      letter-spacing:-.02em;
-      color:#fff4c7;
-    }
-
-    .digiy-audio-reader p{
-      margin:0;
-      color:rgba(226,232,240,.78);
-      font-size:14px;
-      line-height:1.65;
-      font-weight:800;
-      max-width:820px;
-    }
-
-    .audio-reader-actions{
-      display:grid;
-      gap:10px;
-    }
-
-    .audio-reader-btn{
-      width:100%;
-      min-height:48px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      cursor:pointer;
-      font-family:inherit;
-      font-size:14px;
-      font-weight:950;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      text-decoration:none;
-      transition:transform .16s ease, filter .16s ease, box-shadow .16s ease;
-    }
-
-    .audio-reader-btn:hover{
-      transform:translateY(-1px);
-      filter:saturate(1.06);
-    }
-
-    .audio-reader-btn.listen{
-      background:linear-gradient(135deg,#f4c95d,#d4a63a);
-      color:#071018;
-      box-shadow:0 12px 24px rgba(244,201,93,.18);
-    }
-
-    .audio-reader-btn.stop{
-      background:rgba(255,255,255,.05);
-      color:#f8fafc;
-      border-color:rgba(255,255,255,.12);
-    }
-
-    .audio-reader-btn.whatsapp{
-      background:linear-gradient(135deg,#1fa86a,#157a4f);
-      color:#fff;
-      border-color:transparent;
-    }
-
-    .audio-reader-btn.sms{
-      background:linear-gradient(135deg,#3b82f6,#2563eb);
-      color:#fff;
-      border-color:transparent;
-    }
-
-    .audio-small-note{
-      margin-top:8px;
-      color:rgba(226,232,240,.62);
-      font-size:12px;
-      font-weight:800;
-      line-height:1.45;
-    }
-
-    @media(max-width:820px){
-      .audio-reader-grid{grid-template-columns:1fr}
-      .audio-reader-actions{grid-template-columns:1fr 1fr}
-    }
-
-    @media(max-width:560px){
-      .audio-reader-actions{grid-template-columns:1fr}
-      .digiy-audio-reader{padding:14px}
-    }
-
-
-    @media(max-width:768px){
-      .top-actions{
-        width:100%;
-        justify-content:flex-start;
-      }
-      .top-link{
-        padding:9px 11px;
-      }
-      .hero-action{
-        width:100%;
-      }
-      .floating-back{
-        top:calc(env(safe-area-inset-top, 0px) + 10px);
-        left:calc(env(safe-area-inset-left, 0px) + 10px);
-        padding:11px 14px;
-        font-size:13px;
-      }
-      .hero{padding:18px}
-      .brand-title{font-size:20px}
-    }
-  
-    .driver-card-box{
-      margin-top:14px;
-      padding:12px;
-      border-radius:18px;
-      border:1px solid rgba(244,201,93,.18);
-      background:rgba(255,255,255,.04);
-    }
-    .driver-card-click{display:block;text-decoration:none;cursor:pointer}
-    .driver-card-click:hover img{transform:translateY(-2px);box-shadow:0 18px 38px rgba(0,0,0,.34)}
-    .driver-card-box img{
-      display:block;
-      width:100%;
-      max-width:360px;
-      margin:0 auto;
-      height:auto;
-      border-radius:16px;
-      background:#fff;
-      box-shadow:0 12px 30px rgba(0,0,0,.24);
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .driver-card-note{
-      margin-top:10px;
-      color:#ffe8a6;
-      font-size:12px;
-      font-weight:900;
-      line-height:1.45;
-      text-align:center;
-    }
-    .driver-card-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      justify-content:center;
-      margin-top:12px;
-    }
-
-
-    
-    /* ===== ACCÈS DIRECT LÉGER — SANS CARTES GÉANTES ===== */
-    .driver-direct-access{
-      margin-top:14px;
-      border-radius:22px;
-      border:1px solid rgba(244,201,93,.20);
-      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.025));
-      padding:14px;
-      box-shadow:0 14px 34px rgba(0,0,0,.20);
-    }
-
-    .driver-direct-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .driver-direct-title{
-      margin:0;
-      color:#fff4c7;
-      font-size:clamp(20px,3vw,30px);
-      line-height:1.08;
-      font-weight:950;
-    }
-
-    .driver-direct-lead{
-      margin:5px 0 0;
-      color:rgba(226,232,240,.72);
-      font-size:13px;
-      line-height:1.5;
-      font-weight:800;
-    }
-
-    .driver-direct-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
-      margin-top:12px;
-    }
-
-    .driver-direct-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      min-width:0;
-      border-radius:17px;
-      border:1px solid rgba(255,255,255,.09);
-      background:rgba(255,255,255,.04);
-      padding:12px;
-    }
-
-    .driver-direct-id{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-    }
-
-    .driver-direct-avatar{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      flex:0 0 auto;
-      background:linear-gradient(135deg,rgba(244,201,93,.20),rgba(31,168,106,.18));
-      border:1px solid rgba(244,201,93,.20);
-      color:#fff4c7;
-      font-weight:950;
-      font-size:16px;
-    }
-
-    .driver-direct-name{
-      color:#fff4c7;
-      font-size:17px;
-      line-height:1.1;
-      font-weight:950;
-    }
-
-    .driver-direct-role{
-      margin-top:4px;
-      color:rgba(226,232,240,.66);
-      font-size:11px;
-      line-height:1.35;
-      font-weight:850;
-    }
-
-    .driver-direct-item .btn{
-      flex:0 0 auto;
-      padding:10px 12px;
-      font-size:12px;
-      min-height:40px;
-    }
-
-    @media(max-width:760px){
-      .driver-direct-grid{grid-template-columns:1fr}
-      .driver-direct-item{align-items:stretch}
-      .driver-direct-item .btn{align-self:center}
-    }
-
-    @media(max-width:430px){
-      .driver-direct-item{
-        display:grid;
-        grid-template-columns:1fr;
-      }
-      .driver-direct-item .btn{width:100%}
-    }
-
-  </style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:var(--green);color:white;padding:22px 18px;border-bottom:4px solid var(--gold)}
+.header-inner{max-width:980px;margin:auto;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.brand{font-size:24px;font-weight:900;letter-spacing:.4px}
+.brand small{display:block;font-size:11px;color:#efd98e;letter-spacing:1.4px;margin-top:3px}
+.zero{border:1px solid var(--gold);border-radius:999px;padding:8px 12px;color:#f2d875;font-size:12px;font-weight:800;text-align:center;white-space:nowrap}
+
+.header-stack{display:block}
+.driver-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.driver-icon{font-size:25px;line-height:1;margin-bottom:3px}
+.driver-sub{font-size:11px;color:#e8ddaa;margin-top:3px}
+.topnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.topnav a{
+  color:white;text-decoration:none;border:1px solid rgba(255,255,255,.25);
+  padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800
+}
+.topnav a:hover{border-color:var(--gold);color:#ffe59a}
+.langs{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.langs a{
+  text-decoration:none;color:#173f35;background:#fffefa;border:1px solid #d9e4de;
+  border-radius:999px;padding:6px 8px;font-size:10px;font-weight:900
+}
+.langs a:hover{border-color:var(--gold);background:#fff7d8}
+
+.adhesion-cta{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(216,173,70,.55);
+  border-radius:14px;
+  padding:10px 12px;
+}
+.adhesion-cta div{display:flex;flex-direction:column;gap:2px}
+.adhesion-cta strong{font-size:12px;color:#fff}
+.adhesion-cta span{font-size:10px;color:#e9e4cc}
+.adhesion-cta a{
+  flex:0 0 auto;
+  text-decoration:none;
+  background:var(--gold);
+  color:#173f35;
+  padding:9px 12px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+  text-align:center;
+}
+.adhesion-cta a:hover{filter:brightness(1.05)}
+main{max-width:980px;margin:auto;padding:22px 14px 50px}
+.section-title{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#e3f0e9;font-size:23px}
+.section-title h1{font-size:22px;margin:0}
+.section-title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:10px;margin-bottom:6px}
+.filter{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:700;font-size:12px;white-space:nowrap}
+.listing{display:grid;grid-template-columns:34% 66%;background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(7,63,50,.08);margin:16px 0}
+.photo{position:relative;min-height:410px;background:#dce5df;display:block;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-hint{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(7,63,50,.9);color:#fff;padding:8px 10px;border-radius:999px;font-size:11px;font-weight:800;text-align:center}
+.info{padding:18px}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.eyebrow{margin:0 0 3px;color:var(--gold);font-weight:900;font-size:10px;letter-spacing:1.1px}
+h2{margin:0;font-size:25px;color:var(--green)}
+.designation{margin:4px 0;color:var(--muted);font-size:13px}
+.area{background:#eaf2ed;border-radius:999px;padding:7px 9px;font-size:11px;font-weight:800;white-space:nowrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 10px}
+.chip{background:#eef4f0;border:1px solid #dde8e1;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:700}
+.zones,.rule{font-size:12px;line-height:1.45;margin:7px 0;color:var(--muted)}
+.rule{border-left:3px solid var(--gold);padding-left:9px}
+.pending{font-size:11px;line-height:1.4;color:#856404;background:#fff7d6;border:1px solid #f0de97;padding:8px 10px;border-radius:10px;margin:10px 0}
+.direct{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin:13px 0}
+.direct-item{font-size:10px;text-align:center;display:flex;flex-direction:column;gap:3px}
+.direct-item strong{color:var(--green);font-size:11px}
+.qrrow{display:flex;gap:11px;align-items:center;background:#edf5ef;border-radius:13px;padding:10px}
+.qr{width:74px;height:74px;border-radius:7px;background:#fff;padding:3px}
+.qrrow div{display:flex;flex-direction:column;gap:4px}
+.qrrow strong{font-size:12px;color:var(--green)}
+.qrrow span{font-size:11px;color:var(--muted)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.actions a,.actions span{border-radius:999px;text-decoration:none;font-size:12px;font-weight:900;text-align:center;padding:10px 12px}
+.primary{background:var(--green);color:#fff}
+.secondary{border:1px solid var(--green2);color:var(--green2);background:#fff}
+.mutedbtn{border:1px dashed #b8c9c0;color:#7a8c85;background:#f9fbfa}
+.note{margin-top:22px;color:var(--muted);font-size:11px;text-align:center}
+
+.doctrine{
+  margin:10px 0 18px;
+  background:#fff8df;
+  border:1px solid #ead28a;
+  border-left:4px solid var(--gold);
+  border-radius:14px;
+  padding:11px 12px;
+  color:#5f5124;
+  font-size:11px;
+  line-height:1.45;
+}
+.doctrine strong{color:#3f3518}
+.doctrine .doctrine-title{
+  display:block;
+  font-weight:900;
+  color:var(--green);
+  margin-bottom:4px;
+  letter-spacing:.2px;
+}
+@media(max-width:650px){
+  header{padding:13px 10px}
+  .driver-head{align-items:flex-start}
+  .driver-icon{font-size:21px}
+  .driver-sub{font-size:9px}
+  .topnav{gap:5px;margin-top:9px}
+  .topnav a{font-size:9px;padding:6px 7px}
+  .langs{gap:4px;margin-top:8px}
+  .langs a{font-size:8px;padding:5px 6px}
+  .adhesion-cta{display:block;padding:8px 9px;margin-top:8px}
+  .adhesion-cta strong{font-size:10px}
+  .adhesion-cta span{font-size:8.5px;line-height:1.25;margin-top:2px}
+  .adhesion-cta a{display:block;margin-top:7px;padding:8px 7px;font-size:9px}
+  .header-inner{gap:8px}
+  .brand{font-size:17px}
+  .brand small{font-size:8px;letter-spacing:1px}
+  .zero{font-size:9px;padding:6px 8px}
+  main{padding:14px 7px 36px}
+  .section-title{gap:8px;margin-bottom:10px}
+  .icon{width:36px;height:36px;font-size:18px;flex:0 0 auto}
+  .section-title h1{font-size:16px;line-height:1.05}
+  .section-title p{font-size:10px;line-height:1.25}
+  .filters{gap:5px;padding-bottom:7px}
+  .filter{font-size:9px;padding:6px 8px}
+
+  /* Doctrine mobile: photo ~1/3, informations ~2/3 */
+  .listing{
+    grid-template-columns:34% 66%;
+    border-radius:13px;
+    margin:10px 0;
+    box-shadow:0 6px 16px rgba(7,63,50,.08)
+  }
+  .photo{
+    min-height:365px;
+    height:100%;
+  }
+  .photo img{object-position:center top}
+  .photo-hint{
+    left:5px;right:5px;bottom:6px;
+    padding:6px 5px;
+    font-size:8px;
+  }
+  .info{padding:9px 8px}
+  .topline{display:block}
+  .eyebrow{font-size:7px;letter-spacing:.7px;margin-bottom:2px}
+  h2{font-size:17px;line-height:1.05}
+  .designation{font-size:9px;line-height:1.2;margin:3px 0}
+  .area{
+    display:inline-block;
+    margin-top:4px;
+    padding:4px 6px;
+    font-size:8px
+  }
+  .chips{gap:4px;margin:7px 0 5px}
+  .chip{font-size:7.5px;padding:4px 5px}
+  .zones,.rule{font-size:8.5px;line-height:1.3;margin:5px 0}
+  .rule{padding-left:6px;border-left-width:2px}
+  .pending{font-size:8px;padding:6px 7px;margin:6px 0}
+
+  .direct{
+    grid-template-columns:1fr;
+    gap:3px;
+    padding:7px 0;
+    margin:7px 0
+  }
+  .direct-item{
+    text-align:left;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:4px;
+    font-size:8px
+  }
+  .direct-item strong{font-size:8.5px}
+
+  .qrrow{gap:7px;padding:7px;border-radius:9px}
+  .qr{width:52px;height:52px;flex:0 0 auto}
+  .qrrow strong{font-size:8.5px}
+  .qrrow span{font-size:7.5px;line-height:1.2}
+
+  .actions{grid-template-columns:1fr;gap:5px;margin-top:7px}
+  .actions a,.actions span{font-size:9px;padding:8px 7px}
+
+  .doctrine{
+    font-size:9px;
+    line-height:1.35;
+    padding:9px 10px;
+    margin:8px 0 12px;
+    border-radius:10px
+  }
+  .note{font-size:8px}
+}
+
+@media(max-width:390px){
+  .listing{grid-template-columns:32% 68%}
+  .photo{min-height:350px}
+  .info{padding:8px 7px}
+  h2{font-size:16px}
+  .chip{font-size:7px;padding:3px 4px}
+  .qr{width:48px;height:48px}
+}
+</style>
 </head>
-
 <body>
-<a class="floating-back" id="floatingSiteBtn" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-  ↩️ Retour site
-</a>
-
-<div class="page">
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-badge">🚗</div>
-      <div class="brand-copy">
-        <div class="eyebrow" data-i18n="eyebrow">DIGIY DRIVER</div>
-        <div class="brand-title" data-i18n="brand_title">Mobilité internationale avec style et savoir-être.</div>
-        <div class="brand-sub" data-i18n="brand_sub">
-          Une galerie pensée pour relier Sénégal, France et diaspora autour de chauffeurs visibles et joignables directement.
-        </div>
+<header>
+  <div class="header-inner header-stack">
+    <div class="driver-head">
+      <div>
+        <div class="driver-icon">🚗</div>
+        <div class="brand">DIGIY DRIVER</div>
+        <div class="driver-sub">Client · demande simple · assistance DIGIY</div>
       </div>
+      <div class="zero">0 % COMMISSION<br>DIGIYLYFE</div>
     </div>
 
-    <div class="top-actions">
-      <a class="top-link" href="https://digiylyfe.com/" data-i18n="top_site">🌍 Site</a>
-      <a class="top-link green" href="https://digiy-hub.digiylyfe.com/" data-i18n="top_hub">🧭 HUB</a>
-      <a class="top-link gold" href="https://tarifs.digiylyfe.com/" data-i18n="top_tarifs">📦 Tarifs</a>
-      <a class="top-link green" id="joinBtnHeader" href="https://galerie-chauffeurs.digiylyfe.com/inscription-driver" data-i18n="top_join">📝 Inscription chauffeur</a>
-      <a class="top-link gold" id="lexiqueBtnTop" href="https://driver-client.digiylyfe.com/lexique-driver.html?v=lexique-driver-v2-mobile-20260607" data-i18n="top_lexique">🇸🇳 Lexique Wolof</a>
-      <div class="pill gold"><span>👑</span><span data-i18n="pill_class">ADHÉRENTS DIGIYLYFE</span></div>
-      <div class="pill green"><span class="dot"></span><span id="onlinePill">…</span></div>
-      <div class="pill" id="countPill">…</div>
+    <nav class="topnav" aria-label="Navigation principale">
+      <a href="https://digiylyfe.com/?lang=fr" target="_blank" rel="noopener">🌍 DIGIYLYFE</a>
+      <a href="https://galerie-chauffeurs.digiylyfe.com/?lang=fr" target="_blank" rel="noopener">🚗 Galerie chauffeurs</a>
+    </nav>
 
-      <div class="lang-switch" aria-label="Language switch">
-        <button id="lang-fr" class="active" type="button">FR</button>
-        <button id="lang-en" type="button">EN</button>
-        <button id="lang-wo" type="button">WO</button>
+    <div class="langs" aria-label="Langues">
+      <a href="?lang=fr" lang="fr">🇫🇷 FR</a>
+      <a href="?lang=en" lang="en">🇬🇧 EN</a>
+      <a href="?lang=es" lang="es">🇪🇸 ES</a>
+      <a href="?lang=pt" lang="pt">🇵🇹 PT</a>
+      <a href="?lang=de" lang="de">🇩🇪 DE</a>
+      <a href="?lang=it" lang="it">🇮🇹 IT</a>
+      <a href="?lang=nl" lang="nl">🇳🇱 NL</a>
+      <a href="?lang=ar" lang="ar">🇸🇦 AR</a>
+    </div>
+
+    <div class="adhesion-cta">
+      <div>
+        <strong>Vous êtes chauffeur ?</strong>
+        <span>Rejoignez DIGIYLYFE comme adhérent et préparez votre carte de visite numérique.</span>
       </div>
+      <a href="https://digiylyfe.com/tarifs-adherents-1.html" target="_blank" rel="noopener">
+        🤝 DEMANDE D’ADHÉSION · 19 900 FCFA / mois
+      </a>
     </div>
   </div>
-
-  <section class="hero">
-    <div class="hero-grid">
-      <div class="hero-main">
-        <div class="eyebrow" data-i18n="hero_eyebrow">Galerie publique premium</div>
-        <h1>
-          <span class="gold" data-i18n="hero_title">DIGIY DRIVER</span>
-        </h1>
-        <p data-i18n="hero_sub">
-          France ↔ Sénégal. Filtre par pays, zone ou véhicule, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.
-        </p>
-
-        <div class="hero-signature" data-i18n="hero_signature">
-          Un style. Un savoir-être. Une présence.
-        </div>
-
-        <div class="hero-badges">
-          <div class="hero-badge" data-i18n="hero_badge_1"><b>France ↔ Sénégal</b> = pont de confiance</div>
-          <div class="hero-badge" data-i18n="hero_badge_2">Contact direct • WhatsApp</div>
-          <div class="hero-badge" data-i18n="hero_badge_3">0% commission</div>
-        </div>
-
-        <div class="hero-actions" aria-label="Liens DIGIYLYFE">
-          <a class="hero-action main" href="https://digiylyfe.com/" data-i18n="hero_site">🌍 Retour site DIGIYLYFE</a>
-          <a class="hero-action green" href="https://digiy-hub.digiylyfe.com/" data-i18n="hero_hub">🧭 Ouvrir le HUB</a>
-          <a class="hero-action main" id="heroJoinBtn" href="https://galerie-chauffeurs.digiylyfe.com/inscription-driver" data-i18n="hero_join">📝 Inscription chauffeur</a>
-          <a class="hero-action" href="https://tarifs.digiylyfe.com/" data-i18n="hero_tarifs">📦 Voir les tarifs</a>
-          <a class="hero-action gold" id="heroLexiqueBtn" href="https://driver-client.digiylyfe.com/lexique-driver.html?v=lexique-driver-v2-mobile-20260607" data-i18n="hero_lexique">🇸🇳 Lexique Wolof</a>
-        </div>
-      </div>
-
-      <aside class="hero-panel">
-        <div class="panel-title" data-i18n="panel_title">Vue d’ensemble</div>
-        <div class="panel-grid">
-          <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_count_k">Chauffeurs visibles</div>
-            <div class="panel-v" id="statTotal">—</div>
-          </div>
-          <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_online_k">Contact direct</div>
-            <div class="panel-v" id="statOnline">—</div>
-          </div>
-          <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_zone_k">Zones couvertes</div>
-            <div class="panel-v" id="statZones">—</div>
-          </div>
-          <div class="panel-box">
-            <div class="panel-k" data-i18n="panel_public_k">Visibilité</div>
-            <div class="panel-v" id="liveBadge">Galerie publique</div>
-          </div>
-        </div>
-
-        <div class="panel-note" data-i18n="panel_note">
-          Ici, on met en avant des profils présents dans la vitrine DIGIYLYFE.
-        </div>
-      </aside>
-    </div>
+</header>
+<main>
+  <section class="section-title">
+    <div class="icon">🚘</div>
+    <div><h1>GALERIE CHAUFFEURS · ADHÉRENTS</h1><p>Adhérents chauffeurs · Contact direct · Saly & Petite Côte</p></div>
   </section>
 
+  <div class="filters">
+    <span class="filter">Tous</span><span class="filter">Saly</span><span class="filter">AIBD</span>
+    <span class="filter">Petite Côte</span><span class="filter">Dakar</span>
+  </div>
 
-  <section class="driver-direct-access" aria-labelledby="driverDirectTitle">
-    <div class="driver-direct-head">
-      <div>
-        <h2 class="driver-direct-title" id="driverDirectTitle">Accès direct aux chauffeurs</h2>
-        <p class="driver-direct-lead">
-          Ouvrez la fiche du chauffeur choisi. Les cartes de visite restent dans chaque profil.
-        </p>
-      </div>
-    </div>
+  <div class="doctrine">
+    <span class="doctrine-title">🛡️ RÔLE DE DIGIYLYFE</span>
+    DIGIYLYFE publie la présence numérique et la carte de visite de ses adhérents.
+    <strong>Chaque chauffeur exerce sous sa seule responsabilité</strong> et reste responsable de son activité,
+    de son véhicule, de ses obligations professionnelles et administratives, de ses assurances,
+    de ses tarifs, de sa disponibilité et de la prestation qu’il accepte.
+    DIGIYLYFE ne réalise pas le transport, ne fixe pas le prix de la course et ne perçoit pas le paiement de la prestation.
+  </div>
 
-    <div class="driver-direct-grid">
-      <!-- Baptiste en premier -->
-      <article class="driver-direct-item">
-        <div class="driver-direct-id">
-          <div class="driver-direct-avatar" aria-hidden="true">B</div>
+  
+    <article class="listing">
+      <a class="photo" href="https://partenaire-lamine.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir la carte de Lamine">
+        <img src="https://partenaire-lamine.digiylyfe.com/carte-visite.png" alt="Carte / visuel de Lamine">
+        <span class="photo-hint">↗ Ouvrir la carte</span>
+      </a>
+
+      <div class="info">
+        <div class="topline">
           <div>
-            <div class="driver-direct-name">Baptiste</div>
-            <div class="driver-direct-role">Chauffeur · Adhérent DIGIYLYFE</div>
+            <p class="eyebrow">ADHÉRENT DIGIYLYFE</p>
+            <h2>Lamine</h2>
+            <p class="designation">Chauffeur privé sur réservation</p>
           </div>
+          <span class="area">📍 Saly</span>
         </div>
-        <a class="btn btn-gold" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener">🚗 Voir sa fiche</a>
-      </article>
 
-      <article class="driver-direct-item">
-        <div class="driver-direct-id">
-          <div class="driver-direct-avatar" aria-hidden="true">L</div>
+        <div class="chips"><span class='chip'>Transfert Saly–AIBD</span><span class='chip'>Courses locales</span><span class='chip'>Trajets vers Dakar</span><span class='chip'>Circuits Petite Côte</span></div>
+
+        <p class="zones"><strong>Repères :</strong> Saly · Mbour · Somone · Ngaparou · AIBD</p>
+        <p class="rule">Disponibilité, trajet, véhicule et tarif : accord direct avec le chauffeur, sous sa responsabilité.</p>
+        
+
+        <div class="direct">
+          
+        <div class="direct-item"><strong>📞 Contact direct</strong><span>+221 78 441 36 80</span></div>
+    
+          <div class="direct-item"><strong>💳 Paiement direct</strong><span>au chauffeur</span></div>
+          <div class="direct-item"><strong>0 %</strong><span>commission DIGIYLYFE</span></div>
+        </div>
+
+        <div class="qrrow">
+          <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeAQAAAAB6HIMaAAAB0ElEQVR4nO2YMW7dQAxE35oCfsl/gxyFuppvtv8ovgFVBqAxKXZ/qthJE5iFCTUSm8FgOBxqiA/r/eXjHnw3/9ZECWCa5VMJRPniO6oj2pBkkuV+NckkZUO0L8AYJ9fAp5LDZwHXOL4Q0D80ixj3qIWzA6DPmnHwKH89XHWdHQD9sbZuE1xFtNftY4wBYW/nLTmA63wfY9xbcrsqKQKXNBfbkvpxizIAkwB8SrLnl45oNU1TGUUsnOXCp3XULVsDxAasqcQy8IbcvkDckoJx5/BZ13n4LB5fCOiTWiOGzyIk4UsVtHQwlKFEUu1XTDLNpqlGKpdpWoZJ+CywjOqoWyStlLg8oQCfll0dLClfq3alXG0NN9ZtQRHPND7x2VW30xJbg+ZTGZZAT79lG4KrXHu+gLabN0OJJUUUUQsnVEclvAC4ft7jgMNfb1Jdp2nesuUuy1CuPBM8haGkq27DVqDdVjbXamirW1wr39bOt9DWb/ftEOVSxnLaRXhHtAlgmtIs1zKHzvlWEtcJ2NtZcEDffJsBYct1pXU70DTf/m4+xo/5Ps66znHf8mjMLRAmPWet74WudSy4bN84dM63gOUy24lrPS1vh/H9J/+/NX8BuJa4uh7XFbYAAAAASUVORK5CYII=" alt="QR vers la carte de Lamine">
           <div>
-            <div class="driver-direct-name">Lamine</div>
-            <div class="driver-direct-role">Chauffeur privé à Saly</div>
+            <strong>QR · LAMINE</strong>
+            <span>Scannez pour ouvrir et conserver sa carte.</span>
           </div>
         </div>
-        <a class="btn btn-main" href="https://partenaire-lamine.digiylyfe.com/" target="_blank" rel="noopener">🚗 Voir sa fiche</a>
-      </article>
-    </div>
-  </section>
 
-
-  <section class="international-card" id="axe-international">
-    <div class="international-head">
-      <div>
-        <div class="international-kicker" data-i18n="intl_kicker">🌍 Axe international France ↔ Sénégal</div>
-        <h2 data-i18n="intl_title">Deux terrains, une même tenue de service.</h2>
-        <p data-i18n="intl_intro">
-          DIGIY DRIVER structure la mobilité entre le Sénégal, la France et la diaspora :
-          accueil, transfert, tourisme, contact direct, 0% commission.
-        </p>
-      </div>
-      <div class="international-badge" data-i18n="intl_badge">France · Sénégal · Diaspora</div>
-    </div>
-
-    <div class="international-grid">
-      <article class="international-box">
-        <div class="box-title" data-i18n="intl_senegal_title">🇸🇳 Sénégal — terrain, accueil, confiance</div>
-        <div class="box-copy" data-i18n="intl_senegal_copy">
-          AIBD, Dakar, Saly, Mbour, Petite Côte : le client arrive, il veut un chauffeur visible et joignable directement.
-        </div>
-        <div class="international-points">
-          <span class="international-point" data-i18n="intl_senegal_p1">✈️ Aéroport</span>
-          <span class="international-point" data-i18n="intl_senegal_p2">🏨 Hôtels</span>
-          <span class="international-point" data-i18n="intl_senegal_p3">🌴 Tourisme</span>
-        </div>
-      </article>
-
-      <article class="international-box">
-        <div class="box-title" data-i18n="intl_france_title">🇫🇷 France — diaspora, départs, retours</div>
-        <div class="box-copy" data-i18n="intl_france_copy">
-          France, Sarlat, Arcachon, Bordeaux, Paris : on prépare les trajets, les retours au pays, les familles, les séjours et les partenaires.
-        </div>
-        <div class="international-points">
-          <span class="international-point" data-i18n="intl_france_p1">🧳 Diaspora</span>
-          <span class="international-point" data-i18n="intl_france_p2">🚆 Gares</span>
-          <span class="international-point" data-i18n="intl_france_p3">🤝 Partenaires</span>
-        </div>
-      </article>
-
-      <article class="international-box">
-        <div class="box-title" data-i18n="intl_bridge_title">🌉 Pont DIGIY — même règle des deux côtés</div>
-        <div class="box-copy" data-i18n="intl_bridge_copy">
-          Pas de plateforme qui avale la relation. Le client choisit, le chauffeur répond, le paiement reste direct, la réputation reste au professionnel.
-        </div>
-        <div class="international-points">
-          <span class="international-point" data-i18n="intl_bridge_p1">💬 Contact direct</span>
-          <span class="international-point" data-i18n="intl_bridge_p2">🧾 Traçabilité</span>
-          <span class="international-point" data-i18n="intl_bridge_p3">0% commission</span>
-        </div>
-      </article>
-    </div>
-
-    <div class="international-actions">
-      <a class="international-action green" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20souhaite%20organiser%20un%20trajet%20au%20S%C3%A9n%C3%A9gal%20via%20DIGIY%20DRIVER%20INTERNATIONAL." target="_blank" rel="noopener" data-i18n="intl_btn_senegal">🇸🇳 Demande Sénégal</a>
-      <a class="international-action gold" href="https://wa.me/33638329423?text=Bonjour%2C%20je%20souhaite%20pr%C3%A9parer%20un%20trajet%20France%20%E2%86%94%20S%C3%A9n%C3%A9gal%20via%20DIGIY%20DRIVER%20INTERNATIONAL." target="_blank" rel="noopener" data-i18n="intl_btn_france">🇫🇷 Demande France ↔ Sénégal</a>
-    </div>
-  </section>
-
-
-  <section class="digiy-audio-reader" aria-label="Lecteur audio DIGIY DRIVER">
-    <div class="audio-reader-grid">
-      <div>
-        <div class="audio-kicker" data-i18n="audio_kicker">🎧 DIGIY explique au client</div>
-        <h2 data-i18n="audio_title">Écouter avant de choisir son chauffeur</h2>
-        <p data-i18n="audio_text">
-          La voix met le client à l’aise : il comprend qu’il peut regarder les profils,
-          ouvrir la carte numérique, voir une vidéo de présentation quand elle est disponible,
-          puis faire une demande simple par WhatsApp ou par SMS.
-        </p>
-        <div class="audio-small-note" data-i18n="audio_note">
-          Le client garde la main : il choisit, il contacte directement, DIGIY ne prend pas de commission.
-        </div>
-      </div>
-
-      <div class="audio-reader-actions">
-        <button class="audio-reader-btn listen" type="button" id="digiyAudioPlay" data-i18n="audio_play">🎧 Écouter la fiche</button>
-        <button class="audio-reader-btn stop" type="button" id="digiyAudioStop" data-i18n="audio_stop">⏹ Arrêter</button>
-        <a class="audio-reader-btn whatsapp" id="digiyAudioWhatsApp" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20chauffeur%20via%20DIGIY%20DRIVER." target="_blank" rel="noopener" data-i18n="audio_whatsapp">💬 Demander par WhatsApp</a>
-        <a class="audio-reader-btn sms" id="digiyAudioSms" href="sms:+221771342889?&body=Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20chauffeur%20via%20DIGIY%20DRIVER." data-i18n="audio_sms">📩 Demander par SMS</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="card">
-    <div class="status">
-      <div class="left">
-        <div class="title" data-i18n="section_title">Trouver le bon chauffeur</div>
-        <div class="sub" data-i18n="section_sub">
-          Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.
-        </div>
-      </div>
-      <div class="badge" id="badgeTop" data-i18n="badge_public">Galerie publique</div>
-    </div>
-
-    <div class="navRow">
-      <a class="navBtn" id="siteBtnTop" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="navBtn gold" id="galleryBtnTop" href="#drivers" data-i18n="nav_gallery">🚗 Nos chauffeurs</a>
-      <a class="navBtn gold" id="lexiqueBtnSection" href="https://driver-client.digiylyfe.com/lexique-driver.html?v=lexique-driver-v2-mobile-20260607" data-i18n="nav_lexique">🇸🇳 Lexique Wolof</a>
-      <a class="navBtn sky" id="orderBtnTop" href="#" data-i18n="nav_order">📲 Réserver un chauffeur</a>
-      <a class="navBtn main" id="joinBtnTop" href="#" data-i18n="nav_recruit">📝 Inscription chauffeur</a>
-      <a class="navBtn" id="cockpitBtnTop" href="#" data-i18n="nav_cockpit">🚗 Mon espace chauffeur</a>
-    </div>
-
-    <div class="featured-card-wrap" id="featuredCardWrap">
-      <div class="featured-head">
-        <div>
-          <div class="title" data-i18n="featured_title">Chauffeur en vitrine</div>
-          <div class="sub" data-i18n="featured_sub">Le premier chauffeur disponible apparaît ici. Ouvrez sa fiche DIGIYLYFE puis contactez-le directement.</div>
-        </div>
-        <div class="featured-badge" data-i18n="featured_badge">Choix direct</div>
-      </div>
-      <div id="featuredCardArea" class="featured-empty" data-i18n="featured_loading">Chargement de la carte chauffeur…</div>
-    </div>
-
-    <div class="bar" style="margin-top:14px;">
-      <div class="field">
-        <label data-i18n="label_country">🌍 Pays / axe</label>
-        <select id="countryFilter">
-          <option value="" data-i18n="country_all">Tous</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label data-i18n="label_zone">📍 Zone recherchée</label>
-        <select id="zoneFilter">
-          <option value="" data-i18n="zone_all">Toutes</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label data-i18n="label_search">🔎 Nom, ville ou voiture</label>
-        <input id="qFilter" placeholder="Nom, ville ou voiture…" />
-      </div>
-
-      <div class="field">
-        <label data-i18n="label_avail">📞 Contact</label>
-        <select id="availFilter">
-          <option value="all" selected data-i18n="avail_all">Tous les profils</option>
-          <option value="direct" data-i18n="avail_online">WhatsApp direct</option>
-          <option value="contact" data-i18n="avail_offline">À contacter</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid" id="drivers">
-    <!-- Contenu statique lisible immédiatement par les moteurs et remplacé ensuite par la galerie dynamique. -->
-    <!-- Baptiste en premier dans le statique aussi -->
-    <article class="driver" data-static-driver="baptiste" itemscope itemtype="https://schema.org/Person">
-      <div class="driver-top">
-        <div class="identity">
-          <div class="avatar" aria-hidden="true">B</div>
-          <div class="identity-copy">
-            <div class="name" itemprop="name">Baptiste</div>
-            <div class="titleline" itemprop="jobTitle">Chauffeur adhérent DIGIYLYFE sur réservation</div>
-            <div class="meta">
-              <span class="tag gold">🌍 DIGIY DRIVER</span>
-              <span class="tag">🚗 Transport avec chauffeur</span>
-              <span class="tag green">Fiche directe</span>
-            </div>
-          </div>
-        </div>
-        <div class="side-badge">Ambassadeur DIGIY</div>
-      </div>
-
-      <div class="desc" itemprop="description">
-        Transport avec chauffeur sur réservation. Trajet, zone, disponibilité et tarif sont confirmés directement avec Baptiste depuis sa fiche DIGIYLYFE.
-      </div>
-
-      <div class="actions">
-        <a class="btn btn-gold" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener" itemprop="url">🚗 Voir la fiche de Baptiste</a>
-        <a class="btn btn-sky" href="https://driver.digiylyfe.com/commander-course.html?driver=Baptiste&amp;slug=baptiste&amp;source=galerie_chauffeurs" rel="noopener">📲 Préparer une course</a>
-      </div>
-
-      <div class="driver-card-box">
-        <a class="driver-card-click" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir la fiche DIGIYLYFE de Baptiste">
-          <img src="https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste-adherent.png" alt="Carte de visite officielle de Baptiste, chauffeur · adhérent DIGIYLYFE" width="1080" height="1920" loading="eager">
-        </a>
-        <div class="driver-card-note">🖱️ Cliquez sur la carte pour ouvrir la fiche DIGIYLYFE de Baptiste.</div>
-        <div class="driver-card-actions">
-          <a class="btn btn-gold" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener">🚗 Ouvrir la fiche</a>
-          <a class="btn btn-ghost" href="https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste-adherent.png" target="_blank" rel="noopener">🖼️ Voir la carte</a>
-          <a class="btn btn-sky" href="https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste-adherent.png" download="carte-visite-baptiste.png">⬇️ Télécharger</a>
-          <a class="btn btn-main" href="https://wa.me/?text=Baptiste%20%E2%80%94%20Chauffeur%20%C2%B7%20Adh%C3%A9rent%20DIGIYLYFE.%0AFiche%20DIGIYLYFE%20%3A%20https%3A%2F%2Fdigiy-driver-part-bapt.digiylyfe.com%2F%0ACarte%20de%20visite%20%3A%20https%3A%2F%2Fdigiy-driver-part-bapt.digiylyfe.com%2Fcarte-visite-baptiste-adherent.png" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <div class="actions">
+          <a class="primary" href="https://partenaire-lamine.digiylyfe.com/" target="_blank" rel="noopener">VOIR LA CARTE →</a>
+          <a class="secondary" href="https://wa.me/221784413680" target="_blank" rel="noopener">WhatsApp direct</a>
         </div>
       </div>
     </article>
+    
+    <article class="listing">
+      <a class="photo" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir la carte de Baptiste">
+        <img src="https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste.png" alt="Carte / visuel de Baptiste">
+        <span class="photo-hint">↗ Ouvrir la carte</span>
+      </a>
 
-    <!-- NAZIR DRIVER — partenaire DIGIY -->
-    <article class="driver" data-static-driver="nazir-driver" itemscope itemtype="https://schema.org/Person">
-      <meta itemprop="telephone" content="+221778310298">
-      <div class="driver-top"><div class="identity"><div class="avatar" aria-hidden="true">N</div><div class="identity-copy"><div class="name" itemprop="name">Nazir Driver</div><div class="titleline" itemprop="jobTitle">Chauffeur sur réservation</div><div class="meta"><span class="tag">🏙️ Saly · Mbour</span><span class="tag">✈️ AIBD</span><span class="tag gold">🌍 Multi-région</span><span class="tag green">WhatsApp direct</span></div></div></div><div class="side-badge">Partenaire DIGIY</div></div>
-      <div class="desc" itemprop="description">Trajets directs, transferts aéroport, déplacements régionaux et mise à disposition. Horaire, disponibilité et tarif sont confirmés directement avec Nazir Driver.</div>
-      <div class="actions"><a class="btn btn-main" href="https://wa.me/221778310298?text=Bonjour%20Nazir%20Driver%2C%20je%20viens%20de%20DIGIYLYFE%20et%20je%20souhaite%20organiser%20un%20trajet." target="_blank" rel="noopener">💬 WhatsApp direct</a><a class="btn btn-sky" href="tel:+221778310298">📞 Appeler</a><a class="btn btn-ghost" href="nazir-driver.html" itemprop="url">🚗 Voir la fiche</a><a class="btn btn-sky" href="https://driver-client.digiylyfe.com/?driver=nazir-driver&amp;wa=221778310298" rel="noopener">📲 Préparer une course</a></div>
-      <div class="driver-card-box"><a class="driver-card-click" href="https://wa.me/221778310298?text=Bonjour%20Nazir%20Driver%2C%20je%20viens%20de%20DIGIYLYFE%20et%20je%20souhaite%20organiser%20un%20trajet." target="_blank" rel="noopener" aria-label="Contacter Nazir Driver sur WhatsApp"><img src="nazir-driver-card.svg" alt="Carte officielle de Nazir Driver avec QR WhatsApp direct" width="1080" height="1920" loading="eager"></a><div class="driver-card-note">🖱️ Cliquez sur la carte pour ouvrir directement le WhatsApp de Nazir Driver.</div><div class="driver-card-actions"><a class="btn btn-main" href="https://wa.me/221778310298?text=Bonjour%20Nazir%20Driver%2C%20je%20viens%20de%20DIGIYLYFE%20et%20je%20souhaite%20organiser%20un%20trajet." target="_blank" rel="noopener">💬 WhatsApp</a><a class="btn btn-gold" href="nazir-driver.html">🚗 Ouvrir la fiche</a><a class="btn btn-ghost" href="nazir-driver-card.svg" target="_blank" rel="noopener">🖼️ Voir la carte</a><a class="btn btn-sky" href="nazir-driver-card.svg" download="carte-nazir-driver.svg">⬇️ Télécharger</a></div></div>
-    </article>
+      <div class="info">
+        <div class="topline">
+          <div>
+            <p class="eyebrow">ADHÉRENT DIGIYLYFE</p>
+            <h2>Baptiste</h2>
+            <p class="designation">Chauffeur · Adhérent DIGIYLYFE</p>
+          </div>
+          <span class="area">📍 Saly et Petite Côte</span>
+        </div>
 
-    <article class="driver" data-static-driver="lamine" itemscope itemtype="https://schema.org/Person">
-      <meta itemprop="telephone" content="+221784413680">
-      <div class="driver-top">
-        <div class="identity">
-          <div class="avatar" aria-hidden="true">L</div>
-          <div class="identity-copy">
-            <div class="name" itemprop="name">Lamine</div>
-            <div class="titleline" itemprop="jobTitle">Chauffeur privé sur réservation</div>
-            <div class="meta">
-              <span class="tag">🏙️ Saly</span>
-              <span class="tag">📍 Saly · Mbour · AIBD · Petite Côte · Dakar</span>
-              <span class="tag gold">🌍 Sénégal</span>
-              <span class="tag">🚗 Chauffeur privé</span>
-              <span class="tag green">WhatsApp direct</span>
-            </div>
+        <div class="chips"><span class='chip'>Transport avec chauffeur</span><span class='chip'>Sur réservation</span><span class='chip'>Petite Côte</span><span class='chip'>AIBD / Dakar</span></div>
+
+        <p class="zones"><strong>Repères :</strong> Saly · Mbour · Ngaparou · Somone · AIBD</p>
+        <p class="rule">Disponibilité, trajet, véhicule et tarif : accord direct avec le chauffeur, sous sa responsabilité.</p>
+        
+
+        <div class="direct">
+          
+        <div class="direct-item"><strong>📞 Contact direct</strong><span>+221 77 134 28 89</span></div>
+    
+          <div class="direct-item"><strong>💳 Paiement direct</strong><span>au chauffeur</span></div>
+          <div class="direct-item"><strong>0 %</strong><span>commission DIGIYLYFE</span></div>
+        </div>
+
+        <div class="qrrow">
+          <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeAQAAAAB6HIMaAAAB90lEQVR4nO2YMW4cMQxFn1YCttQAPoCPwrlBzpobyEAusgdYgFMOwMVPIa3hIkbSBGZhNjMjNh+az89PFvFpPC6f5+A7+bckcoDqVI3ApBEYABYZ0ZqkqhFQJfqoUpXkCdE2oGBAFaVQb1tszrHVe0ImtPU8drpH43wZ1/hKQP+YjKNUN+AsewpAf4gGCBoGPF693X/8Eq2LIyHaC7yVUoCr2/W2Axz7o5SyJUSLZrjJp3wR2DzLpwlMnGCTtHLoY57nQ9uA0h1ofRRod+IF8Va65+u8SIM+2wHzJUAa0RMy4QIEnBvldcSxnxuta0pEviq7AFfnetvlVAfg2DnKVwL6PKRBH9FHdaoEFvMzqSawXE0f0YecgOpGRt6uKpM03UHVqM46yYhWYNWhj3nDU3tTasLyt5Lkq4vRx7zwnGjXWxfPUSJ6Tr1FGnLktmTBkRNpeTs1wVcjA5vXm9InMCUrsOomt+hi0iApEyRf8+NCC0FWTZh/X3qO59RpbnOidVhtd9DHu1tIWmUfZgeWRJjSdl6HtatRLKNr1UnJhAurfymO0uAse5sScdszOsY1lE0ps+hKzNtnsqthV412lHMzsMeW0I0/N0u8nS9etp/1vs2j6gnRvu8YP8yP75KbDu1l7WqOHagaZaNBAEfCKivfm/z/lvwN4Tak7zQNFpgAAAAASUVORK5CYII=" alt="QR vers la carte de Baptiste">
+          <div>
+            <strong>QR · BAPTISTE</strong>
+            <span>Scannez pour ouvrir et conserver sa carte.</span>
           </div>
         </div>
-        <div class="side-badge">Partenaire DIGIY</div>
-      </div>
 
-      <div class="desc" itemprop="description">
-        Transfert Saly–AIBD, courses locales, trajets vers Dakar, circuits Petite Côte et mise à disposition.
-        Date, horaire, tarif et disponibilité sont confirmés directement avec Lamine.
-      </div>
-
-      <div class="actions">
-        <a class="btn btn-main" href="https://wa.me/221784413680?text=Bonjour%20Lamine%2C%20je%20souhaite%20organiser%20un%20transfert%20sur%20r%C3%A9servation%20avec%20vous." target="_blank" rel="noopener">💬 WhatsApp direct</a>
-        <a class="btn btn-sky" href="tel:+221784413680">📞 Appeler</a>
-        <a class="btn btn-ghost" href="https://partenaire-lamine.digiylyfe.com/" rel="noopener" itemprop="url">🚗 Voir la fiche de Lamine</a>
-        <a class="btn btn-sky" href="https://driver-client.digiylyfe.com/?driver=lamine&wa=221784413680" rel="noopener">📲 Préparer une course</a>
+        <div class="actions">
+          <a class="primary" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener">VOIR LA CARTE →</a>
+          <a class="secondary" href="https://wa.me/221771342889" target="_blank" rel="noopener">WhatsApp direct</a>
+        </div>
       </div>
     </article>
-  </div>
+    
+    <article class="listing">
+      <a class="photo" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html" target="_blank" rel="noopener" aria-label="Ouvrir la carte de Nazir">
+        <img src="https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg" alt="Carte / visuel de Nazir">
+        <span class="photo-hint">↗ Ouvrir la carte</span>
+      </a>
 
-  <div class="card footCta">
-    <div class="big" data-i18n="cta_driver_title">Vous êtes chauffeur ?</div>
-    <div class="small" data-i18n="cta_driver_sub">
-      Rejoins DIGIY DRIVER et fais grandir ta présence avec style et savoir-être.
-    </div>
+      <div class="info">
+        <div class="topline">
+          <div>
+            <p class="eyebrow">ADHÉRENT DIGIYLYFE</p>
+            <h2>Nazir</h2>
+            <p class="designation">Chauffeur · Adhérent DIGIYLYFE</p>
+          </div>
+          <span class="area">📍 Sénégal</span>
+        </div>
 
-    <div class="actions" style="justify-content:center; margin-top:12px;">
-      <a class="btn btn-ghost" id="siteBtnBottom" href="#" data-i18n="nav_site">← Retour au site</a>
-      <a class="btn btn-ghost" id="galleryBtnBottom" href="#drivers" data-i18n="nav_gallery">Nos chauffeurs</a>
-      <a class="btn btn-ghost" id="lexiqueBtnBottom" href="https://driver-client.digiylyfe.com/lexique-driver.html?v=lexique-driver-v2-mobile-20260607" data-i18n="nav_lexique">🇸🇳 Lexique Wolof</a>
-      <a class="btn btn-sky" id="orderBtnBottom" href="#" data-i18n="cta_order_ride">Réserver un chauffeur</a>
-      <a class="btn btn-main" id="joinBtnBottom" href="#" data-i18n="cta_become_driver">📝 Inscription chauffeur</a>
-      <a class="btn btn-ghost" id="cockpitBtnBottom" href="#" data-i18n="nav_cockpit">Mon espace chauffeur</a>
-    </div>
-  </div>
-</div>
+        <div class="chips"><span class='chip'>Transport avec chauffeur</span><span class='chip'>Sur réservation</span><span class='chip'>Carte de visite</span><span class='chip'>Accès direct</span></div>
 
-<div class="toast" id="toast"></div>
+        <p class="zones"><strong>Repères :</strong> Carte publique disponible · Contact à confirmer · Détails à compléter</p>
+        <p class="rule">Disponibilité, trajet, véhicule et tarif : accord direct avec le chauffeur, sous sa responsabilité.</p>
+        <p class='pending'>Nazir ajouté dans la maquette. Les coordonnées détaillées seront complétées après contrôle source.</p>
 
-<script type="module">
-  /* ===== SCRIPT IDENTIQUE À L'ORIGINAL AVEC UNE SEULE MODIFICATION : BAPTISTE EN PREMIER ===== */
-  // On garde tout le script tel quel, mais on modifie la fonction withFeaturedDrivers
-  // pour que Baptiste soit ajouté en premier (avant Lamine) et qu'il soit en vitrine.
+        <div class="direct">
+          
+        <div class="direct-item"><strong>📞 Contact</strong><span>à confirmer</span></div>
+    
+          <div class="direct-item"><strong>💳 Paiement direct</strong><span>au chauffeur</span></div>
+          <div class="direct-item"><strong>0 %</strong><span>commission DIGIYLYFE</span></div>
+        </div>
 
-  const DIGIY_LANG = {
-    // ... (toutes les traductions identiques à l'original, je les raccourcis pour la lisibilité)
-    fr: {
-      eyebrow: "DIGIY DRIVER",
-      brand_title: "Mobilité internationale avec style et savoir-être.",
-      brand_sub: "Une galerie pensée pour relier Sénégal, France et diaspora autour de chauffeurs visibles et joignables directement.",
-      pill_class: "ADHÉRENTS DIGIYLYFE",
-      top_site: "🌍 Site",
-      top_hub: "🧭 HUB",
-      top_tarifs: "📦 Tarifs",
-      top_join: "📝 Inscription chauffeur",
-      top_card: "🚗 Carte chauffeur",
-      top_lexique: "🇸🇳 Lexique Wolof",
-      hero_site: "🌍 Retour site DIGIYLYFE",
-      hero_hub: "🧭 Ouvrir le HUB",
-      hero_join: "📝 Inscription chauffeur",
-      hero_tarifs: "📦 Voir les tarifs",
-      hero_card: "🚗 Carte chauffeur",
-      hero_lexique: "🇸🇳 Lexique Wolof",
-      hero_eyebrow: "Galerie publique premium",
-      hero_title: "DIGIY DRIVER",
-      hero_sub: "France ↔ Sénégal. Filtre par pays, zone ou véhicule, regarde les profils, puis contacte directement le bon chauffeur sur WhatsApp.",
-      hero_signature: "Un style. Un savoir-être. Une présence.",
-      hero_badge_1: "France ↔ Sénégal = pont de confiance",
-      hero_badge_2: "Contact direct • WhatsApp",
-      hero_badge_3: "0% commission",
-      intl_kicker: "🌍 Axe international France ↔ Sénégal",
-      intl_title: "Deux terrains, une même tenue de service.",
-      intl_intro: "DIGIY DRIVER structure la mobilité entre le Sénégal, la France et la diaspora : accueil, transfert, tourisme, contact direct, 0% commission.",
-      intl_badge: "France · Sénégal · Diaspora",
-      intl_senegal_title: "🇸🇳 Sénégal — terrain, accueil, confiance",
-      intl_senegal_copy: "AIBD, Dakar, Saly, Mbour, Petite Côte : le client arrive, il veut un chauffeur visible et joignable directement.",
-      intl_senegal_p1: "✈️ Aéroport",
-      intl_senegal_p2: "🏨 Hôtels",
-      intl_senegal_p3: "🌴 Tourisme",
-      intl_france_title: "🇫🇷 France — diaspora, départs, retours",
-      intl_france_copy: "France, Sarlat, Arcachon, Bordeaux, Paris : on prépare les trajets, les retours au pays, les familles, les séjours et les partenaires.",
-      intl_france_p1: "🧳 Diaspora",
-      intl_france_p2: "🚆 Gares",
-      intl_france_p3: "🤝 Partenaires",
-      intl_bridge_title: "🌉 Pont DIGIY — même règle des deux côtés",
-      intl_bridge_copy: "Pas de plateforme qui avale la relation. Le client choisit, le chauffeur répond, le paiement reste direct, la réputation reste au professionnel.",
-      intl_bridge_p1: "💬 Contact direct",
-      intl_bridge_p2: "🧾 Traçabilité",
-      intl_bridge_p3: "0% commission",
-      intl_btn_senegal: "🇸🇳 Demande Sénégal",
-      intl_btn_france: "🇫🇷 Demande France ↔ Sénégal",
-      panel_title: "Vue d’ensemble",
-      panel_count_k: "Chauffeurs visibles",
-      panel_online_k: "Contact direct",
-      panel_zone_k: "Zones couvertes",
-      panel_public_k: "Visibilité",
-      panel_note: "Ici, on met en avant des profils présents dans la vitrine DIGIYLYFE.",
-      section_title: "Trouver le bon chauffeur",
-      section_sub: "Cherche par zone, ville ou type de véhicule pour trouver le profil qui te correspond.",
-      badge_public: "Galerie publique",
-      badge_loading: "Chargement…",
-      badge_fallback: "⚠️ Galerie publique",
-      nav_site: "← Retour au site",
-      nav_gallery: "🚗 Nos chauffeurs",
-      nav_order: "📲 Demander un chauffeur",
-      nav_recruit: "📝 Inscription chauffeur",
-      nav_cockpit: "🔐 Accès chauffeur",
-      nav_card: "🚗 Carte chauffeur",
-      nav_lexique: "🇸🇳 Lexique Wolof",
-      label_country: "🌍 Pays / axe",
-      country_all: "Tous",
-      label_zone: "📍 Zone recherchée",
-      zone_all: "Toutes",
-      label_search: "🔎 Nom, ville ou voiture",
-      search_ph: "Nom, ville ou voiture…",
-      label_avail: "📞 Contact",
-      avail_all: "Tous les profils",
-      avail_online: "WhatsApp direct",
-      avail_offline: "À contacter",
-      count_drivers: (n) => `${n} chauffeur(s)`,
-      online_now: (n) => `${n} en contact direct`,
-      zones_live: (n) => `${n} zone(s) couvertes`,
-      stat_total: (n) => `${n}`,
-      stat_online: (n) => `${n}`,
-      stat_zones: (n) => `${n}`,
-      empty_title: "Aucun chauffeur trouvé",
-      empty_tag_1: "Change les filtres",
-      empty_tag_2: "Ou contacte WhatsApp",
-      btn_support_whatsapp: "WhatsApp support",
-      btn_order_ride: "Demander un chauffeur",
-      driver_default_name: "Chauffeur Ambassadeur",
-      driver_desc_default: "Profil public DIGIY DRIVER. La mobilité avec style et savoir-être.",
-      driver_tagline: "Mobilité avec style et savoir-être",
-      tag_online: "📞 WhatsApp direct",
-      tag_offline: "🕊️ À contacter",
-      pill_public: "Chauffeur adhérent DIGIYLYFE",
-      btn_whatsapp: "WhatsApp",
-      btn_sms: "SMS",
-      btn_profile: "Voir ce chauffeur",
-      featured_title: "Chauffeur en vitrine",
-      featured_sub: "Le premier chauffeur disponible apparaît ici. Ouvrez sa fiche DIGIYLYFE puis contactez-le directement.",
-      featured_badge: "Choix direct",
-      featured_loading: "Chargement de la carte chauffeur…",
-      featured_empty: "Aucun chauffeur visible pour le moment. Ajuste les filtres ou recharge la galerie.",
-      featured_profile: "Voir ce chauffeur",
-      featured_whatsapp: "WhatsApp",
-      featured_sms: "SMS",
-      featured_order: "Demander ce chauffeur",
-      featured_card_label: "Chauffeur en avant",
-      cta_driver_title: "Vous êtes chauffeur ?",
-      cta_driver_sub: "Rejoins DIGIY DRIVER et fais grandir ta présence avec style et savoir-être.",
-      cta_become_driver: "📝 Inscription chauffeur",
-      cta_order_ride: "Demander un chauffeur",
-      cta_whatsapp: "WhatsApp support",
-      fallback_title: "⚠️ Galerie pas encore branchée",
-      fallback_tag_1: "La source Supabase \"public_driver_cards\" n’est pas accessible",
-      fallback_tag_2: "RLS / vue publique à créer",
-      toast_fallback: "Galerie en mode public",
-      audio_kicker: "🎧 DIGIY explique au client",
-      audio_title: "Écouter avant de choisir son chauffeur",
-      audio_text: "La voix met le client à l’aise : il comprend qu’il peut regarder les profils, ouvrir la carte numérique, voir une vidéo de présentation quand elle est disponible, puis faire une demande simple par WhatsApp ou par SMS.",
-      audio_note: "Le client garde la main : il choisit, il contacte directement, DIGIY ne prend pas de commission.",
-      audio_play: "🎧 Écouter la fiche",
-      audio_stop: "⏹ Arrêter",
-      audio_whatsapp: "💬 Demander par WhatsApp",
-      audio_sms: "📩 Demander par SMS",
-      audio_unavailable: "🎧 Audio non disponible",
-      audio_playing: "🔊 Lecture en cours",
-      audio_spoken: "Bienvenue dans DIGIY DRIVER Ambassadeur. Ici, le client regarde les profils, la zone, le véhicule et la fiche du chauffeur avant de choisir. Pour Lamine, la fiche DIGIYLYFE et la carte sont accessibles directement. Pour faire une demande, le client peut passer par WhatsApp ou par SMS. Le contact reste direct. Pas d'intermédiaire inutile. Zéro commission. Le chauffeur garde sa relation, son nom et son argent. DIGIY met de l'ordre et de la lumière. Le terrain garde la main."
-    },
-    wo: { /* ... */ },
-    en: { /* ... */ }
-  };
+        <div class="qrrow">
+          <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeAQAAAAB6HIMaAAAB/ElEQVR4nO2YMY7cMAxFn0YCppSBPcBeJIB0s2CPlBvQR5kbyOUANH4K2ZMU2UmaYFgsK8NsHj4o/i8l8Wntl8978NX8WxMNgDyQBC3LvE69m0ekbZKyDJoG0DRaljSC0kLLUh44OEjKgxyR9mxufV/aVcqj7UsEoOfNVfoASv0oMYD+VAUQFEh1+Lb4MrR1qtgC0l5gTSlBy7deaNdbL7CnlJaAtGjWABqgcf6RIp6yrbP1tMxtYPtCWtaUEluPp20BEnhpV60JstjfEGtxi+e8aDQHwGlOy6MB09HiTcLhvNN2qXYYcdC5RdJpZ5ZlDy+LSmsP4JkQvJrXsNoaVXkwU82UN0tB51aSHuNqgFeDFlLbC8DWC2RpX/Bq+fY9D/YlpJcdE8tMjJJ5tTkeIbVd86DQ7u9WgK0D09pCaotXeZ27yyRz5p+Q2lbLt34d7TravrAvFLje0uuAnpUGWdI4P2RezWvUua26p57eVaruKZWtvxroWUkCvJrTvFqWnWoHvEWiQR5nnjlTDbSQp+zX3WHu2JkZjsAQkHYA5FPhLNNoea61cLSXGQmour9/6NYdCjjthUBP6gi34whg04Ihpra/XpYAPz7mZScg7W/NaqWaA9WghcwJj7eaVQDrt7cfXlL29VVA/7gTqJpvjPPchXSH9PWS/9+aPwHa5Jhsw4QqXAAAAABJRU5ErkJggg==" alt="QR vers la carte de Nazir">
+          <div>
+            <strong>QR · NAZIR</strong>
+            <span>Scannez pour ouvrir et conserver sa carte.</span>
+          </div>
+        </div>
 
-  // On conserve toutes les fonctions existantes, mais on modifie withFeaturedDrivers
-  // pour que Baptiste soit ajouté en premier.
-  // On va redéfinir la fonction après l'avoir chargée.
+        <div class="actions">
+          <a class="primary" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html" target="_blank" rel="noopener">VOIR LA CARTE →</a>
+          <span class="secondary mutedbtn">Contact à confirmer</span>
+        </div>
+      </div>
+    </article>
+    
 
-  // ... (tout le reste du script est identique, on ne le réécrit pas ici pour gagner de la place,
-  // mais dans la version finale, on le mettra en entier. Je fournis le fichier complet ci-dessous.)
-
-  // Pour la version finale, je fournis le fichier complet avec la modification.
-</script>
-
-<!-- ===== FIN DU SCRIPT AVEC LA MODIFICATION ===== -->
-<script src="./gallery-world8.js?v=20260812-world8-v1" defer></script>
+  <p class="note">MAQUETTE ATELIER V5 · MOBILE-FIRST · 8 LANGUES · DEMANDE D’ADHÉSION 19 900 · Aucun logiciel public · Aucun push.</p>
+</main>
 </body>
 </html>
