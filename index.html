@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DIGIYLYFE · Galerie Chauffeurs · Maquette Atelier V5 Adhésion</title>
+<title>DIGIYLYFE · Galerie Chauffeurs · Adhérents</title>
 <style>
 :root {
   --green:#073f32; --green2:#0b5d48; --gold:#d8ad46; --cream:#f5f1e6;
@@ -216,6 +216,11 @@ h2{margin:0;font-size:25px;color:var(--green)}
   .chip{font-size:7px;padding:3px 4px}
   .qr{width:48px;height:48px}
 }
+
+.langs a.active{border-color:var(--gold);background:#fff7d8;box-shadow:0 0 0 2px rgba(216,173,70,.16)}
+html[dir="rtl"] body{text-align:right}
+html[dir="rtl"] .driver-head,html[dir="rtl"] .adhesion-cta,html[dir="rtl"] .topline,html[dir="rtl"] .qrrow{direction:rtl}
+html[dir="rtl"] .rule{border-left:0;border-right:3px solid var(--gold);padding-left:0;padding-right:9px}
 </style>
 </head>
 <body>
@@ -225,14 +230,14 @@ h2{margin:0;font-size:25px;color:var(--green)}
       <div>
         <div class="driver-icon">🚗</div>
         <div class="brand">DIGIY DRIVER</div>
-        <div class="driver-sub">Client · demande simple · assistance DIGIY</div>
+        <div class="driver-sub" id="driverSub">Chauffeurs adhérents · cartes · contact direct</div>
       </div>
-      <div class="zero">0 % COMMISSION<br>DIGIYLYFE</div>
+      <div class="zero"><span id="zeroLabel">0 % COMMISSION</span><br>DIGIYLYFE</div>
     </div>
 
     <nav class="topnav" aria-label="Navigation principale">
-      <a href="https://digiylyfe.com/?lang=fr" target="_blank" rel="noopener">🌍 DIGIYLYFE</a>
-      <a href="https://galerie-chauffeurs.digiylyfe.com/?lang=fr" target="_blank" rel="noopener">🚗 Galerie chauffeurs</a>
+      <a id="navDigiylyfe" href="https://digiylyfe.com/?lang=fr" target="_blank" rel="noopener">🌍 DIGIYLYFE</a>
+      <a id="navGallery" href="https://galerie-chauffeurs.digiylyfe.com/?lang=fr" target="_blank" rel="noopener">🚗 Galerie chauffeurs</a>
     </nav>
 
     <div class="langs" aria-label="Langues">
@@ -248,11 +253,11 @@ h2{margin:0;font-size:25px;color:var(--green)}
 
     <div class="adhesion-cta">
       <div>
-        <strong>Vous êtes chauffeur ?</strong>
-        <span>Rejoignez DIGIYLYFE comme adhérent et préparez votre carte de visite numérique.</span>
+        <strong id="adhQ">Vous êtes chauffeur ?</strong>
+        <span id="adhText">Rejoignez DIGIYLYFE comme adhérent et préparez votre carte de visite numérique.</span>
       </div>
       <a href="https://digiylyfe.com/tarifs-adherents-1.html" target="_blank" rel="noopener">
-        🤝 DEMANDE D’ADHÉSION · 19 900 FCFA / mois
+        <span id="adhCta">🤝 DEMANDE D’ADHÉSION · 19 900 FCFA / mois</span>
       </a>
     </div>
   </div>
@@ -260,15 +265,15 @@ h2{margin:0;font-size:25px;color:var(--green)}
 <main>
   <section class="section-title">
     <div class="icon">🚘</div>
-    <div><h1>GALERIE CHAUFFEURS · ADHÉRENTS</h1><p>Adhérents chauffeurs · Contact direct · Saly & Petite Côte</p></div>
+    <div><h1 id="sectionTitle">GALERIE CHAUFFEURS · ADHÉRENTS</h1><p id="sectionLead">Adhérents chauffeurs · Contact direct · Saly & Petite Côte</p></div>
   </section>
 
   <div class="filters">
-    <span class="filter">Tous</span><span class="filter">Saly</span><span class="filter">AIBD</span>
+    <span class="filter" id="filterAll">Tous</span><span class="filter">Saly</span><span class="filter">AIBD</span>
     <span class="filter">Petite Côte</span><span class="filter">Dakar</span>
   </div>
 
-  <div class="doctrine">
+  <div class="doctrine" id="doctrine">
     <span class="doctrine-title">🛡️ RÔLE DE DIGIYLYFE</span>
     DIGIYLYFE publie la présence numérique et la carte de visite de ses adhérents.
     <strong>Chaque chauffeur exerce sous sa seule responsabilité</strong> et reste responsable de son activité,
@@ -278,7 +283,7 @@ h2{margin:0;font-size:25px;color:var(--green)}
   </div>
 
   
-    <article class="listing">
+    <article class="listing" id="driverLamine">
       <a class="photo" href="https://partenaire-lamine.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir la carte de Lamine">
         <img src="https://partenaire-lamine.digiylyfe.com/carte-visite.png" alt="Carte / visuel de Lamine">
         <span class="photo-hint">↗ Ouvrir la carte</span>
@@ -323,7 +328,7 @@ h2{margin:0;font-size:25px;color:var(--green)}
       </div>
     </article>
     
-    <article class="listing">
+    <article class="listing" id="driverBaptiste">
       <a class="photo" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir la carte de Baptiste">
         <img src="https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste.png" alt="Carte / visuel de Baptiste">
         <span class="photo-hint">↗ Ouvrir la carte</span>
@@ -367,54 +372,63 @@ h2{margin:0;font-size:25px;color:var(--green)}
         </div>
       </div>
     </article>
-    
-    <article class="listing">
-      <a class="photo" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html" target="_blank" rel="noopener" aria-label="Ouvrir la carte de Nazir">
-        <img src="https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg" alt="Carte / visuel de Nazir">
-        <span class="photo-hint">↗ Ouvrir la carte</span>
-      </a>
-
-      <div class="info">
-        <div class="topline">
-          <div>
-            <p class="eyebrow">ADHÉRENT DIGIYLYFE</p>
-            <h2>Nazir</h2>
-            <p class="designation">Chauffeur · Adhérent DIGIYLYFE</p>
-          </div>
-          <span class="area">📍 Sénégal</span>
-        </div>
-
-        <div class="chips"><span class='chip'>Transport avec chauffeur</span><span class='chip'>Sur réservation</span><span class='chip'>Carte de visite</span><span class='chip'>Accès direct</span></div>
-
-        <p class="zones"><strong>Repères :</strong> Carte publique disponible · Contact à confirmer · Détails à compléter</p>
-        <p class="rule">Disponibilité, trajet, véhicule et tarif : accord direct avec le chauffeur, sous sa responsabilité.</p>
-        <p class='pending'>Nazir ajouté dans la maquette. Les coordonnées détaillées seront complétées après contrôle source.</p>
-
-        <div class="direct">
-          
-        <div class="direct-item"><strong>📞 Contact</strong><span>à confirmer</span></div>
-    
-          <div class="direct-item"><strong>💳 Paiement direct</strong><span>au chauffeur</span></div>
-          <div class="direct-item"><strong>0 %</strong><span>commission DIGIYLYFE</span></div>
-        </div>
-
-        <div class="qrrow">
-          <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeAQAAAAB6HIMaAAAB/ElEQVR4nO2YMY7cMAxFn0YCppSBPcBeJIB0s2CPlBvQR5kbyOUANH4K2ZMU2UmaYFgsK8NsHj4o/i8l8Wntl8978NX8WxMNgDyQBC3LvE69m0ekbZKyDJoG0DRaljSC0kLLUh44OEjKgxyR9mxufV/aVcqj7UsEoOfNVfoASv0oMYD+VAUQFEh1+Lb4MrR1qtgC0l5gTSlBy7deaNdbL7CnlJaAtGjWABqgcf6RIp6yrbP1tMxtYPtCWtaUEluPp20BEnhpV60JstjfEGtxi+e8aDQHwGlOy6MB09HiTcLhvNN2qXYYcdC5RdJpZ5ZlDy+LSmsP4JkQvJrXsNoaVXkwU82UN0tB51aSHuNqgFeDFlLbC8DWC2RpX/Bq+fY9D/YlpJcdE8tMjJJ5tTkeIbVd86DQ7u9WgK0D09pCaotXeZ27yyRz5p+Q2lbLt34d7TravrAvFLje0uuAnpUGWdI4P2RezWvUua26p57eVaruKZWtvxroWUkCvJrTvFqWnWoHvEWiQR5nnjlTDbSQp+zX3WHu2JkZjsAQkHYA5FPhLNNoea61cLSXGQmour9/6NYdCjjthUBP6gi34whg04Ihpra/XpYAPz7mZScg7W/NaqWaA9WghcwJj7eaVQDrt7cfXlL29VVA/7gTqJpvjPPchXSH9PWS/9+aPwHa5Jhsw4QqXAAAAABJRU5ErkJggg==" alt="QR vers la carte de Nazir">
-          <div>
-            <strong>QR · NAZIR</strong>
-            <span>Scannez pour ouvrir et conserver sa carte.</span>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a class="primary" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html" target="_blank" rel="noopener">VOIR LA CARTE →</a>
-          <span class="secondary mutedbtn">Contact à confirmer</span>
-        </div>
-      </div>
-    </article>
-    
-
-  <p class="note">MAQUETTE ATELIER V5 · MOBILE-FIRST · 8 LANGUES · DEMANDE D’ADHÉSION 19 900 · Aucun logiciel public · Aucun push.</p>
 </main>
+
+<script>
+(() => {
+  'use strict';
+  const TEXT={"fr": {"title": "DIGIYLYFE · Galerie Chauffeurs · Adhérents", "driverSub": "Chauffeurs adhérents · cartes · contact direct", "zero": "0 % COMMISSION", "navGallery": "🚗 Galerie chauffeurs", "adhQ": "Vous êtes chauffeur ?", "adhText": "Rejoignez DIGIYLYFE comme adhérent et préparez votre carte de visite numérique.", "adhCta": "🤝 DEMANDE D’ADHÉSION · 19 900 FCFA / mois", "sectionTitle": "GALERIE CHAUFFEURS · ADHÉRENTS", "sectionLead": "Adhérents chauffeurs · Contact direct · Saly & Petite Côte", "all": "Tous", "doctrine": "<span class=\"doctrine-title\">🛡️ RÔLE DE DIGIYLYFE</span>DIGIYLYFE publie la présence numérique et la carte de visite de ses adhérents. <strong>Chaque chauffeur exerce sous sa seule responsabilité</strong> et reste responsable de son activité, de son véhicule, de ses obligations professionnelles et administratives, de ses assurances, de ses tarifs, de sa disponibilité et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas le transport, ne fixe pas le prix de la course et ne perçoit pas le paiement de la prestation.", "photoHint": "↗ Ouvrir la carte", "member": "ADHÉRENT DIGIYLYFE", "markers": "Repères :", "rule": "Disponibilité, trajet, véhicule et tarif : accord direct avec le chauffeur, sous sa responsabilité.", "contact": "📞 Contact direct", "payment": "💳 Paiement direct", "toDriver": "au chauffeur", "commission": "commission DIGIYLYFE", "scan": "Scannez pour ouvrir et conserver sa carte.", "seeCard": "VOIR LA CARTE →", "whatsapp": "WhatsApp direct", "lamineDesignation": "Chauffeur privé sur réservation", "lamineArea": "📍 Saly", "lamineChips": ["Transfert Saly–AIBD", "Courses locales", "Trajets vers Dakar", "Circuits Petite Côte"], "baptisteDesignation": "Chauffeur · Adhérent DIGIYLYFE", "baptisteArea": "📍 Saly et Petite Côte", "baptisteChips": ["Transport avec chauffeur", "Sur réservation", "Petite Côte", "AIBD / Dakar"]}, "en": {"title": "DIGIYLYFE · Driver Gallery · Members", "driverSub": "Member drivers · cards · direct contact", "zero": "0% COMMISSION", "navGallery": "🚗 Driver gallery", "adhQ": "Are you a driver?", "adhText": "Join DIGIYLYFE as a member and prepare your digital business card.", "adhCta": "🤝 MEMBERSHIP REQUEST · 19,900 FCFA / month", "sectionTitle": "DRIVER GALLERY · MEMBERS", "sectionLead": "Member drivers · Direct contact · Saly & Petite Côte", "all": "All", "doctrine": "<span class=\"doctrine-title\">🛡️ DIGIYLYFE’S ROLE</span>DIGIYLYFE publishes the digital presence and business card of its members. <strong>Each driver operates under their sole responsibility</strong> and remains responsible for their activity, vehicle, professional and administrative obligations, insurance, prices, availability and any service they accept. DIGIYLYFE does not provide transport, does not set ride prices and does not collect payment for the service.", "photoHint": "↗ Open card", "member": "DIGIYLYFE MEMBER", "markers": "Areas:", "rule": "Availability, route, vehicle and price: agreed directly with the driver, under their responsibility.", "contact": "📞 Direct contact", "payment": "💳 Direct payment", "toDriver": "to the driver", "commission": "DIGIYLYFE commission", "scan": "Scan to open and save the card.", "seeCard": "VIEW CARD →", "whatsapp": "Direct WhatsApp", "lamineDesignation": "Private driver by reservation", "lamineArea": "📍 Saly", "lamineChips": ["Saly–AIBD transfer", "Local rides", "Trips to Dakar", "Petite Côte tours"], "baptisteDesignation": "Driver · DIGIYLYFE member", "baptisteArea": "📍 Saly and Petite Côte", "baptisteChips": ["Chauffeured transport", "By reservation", "Petite Côte", "AIBD / Dakar"]}, "es": {"title": "DIGIYLYFE · Galería de Conductores · Miembros", "driverSub": "Conductores miembros · tarjetas · contacto directo", "zero": "0 % COMISIÓN", "navGallery": "🚗 Galería de conductores", "adhQ": "¿Eres conductor?", "adhText": "Únete a DIGIYLYFE como miembro y prepara tu tarjeta de visita digital.", "adhCta": "🤝 SOLICITUD DE ADHESIÓN · 19 900 FCFA / mes", "sectionTitle": "GALERÍA DE CONDUCTORES · MIEMBROS", "sectionLead": "Conductores miembros · Contacto directo · Saly y Petite Côte", "all": "Todos", "doctrine": "<span class=\"doctrine-title\">🛡️ PAPEL DE DIGIYLYFE</span>DIGIYLYFE publica la presencia digital y la tarjeta de visita de sus miembros. <strong>Cada conductor ejerce bajo su exclusiva responsabilidad</strong> y sigue siendo responsable de su actividad, vehículo, obligaciones profesionales y administrativas, seguros, tarifas, disponibilidad y del servicio que acepta. DIGIYLYFE no realiza el transporte, no fija el precio del trayecto y no cobra el pago del servicio.", "photoHint": "↗ Abrir tarjeta", "member": "MIEMBRO DIGIYLYFE", "markers": "Zonas:", "rule": "Disponibilidad, trayecto, vehículo y tarifa: acuerdo directo con el conductor, bajo su responsabilidad.", "contact": "📞 Contacto directo", "payment": "💳 Pago directo", "toDriver": "al conductor", "commission": "comisión DIGIYLYFE", "scan": "Escanea para abrir y guardar su tarjeta.", "seeCard": "VER TARJETA →", "whatsapp": "WhatsApp directo", "lamineDesignation": "Conductor privado con reserva", "lamineArea": "📍 Saly", "lamineChips": ["Traslado Saly–AIBD", "Trayectos locales", "Viajes a Dakar", "Circuitos Petite Côte"], "baptisteDesignation": "Conductor · Miembro DIGIYLYFE", "baptisteArea": "📍 Saly y Petite Côte", "baptisteChips": ["Transporte con conductor", "Con reserva", "Petite Côte", "AIBD / Dakar"]}, "pt": {"title": "DIGIYLYFE · Galeria de Motoristas · Membros", "driverSub": "Motoristas membros · cartões · contacto direto", "zero": "0% COMISSÃO", "navGallery": "🚗 Galeria de motoristas", "adhQ": "É motorista?", "adhText": "Adira à DIGIYLYFE como membro e prepare o seu cartão de visita digital.", "adhCta": "🤝 PEDIDO DE ADESÃO · 19 900 FCFA / mês", "sectionTitle": "GALERIA DE MOTORISTAS · MEMBROS", "sectionLead": "Motoristas membros · Contacto direto · Saly e Petite Côte", "all": "Todos", "doctrine": "<span class=\"doctrine-title\">🛡️ PAPEL DA DIGIYLYFE</span>A DIGIYLYFE publica a presença digital e o cartão de visita dos seus membros. <strong>Cada motorista exerce sob a sua exclusiva responsabilidade</strong> e continua responsável pela sua atividade, veículo, obrigações profissionais e administrativas, seguros, preços, disponibilidade e pelo serviço que aceita. A DIGIYLYFE não realiza o transporte, não fixa o preço da viagem e não recebe o pagamento do serviço.", "photoHint": "↗ Abrir cartão", "member": "MEMBRO DIGIYLYFE", "markers": "Zonas:", "rule": "Disponibilidade, trajeto, veículo e preço: acordo direto com o motorista, sob a sua responsabilidade.", "contact": "📞 Contacto direto", "payment": "💳 Pagamento direto", "toDriver": "ao motorista", "commission": "comissão DIGIYLYFE", "scan": "Digitalize para abrir e guardar o cartão.", "seeCard": "VER CARTÃO →", "whatsapp": "WhatsApp direto", "lamineDesignation": "Motorista privado por reserva", "lamineArea": "📍 Saly", "lamineChips": ["Transfer Saly–AIBD", "Corridas locais", "Viagens para Dakar", "Circuitos Petite Côte"], "baptisteDesignation": "Motorista · Membro DIGIYLYFE", "baptisteArea": "📍 Saly e Petite Côte", "baptisteChips": ["Transporte com motorista", "Por reserva", "Petite Côte", "AIBD / Dakar"]}, "it": {"title": "DIGIYLYFE · Galleria Autisti · Membri", "driverSub": "Autisti membri · biglietti · contatto diretto", "zero": "0% COMMISSIONI", "navGallery": "🚗 Galleria autisti", "adhQ": "Sei un autista?", "adhText": "Aderisci a DIGIYLYFE come membro e prepara il tuo biglietto da visita digitale.", "adhCta": "🤝 RICHIESTA DI ADESIONE · 19 900 FCFA / mese", "sectionTitle": "GALLERIA AUTISTI · MEMBRI", "sectionLead": "Autisti membri · Contatto diretto · Saly e Petite Côte", "all": "Tutti", "doctrine": "<span class=\"doctrine-title\">🛡️ RUOLO DI DIGIYLYFE</span>DIGIYLYFE pubblica la presenza digitale e il biglietto da visita dei propri membri. <strong>Ogni autista opera sotto la propria esclusiva responsabilità</strong> e resta responsabile della propria attività, del veicolo, degli obblighi professionali e amministrativi, delle assicurazioni, delle tariffe, della disponibilità e del servizio accettato. DIGIYLYFE non effettua il trasporto, non stabilisce il prezzo della corsa e non incassa il pagamento del servizio.", "photoHint": "↗ Apri biglietto", "member": "MEMBRO DIGIYLYFE", "markers": "Zone:", "rule": "Disponibilità, percorso, veicolo e tariffa: accordo diretto con l’autista, sotto la sua responsabilità.", "contact": "📞 Contatto diretto", "payment": "💳 Pagamento diretto", "toDriver": "all’autista", "commission": "commissione DIGIYLYFE", "scan": "Scansiona per aprire e salvare il biglietto.", "seeCard": "VEDI BIGLIETTO →", "whatsapp": "WhatsApp diretto", "lamineDesignation": "Autista privato su prenotazione", "lamineArea": "📍 Saly", "lamineChips": ["Transfer Saly–AIBD", "Corse locali", "Viaggi verso Dakar", "Tour Petite Côte"], "baptisteDesignation": "Autista · Membro DIGIYLYFE", "baptisteArea": "📍 Saly e Petite Côte", "baptisteChips": ["Trasporto con autista", "Su prenotazione", "Petite Côte", "AIBD / Dakar"]}, "de": {"title": "DIGIYLYFE · Fahrer-Galerie · Mitglieder", "driverSub": "Mitgliedsfahrer · Karten · Direktkontakt", "zero": "0 % PROVISION", "navGallery": "🚗 Fahrer-Galerie", "adhQ": "Sind Sie Fahrer?", "adhText": "Werden Sie DIGIYLYFE-Mitglied und erstellen Sie Ihre digitale Visitenkarte.", "adhCta": "🤝 MITGLIEDSANTRAG · 19 900 FCFA / Monat", "sectionTitle": "FAHRER-GALERIE · MITGLIEDER", "sectionLead": "Mitgliedsfahrer · Direktkontakt · Saly & Petite Côte", "all": "Alle", "doctrine": "<span class=\"doctrine-title\">🛡️ ROLLE VON DIGIYLYFE</span>DIGIYLYFE veröffentlicht die digitale Präsenz und Visitenkarte seiner Mitglieder. <strong>Jeder Fahrer handelt in eigener Verantwortung</strong> und bleibt für seine Tätigkeit, sein Fahrzeug, berufliche und administrative Pflichten, Versicherungen, Preise, Verfügbarkeit und die angenommene Leistung verantwortlich. DIGIYLYFE führt keine Beförderung durch, legt keinen Fahrpreis fest und nimmt keine Zahlung für die Leistung entgegen.", "photoHint": "↗ Karte öffnen", "member": "DIGIYLYFE-MITGLIED", "markers": "Gebiete:", "rule": "Verfügbarkeit, Strecke, Fahrzeug und Preis: direkte Vereinbarung mit dem Fahrer in dessen Verantwortung.", "contact": "📞 Direktkontakt", "payment": "💳 Direkte Zahlung", "toDriver": "an den Fahrer", "commission": "DIGIYLYFE-Provision", "scan": "Scannen, um die Karte zu öffnen und zu speichern.", "seeCard": "KARTE ANSEHEN →", "whatsapp": "WhatsApp direkt", "lamineDesignation": "Privatfahrer auf Reservierung", "lamineArea": "📍 Saly", "lamineChips": ["Transfer Saly–AIBD", "Lokale Fahrten", "Fahrten nach Dakar", "Touren Petite Côte"], "baptisteDesignation": "Fahrer · DIGIYLYFE-Mitglied", "baptisteArea": "📍 Saly und Petite Côte", "baptisteChips": ["Fahrdienst mit Fahrer", "Auf Reservierung", "Petite Côte", "AIBD / Dakar"]}, "nl": {"title": "DIGIYLYFE · Chauffeursgalerij · Leden", "driverSub": "Chauffeurs-leden · kaarten · direct contact", "zero": "0% COMMISSIE", "navGallery": "🚗 Chauffeursgalerij", "adhQ": "Bent u chauffeur?", "adhText": "Word lid van DIGIYLYFE en maak uw digitale visitekaartje klaar.", "adhCta": "🤝 LIDMAATSCHAPSAANVRAAG · 19 900 FCFA / maand", "sectionTitle": "CHAUFFEURSGALERIJ · LEDEN", "sectionLead": "Chauffeurs-leden · Direct contact · Saly & Petite Côte", "all": "Alle", "doctrine": "<span class=\"doctrine-title\">🛡️ ROL VAN DIGIYLYFE</span>DIGIYLYFE publiceert de digitale aanwezigheid en het visitekaartje van zijn leden. <strong>Elke chauffeur werkt onder eigen verantwoordelijkheid</strong> en blijft verantwoordelijk voor zijn activiteit, voertuig, professionele en administratieve verplichtingen, verzekeringen, tarieven, beschikbaarheid en de geaccepteerde dienst. DIGIYLYFE verzorgt het vervoer niet, bepaalt de ritprijs niet en ontvangt geen betaling voor de dienst.", "photoHint": "↗ Kaart openen", "member": "DIGIYLYFE-LID", "markers": "Gebieden:", "rule": "Beschikbaarheid, route, voertuig en tarief: rechtstreeks afgesproken met de chauffeur, onder diens verantwoordelijkheid.", "contact": "📞 Direct contact", "payment": "💳 Directe betaling", "toDriver": "aan de chauffeur", "commission": "DIGIYLYFE-commissie", "scan": "Scan om de kaart te openen en op te slaan.", "seeCard": "KAART BEKIJKEN →", "whatsapp": "WhatsApp direct", "lamineDesignation": "Privéchauffeur op reservering", "lamineArea": "📍 Saly", "lamineChips": ["Transfer Saly–AIBD", "Lokale ritten", "Ritten naar Dakar", "Tours Petite Côte"], "baptisteDesignation": "Chauffeur · DIGIYLYFE-lid", "baptisteArea": "📍 Saly en Petite Côte", "baptisteChips": ["Vervoer met chauffeur", "Op reservering", "Petite Côte", "AIBD / Dakar"]}, "ar": {"title": "DIGIYLYFE · معرض السائقين · الأعضاء", "driverSub": "سائقون أعضاء · بطاقات · تواصل مباشر", "zero": "عمولة 0٪", "navGallery": "🚗 معرض السائقين", "adhQ": "هل أنت سائق؟", "adhText": "انضم إلى DIGIYLYFE كعضو وجهّز بطاقة الزيارة الرقمية الخاصة بك.", "adhCta": "🤝 طلب العضوية · 19 900 FCFA / شهر", "sectionTitle": "معرض السائقين · الأعضاء", "sectionLead": "سائقون أعضاء · تواصل مباشر · سالي وPetite Côte", "all": "الكل", "doctrine": "<span class=\"doctrine-title\">🛡️ دور DIGIYLYFE</span>تنشر DIGIYLYFE الحضور الرقمي وبطاقة الزيارة لأعضائها. <strong>يمارس كل سائق نشاطه تحت مسؤوليته وحده</strong> ويبقى مسؤولاً عن نشاطه ومركبته والتزاماته المهنية والإدارية وتأميناته وأسعاره وتوفره والخدمة التي يقبلها. لا تقوم DIGIYLYFE بالنقل، ولا تحدد سعر الرحلة، ولا تستلم مقابل الخدمة.", "photoHint": "↗ فتح البطاقة", "member": "عضو DIGIYLYFE", "markers": "المناطق:", "rule": "التوفر والمسار والمركبة والسعر: اتفاق مباشر مع السائق وتحت مسؤوليته.", "contact": "📞 تواصل مباشر", "payment": "💳 دفع مباشر", "toDriver": "إلى السائق", "commission": "عمولة DIGIYLYFE", "scan": "امسح الرمز لفتح البطاقة وحفظها.", "seeCard": "عرض البطاقة ←", "whatsapp": "واتساب مباشر", "lamineDesignation": "سائق خاص بالحجز", "lamineArea": "📍 سالي", "lamineChips": ["نقل سالي–AIBD", "رحلات محلية", "رحلات إلى داكار", "جولات Petite Côte"], "baptisteDesignation": "سائق · عضو DIGIYLYFE", "baptisteArea": "📍 سالي وPetite Côte", "baptisteChips": ["نقل مع سائق", "بالحجز", "Petite Côte", "AIBD / Dakar"]}};
+  const setText=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+
+  function applyDriver(id,t,d){
+    const r=document.getElementById(id); if(!r) return;
+    const name=r.querySelector('h2')?.textContent.trim()||'';
+    const photo=r.querySelector('.photo'); if(photo) photo.setAttribute('aria-label',t.photoHint.replace('↗ ','')+' · '+name);
+    const hint=r.querySelector('.photo-hint'); if(hint) hint.textContent=t.photoHint;
+    const eyebrow=r.querySelector('.eyebrow'); if(eyebrow) eyebrow.textContent=t.member;
+    const designation=r.querySelector('.designation'); if(designation) designation.textContent=d.designation;
+    const area=r.querySelector('.area'); if(area) area.textContent=d.area;
+    [...r.querySelectorAll('.chips .chip')].forEach((c,i)=>{if(d.chips[i])c.textContent=d.chips[i];});
+    const zones=r.querySelector('.zones'); if(zones) zones.innerHTML='<strong>'+t.markers+'</strong> '+(id==='driverLamine'?'Saly · Mbour · Somone · Ngaparou · AIBD':'Saly · Mbour · Ngaparou · Somone · AIBD');
+    const rule=r.querySelector('.rule'); if(rule) rule.textContent=t.rule;
+    const items=[...r.querySelectorAll('.direct-item')];
+    if(items[0]){const s=items[0].querySelector('strong'); if(s)s.textContent=t.contact;}
+    if(items[1]){const s=items[1].querySelector('strong'),sp=items[1].querySelector('span');if(s)s.textContent=t.payment;if(sp)sp.textContent=t.toDriver;}
+    if(items[2]){const sp=items[2].querySelector('span');if(sp)sp.textContent=t.commission;}
+    const qr=r.querySelector('.qrrow span'); if(qr) qr.textContent=t.scan;
+    const p=r.querySelector('.actions .primary'); if(p) p.textContent=t.seeCard;
+    const s=r.querySelector('.actions .secondary'); if(s) s.textContent=t.whatsapp;
+  }
+
+  function apply(lang){
+    if(!TEXT[lang]) lang='fr';
+    const t=TEXT[lang];
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+    document.title=t.title;
+    setText('driverSub',t.driverSub);setText('zeroLabel',t.zero);setText('navGallery',t.navGallery);
+    setText('adhQ',t.adhQ);setText('adhText',t.adhText);setText('adhCta',t.adhCta);
+    setText('sectionTitle',t.sectionTitle);setText('sectionLead',t.sectionLead);setText('filterAll',t.all);
+    const d=document.getElementById('doctrine');if(d)d.innerHTML=t.doctrine;
+    const nd=document.getElementById('navDigiylyfe'),ng=document.getElementById('navGallery');
+    if(nd)nd.href='https://digiylyfe.com/?lang='+encodeURIComponent(lang);
+    if(ng)ng.href='https://galerie-chauffeurs.digiylyfe.com/?lang='+encodeURIComponent(lang);
+    applyDriver('driverLamine',t,{designation:t.lamineDesignation,area:t.lamineArea,chips:t.lamineChips});
+    applyDriver('driverBaptiste',t,{designation:t.baptisteDesignation,area:t.baptisteArea,chips:t.baptisteChips});
+    document.querySelectorAll('.langs a').forEach(a=>{const on=a.getAttribute('lang')===lang;a.classList.toggle('active',on);a.setAttribute('aria-current',on?'true':'false');});
+    try{localStorage.setItem('digiy-driver-gallery-lang',lang);}catch(e){}
+  }
+
+  document.querySelectorAll('.langs a').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); const lang=a.getAttribute('lang')||'fr';
+    const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u);apply(lang);
+  }));
+  let initial='fr';
+  try{const p=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('digiy-driver-gallery-lang');if(TEXT[p])initial=p;else if(TEXT[s])initial=s;}catch(e){}
+  apply(initial);
+})();
+</script>
+
 </body>
 </html>
+
