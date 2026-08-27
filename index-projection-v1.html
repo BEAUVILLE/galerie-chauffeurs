@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIGIY DRIVER · Galerie Chauffeurs · Projection adhérent</title>
+<meta name="description" content="Galerie des chauffeurs adhérents DIGIY DRIVER : contact direct, paiement direct au chauffeur et 0 % de commission DIGIYLYFE.">
+<style>
+:root{--green:#073f32;--green2:#0b5d48;--gold:#d8ad46;--cream:#f5f1e6;--paper:#fffefa;--ink:#16342c;--muted:#6f7f79;--line:#dfe7e2;--soft:#edf5ef}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}
+header{background:var(--green);color:#fff;border-bottom:4px solid var(--gold)}.head{max-width:980px;margin:auto;padding:18px 14px}.brandrow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.brand{font-size:23px;font-weight:950}.sub{font-size:12px;color:#eadfae;margin-top:4px}.zero{border:1px solid var(--gold);border-radius:999px;padding:8px 11px;color:#f5d975;font-size:11px;font-weight:900;text-align:center;white-space:nowrap}.toplinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.toplinks a{text-decoration:none;border:1px solid rgba(255,255,255,.28);padding:7px 10px;border-radius:999px;font-size:11px;font-weight:850}
+main{max-width:980px;margin:auto;padding:16px 14px 50px}.return{display:flex;justify-content:center;text-decoration:none;background:#fff;border:2px solid #111;border-radius:14px;padding:13px 16px;font-weight:950;box-shadow:0 5px 15px rgba(0,0,0,.12);margin-bottom:14px}
+.hero{background:linear-gradient(145deg,#fffefa,#f4ecd2);border:1px solid #e4d8b1;border-radius:22px;padding:22px;box-shadow:0 12px 30px rgba(7,63,50,.08)}.kicker{font-size:11px;font-weight:950;letter-spacing:1.2px;color:#99751e}.hero h1{font-size:30px;line-height:1.04;margin:7px 0 10px;color:var(--green)}.hero p{font-size:15px;line-height:1.5;margin:0;color:#485e57}.hero strong{color:var(--green)}
+.hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}.btn{display:flex;align-items:center;justify-content:center;text-decoration:none;text-align:center;border-radius:999px;padding:12px 14px;font-size:12px;font-weight:950}.btn-primary{background:var(--green);color:#fff}.btn-gold{background:var(--gold);color:#173f35}.btn-outline{background:#fff;border:1px solid var(--green2);color:var(--green2)}
+.section{margin-top:18px}.section h2{font-size:20px;margin:0 0 5px;color:var(--green)}.lead{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.45}.ownership{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.own{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:13px}.own b{display:block;font-size:13px;color:var(--green);margin-bottom:4px}.own span{font-size:11px;color:var(--muted);line-height:1.35}
+.offergrid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-top:14px}.offer{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.offer.featured{border:2px solid var(--green)}.price{font-size:25px;font-weight:950;color:var(--green);margin:5px 0}.offer ul{padding-left:18px;margin:10px 0 0}.offer li{font-size:12px;line-height:1.45;margin:5px 0}.separate{background:#fff8df;border-color:#ead28a}.separate .price{color:#735712}.small{font-size:10px;color:var(--muted);line-height:1.4;margin-top:10px}
+.gallery-title{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-top:24px}.gallery-title h2{margin:0;color:var(--green)}.pill{font-size:10px;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:7px 9px;font-weight:850}.listing{display:grid;grid-template-columns:34% 66%;background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(7,63,50,.08);margin:14px 0}.photo{min-height:330px;background:#dce5df;display:block;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block}.info{padding:17px}.eyebrow{font-size:9px;letter-spacing:1px;font-weight:950;color:#b38a28;margin:0 0 3px}.name{font-size:25px;margin:0;color:var(--green)}.designation{font-size:12px;color:var(--muted);margin:3px 0}.area{display:inline-block;background:#eaf2ed;border-radius:999px;padding:6px 8px;font-size:10px;font-weight:850;margin-top:8px}.chips{display:flex;gap:5px;flex-wrap:wrap;margin:11px 0}.chip{background:#eef4f0;border:1px solid #dde8e1;border-radius:999px;padding:5px 7px;font-size:10px;font-weight:750}.direct{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;margin:11px 0}.direct div{text-align:center;font-size:9px;color:var(--muted)}.direct b{display:block;color:var(--green);font-size:10px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.actions a{text-decoration:none;text-align:center;border-radius:999px;padding:10px;font-size:11px;font-weight:900}.note{background:#fff8df;border-left:4px solid var(--gold);border-radius:12px;padding:10px 12px;font-size:10px;line-height:1.45;color:#5f5124;margin-top:16px}
+@media(max-width:680px){.hero{padding:17px 14px}.hero h1{font-size:24px}.hero p{font-size:13px}.hero-actions,.offergrid{grid-template-columns:1fr}.ownership{grid-template-columns:1fr 1fr}.listing{grid-template-columns:34% 66%;border-radius:14px}.photo{min-height:350px}.info{padding:10px 8px}.name{font-size:18px}.direct{grid-template-columns:1fr;gap:4px}.direct div{text-align:left}.actions{grid-template-columns:1fr}.brand{font-size:18px}.zero{font-size:9px}.gallery-title{align-items:flex-start}.gallery-title h2{font-size:18px}}
+@media(max-width:410px){.ownership{grid-template-columns:1fr}.listing{grid-template-columns:32% 68%}.photo{min-height:360px}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="brandrow"><div><div class="brand">🚗 DIGIY DRIVER</div><div class="sub">La place numérique du chauffeur indépendant</div></div><div class="zero">0 % COMMISSION<br>DIGIYLYFE</div></div><div class="toplinks"><a href="https://digiylyfe.com/">🌍 DIGIYLYFE</a><a href="https://galerie-chauffeurs.digiylyfe.com/">🚘 Galerie actuelle</a></div></div></header>
+<main>
+<a class="return" href="https://digiylyfe.com/">← RETOUR DIGIYLYFE</a>
+<section class="hero">
+<div class="kicker">VOUS ÊTES CHAUFFEUR ?</div>
+<h1>Voici votre place dans DIGIY DRIVER.</h1>
+<p>Le client ne voit pas seulement des demandes de trajets. Il peut aussi <strong>voir les chauffeurs adhérents, comprendre leurs zones et les contacter directement.</strong> Vous gardez votre activité, vos prix, votre relation client et le paiement de vos courses.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="#chauffeurs">VOIR LES CHAUFFEURS ADHÉRENTS ↓</a><a class="btn btn-gold" href="https://digiylyfe.com/tarifs-adherents-1.html">JE VEUX REJOINDRE LA GALERIE</a></div>
+</section>
+
+<section class="section">
+<h2>Ce qui reste à vous</h2>
+<p class="lead">DIGIYLYFE vous donne une présence et un chemin direct vers le client. Il ne prend pas la place du chauffeur.</p>
+<div class="ownership">
+<div class="own"><b>👤 Votre identité</b><span>Votre nom professionnel, votre activité et vos informations restent les vôtres.</span></div>
+<div class="own"><b>📍 Vos zones</b><span>Vous indiquez où vous travaillez et les trajets que vous souhaitez proposer.</span></div>
+<div class="own"><b>💰 Vos tarifs</b><span>Vous décidez vos tarifs et les confirmez directement avec votre client.</span></div>
+<div class="own"><b>📞 Votre client</b><span>Le contact reste direct : appel ou WhatsApp, sans intermédiaire dans la conversation.</span></div>
+<div class="own"><b>💳 Votre paiement</b><span>Le paiement de la course est effectué directement au chauffeur.</span></div>
+<div class="own"><b>0 % sur la course</b><span>DIGIYLYFE ne prélève aucune commission sur votre prestation de transport.</span></div>
+</div>
+
+<div class="offergrid">
+<div class="offer featured"><b>ADHÉSION DIGIYLYFE · CHAUFFEUR</b><div class="price">19 900 FCFA / mois</div><ul><li>Présence comme chauffeur adhérent dans la galerie DIGIY DRIVER.</li><li>Vos zones, services et moyens de contact présentés au client.</li><li>Contact et accord directs avec le client.</li><li>Paiement de la prestation directement au chauffeur.</li><li>0 % de commission DIGIYLYFE sur la course.</li></ul><a class="btn btn-primary" style="margin-top:12px" href="https://digiylyfe.com/tarifs-adherents-1.html">DEMANDER MON ADHÉSION</a></div>
+<div class="offer separate"><b>OPTION SÉPARÉE</b><div class="price">100 000 FCFA</div><strong>Fiche professionnelle personnalisée</strong><p class="small">La création d’une fiche professionnelle dédiée est une prestation séparée. Elle n’est pas incluse dans l’adhésion mensuelle de 19 900 FCFA.</p></div>
+</div>
+</section>
+
+<section id="chauffeurs" class="section">
+<div class="gallery-title"><div><h2>Chauffeurs adhérents</h2><p class="lead">Le client voit immédiatement qui peut le servir et contacte le chauffeur directement.</p></div><span class="pill">Saly · AIBD · Petite Côte</span></div>
+
+<article class="listing"><a class="photo" href="https://partenaire-lamine.digiylyfe.com/" target="_blank" rel="noopener"><img src="https://partenaire-lamine.digiylyfe.com/carte-visite.png" alt="Visuel professionnel de Lamine"></a><div class="info"><p class="eyebrow">ADHÉRENT DIGIYLYFE</p><h3 class="name">Lamine</h3><p class="designation">Chauffeur privé sur réservation</p><span class="area">📍 Saly</span><div class="chips"><span class="chip">Saly–AIBD</span><span class="chip">Courses locales</span><span class="chip">Dakar</span><span class="chip">Petite Côte</span></div><div class="direct"><div><b>📞 Contact direct</b>+221 78 441 36 80</div><div><b>💳 Paiement direct</b>au chauffeur</div><div><b>0 %</b>commission DIGIYLYFE</div></div><div class="actions"><a class="btn-primary" href="https://partenaire-lamine.digiylyfe.com/" target="_blank" rel="noopener">VOIR LA FICHE →</a><a class="btn-outline" href="https://wa.me/221784413680" target="_blank" rel="noopener">WhatsApp direct</a></div></div></article>
+
+<article class="listing"><a class="photo" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener"><img src="https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste.png" alt="Visuel professionnel de Baptiste"></a><div class="info"><p class="eyebrow">ADHÉRENT DIGIYLYFE</p><h3 class="name">Baptiste</h3><p class="designation">Chauffeur · Adhérent DIGIYLYFE</p><span class="area">📍 Saly et Petite Côte</span><div class="chips"><span class="chip">Avec chauffeur</span><span class="chip">Sur réservation</span><span class="chip">Petite Côte</span><span class="chip">AIBD / Dakar</span></div><div class="direct"><div><b>📞 Contact direct</b>+221 77 134 28 89</div><div><b>💳 Paiement direct</b>au chauffeur</div><div><b>0 %</b>commission DIGIYLYFE</div></div><div class="actions"><a class="btn-primary" href="https://digiy-driver-part-bapt.digiylyfe.com/" target="_blank" rel="noopener">VOIR LA FICHE →</a><a class="btn-outline" href="https://wa.me/221771342889" target="_blank" rel="noopener">WhatsApp direct</a></div></div></article>
+
+<div class="note"><strong>🛡️ Rôle de DIGIYLYFE :</strong> DIGIYLYFE publie la présence numérique de ses adhérents. Chaque chauffeur exerce sous sa responsabilité, fixe ses tarifs, gère sa disponibilité, son véhicule, ses assurances et la prestation qu’il accepte. DIGIYLYFE ne réalise pas le transport et ne perçoit pas le paiement de la course.</div>
+</section>
+</main>
+</body>
+</html>
