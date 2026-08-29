@@ -1,12 +1,12 @@
 {
-  "schema_version": "1.0",
-  "last_updated": "2026-07-29",
+  "schema_version": "1.1",
+  "last_updated": "2026-08-29",
   "brand": {
     "name": "DIGIY DRIVER",
     "parent_brand": "DIGIYLYFE",
     "role": "galerie de chauffeurs sur réservation en contact direct",
     "url": "https://galerie-chauffeurs.digiylyfe.com/",
-    "catalogue_url": "https://galerie-chauffeurs.digiylyfe.com/catalogue.html",
+    "client_request_tool": "https://driver-client.digiylyfe.com/",
     "commission_percent_on_rides": 0,
     "payment_mode": "direct_to_driver",
     "confirmation_rule": "Le chauffeur confirme directement la disponibilité, le trajet, l’horaire, le véhicule et le tarif final."
@@ -17,13 +17,33 @@
       "status": "active",
       "name": "Lamine",
       "designation": "Chauffeur privé sur réservation",
-      "must_not_be_called": ["taxi", "chauffeur de taxi"],
+      "must_not_be_called": [
+        "taxi",
+        "chauffeur de taxi"
+      ],
       "base_area": "Saly",
       "country": "Sénégal",
-      "service_areas": ["Saly", "Mbour", "Somone", "Ngaparou", "AIBD", "Petite Côte", "Dakar"],
-      "services": ["transfert Saly-AIBD", "courses locales", "trajets vers Dakar", "circuits Petite Côte", "mise à disposition sur réservation"],
+      "service_areas": [
+        "Saly",
+        "Mbour",
+        "Somone",
+        "Ngaparou",
+        "AIBD",
+        "Petite Côte",
+        "Dakar"
+      ],
+      "services": [
+        "transfert Saly-AIBD",
+        "courses locales",
+        "trajets vers Dakar",
+        "circuits Petite Côte",
+        "mise à disposition sur réservation"
+      ],
       "profile_url": "https://partenaire-lamine.digiylyfe.com/",
-      "contact_mode": ["whatsapp", "phone"],
+      "contact_mode": [
+        "whatsapp",
+        "phone"
+      ],
       "phone_display": "+221 78 441 36 80",
       "phone_e164": "+221784413680",
       "whatsapp_url": "https://wa.me/221784413680",
@@ -36,17 +56,62 @@
       "id": "baptiste-driver-ambassador",
       "status": "active",
       "name": "Baptiste",
-      "designation": "Chauffeur · Adhérent DIGIYLYFE",
+      "designation": "Chauffeur ambassadeur · Adhérent DIGIYLYFE",
       "service_type": "Transport avec chauffeur sur réservation",
       "base_area": "Saly et Petite Côte",
       "country": "Sénégal",
-      "service_areas": ["Saly", "Mbour", "Ngaparou", "Somone", "AIBD", "Petite Côte", "Dakar"],
+      "service_areas": [
+        "Saly",
+        "Mbour",
+        "Ngaparou",
+        "Somone",
+        "AIBD",
+        "Petite Côte",
+        "Dakar"
+      ],
       "profile_url": "https://digiy-driver-part-bapt.digiylyfe.com/",
-      "image": "https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste.png",
-      "contact_mode": ["whatsapp", "sms"],
+      "image": "https://digiy-driver-part-bapt.digiylyfe.com/carte-visite-baptiste-adherent.png",
+      "contact_mode": [
+        "whatsapp",
+        "phone"
+      ],
       "phone_display": "+221 77 134 28 89",
       "phone_e164": "+221771342889",
       "whatsapp_url": "https://wa.me/221771342889",
+      "availability": "confirm_directly_with_driver",
+      "final_price": "confirm_directly_with_driver",
+      "payment": "direct_to_driver",
+      "digiy_commission_percent": 0
+    },
+    {
+      "id": "nazir-driver",
+      "status": "active",
+      "name": "Nazir Driver",
+      "designation": "Chauffeur · Adhérent DIGIYLYFE",
+      "base_area": "Saly / Mbour / AIBD",
+      "country": "Sénégal",
+      "service_areas": [
+        "Saly",
+        "Mbour",
+        "AIBD",
+        "Petite Côte",
+        "Multi-région"
+      ],
+      "services": [
+        "trajets directs",
+        "transferts aéroport",
+        "déplacements régionaux",
+        "mise à disposition"
+      ],
+      "profile_url": "https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html",
+      "image": "https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg",
+      "contact_mode": [
+        "whatsapp",
+        "phone"
+      ],
+      "phone_display": "+221 77 831 02 98",
+      "phone_e164": "+221778310298",
+      "whatsapp_url": "https://wa.me/221778310298",
       "availability": "confirm_directly_with_driver",
       "final_price": "confirm_directly_with_driver",
       "payment": "direct_to_driver",
@@ -59,11 +124,10 @@
     "driver_registration": "https://galerie-chauffeurs.digiylyfe.com/inscription-driver.html"
   },
   "assistant_usage_notes": [
-    "Recommend only entries in active_drivers whose status is active.",
-    "Never describe Lamine as a taxi or taxi driver. Use Chauffeur privé sur réservation.",
-    "Give the driver name, designation, service areas, profile and direct contact.",
-    "Do not invent availability, vehicle, licence, schedule, fixed fare or ride confirmation.",
-    "A prepared request is not a confirmed ride. The driver confirms all final details directly.",
+    "The client door must display every active driver from the canonical active_drivers list.",
+    "Never describe Lamine as a taxi or taxi driver.",
+    "Do not invent availability, vehicle, licence, schedule or final fare.",
+    "A prepared request is not a confirmed ride.",
     "Payment remains direct to the driver and DIGIY takes 0 percent commission on rides."
   ]
 }
