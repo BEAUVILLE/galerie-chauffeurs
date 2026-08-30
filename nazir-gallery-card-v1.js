@@ -25,7 +25,7 @@ function render(){
     card=document.createElement('article'); card.className='listing'; card.id='nazir-driver-gallery';
     var note=section.querySelector('.note'); if(note)section.insertBefore(card,note); else section.appendChild(card);
   }
-  card.innerHTML='<a class="photo" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html" target="_blank" rel="noopener"><img src="https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg" alt="Nazir Driver"></a>'+
+  card.innerHTML='<a class="photo" href="https://galerie-chauffeurs.digiylyfe.com/nazir-driver.html" target="_blank" rel="noopener"><img src="https://galerie-chauffeurs.digiylyfe.com/nazir-driver-card.svg" alt="Nazir Driver" loading="lazy" decoding="async" fetchpriority="low"></a>'+
   '<div class="info"><p class="eyebrow">'+x.member+'</p><h3 class="name">Nazir Driver</h3><p class="designation">'+x.role+'</p><span class="area">'+x.area+'</span>'+
   '<div class="chips"><span class="chip">'+x.c1+'</span><span class="chip">'+x.c2+'</span><span class="chip">'+x.c3+'</span><span class="chip">'+x.c4+'</span></div>'+
   '<div class="direct"><div><b>'+x.contact+'</b>+221 77 831 02 98</div><div><b>'+x.payment+'</b><span>'+x.toDriver+'</span></div><div><b>0 %</b><span>'+x.commission+'</span></div></div>'+
