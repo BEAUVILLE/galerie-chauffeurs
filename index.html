@@ -53,7 +53,7 @@ html[dir="rtl"] .offer ul{padding-left:0;padding-right:18px}html[dir="rtl"] .not
 <section id="chauffeurs" class="section">
 <div class="gallery-title"><div><h2 data-i18n="driversTitle">Chauffeurs adhérents</h2><p class="lead" data-i18n="driversLead">Le client voit immédiatement qui peut le servir et contacte le chauffeur directement.</p></div><span class="pill">Saly · AIBD · Petite Côte</span></div>
 
-<div id="driverGallery"></div>
+<div id="driverGallery" aria-live="polite"></div>
 
 <div class="note" data-i18n-html="roleNote"><strong>🛡️ Rôle de DIGIYLYFE :</strong> DIGIYLYFE publie la présence numérique de ses adhérents. Chaque chauffeur exerce sous sa responsabilité, fixe ses tarifs, gère sa disponibilité, son véhicule, ses assurances et la prestation qu’il accepte. DIGIYLYFE ne réalise pas le transport et ne perçoit pas le paiement de la course.</div>
 </section>
@@ -66,29 +66,75 @@ html[dir="rtl"] .offer ul{padding-left:0;padding-right:18px}html[dir="rtl"] .not
 var DRIVER_API='https://wesqmwjjtsefyjnluosj.supabase.co/rest/v1/rpc/digiy_driver_public_list_v1';
 var DRIVER_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA';
 var DRIVER_ROWS=[];
+var DRIVER_STATUS='loading';
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+function httpsUrl(value){
+  var raw=String(value||'').trim();
+  if(!raw)return '';
+  try{
+    var u=new URL(raw,location.href);
+    return u.protocol==='https:'?u.href:'';
+  }catch(e){return ''}
+}
+function whatsappUrl(value){
+  var digits=String(value||'').replace(/\D/g,'');
+  return /^\d{10,15}$/.test(digits)?'https://wa.me/'+digits:'';
+}
+function telUrl(value){
+  var digits=String(value||'').replace(/\D/g,'');
+  return /^\d{9,15}$/.test(digits)?'tel:+'+digits:'';
+}
+var GALLERY_MESSAGES={
+  fr:{empty:'Aucun chauffeur publié pour le moment.',error:'Les fiches chauffeurs sont momentanément indisponibles. Réessayez plus tard.',noCard:'Fiche indisponible',noWhatsapp:'WhatsApp non renseigné'},
+  en:{empty:'No published drivers yet.',error:'Driver cards are temporarily unavailable. Please try later.',noCard:'Profile unavailable',noWhatsapp:'WhatsApp not provided'},
+  es:{empty:'Aún no hay conductores publicados.',error:'Fichas de conductores no disponibles temporalmente. Inténtalo más tarde.',noCard:'Ficha no disponible',noWhatsapp:'WhatsApp no indicado'},
+  pt:{empty:'Ainda não há motoristas publicados.',error:'Perfis dos motoristas temporariamente indisponíveis. Tente mais tarde.',noCard:'Perfil indisponível',noWhatsapp:'WhatsApp não indicado'},
+  it:{empty:'Nessun autista pubblicato per ora.',error:'Schede autisti temporaneamente non disponibili. Riprova più tardi.',noCard:'Scheda non disponibile',noWhatsapp:'WhatsApp non indicato'},
+  de:{empty:'Noch keine Fahrer veröffentlicht.',error:'Fahrerprofile derzeit nicht verfügbar. Bitte später erneut versuchen.',noCard:'Profil nicht verfügbar',noWhatsapp:'WhatsApp nicht angegeben'},
+  nl:{empty:'Nog geen chauffeurs gepubliceerd.',error:'Chauffeursprofielen tijdelijk niet beschikbaar. Probeer later opnieuw.',noCard:'Profiel niet beschikbaar',noWhatsapp:'WhatsApp niet ingevuld'},
+  ar:{empty:'لا يوجد سائقون منشورون حاليًا.',error:'ملفات السائقين غير متاحة مؤقتًا. حاول لاحقًا.',noCard:'الملف غير متاح',noWhatsapp:'لم يُحدد واتساب'},
+  wo:{empty:'Amagul dawalkat bu ñu siif léegi.',error:'Fichu dawalkat yi amuñu léegi. Jéemaat ginnaaw.',noCard:'Fich bi amul',noWhatsapp:'WhatsApp amul'},
+  zh:{empty:'目前尚无已发布司机。',error:'司机资料暂时不可用，请稍后再试。',noCard:'资料不可用',noWhatsapp:'未提供 WhatsApp'}
+};
 function renderDrivers(lang){
- var box=document.getElementById('driverGallery');if(!box)return;
- var t=TEXT[lang]||TEXT.fr;
- if(!DRIVER_ROWS.length){box.innerHTML='';return;}
- box.innerHTML=DRIVER_ROWS.map(function(d){
-   var zones=(d.zones||[]).map(function(z){return '<span class="chip">'+esc(z)+'</span>';}).join('');
-   var tags=(d.tags||[]).map(function(z){return '<span class="chip">'+esc(z)+'</span>';}).join('');
-   var img=d.photo_url?'<img src="'+esc(d.photo_url)+'" alt="'+esc(d.display_name)+'" loading="lazy" decoding="async">':'';
-   return '<article class="listing" id="'+esc(d.slug)+'"><a class="photo" href="'+esc(d.profile_url)+'" target="_blank" rel="noopener">'+img+'</a><div class="info">'+
-   '<p class="eyebrow">'+esc(t.member)+'</p><h3 class="name">'+esc(d.display_name)+'</h3>'+
-   '<p class="designation">'+esc(d.bio||'Chauffeur')+'</p><span class="area">📍 '+esc(d.city||'')+'</span>'+
-   '<div class="chips">'+zones+tags+'</div>'+
-   '<div class="direct"><div><b>'+esc(t.contact)+'</b>'+esc(d.phone||'')+'</div><div><b>'+esc(t.payment)+'</b><span>'+esc(t.toDriver)+'</span></div><div><b>0 %</b><span>'+esc(t.commission)+'</span></div></div>'+
-   '<div class="actions"><a class="btn-primary" href="'+esc(d.profile_url)+'" target="_blank" rel="noopener">'+esc(t.viewCard)+'</a><a class="btn-outline" href="https://wa.me/'+esc(d.whatsapp||'')+'" target="_blank" rel="noopener">'+esc(t.whatsapp)+'</a></div></div></article>';
- }).join('');
+  var box=document.getElementById('driverGallery');if(!box)return;
+  var t=TEXT[lang]||TEXT.fr, m=GALLERY_MESSAGES[lang]||GALLERY_MESSAGES.fr;
+  if(!DRIVER_ROWS.length){
+    box.textContent=DRIVER_STATUS==='error'?m.error:m.empty;
+    box.setAttribute('role','status');
+    return;
+  }
+  box.removeAttribute('role');
+  box.innerHTML=DRIVER_ROWS.map(function(d){
+    var zones=(Array.isArray(d.zones)?d.zones:[]).map(function(z){return '<span class="chip">'+esc(z)+'</span>';}).join('');
+    var tags=(Array.isArray(d.tags)?d.tags:[]).map(function(z){return '<span class="chip">'+esc(z)+'</span>';}).join('');
+    var profile=httpsUrl(d.profile_url);
+    var photo=httpsUrl(d.photo_url);
+    var img=photo?'<img src="'+esc(photo)+'" alt="'+esc(d.display_name)+'" loading="lazy" decoding="async">':'';
+    var cover=profile?'<a class="photo" href="'+esc(profile)+'" target="_blank" rel="noopener noreferrer">'+img+'</a>':'<div class="photo">'+img+'</div>';
+    var profileButton=profile?'<a class="btn-primary" href="'+esc(profile)+'" target="_blank" rel="noopener noreferrer">'+esc(t.viewCard)+'</a>':'<span class="btn-primary" aria-disabled="true">'+esc(m.noCard)+'</span>';
+    var whatsapp=whatsappUrl(d.whatsapp);
+    var whatsappButton=whatsapp?'<a class="btn-outline" href="'+esc(whatsapp)+'" target="_blank" rel="noopener noreferrer">'+esc(t.whatsapp)+'</a>':'<span class="btn-outline" aria-disabled="true">'+esc(m.noWhatsapp)+'</span>';
+    var phoneLink=telUrl(d.phone);
+    var phone=phoneLink?'<a href="'+esc(phoneLink)+'">'+esc(d.phone)+'</a>':esc(d.phone||'—');
+    var id=d.slug?' id="'+esc(d.slug)+'"':'';
+    return '<article class="listing"'+id+'>'+cover+'<div class="info">'+
+      '<p class="eyebrow">'+esc(t.member)+'</p><h3 class="name">'+esc(d.display_name)+'</h3>'+
+      '<p class="designation">'+esc(d.bio||'Chauffeur')+'</p><span class="area">📍 '+esc(d.city||'')+'</span>'+
+      '<div class="chips">'+zones+tags+'</div>'+
+      '<div class="direct"><div><b>'+esc(t.contact)+'</b>'+phone+'</div><div><b>'+esc(t.payment)+'</b><span>'+esc(t.toDriver)+'</span></div><div><b>0 %</b><span>'+esc(t.commission)+'</span></div></div>'+
+      '<div class="actions">'+profileButton+whatsappButton+'</div></div></article>';
+  }).join('');
 }
 async function loadDrivers(){
- try{
-   var r=await fetch(DRIVER_API,{method:'POST',headers:{apikey:DRIVER_ANON,Authorization:'Bearer '+DRIVER_ANON,'Content-Type':'application/json'},body:'{}'});
-   if(!r.ok)throw new Error('driver_source_unavailable');
-   DRIVER_ROWS=await r.json();
- }catch(e){DRIVER_ROWS=[];}
+  try{
+    var r=await fetch(DRIVER_API,{method:'POST',headers:{apikey:DRIVER_ANON,Authorization:'Bearer '+DRIVER_ANON,'Content-Type':'application/json'},body:'{}'});
+    if(!r.ok)throw new Error('driver_source_unavailable');
+    var data=await r.json();
+    if(!Array.isArray(data))throw new Error('driver_source_invalid');
+    DRIVER_ROWS=data.filter(function(d){return d&&typeof d==='object'&&typeof d.display_name==='string'&&d.display_name.trim()});
+    DRIVER_STATUS=DRIVER_ROWS.length?'ready':'empty';
+  }catch(e){DRIVER_ROWS=[];DRIVER_STATUS='error';}
 }
 var TEXT={
 fr:{title:'DIGIY DRIVER · Galerie Chauffeurs · Projection adhérent',description:'Galerie des chauffeurs adhérents DIGIY DRIVER : contact direct, QR personnel, paiement direct au chauffeur et 0 % de commission DIGIYLYFE.',sub:'La place numérique du chauffeur indépendant',zero:'0 % COMMISSION',galleryNav:'🚘 Galerie chauffeurs',back:'← RETOUR DIGIYLYFE',kicker:'VOUS ÊTES CHAUFFEUR ?',heroTitle:'Voici votre place dans DIGIY DRIVER.',heroText:'Le client ne voit pas seulement des demandes de trajets. Il peut aussi <strong>voir les chauffeurs adhérents, comprendre leurs zones et les contacter directement.</strong> Avec votre adhésion, vous disposez aussi de <strong>votre propre QR DIGIY DRIVER, partageable sur les réseaux sociaux et vos supports terrain.</strong> Vous gardez votre activité, vos prix, votre relation client et le paiement de vos courses.',seeDrivers:'VOIR LES CHAUFFEURS ADHÉRENTS ↓',joinGallery:'JE VEUX REJOINDRE LA GALERIE',ownershipTitle:'Ce qui reste à vous',ownershipLead:'DIGIYLYFE vous donne une présence et un chemin direct vers le client. Il ne prend pas la place du chauffeur.',o1t:'👤 Votre identité',o1x:'Votre nom professionnel, votre activité et vos informations restent les vôtres.',o2t:'📍 Vos zones',o2x:'Vous indiquez où vous travaillez et les trajets que vous souhaitez proposer.',o3t:'💰 Vos tarifs',o3x:'Vous décidez vos tarifs et les confirmez directement avec votre client.',o4t:'📞 Votre client',o4x:'Le contact reste direct : appel ou WhatsApp, sans intermédiaire dans la conversation.',o5t:'💳 Votre paiement',o5x:'Le paiement de la course est effectué directement au chauffeur.',o6t:'🔳 Votre QR',o6x:'Votre propre QR DIGIY DRIVER est inclus avec l’adhésion et partageable sur WhatsApp, Facebook, Instagram, TikTok, vos cartes et vos supports terrain.',o7t:'0 % sur la course',o7x:'DIGIYLYFE ne prélève aucune commission sur votre prestation de transport.',membershipTitle:'ADHÉSION DIGIYLYFE · CHAUFFEUR',membershipPrice:'12 000 FCFA / mois',m1:'Présence comme chauffeur adhérent dans la galerie DIGIY DRIVER.',m2:'<strong>Votre propre QR DIGIY DRIVER</strong>, partageable sur les réseaux sociaux, WhatsApp et vos supports physiques.',m3:'Vos zones, services et moyens de contact présentés au client.',m4:'Contact et accord directs avec le client.',m5:'Paiement de la prestation directement au chauffeur.',m6:'0 % de commission DIGIYLYFE sur la course.',requestMembership:'DEMANDER MON ADHÉSION',separate:'OPTION SÉPARÉE',customCard:'Fiche professionnelle personnalisée',customCardText:'La création d’une fiche professionnelle dédiée est une prestation séparée. Elle n’est pas incluse dans l’adhésion mensuelle de 12 000 FCFA.',driversTitle:'Chauffeurs adhérents',driversLead:'Le client voit immédiatement qui peut le servir et contacte le chauffeur directement.',member:'ADHÉRENT DIGIYLYFE',lamineRole:'Chauffeur privé sur réservation',lc1:'Saly–AIBD',lc2:'Courses locales',contact:'📞 Contact direct',payment:'💳 Paiement direct',toDriver:'au chauffeur',commission:'commission DIGIYLYFE',viewCard:'VOIR LA FICHE →',whatsapp:'WhatsApp direct',baptisteRole:'Chauffeur · Adhérent DIGIYLYFE',baptisteArea:'📍 Saly et Petite Côte',bc1:'Avec chauffeur',bc2:'Sur réservation',roleNote:'<strong>🛡️ Rôle de DIGIYLYFE :</strong> DIGIYLYFE publie la présence numérique de ses adhérents. Chaque chauffeur exerce sous sa responsabilité, fixe ses tarifs, gère sa disponibilité, son véhicule, ses assurances et la prestation qu’il accepte. DIGIYLYFE ne réalise pas le transport et ne perçoit pas le paiement de la course.'},
