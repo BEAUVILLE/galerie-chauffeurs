@@ -1,0 +1,23 @@
+name: DIGIY DRIVER Galerie · liens et contacts
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'tests/gallery-links.test.cjs'
+      - '.github/workflows/gallery-links.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'tests/gallery-links.test.cjs'
+      - '.github/workflows/gallery-links.yml'
+permissions:
+  contents: read
+jobs:
+  validate-driver-gallery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tester les fiches, WhatsApp, données indisponibles et dix langues
+        run: node --test tests/gallery-links.test.cjs
